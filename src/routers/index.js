@@ -1,22 +1,31 @@
-const PAGE_PATH = '../pages'
-export const setRouters = app => {
+export default (app, Angular) => {
   app.config(($stateProvider) => {
-    const routers = [
-      {
-        name: 'home',
-        url: '/home',
-        template: require(PAGE_PATH + '/home/index.html')
-      },
-      {
-        name: 'test',
-        url: '/test',
-        template: require(PAGE_PATH + '/test/index.html')
+    $stateProvider.state('page4', {
+      url: '/page4',
+      templateProvider: ['$q', function ($q) {
+        let deferred = $q.defer();
+        require.ensure(['../pages/page4/index.template.html'], function () {
+          let template = require('../pages/page4/index.template.html');
+          deferred.resolve(template);
+        });
+        return deferred.promise;
+      }],
+      controller: 'Page4Controller',
+      controllerAs: 'test',
+      resolve: {
+        foo: ['$q', '$ocLazyLoad', function ($q, $ocLazyLoad) {
+          let deferred = $q.defer();
+          require.ensure([], function () {
+            let module = require('../pages/page4/index.controller.js')(Angular);
+            $ocLazyLoad.load({
+              name: 'page4App'
+            });
+            deferred.resolve(module);
+          });
+
+          return deferred.promise;
+        }]
       }
-    ]
-
-    routers.forEach(route => {
-      $stateProvider.state(route)
-    })
-
+    });
   })
 }

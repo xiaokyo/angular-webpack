@@ -1,4 +1,5 @@
 const path = require('path');
+const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -66,6 +67,9 @@ const config = {
     }),
     // 提取 css 到外部文件件
     new MiniCssExtractPlugin(),
+    new ngAnnotatePlugin({
+      add: true,
+    })
   ],
 };
 

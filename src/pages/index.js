@@ -1,7 +1,14 @@
 import angular from 'angular'
+import uirouter from 'angular-ui-router'
+import oclazyload from 'oclazyload'
+
+// style
+import './common.less'
+
+export { angular }
 
 // 导出app实例
-export const app = angular.module('manage', ['ui.router'])
+export const app = angular.module('manage', [uirouter, oclazyload])
 
 /**启动项目 */
 export const start = () => {

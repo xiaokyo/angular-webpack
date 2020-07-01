@@ -8,16 +8,14 @@
 </head>
 
 <body>
-  <div ng-app="manage" ng-controller="manage.ctrl">
-    {{ name }}
-
+  <div ng-app="manage" ng-controller="manage.ctrl" ng-cloak>
+    
     <ul>
       <li><a ui-sref="home" ui-sref-active="active">HOME</a></li>
       <li><a ui-sref="test" ui-sref-active="active">TEST</a></li>
     </ul>
 
     <ui-view></ui-view>
-
   </div>
 </body>
 
