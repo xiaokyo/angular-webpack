@@ -1,0 +1,192 @@
+	.asj-pod-merch {
+		border: 1px solid #E6E6E6;
+		width: 1000px;
+		padding: 15px;
+		padding-top: 0;
+    .title {
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #E6E6E6;
+      h6 {
+        float: left;
+        color: #666666;
+        font-size: 16px;
+        line-height: 40px;
+      }
+    }
+    .set-range {
+      float: right;
+      .left {
+        color: #666;
+      }
+      input {
+        height: 24px;
+        width: 100px;
+      }
+      .tip {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+    .add-pod-colors {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      input {
+        height: 30px;
+        padding-left: 10px;
+      }
+    }
+    .pod-colors {
+      table {
+        width: 620px;
+        margin-top: 10px;
+      }
+      td {
+        font-size: 14px;
+        text-align: center;
+        color: #666;
+      }
+    }
+    .pod-zone {
+      .top-con {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid #E6E6E6;
+        ul {
+          float: left;
+          li {
+            float: left;
+            margin-right: 15px;
+            font-size: 16px;
+            color: #666;
+            cursor: pointer;
+            line-height: 50px;
+          }
+          .current {
+            position: relative;
+          }
+          .current::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            height: 4px;
+            background: #FF9900;
+            width: 100%;
+            border-radius: 2px;
+            left: 0;
+          }
+        }
+        .switch-btn {
+          float: right;
+          .switch-text {
+            float: left;
+            margin-right: 10px;
+          }
+          .switch-icon {
+            float: left;
+            b {
+              color: #8B572A;
+              font-weight: normal;
+              float: left;
+              margin-right: 5px;
+            }
+            i {
+              float: left;
+              display: inline-block;
+              height: 4px;
+              width: 48px;
+              background: #FF9900;
+              margin-right: 5px;
+              margin-top: 23px;
+              position: relative;
+            }
+            i::after {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: -10px;
+              width: 24px;
+              height: 24px;
+              background: #FFB85F;
+              border-radius: 50%;
+              transition: all .3s;
+              cursor: pointer;
+            }
+            .on::after {
+              right: 0;
+            }
+            .off::after {
+              right: 24px;
+            }
+          }
+        }
+      }
+      .bottom-con {
+        padding: 10px 0;
+        .show-img {
+          float: left;
+          width: 402px;
+          height: 402px;
+          position: relative;
+          margin-right: 10px;
+        }
+        .del-btn {
+          position: absolute;
+          width: 33px;
+          height: 33px;
+          right: 5px;
+          top: 5px;
+          cursor: pointer;
+        }
+        .preview {
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
+        }
+        .add-img {
+          width: 104px;
+          height: 104px;
+          border: 1px dashed #dcdcdc;
+          background: #FAFAFA;
+          cursor: pointer;
+          position: relative;
+          float: left;
+          margin-right: 10px;
+          span {
+            display: block;
+            width: 20px;
+            height: 20p;
+            margin: 24px auto 20px;
+          }
+          a {
+            display: block;
+            text-align: center;
+          }
+          form {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 104px;
+            height: 104px;
+            input {
+              display: block;
+              width: 104px;
+              height: 104px;
+              opacity: 0;
+              cursor: pointer;
+            }
+          }
+        }
+        .print-sele {
+          height: 40px;
+          line-height: 40px;
+          select {
+            height: 30px;
+          }
+        }
+      }
+    }
+    .pod-puretext .max-num{
+      margin-top: 10px;
+    }
+	} 

@@ -1,0 +1,41 @@
+<div class="erp-common-tan-v2-wrap yzy-roll-over" ng-show="showFlag">
+	<div class="erp-common-tan-v2" style="width: 300px; height: initial;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="showFlag=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6 class="text-center">转仓</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="d-flex align-items-center roll-over-item">
+				<label>当前仓库：</label>
+				<span>{{rollOverItem.current}}</span>
+			</div>
+			<div class="d-flex align-items-center roll-over-item">
+				<label>转至仓库：</label>
+				<select name="" id="" ng-model="rollOverItem.selectId">
+					<option value="">请选择仓库</option>
+					<option value="{{item.id}}" ng-repeat="item in rollOverItem.list">{{item.storageName}}</option>
+				</select>
+			</div>
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="showFlag=false;" class="qu-xiao-btn">取消</a>
+      <!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="doSomething()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.yzy-roll-over .roll-over-item{
+		margin-bottom: 16px;
+	}
+	.yzy-roll-over .roll-over-item select{
+		border-radius: 4px;
+		height: 32px;
+	}
+</style>

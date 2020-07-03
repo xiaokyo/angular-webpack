@@ -1,0 +1,32 @@
+<div class="flex aic">
+    <div class="upload-files" ng-class='{"noImg":!isImage(i)}' ng-repeat="i in certPic">
+        <img src="{{ getImgUrl(i) }}" />
+        <div class="edit-box-wrap">
+            <div class="edit-box">
+                <a href="javascript:void(0);" class="preview-btn" ng-click="previewPic(i)">{{ canPerview(i) ? '预览' : '下载' }}</a>
+                <a href="javascript:void(0);" class="delete-btn" ng-click="deletePic($index)" ng-show="!showComponent">删除</a>
+            </div>
+        </div>
+    </div>
+    <div class="upload-files upBtn" id="{{id + 'box'}}" ng-show="!showComponent">
+        <input type="file" multiple id="{{id}}" accept="*" onchange="angular.element(this).scope().upLoadImg(this.files)" />
+    </div>
+</div>
+
+<style>
+    .flex{display: flex;}
+    .flex.aic{align-items: center;}
+    .flex.ais{align-items: center;}
+    .flex.aie{align-items: center;}
+    .flex.fdc{flex-direction: column;}
+
+    /* upload img */
+   .upload-files{margin-right:10px;width:100px;height:100px;position:relative;}
+  .upload-files.upBtn{background:url('/static/image/public-img/plus.png') center no-repeat;}
+  .upload-files img{width:100%;height:100%;position:absolute;top:0;left:0;}
+  .upload-files input[type='file']{position: absolute;left:0;top:0;opacity:0;display: block;width: 100%!important;height: 100%!important;cursor: pointer;}
+  .upload-files .edit-box-wrap{position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; display: none; background: rgba(0, 0, 0, 0.5); transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; }
+  .upload-files:hover .edit-box-wrap{display: block;}
+  .upload-files .edit-box-wrap .edit-box { position: absolute; width: 100%;  height: 30px; bottom: 0; left: 50%; margin-left: -50px; line-height: 30px; }
+  .upload-files .edit-box-wrap .edit-box a{ color: #fff; float: left; width: 50%; text-align: center; font-size: 14px; line-height: 24px; }
+</style>

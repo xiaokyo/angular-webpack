@@ -1,0 +1,1224 @@
+<style>
+  .consult .nav {
+    padding: 0 20px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  .consult .nav li {
+    float: left;
+    height: 62px;
+    line-height: 62px;
+    margin-right: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+  }
+
+  .consult .right-bar {
+    padding-top: 20px;
+    background-color: #fff;
+  }
+
+  .consult .nav li:hover {
+    color: #F9AE08;
+  }
+
+  .consult .nav .active {
+    color: #F9AE08;
+  }
+
+  .consult .main {
+    padding: 0 20px;
+    background-color: #fff;
+  }
+
+  .consult .main table {
+    width: 100%;
+  }
+
+  .consult .main-table .color {
+    color: #F48B31;
+    cursor: pointer;
+  }
+
+  .consult .main-table span {
+    cursor: pointer;
+  }
+
+  .consult .main thead {
+    height: 48px;
+    line-height: 48px;
+    background-color: #FCF4D9;
+    border-radius: 6px 6px 0px 0px;
+  }
+
+  .consult .main th {
+    color: #8B572A;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .consult .main td {
+    height: 72px;
+    text-align: center;
+    border: 1px solid #F3F3F3;
+  }
+
+  .consult .main-table tbody {
+    border: 1px solid #F3F3F3;
+  }
+
+  .consult .main-table tbody a,
+  .consult .main-table tbody a:hover {
+    color: #4A90E2;
+  }
+
+  .consult .main-table .popover-p {
+    width: 180px;
+  }
+
+  .consult .main-table .popover-p p {
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .consult .main-table p:hover {
+    color: #F48B31;
+    cursor: pointer;
+  }
+
+  .editmesstc-wrap .consult-model {
+    width: 780px;
+    height: 380px;
+    padding: 20px 24px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    z-index: 1000;
+  }
+
+  .comodity .model-top {
+    height: 40px;
+    text-align: center;
+  }
+
+  .comodity .model-content ul {
+    height: 230px;
+    border-top: 1px solid #EBEBEB;
+    overflow-y: auto;
+  }
+
+  .comodity .model-content {
+    overflow: hidden;
+  }
+
+  .comodity .model-content li {
+    height: 44px;
+    margin-top: 15px;
+  }
+
+  .comodity .model-content li .fl {
+    float: left;
+  }
+
+  .comodity .model-content li img {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+
+  /* .comodity .model-content .top {
+    height: 17px;
+    line-height: 17px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #333;
+  }
+
+  .comodity .model-content .bot {
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .comodity .model-content .bold {
+    float: left;
+    margin-right: 10px;
+    font-weight: 500;
+  } */
+  .comodity .model-content .content-item {
+    width: 650px;
+    padding-left: 10px;
+  }
+
+  .comodity .model-content .top {
+    min-height: 17px;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  .comodity .model-content .bold {
+    float: left;
+    min-width: 60px;
+    max-width: 200px;
+    margin-right: 10px;
+    font-weight: 800;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+
+  .comodity .model-content .active {
+    color: #D9D9D9;
+  }
+
+  .comodity .model-content .top .div {
+    /* float: left; */
+    /* max-width: 440px; */
+    /* word-wrap:break-word;
+    word-break:break-all; */
+    font-weight: 400;
+    color: #333;
+  }
+
+  .comodity .model-content .del-active label,
+  .comodity .model-content .del-active span {
+    color: #D9D9D9;
+  }
+
+  .comodity .model-bottom {
+    text-align: center;
+    margin-top: 27px;
+  }
+
+  .comodity .model-bottom .cancel {
+    display: inline-block;
+    width: 70px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid rgba(230, 230, 230, 1);
+    background-color: #FFB900;
+    color: #fff;
+  }
+
+  .comodity .model-content .user-head-img {
+    display: inline-block;
+    border: solid 1px #ececec;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+
+  .comodity .model-content .user-head-firname {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 44px;
+    border: 1px solid #ececec;
+    border-radius: 50%;
+    text-align: center;
+  }
+
+  .fuwufei-tkcon {
+    transform: translateY(-50%);
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 280px;
+    background: #fff;
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+    width: 523px;
+    min-height: 330px;
+    margin: initial;
+    border-radius: 4px;
+    padding: initial;
+    opacity: 0.1;
+  }
+
+  @media screen and (min-width: 1360px) {
+    .fuwufei-tkcon {
+      transform: translate(-50%, -50%);
+      left: 50%;
+    }
+  }
+
+  .fuwufei-tkcon:hover {
+    opacity: 1;
+  }
+
+  .tk-top-tit {
+    height: 45px;
+    background: #F9F8F8;
+    padding: 0 30px;
+  }
+
+  .bc-feiyong-btn {
+    width: 69px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #F9AE08;
+    color: #F9AE08;
+    background-color: #F9F8F8;
+  }
+
+  .tk-qd-btn {
+    width: 91px;
+    height: 32px;
+    background: #F9AE08;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .tk-mid-con {
+    padding: 20px 30px 15px;
+  }
+
+  .tk-mid-con .min-inpgroup {
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .min-inpgroup label {
+    width: 90px;
+  }
+
+  .min-inpgroup input {
+    width: 165px;
+    height: 38px;
+  }
+
+  .min-inpgroup .left-span {
+    position: absolute;
+    right: 40px;
+    font-size: 14px;
+    color: #999999;
+    top: 32px;
+  }
+
+  .min-inpgroup .right-span {
+    position: absolute;
+    right: 40px;
+    font-size: 14px;
+    color: #999999;
+    top: 32px;
+  }
+
+  .tk-btns {
+    margin-bottom: 30px;
+  }
+
+  .mid-left {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .mid-right {
+    vertical-align: top;
+    float: right;
+  }
+  #discount-warp .radio-box{
+	  width: 100px;
+	  display: inline-block;
+  }
+  .discount-range-box{
+	  width: 670px;
+	  border: 1px solid #E5E5E5;
+	  margin: 10px 0;
+  }
+  .discount-range-box .title{
+	  height: 47px;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  border-bottom: 1px solid #E5E5E5;
+  }
+  .discount-range-box .item{
+	  text-align: center;
+	  font-size: 16px;
+	  justify-content: center;
+  }
+  .discount-range-box .item:nth-child(1){
+	  width: 410px;
+  }
+  .discount-range-box .item:nth-child(2){
+	  width: 330px;
+  }
+  .discount-range-box .item button{
+	  width: 50px;
+	  height: 30px;
+	  font-size: 12px;
+	  border-radius: 4px;
+	  margin-left: 10px;
+  }
+  .discount-range-box .item-box{
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  border-bottom: 1px solid #E5E5E5;
+	  padding: 10px 0;
+  }
+  .discount-range-box .item-box input{
+	  width: 160px!important;
+	  height: 40px;
+	  border-radius: 4px;
+	  text-align: center;
+  }
+</style>
+<div class="merchandise-box">
+  <div class="right-bar-wrap show-detail-box consult" ng-click="hideSearchRes()">
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+      <!-- 基本信息 -->
+      <div class="basic-info">
+        <div class="basic-title">{{'100443' | translate}}</div>
+        <div class="inputs-basic">
+          <!-- 商品类型 -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">{{'商品类型'}}</label>
+            <div class="right-con">
+              <span ng-if="productType=='0' && !personalizePro">{{'代发商品'}}</span>
+              <span ng-if="productType=='0' && personalizePro && !customeDesign">{{'个性商品'}}</span>
+              <span ng-if="customeDesign">客户设计商品（原商品sku：{{oldSku}}）</span>
+              <span ng-if="productType=='1'">{{'服务商品'}}</span>
+            </div>
+          </div>
+          <!-- 定制类型 -->
+          <div class="input-item clearfix merch-sku" style="display: none">
+            <!-- ng-show="personalizePro" -->
+            <label class="">{{'定制类型'}}</label>
+            <div class="right-con">
+              颜色和区域定制
+            </div>
+          </div>
+          <!-- 商品名称 -->
+          <div class="input-item clearfix">
+            <label class="">{{'100107' | translate}}</label>
+            <div class="right-con">
+              {{ merchanName }}
+            </div>
+          </div>
+          <!-- 商品sku -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">SKU</label>
+            <div class="right-con">
+              {{ addGoodsAutoSKU }}
+            </div>
+          </div>
+          <!-- 商品类目 -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">{{'100386' | translate}}</label>
+            <div class="right-con">
+              <span id="show-selected-category">{{ goodsCategory }}</span>
+            </div>
+          </div>
+          <!-- 商品到货周期 2019-7-9 xioay-->
+          <div class="input-item clearfix merch-sku" ng-show="chartShow">
+            <label class="">商品到货周期</label>
+            <div style="height: 400px;" id="pie-chart"></div>
+          </div>
+          <!-- 描述 -->
+          <div class="input-item merchan-desc clearfix" ng-show="productType=='0'">
+            <label class="label-desc" for="">{{'100444' | translate}}</label>
+            <div class="right-con">
+              <div id="wang-editor"></div>
+            </div>
+          </div>
+          <!-- 销售建议 -->
+          <div class="input-item merchan-desc clearfix">
+            <!-- <span class="asj-must-require">* </span> -->
+            <label class="label-desc" for="">{{'销售建议'}}</label>
+            <div class="right-con">
+              <div id="wang-editor-2-show" class="wang-editor"></div>
+            </div>
+          </div>
+          <!-- 商品图片 -->
+          <div class="input-item merch-pics">
+            <div class="merch-pics-title clearfix">
+              <div class="pull-left title-left">{{'100445' | translate}}</div>
+              <div class="pull-right title-right">
+                  <a href="javascript: void(0);" ng-click="downloadPic()">批量下载图片</a>
+                <!-- <a href="javascript: void(0);" ng-click="addPic()">添加URL图片</a>
+                                <span class="add-local">
+                                <a href="javascript: void(0);"  class="add-local-pic-btn">添加本地图片</a>
+                                 <form action="http://192.168.5.243:8082/dsp_server/app/ajax/upload" method="post" enctype="multipart/form-data" id="uploadimg">
+                                   <input type="file" name="file" id="" class="add-local-pic-inp" multiple onchange="angular.element(this).scope().upLoadImg(this.files)">
+                                 </form>
+                                </span> -->
+              </div>
+            </div>
+            <div class="show-pics-box clearfix">
+              <ul>
+                <li ng-repeat="item in picContainer">
+                  <div>
+                    <img ng-src="{{ item.src }}" alt="">
+                    <div class="edit-box-wrap">
+                      <div class="edit-box">
+                        <a href="javascript:void(0);" class="preview-btn"
+                          ng-click="previewPic($event)">{{'100245' | translate}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- 商品变量 -->
+          <div class="input-item merch-variable variable-show-detail">
+            <div class="merch-variable-title clearfix">
+              <div class="pull-left">
+                <div class="pull-left title-left">{{'100446' | translate}}</div>
+              </div>
+            </div>
+            <div class="merch-varible-box-wrap">
+              <div class="merch-varible-box">
+                <div class="merch-varible-thead clearfix">
+                  <ul class="pull-left">
+                    <li class="li-img">&nbsp;&nbsp;</li>
+                  </ul>
+                  <ul class="pull-left" id="varible-new">
+                  </ul>
+                  <ul class="pull-left">
+                    <li class="li-pweight">{{'100380' | translate}}</li>
+                    <li class="li-postweight">{{'100447' | translate}}</li>
+                    <li class="li-pprice" ng-if="productType=='0'">{{'100350' | translate}}($)</li>
+                    <li class="li-SKU">SKU</li>
+                    <!-- <li class="li-sku-aname" ng-show="personalizePro">
+                                基础色值
+                            </li> -->
+                    <li class="li-sku-aname" ng-if="productType=='0' || productType=='1'">{{'100448' | translate}}</li>
+                    <li class="li-sku-aname" ng-if="productType=='1'">{{'仓储费'}}</li>
+                    <li class="li-sku-aname" ng-if="productType=='1'">{{'处理费'}}</li>
+                    <li class="li-sku-aname" ng-if="productType=='1'">{{'卸货费'}}</li>
+                    <!-- <li class="li-sku-aname" ng-if="productType=='1'">{{'派送费'}}</li> -->
+                    <li class="li-sku-aname" ng-if="productType=='1'">{{'国内运输费'}}</li>
+                    <li class="li-buyprice" ng-if="productType=='0'">{{'100449' | translate}}</li>
+                    <li class="li-unit">{{'100450' | translate}}</li>
+                    <li class="li-declarevalue">{{'100451' | translate}}</li>
+                    <li class="li-length">{{'100452' | translate}}</li>
+                    <li class="li-width">{{'100453' | translate}}</li>
+                    <li class="li-height">{{'100454' | translate}}</li>
+                  </ul>
+                  <ul class="pull-left" id="storage-name">
+                    <!-- <li class="li-yiwu">义乌仓</li>
+                            <li class="li-shenzhen">深圳仓</li>
+                            <li class="li-meiguo">美国仓</li> -->
+                  </ul>
+                  <ul class="pull-left">
+                    <li class="li-remove">&nbsp;&nbsp;</li>
+                  </ul>
+                </div>
+                <div class="merch-varible-tbody clearfix" id="varible-line-0" style="height: 76px;line-height: 76px;">
+                  <ul class="pull-left">
+                    <li class="li-img">
+                      <div class="li-img-box">
+                        <div class="asj-listimg-span">
+                          <img src="#" alt="" class="small-img merch-variable-pic">
+                          <img src="#" alt="" class="hidden-bigimg variable-pic-big bottom">
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="pull-left varible-new">
+                  </ul>
+                  <ul class="pull-left">
+                    <li class="li-pweight can-edit"><span class="edit-inp edit-pweight no-empty"></span></li>
+                    <li class="li-postweight can-edit"><span class="edit-inp edit-postweight no-empty"></span></li>
+                    <li class="li-pprice can-edit" ng-if="productType=='0'"><span
+                        class="edit-inp edit-pprice no-empty"></span></li>
+                    <li class="li-SKU" style="position: relative;">
+                      <div class="span-SKU" style="width: 190px;"></div>
+                      <a href="javascript:void(0)"
+                        style="width: 18px; height: 18px; position: absolute; bottom: 2px;right: 2px;line-height: 18px;"
+                        title="复制SKU" ng-click="handleCopySku($event)"><img style="height: 18px;"
+                          src="./static/image/public-img/copy.png" alt=""></a>
+                    </li>
+                    <li class="li-sku-aname can-edit" ng-if="productType=='0' || productType=='1'"><span class="edit-inp edit-sku-aname" ng-click="alertSkuAname($event)"></span></li>
+                    <li class="li-sku-aname can-edit" ng-if="productType=='1'">
+                      <span class="edit-storage-charge"></span>
+                    </li>
+                    <li class="li-sku-aname can-edit" ng-if="productType=='1'">
+                      <span class="edit-process-charge"></span>
+                    </li>
+                    <li class="li-sku-aname can-edit" ng-if="productType=='1'">
+                      <span class="edit-unload-charge"></span>
+                    </li>
+                    <!-- <li class="li-sku-aname can-edit" ng-if="productType=='1'">
+                                <span class="edit-send-charge"></span>
+                            </li> -->
+                    <li class="li-sku-aname can-edit" ng-if="productType=='1'">
+                      <span class="edit-CNTOUSA-charge"></span>
+                    </li>
+                    <li class="li-buyprice can-edit" ng-if="productType=='0'"><span
+                        class="edit-inp edit-buyprice no-empty"></span></li>
+                    <li class="li-unit">
+                      <span>{{ merchanUnit }}</span>
+                    </li>
+                    <li class="li-declarevalue can-edit">
+                      <span class="edit-inp edit-declarevalue no-empty">
+                    </li>
+                    <li class="li-length can-edit"><span class="edit-inp edit-length"></span></li>
+                    <li class="li-width can-edit"><span class="edit-inp edit-width"></span></li>
+                    <li class="li-height can-edit"><span class="edit-inp edit-height"></span></li>
+                  </ul>
+                  <ul class="pull-left storage-con">
+                    <!-- <li class="li-yiwu can-edit"><input class="edit-inp edit-yiwu" value="" placeholder="0" ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event)"></li>
+                            <li class="li-shenzhen can-edit"><input class="edit-inp edit-shenzhen" value="" placeholder="0" ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event)"></li>
+                            <li class="li-meiguo can-edit"><input class="edit-inp edit-american" value="" placeholder="0" ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event)"></li> -->
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <pod-merchandise type='1' from="'detail'" podarray="ctrl.podarray" showdetail="ctrl.showdetail"
+            ng-if="personalizePro && podType == '1' && !customeDesign && podVersion==1"></pod-merchandise>
+          <pod-merchandise2 type='1' from="'detail'" podarray="ctrl.podarray" showdetail="ctrl.showdetail"
+            ng-if="personalizePro && podType == '1' && !customeDesign && podVersion==2"></pod-merchandise2>
+          <pod-merchandise2 type='2' from="'detail'" ng-if="personalizePro && podType == '2' && !customeDesign">
+          </pod-merchandise2>
+          <!-- 定制信息： -->
+          <!-- <div class="input-item merchan-desc clearfix" ng-show="customeDesign">
+            <label class="label-desc" for="">定制信息：</label>
+            <div class="right-con">
+              <p style="font-size: 14px;" ng-show="customeDesign.front && customeDesign.front.imgUrl">正面定制图：<a
+                  href="{{customeDesign.front.imgUrl}}" target="_blank"><img
+                    style="max-width: 200px; max-height: 200px;" src="{{customeDesign.front.imgUrl}}" alt=""></a></p>
+              <p style="font-size: 14px;" ng-show="customeDesign.front && customeDesign.front.text">
+                正面定制文字：{{customeDesign.front.text}}(字体：{{customeDesign.front.fontfamily}}，字号：{{customeDesign.front.fontsize}}，颜色：{{customeDesign.front.fontcolor}})
+              </p>
+              <p style="font-size: 14px;" ng-show="customeDesign.back && customeDesign.back.imgUrl">背面定制图：<a
+                  href="{{customeDesign.back.imgUrl}}" target="_blank"><img style="max-width: 200px; max-height: 200px;"
+                    src="{{customeDesign.back.imgUrl}}" alt=""></a></p>
+              <p style="font-size: 14px;" ng-show="customeDesign.back && customeDesign.back.text">
+                背面定制文字：{{customeDesign.back.text}}(字体：{{customeDesign.back.fontfamily}}，字号：{{customeDesign.back.fontsize}}，颜色：{{customeDesign.back.fontcolor}})
+              </p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <!-- 辅助信息 -->
+      <div class="supply-info">
+        <div class="basic-title">{{'100455' | translate}}</div>
+        <div class="inputs-supply">
+          <!-- 中文名称 -->
+          <div id="chinese-name" ng-show="productType=='0' || productType=='1'"
+            class="input-item chinese-name clearfix">
+            <label class="">{{'100456' | translate}}</label>
+            <div class="right-con">
+              <span type="text" id="" class="chinese-name-inp top-three"></span>
+              <span type="text" id="" class="chinese-name-inp top-three"></span>
+              <span type="text" id="" class="chinese-name-inp top-three"></span>
+              <span type="text" id="" class="chinese-name-inp"></span>
+              <span type="text" id="" class="chinese-name-inp"></span>
+              <span type="text" id="" class="chinese-name-inp"></span>
+            </div>
+          </div>
+          <!-- SKU别名 -->
+          <!-- <div class="input-item clearfix sku-another-name">
+                        <label class="">SKU别名</label>
+                        <div class="right-con">
+                            <div class="show-aname-box">
+                                <ul>
+                                    <li ng-repeat="item in skuAnameSet track by $index"><span class="aname">{{item}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+          <div class="input-item customs-code clearfix">
+            <label class="">{{'100457' | translate}}</label>
+            <div class="right-con">
+              {{ customsCode }}
+            </div>
+          </div>
+          <div class="input-item clearfix">
+            <label class="">{{'100458' | translate}}</label>
+            <div class="right-con">
+              {{ entryNameEn }}
+            </div>
+          </div>
+          <div class="input-item clearfix">
+            <label class="">{{'100459' | translate}}</label>
+            <div class="right-con">
+              {{ entryName }}
+            </div>
+          </div>
+          <!-- 包装 -->
+          <div class="input-item item-packing clearfix" id="merchan-packing">
+            <label class="">{{'100460' | translate}}</label>
+            <div class="right-con">
+              <span class="span-pack" ng-repeat="item in packing">{{ item }}</span>
+            </div>
+          </div>
+          <!-- 产品属性 -->
+          <div class="input-item item-packing clearfix" id="merchan-property">
+            <label class="">{{'100461' | translate}}</label>
+            <div class="right-con">
+              <span class="span-pack" ng-repeat="item in property">{{ item }}</span>
+            </div>
+          </div>
+          <!-- 产品主要材质 -->
+          <div class="input-item item-packing clearfix" id="merchan-material"
+            ng-show="productType == '0' || productType == '1'">
+            <label class="">{{'100462' | translate}}</label>
+            <div class="right-con">
+              <span class="span-pack" ng-repeat="item in material">{{ item }}</span>
+            </div>
+
+          </div>
+          <!-- 仓位编号 -->
+          <!-- <div class="input-item position-num clearfix">
+                        <label class="">仓位编号</label>
+                        <div class="right-con">
+                            <span>sss-12</span>
+                        </div>
+                    </div> -->
+          <!-- 到货周期  -->
+          <div class="input-item arrival-cycle clearfix" ng-show="productType=='0'">
+            <label class="">{{'100463' | translate}}</label>
+            <div class="right-con">
+              <span>{{ ArrivalCycle }}</span>
+            </div>
+          </div>
+          <!-- 商品消费人群 -->
+          <div class="input-item consumers-group clearfix" ng-show="productType == '0' || productType == '1'">
+            <label class="">{{'100464' | translate}}</label>
+            <div class="right-con">
+              <div class="show-group-box">
+                <div class="select-consumer-item" ng-repeat="item in selectConsumer">
+                  <button type="button" class="btn btn-default chose-group">{{ item.name }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 首选业务员 -->
+          <div class="input-item consumers-group clearfix">
+            <label class="">{{'100465' | translate}}</label>
+            <div class="right-con">
+              <span>{{shelve || '100466' | translate}}</span>
+            </div>
+          </div>
+          <!-- 可见 -->
+          <div class="input-item attribute clearfix" id="authrity-users">
+            <label class="">{{'100467' | translate}}</label>
+            <div class="right-con">
+              <div class="all-see">
+                <label for="">{{'100391' | translate}}</label>
+              </div>
+              <div class="part-see">
+                <div class="part-see-top clearfix">
+                  <label for="">{{'100396' | translate}}</label>
+                </div>
+                <div class="part-see-bottom" ng-show="authorityPart">
+                  <ul>
+                    <!-- ng-click="removeAname(item)" -->
+                    <li ng-repeat="item in authorityUsers"><span class="aname">{{ item.num + '-' + item.name }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 采购数量区间折扣 -->
+	        <div class="input-item clearfix" id="discount-warp" ng-show="productType == '3'">
+            <label class=""><span class="asj-must-require">* </span>采购数量区间折扣</label>
+            <div class="right-con">
+              <div class="radio-box">
+                <input type="radio" name="discount_radio" disabled value="0" ng-model="discountStatus">
+                <label for="">不设置折扣</label>
+              </div>
+              <div class="radio-box">
+                <input type="radio" name="discount_radio" disabled value="1" ng-model="discountStatus">
+                <label for="">设置折扣</label>
+              </div>
+              <div class="discount-range-box" ng-show="discountStatus === '1'">
+               <div class="title item-box">
+                 <div class="item">数量</div>
+                 <div class="item">折扣</div>
+               </div>
+                <div class="item-box" ng-repeat="item in discountData">
+                  <div class="item">
+                    <input type="text" disabled ng-model="item.lowNum">-
+                    <input type="text" ng-model="item.highNum"
+                           disabled
+                           placeholder="{{$index === discountData.length-1 ? '999999' : ''}}">
+                  </div>
+									<div class="item d-flex align-items-center ">
+										<input type="text" ng-model="item.discount" disabled>
+									</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 采购链接  -->
+          <div class="input-item buy-link clearfix" ng-show="productType=='0'||productType=='3'">
+            <label class=""><span class="asj-must-require">* </span>{{'100417' | translate}}</label>
+            <div class="right-con">
+              <div class="show-buylink-box">
+                <table class="table table-bordered merch-buylink-table">
+                  <tr class="tr-head">
+                    <td width="300">{{'100417' | translate}}</td>
+                    <td width="200">{{'100425' | translate}}</td>
+                    <td width="200">备注</td>
+                  </tr>
+                  <tr ng-repeat="item in merchBuyLinks">
+                    <td class="td-link"><a href="{{ item.name }}" target="_blank">{{ item.name }}</a></td>
+                    <td class="td-star">
+                      <span ng-class="{star: item.star * 1 >= 1 }" ng-click="changeBuyLinkStar(item.name, $event)"
+                        ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="1"></span>
+                      <span ng-class="{star: item.star * 1 >= 2 }" ng-click="changeBuyLinkStar(item.name, $event)"
+                        ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="2"></span>
+                      <span ng-class="{star: item.star * 1 >= 3 }" ng-click="changeBuyLinkStar(item.name, $event)"
+                        ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="3"></span>
+                      <span ng-class="{star: item.star * 1 >= 4 }" ng-click="changeBuyLinkStar(item.name, $event)"
+                        ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="4"></span>
+                      <span ng-class="{star: item.star * 1 >= 5 }" ng-click="changeBuyLinkStar(item.name, $event)"
+                        ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="5"
+                        index="10"></span>
+                    </td>
+                    <td>{{item.beiZhu}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- 对手链接  -->
+          <!-- && addSourceId -->
+          <div class="input-item buy-link clearfix" ng-show="productType=='0'">
+            <label class="">
+              {{'对手链接'}}
+            </label>
+            <div class="right-con">
+              <!-- <div class="add-buylink-box">
+                            <input type="text" id="rival-link-inp" placeholder="链接" ng-model="addRivalVal">
+                            <input style="height: 40px; padding-left: 10px;" type="number" placeholder="价格" ng-model="addRivalPrice">
+                            <a href="javascript: void(0);" class="add-buylink-btn" ng-click="addRivalLink()"><img src="./static/image/public-img/iconplus.png" alt="" title="新增对手链接"></a>
+                          </div> -->
+              <div class="show-buylink-box">
+                <table class="table table-bordered merch-buylink-table">
+                  <tr class="tr-head">
+                    <td width="300">{{'对手链接'}}</td>
+                    <td width="200">{{'对手价格'}}</td>
+                    <!-- <td width="100">{{'100043' | translate}}</td> -->
+                  </tr>
+                  <tr ng-repeat="item in rivalLink">
+                    <td class="td-link"><a href="{{ item.name }}" target="_blank">{{ item.name }}</a></td>
+                    <td class="td-star">
+                      {{item.price}}
+                    </td>
+                    <!-- <td><a href="javascript:void(0);" ng-click="deleteRivalLink($index)">{{'100227' | translate}}</a></td> -->
+                  </tr>
+                </table>
+              </div>
+              <div class="error-message" ng-show="verifyRivallink">{{'请填写对手链接'}}</div>
+            </div>
+          </div>
+          <!-- 供应商信息 -->
+          <div class="input-item supplier-info clearfix">
+            <label class="">{{'100468' | translate}}</label>
+            <div class="right-con">
+              <div class="show-supplier-box">
+                <div class="table-supplier-box" ng-repeat="item in suppliers">
+                  <table class="table supplier-info-table" id="{{item.id}}">
+                    <tr class="tr-head tr-first">
+                      <td class="td-left">{{'100469' | translate}}</td>
+                      <td>{{'100470' | translate}}</td>
+                      <td>{{'100471' | translate}}</td>
+                      <td>{{'100472' | translate}}</td>
+                      <td>QQ</td>
+                      <td>{{'100473' | translate}}</td>
+                      <td>{{'100474' | translate}}</td>
+                      <td>{{'100475' | translate}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-left">
+                        {{ item.name }}
+                      </td>
+                      <td>
+                        {{ item.supplierType }}
+                      </td>
+                      <td>
+                        {{ item.mainSaleCategory }}
+                      </td>
+                      <td>
+                        {{ item.linkman }}
+                      </td>
+                      <td>
+                        {{ item.qq }}
+                      </td>
+                      <td>
+                        {{ item.wechat }}
+                      </td>
+                      <td>
+                        {{ item.wangwang }}
+                      </td>
+                      <td>
+                        {{ item.tel }}
+                      </td>
+                    </tr>
+                    <tr class="tr-head">
+                      <td class="td-left">{{'100476' | translate}}</td>
+                      <td>{{'100477' | translate}}</td>
+                      <td>{{'100478' | translate}}</td>
+                      <td colspan="2">{{'100479' | translate}}</td>
+                      <td>{{'100480' | translate}}</td>
+                      <td>{{'100481' | translate}}</td>
+                      <td>{{'100482' | translate}}</td>
+                    </tr>
+                    <tr>
+                      <td class="td-left">
+                        {{ item.productLink }}
+                      </td>
+                      <td>
+                        {{ item.supplyPrice }}
+                      </td>
+                      <td class="td-supplier-grade">
+                        <span ng-class="{star: item.lev * 1 >= 1 }"></span>
+                        <span ng-class="{star: item.lev * 1 >= 2 }"></span>
+                        <span ng-class="{star: item.lev * 1 >= 3 }"></span>
+                        <span ng-class="{star: item.lev * 1 >= 4 }"></span>
+                        <span ng-class="{star: item.lev * 1 >= 5 }"></span>
+                        <!-- <ul>
+                                                <li class="li-grade" ng-mouseenter="gradeMouseEnter($event)" ng-mouseleave="gradeLeaveEnter($event)" ng-click="markCurrentLi($event)"></li>
+                                                <li class="li-grade" ng-mouseenter="gradeMouseEnter($event)" ng-mouseleave="gradeLeaveEnter($event)" ng-click="markCurrentLi($event)"></li>
+                                                <li class="li-grade" ng-mouseenter="gradeMouseEnter($event)" ng-mouseleave="gradeLeaveEnter($event)" ng-click="markCurrentLi($event)"></li>
+                                                <li class="li-grade" ng-mouseenter="gradeMouseEnter($event)" ng-mouseleave="gradeLeaveEnter($event)" ng-click="markCurrentLi($event)"></li>
+                                                <li class="li-grade" ng-mouseenter="gradeMouseEnter($event)" ng-mouseleave="gradeLeaveEnter($event)" ng-click="markCurrentLi($event)"></li>
+                                            </ul> -->
+                      </td>
+                      <td colspan="2" class="td-receive-info"><a href="javascript: void(0);" title="点击查看详情"
+                          ng-click="showReceiveInfo(item.id)">{{'100540' | translate}}</a></td>
+                      <td>
+                        {{ item.tax }}
+                      </td>
+                      <td>
+                        {{ item.billType }}
+                        <!-- <select name="" id="">
+                                                <option value="">普通发票</option>
+                                                <option value="">专用发票</option>
+                                            </select> -->
+                      </td>
+                      <td>
+                        {{ item.origin }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-item remark-info clearfix">
+            <label class="">{{'100483' | translate}}</label>
+            <div class="right-con">
+              {{ remarkInfo }}
+            </div>
+          </div>
+        </div>
+        <!-- 商品操作日志 -->
+        <div class="nav">
+          <ul class="clearfix">
+            <li ng-click="navTab(1)" ng-class="{'active' : logShow}">商品操作日志</li>
+            <li ng-click="navTab(2)" ng-class="{'active' : !logShow}">商品咨询</li>
+          </ul>
+        </div>
+        <div class="main">
+          <div class="main-content" ng-show="logShow">
+            <table class="main-log">
+              <thead>
+                <tr>
+                  <th width=15%>{{'100254' | translate}}</th>
+                  <th width=55%>{{'100485' | translate}}</th>
+                  <th width=15%>{{'100486' | translate}}</th>
+                  <th width=15%>{{'100487' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in operateLogs track by $index">
+                  <td>{{ $index + 1 }}</td>
+                  <td>{{ item.operate || item.OPERATE }}</td>
+                  <td>{{ item.operator || item.OPERATOR }}</td>
+                  <td>{{ (item.operateDate || item.OPERATEDATE).time | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+              </tbody>
+            </table>
+          </div>
+          <div class="main-content" ng-show="!logShow">
+            <table class="main-table">
+              <thead>
+                <tr>
+                  <th width="94">序号</th>
+                  <th width="94">咨询时间</th>
+                  <th width="112">用户名</th>
+                  <th width="94">商品名称</th>
+                  <th width="112">SKU</th>
+                  <th width="180">咨询问题</th>
+                  <th width="94">最近回复时间</th>
+                  <th width="160">最近回复内容</th>
+                  <th width="70">处理人</th>
+                  <th width="70">删除人</th>
+                  <th width="70">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(key, item) in consultList.list">
+                  <td>{{key + 1}}</td>
+                  <td>{{item.craete_time | date : 'yyyy-MM-dd HH:mm'}}</td>
+                  <td>{{item.user_name}}</td>
+                  <td>
+                    {{item.product_name}}
+                  </td>
+                  <td>{{item.sku}}</td>
+                  <td class="popover-p">
+                    <p data-toggle="tooltip" data-placement="bottom" title="{{item.content}}">{{item.content}}
+                    </p>
+                  </td>
+                  <td>{{item.replytime | date : 'yyyy-MM-dd HH:mm'}}</td>
+                  <td>{{item.replycontent}}</td>
+                  <td>{{item.deal_name || ''}}</td>
+                  <td>{{item.del_name || ''}}</td>
+                  <td>
+                    <span class="color" ng-click="detail(item)">详情</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div ng-show="erpordTnum<1" style="text-align: center;">暂无数据</div>
+            <!-- 分页 -->
+            <div class="pages-fun" ng-show="erpordTnum>0">
+              <!-- <select id="page-sel" class="c-select-page-num">
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select> -->
+              <!-- <span class="every-page">每页</span> -->
+              <span class="every-page gong">共</span>
+              <span class="c-all-num-line">{{erpordTnum}}</span>
+              <span class="every-page">条</span>
+              <span id="demo3-text"></span>
+              <div id="c-pages-fun"></div>
+              <span class="every-page">跳转:</span>
+              <input id="inp-num" class="c-inp-num-go"></input>
+              <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+              <!-- <span class="count-money">总金额:</span>
+                <span class="count-mnum">{{countMoney}}</span> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="merch-logs clearfix">
+                <label for="">{{'100484' | translate}}</label>
+                <table class="table table-bordered merch-log-table">
+                    <tr class="tr-head">
+                        <th>{{'100254' | translate}}</th>
+                        <th width="300">{{'100485' | translate}}</th>
+                        <th>{{'100486' | translate}}</th>
+                        <th>{{'100487' | translate}}</th>
+                    </tr>
+                    <tr ng-repeat="item in operateLogs">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ item.operate || item.OPERATE }}</td>
+                        <td>{{ item.operator || item.OPERATOR }}</td>
+                        <td>{{ (item.operateDate || item.OPERATEDATE).time | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    </tr>
+                </table>
+            </div> -->
+        <!--商品视频-->
+        <!--<div class="merch-logs clearfix">
+                <label for="" style="width: auto;">
+                    <span>商品视频</span>
+                    <ul class="videos">
+                        <li>
+                            <video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
+                                <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4">
+                            </video>
+                            <p class="clearfix">
+                                <span>编号1001</span>
+                            </p>
+                        </li>
+                    </ul>
+                </label>
+            </div>-->
+        <!-- 按钮 -->
+        <div class="footer-btns">
+          <a class="btn btn-default back-btn" href="javascript: void(0);" role="button"
+            ng-click="cancelAdd()">{{'100173' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 商品详情 -->
+  <div class="editmesstc-wrap comodity" ng-show="model">
+    <div class="editmess-con consult-model">
+      <div class="model-top">咨询详情</div>
+      <div class="model-content">
+        <ul class="clearfix">
+          <li ng-repeat="(key, item) in detailList" class="active" ng-class="item.state == 3 ? 'del-active' : ''">
+            <div class="clearfix">
+              <div class="img fl">
+                <img class="user-head-img" ng-show="item.head" ng-src="{{item.head}}">
+                <p class="user-head-firname" ng-show="!item.head">{{item.imageName}}</p>
+              </div>
+              <div class="fl content-item">
+                <div class="top clearfix">
+                  <label class="bold" data-toggle="tooltip" data-placement="bottom"
+                    title="{{item.user_name}}">{{item.user_name}}:</label>
+                  <!-- <label class="bold">{{item.user_name}}:</label> -->
+                  <div class="div">{{item.content}}</div>
+                </div>
+                <div class="bot">
+                  <label>{{item.craete_time | date : 'yyyy-MM-dd HH:mm'}}</label>
+                  <span ng-if="item.state == 3" class="reply">{{item.user_name}}已删除</span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="model-bottom">
+        <button ng-click="cancel()" class="cancel">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 服务费 ng-show="adminFlag" -->
+<div class="fuwufei-tkcon" style="width: 960px;min-height: inherit;" ng-show="adminFlag">
+  <div class="tk-top-tit d-flex justify-content-around align-items-center">
+    <span>中国仓</span>
+    <!-- <button ng-click="baoCunFun('cn')" class="bc-feiyong-btn font-size-14px">保存</button> -->
+    <span>美国仓</span>
+    <!-- <button ng-click="baoCunFun('en')" class="bc-feiyong-btn font-size-14px">保存</button> -->
+    <span>泰国仓</span>
+    <!-- <button ng-click="baoCunFun('th')" class="bc-feiyong-btn font-size-14px">保存</button> -->
+    <span>德国仓</span>
+    <!-- <button ng-click="baoCunFun('en')" class="bc-feiyong-btn font-size-14px">保存</button> -->
+    <span>印尼仓</span>
+    <!-- <button ng-click="baoCunFun('th')" class="bc-feiyong-btn font-size-14px">保存</button> -->
+  </div>
+  <div class="tk-mid-con d-flex">
+    <div class="mid-left">
+      <!-- ng-repeat="cn in cnMoneyList" -->
+      <div class="min-inpgroup" ng-repeat="cn in cnMoneyList">
+        <label class="font-size-14px">{{cn.itemName}}: </label>
+        <input placeholder="0" ng-model="cn.moneys" ng-keyup="isNumFun(cn,cn.moneys)"></input>
+        <span class="left-span">/美元</span>
+      </div>
+      <div class="min-inpgroup" ng-repeat="cnts in zhiLiuList" ng-if="cnts.storeId==1">
+        <label class="font-size-14px">免费仓储天数: </label>
+        <input placeholder="0" ng-model="cnts.days" ng-keyup="dayIsNumFun(cnts,'days',cnts.days)"></input>
+        <span class="left-span">/天</span>
+      </div>
+    </div>
+    <div class="mid-right">
+      <!-- ng-repeat="en in enMoneyList" -->
+      <div class="min-inpgroup" ng-repeat="en in enMoneyList">
+        <label class="font-size-14px">{{en.itemName}}: </label>
+        <input placeholder="0" ng-model="en.moneys" ng-keyup="isNumFun(en,en.moneys)"></input>
+        <span class="right-span">/美元</span>
+      </div>
+      <div class="min-inpgroup" ng-repeat="cnts in zhiLiuList" ng-if="cnts.storeId==2">
+        <label class="font-size-14px">免费仓储天数: </label>
+        <input placeholder="0" ng-model="cnts.days" ng-keyup="dayIsNumFun(cnts,'days',cnts.days)"></input>
+        <span class="right-span">/天</span>
+      </div>
+    </div>
+    <div class="mid-right">
+      <!-- ng-repeat="en in enMoneyList" -->
+      <div class="min-inpgroup" ng-repeat="th in thMoneyList">
+        <label class="font-size-14px">{{th.itemName}}: </label>
+        <input placeholder="0" ng-model="th.moneys" ng-keyup="isNumFun(th,th.moneys)"></input>
+        <span class="right-span">/美元</span>
+      </div>
+      <div class="min-inpgroup" ng-repeat="cnts in zhiLiuList" ng-if="cnts.storeId==3">
+        <label class="font-size-14px">免费仓储天数: </label>
+        <input placeholder="0" ng-model="cnts.days" ng-keyup="dayIsNumFun(cnts,'days',cnts.days)"></input>
+        <span class="right-span">/天</span>
+      </div>
+    </div>
+    <div class="mid-right">
+      <!-- ng-repeat="en in enMoneyList" -->
+      <div class="min-inpgroup" ng-repeat="de in deMoneyList">
+        <label class="font-size-14px">{{de.itemName}}: </label>
+        <input placeholder="0" ng-model="de.moneys" ng-keyup="isNumFun(de,de.moneys)"></input>
+        <span class="right-span">/美元</span>
+      </div>
+      <div class="min-inpgroup" ng-repeat="cnts in zhiLiuList" ng-if="cnts.storeId==4">
+        <label class="font-size-14px">免费仓储天数: </label>
+        <input placeholder="0" ng-model="cnts.days" ng-keyup="dayIsNumFun(cnts,'days',cnts.days)"></input>
+        <span class="right-span">/天</span>
+      </div>
+    </div>
+    <div class="mid-right">
+      <!-- ng-repeat="en in enMoneyList" -->
+      <div class="min-inpgroup" ng-repeat="ind in inMoneyList">
+        <label class="font-size-14px">{{ind.itemName}}: </label>
+        <input placeholder="0" ng-model="ind.moneys" ng-keyup="isNumFun(ind,ind.moneys)"></input>
+        <span class="right-span">/美元</span>
+      </div>
+      <div class="min-inpgroup" ng-repeat="cnts in zhiLiuList" ng-if="cnts.storeId==5">
+        <label class="font-size-14px">免费仓储天数: </label>
+        <input placeholder="0" ng-model="cnts.days" ng-keyup="dayIsNumFun(cnts,'days',cnts.days)"></input>
+        <span class="right-span">/天</span>
+      </div>
+    </div>
+  </div>
+  <div class="tk-btns text-align-center">
+    <button ng-click="baoCunFun()" class="bc-feiyong-btn font-size-14px">保存</button>
+    <button ng-show="fuWuSpStu==1" ng-click="tiJiaoShFun()" class="tk-qd-btn font-size-14px margin-left-30px">提交审核</button>
+    <button ng-show="fuWuSpStu==2" ng-click="tiJiaoShFun()" class="tk-qd-btn font-size-14px margin-left-30px">同意审核</button>
+  </div>
+</div>
+<script>
+  $(function () {
+    $("[data-toggle='tooltip']").tooltip()
+  });
+</script>
+<!-- 展示收款信息弹框 -->
+<script type="text/template" id="show-receive-info">
+  <h5>{{'100479' | translate}}</h5>
+  <div class="show-receive-info">
+    <div class="bank-account">
+      <div class="account-name">{{'100488' | translate}}</div>
+      <div class="account-info">
+        <span>{{'100329' | translate}}：</span><span class="account-info alipay-account"></span>
+      </div>
+    </div>
+    <div class="bank-account">
+      <div class="account-name">{{'100489' | translate}}</div>
+      <div class="account-info">
+        <span>{{'100329' | translate}}：</span><span class="account-info wechat-account"></span>
+      </div>
+    </div>
+    <div class="bank-account">
+      <div class="account-name">{{'100490' | translate}}</div>
+      <div class="account-info">
+        <ul>
+          <li>{{'100491' | translate}}：<span class="bank-account-receiver"></span></li>
+          <li>{{'100343' | translate}}：<span class="bank-account-num"></span></li>
+          <li>{{'100492' | translate}}：<span class="bank-account-open"></span></li>
+          <li>{{'100493' | translate}}：<span class="bank-account-position"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</script>
+<!-- sku别名弹框 -->
+<script type="text/template" id="asj-sku-aname">
+  <h5>sku别名</h5>
+  <div class="show-sku-aname-box">
+    <span>sku别名：</span>
+    <ul class="show-current-sku-aname">
+    
+    </ul>
+  </div>
+</script>
+<script src="erp_otweb/js/video.min.js"></script>

@@ -1,0 +1,77 @@
+<div class="advancePurchase wrapper">
+  <div class="backBtn"><a href="javascript:history.back();" class="btn">&lt;返回</a></div>
+
+  <!--  -->
+  <div class="filter flex fwp fdr">
+    <div class="input-item flex aic jcc" ng-show="sendParams.procurementType==0">
+      <span>价格：</span>
+      <div class="con flex aic">
+        <input type="text" placeholder="输入价格" ng-model="sendParams.procurementPriceLow" ng-keyup="keyUpByMoney($event)" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc" ng-show="sendParams.procurementType==1">
+      <span>SKU：</span>
+      <div class="con">
+        <input type="text" placeholder="输入SKU" ng-model="sendParams.sku" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>采购周期：</span>
+      <div class="con flex aic">
+        <input type="text" placeholder="输入天数" ng-model="sendParams.procurementPeriod" ng-keyup="onKeyUpEventByNumber('procurementPeriod')" />
+      </div>
+    </div>
+  </div>
+
+  <ul class="k-tab flex fdr aic">
+    <li ng-class="{'active':sendParams.procurementType==0}" ng-click="sendParams.procurementType=0"><span>通用</span></li>
+    <li ng-class="{'active':sendParams.procurementType==1}" ng-click="sendParams.procurementType=1"><span>专用</span></li ng-class="{'active':sendParams.type==0}" ng-click="sendParams.type=0">
+  </ul>
+  <table class="k-table" width="100%">
+    <thead>
+      <th ng-show="sendParams.procurementType==0">价格区间（$）</th>
+      <th ng-show="sendParams.procurementType==1">SKU</th>
+      <th>采购周期（天）</th>
+      <th>操作</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in list">
+        <td ng-show="sendParams.procurementType==0">
+          <div class="td">
+            <input type="text" placeholder="输入价格" ng-model="i.procurementPriceLow" ng-blur="onMoneyBlur($index,'procurementPriceLow',$event)" />
+            -
+            <input type="text" placeholder="输入价格" ng-model="i.procurementPriceHigh" ng-blur="onMoneyBlur($index,'procurementPriceHigh',$event)" />
+          </div>
+        </td>
+        <td ng-show="sendParams.procurementType==1">
+          <div class="td">
+            <input type="text" placeholder="输入SKU" ng-model="i.sku" />
+          </div>
+        </td>
+        <td>
+          <div class="td">
+            <input type="text" placeholder="输入天数" ng-model="i.procurementPeriod" ng-keyup="onKeyUpByNum($index,'procurementPeriod')" />
+          </div>
+        </td>
+        <td>
+          <div class="td">
+            <div class="flex aic">
+              <a href="javascript:void(0)" class="btn primary" ng-click="update(i)">保存</a>
+              <a href="javascript:void(0)" class="btn" ng-click="delete(i,$index)">删除</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex fdr aic" style="margin-top:20px;">
+    <a href="javascript:void(0)" class="btn primary" ng-click="add()">添加</a>
+  </div>
+
+</div>
+
+<style>
+  /* module */
+  input.day{width:100px;}
+
+</style>

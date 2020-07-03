@@ -1,0 +1,98 @@
+<div class="merchandise-box analysis-detail variant">
+  <div class="right-bar-wrap show-detail-box consult" ng-click="hideSearchRes()">
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+
+      <div class="flex jcb bgWhite">
+        <div class="proInfo flex fdc">
+          <div class="_tit">变体基本信息</div>
+          <div class="_box flex fwp">
+            <div class="line-item">
+              <span class="label">类型：</span>
+              <span class="con">{{getProductType()}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">名称：</span>
+              <span class="con">{{detail.nameen}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">SKU：</span>
+              <span class="con">{{detail.sku}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">类目：</span>
+              <span class="con">{{detail.category}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">采购次数：</span>
+              <span class="con">{{purchaseCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">采购难度：</span>
+              <span class="con">
+                <div class="bubble difficulty">
+                  {{purchasingDifficulty.linkCount<=0?'无':''}}
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>0"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=20"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=40"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=60"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=80"></i>
+                  <div class="bubble-hover" ng-if="purchasingDifficulty.linkCount>0">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        当前分值为{{formatPurchasing(purchasingDifficulty.score)}}分<br/>
+                        分值越大采购难度越小
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="line-item">
+              <span class="label">首页展示：</span>
+              <span class="con">{{IndexShowCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">推送次数：</span>
+              <span class="con">{{pushCount}}次</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variant-pic">
+          <img src="{{detail.img}}" />
+        </div>
+      </div>
+
+      <!-- 折线图 -->
+      <product-detail-graph productid="productId" vid="variantId"></product-detail-graph>
+
+    </div>
+  </div>
+  </div>
+
+</div>
+
+<style>
+  .flex{display: flex;}
+  .flex.jcc{justify-content: center;}
+  .flex.jcs{justify-content: flex-start;}
+  .flex.jcb{justify-content: space-between;}
+  .flex.aic{align-items: center;}
+  .flex.ais{align-items: flex-start;}
+  .flex.aie{align-items: flex-end;}
+  .flex.fdcr{flex-direction: column-reverse;}
+  .flex.fdrr{flex-direction: row-reverse;}
+  .flex.fdr{flex-direction: row;}
+  .flex.fdc{flex-direction:column;}
+  .flex.fwp{flex-wrap: wrap;}
+
+  hr{border-top:1px dashed #e6e6e6;padding:15px 0;}
+
+  .color-blue{color:#70B9FE;}
+  .color-red{color:#F5222D;}
+  .color-green{color:#52C41A;}
+  .color-gray{color:#666666;}
+  .color-c999{color:#999999;}
+</style>

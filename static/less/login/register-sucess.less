@@ -1,0 +1,116 @@
+// 忘记密码页css
+body,html{
+  height: 100%;
+}
+.forgot-wrap{
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  min-width: 1200px;
+}
+//元素水平居中
+.xauto{
+  margin: 0 auto;
+}
+//切圆角
+@radius:4px;
+// 给元素添加border
+.border{
+  border:1px solid red;
+}
+.main{
+  margin: 0 auto;
+  width: 1200px;
+  text-align: center;
+  // .border;
+}
+
+.forgot-header{
+  width: 100%;
+  height: 9%;
+  background-color: #ffab49;
+  .main{
+    display: table;
+    text-align: left;
+    height: 100%;
+    margin: 0 auto;
+    width: 1200px;
+    .main-child{
+      display: table-cell;
+      vertical-align: middle;
+      a{
+        text-align: left;
+        display: inline-block;
+        img{
+          display: inline-block;
+          height: 58px;
+          width: 391px;
+        }
+      }
+    }
+  }
+}
+@background:#f8f8f8;
+// 中间内容部分
+.reg-sucess{
+  height: 82%;
+  ul{
+    width: 1200px;
+    .xauto;
+    text-align: center;
+    padding-top: 188px;
+    .reg-sucessfully{
+      margin-top: 32px;
+      p{
+        font-size: 26px;
+        color: #7a7a7a;
+        font-family: Tahoma;
+      }
+    }
+    .enter-interface{
+      margin-top: 24px;
+      p{
+        font-size: 18px;
+        font-family: Tahoma;
+        color: #605757;
+        .change-time{
+          color: #009bdc;
+        }
+      }
+    }
+  }
+}
+@color:#c1c1c1;
+@footer-size:14px;
+.forgot-footer{
+  height: 9%;
+  width: 100%;
+  background-color: #ffffff;
+  display: table;
+  .forfoo-con{
+    min-width: 1200px;
+    width: 1200px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    span{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      .copyright-logo{
+        padding: 0 5px 0 0;
+        font-size: 22px;
+        vertical-align: middle;
+      }
+    }
+    a{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      border-left: 1px solid @color;
+      border-right: 1px solid @color;
+    }
+  }
+}
+
+

@@ -1,0 +1,500 @@
+<style>
+    .c-ord-con {
+        padding: 25px;
+        background: #fff;
+    }
+
+    .retention-order {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 4px 15px;
+        margin-right: 0;
+        margin-left: 15px;
+        color: #fff;
+        background: #FFB900;
+        border-color: #FFB900;
+    }
+
+    .btn.clean {
+        background: #fff;
+        color: #666;
+        border-color: #e6e6e6;
+    }
+
+    .btn:hover {
+        color: #fff;
+    }
+    .btn.clean:hover {
+        color: #666;
+    }
+
+    .btn-sort {
+        padding: 2px 5px;
+        box-shadow: 0 0 2px 0px #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .btn-sort.active {
+        color: #fff;
+        background: #08ACE9;
+    }
+
+    .box-shadow {
+        box-shadow: 0 0 10px -4px #ccc;
+    }
+
+    .select-day.active-color {
+        background: #F9AE08;
+        border:1px solid #F9AE08;
+        color: #fff;
+    }
+
+    .color-secondary {
+        color: #F9AE08;
+        font-size: 11px;
+    }
+
+    .select-day {
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #E4E4E4;
+        border-radius: 15px !important;
+        padding: 3px 10px;
+        font-size: 12px;
+    }
+
+    .top-box {
+        padding: 15px 18px;
+        margin: 0 0 15px;
+        background: #fff;
+        /* border: 1px solid #eee; */
+        border-radius: 2px;
+        margin-bottom: 15px;
+    }
+
+    .top-bar {
+        line-height: 44px;
+    }
+
+    .range-input input,
+    input.range-input {
+        width: 60px;
+    }
+
+    .margin-left-large {
+        margin-left: 30px;
+    }
+
+    .margin-left-medium {
+        margin-left: 25px;
+    }
+
+    .margin-left-small {
+        margin: 0 8px;
+        height: 32px;
+        border-radius: 4px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 12px;
+        text-align: center;
+        color: #333;
+        text-shadow: 0 0 2px #ddd;
+    }
+
+    .table-thead {
+        background: #FCF4D9;
+        transform: translate(0px);
+        border: 1px solid #FCF4D9;
+        color: #8B572A;
+        margin-bottom: -1px;
+        font-weight: 600;
+    }
+
+    .table-thead .item {
+        padding: 11px 0;
+        text-align: center;
+        font-weight: normal;
+    }
+
+    .table-thead .btn-box {
+        margin-top: 4px;
+    }
+
+    table tr span {
+        font-size: 11px;
+    }
+
+    table tr td {
+        max-width: 200px;
+    }
+
+    table tr td.sku span {
+        color: #08ACE9;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    table tr td.split {
+        position: relative;
+        white-space: nowrap;
+    }
+
+    table tr td.split span {
+        display: inline-block;
+        text-align: center;
+        width: 50%;
+    }
+
+    table tr td.split span:first-child {
+        border-right: 1px solid #ccc;
+    }
+
+    table tr * {
+        vertical-align: middle !important;
+    }
+
+    table tr .img-box {
+        position: relative;
+    }
+
+    table tr .img-box:hover .big-img {
+        opacity: 1;
+        width: initial;
+    }
+
+    table tr .big-img {
+        position: absolute;
+        left: 90px;
+        top: 50%;
+        width: 0;
+        opacity: 0;
+        transform: translateY(-50%);
+        transition: 100ms;
+    }
+
+    /* 5 + 6 + 19 + 11 + 7 + 7 + 7 + 7 + 7 + 12 + 12 */
+    .table-thead .item:nth-child(1) {
+        width: 5%;
+    }
+
+    .table-thead .item:nth-child(2) {
+        width: 6%;
+    }
+
+    .table-thead .item:nth-child(3) {
+        width: 19%;
+    }
+
+    .table-thead .item:nth-child(4) {
+        width: 11%;
+    }
+
+    .table-thead .item:nth-child(5) {
+        width: 7%;
+    }
+
+    .table-thead .item:nth-child(6) {
+        width: 7%;
+    }
+
+    .table-thead .item:nth-child(7) {
+        width: 7%;
+    }
+
+    .table-thead .item:nth-child(8) {
+        width: 7%;
+    }
+
+    .table-thead .item:nth-child(9) {
+        width: 7%;
+    }
+
+    .table-thead .item:nth-child(10) {
+        width: 12%;
+    }
+
+    .table-thead .item:nth-child(11) {
+        width: 12%;
+    }
+
+    table tr.body td:nth-child(1) {
+        width: 5%;
+    }
+
+    table tr.body td:nth-child(2) {
+        width: 6%;
+    }
+
+    table tr.body td:nth-child(3) {
+        width: 19%;
+    }
+
+    table tr.body td:nth-child(4) {
+        width: 11%;
+    }
+
+    table tr.body td:nth-child(5) {
+        width: 7%;
+    }
+
+    table tr.body td:nth-child(6) {
+        width: 7%;
+    }
+
+    table tr.body td:nth-child(7) {
+        width: 7%;
+    }
+
+    table tr.body td:nth-child(8) {
+        width: 7%;
+    }
+
+    table tr.body td:nth-child(9) {
+        width: 7%;
+    }
+
+    table tr.body td:nth-child(10) {
+        width: 12%;
+    }
+
+    table tr.body td:nth-child(11) {
+        width: 12%;
+    }
+
+    .display-opacity {
+        opacity: .4;
+        pointer-events: none;
+    }
+    .copy-img-sty{
+        cursor: pointer;
+    }
+</style>
+
+<div class="retention-order">
+    <!-- className scope -->
+    <!-- 右边的内容部分 -->
+    <div class="content">
+        <div class="c-ord-conall" style="background:transparent">
+            <div class="top-box box-shadow">
+                <div class="top-bar d-flex align-items-center">
+                    <div class="top-item">
+                        <span class="tag">仓库:</span>
+                        <select style="width: 132px;" class="margin-left-small" ng-model="storageID"
+                            onchange="var ng=angular.element(this).scope();setTimeout(() => ng.getStorageRetentionInfo(ng.storageID, 1), 100)"
+                            ng-options="opt.id as opt.storageName for opt in options1"></select>
+                    </div>
+                    <div class="top-item margin-left-large">
+                        <span class="tag">总库存金额: </span>
+                        <span class="color-secondary">{{topBarAmount.CkMoney}}</span>
+                        <span class="color-secondary">RMB</span>
+                    </div>
+                    <div class="top-item margin-left-large">
+                        <span class="tag">订单占用金额: </span>
+                        <!-- <span class="tag">订单抵扣金额: </span> -->
+                        <span class="color-secondary">{{topBarAmount.dikouMoney}}</span>
+                        <span class="color-secondary">RMB</span>
+                    </div>
+                    <div class="top-item margin-left-large">
+                        <span class="tag">待出库金额: </span>
+                        <span class="color-secondary">{{topBarAmount.DckMoney}}</span>
+                        <span class="color-secondary">RMB</span>
+                    </div>
+                    <div class="top-item margin-left-large">
+                        <span class="tag">公有滞留金额: </span>
+                        <!-- <span class="tag">滞留金额: </span> -->
+                        <span class="color-secondary">{{topBarAmount.ZlMoney}}</span>
+                        <span class="color-secondary">RMB</span>
+                    </div>
+                </div>
+                <div class="top-bar d-flex align-items-center">
+                    <div class="top-item d-flex align-items-center"">
+                                <span class=" tag">库存类型:</span>
+                        <select style="width:72px;" class="margin-left-small" ng-model="storageType"
+                            ng-options="opt.val as opt.tag for opt in storageOptions"></select>
+                    </div>
+                    <div class="top-item margin-left-large">
+                        <input ng-model="searchStr" placeholder="请输入商品名称/SKU">
+                    </div>
+                    <div class="top-item margin-left-large d-flex range-input align-items-center">
+                        <span class="tag">滞留天数:</span>
+                        <input class="margin-left-small" ng-model="retentionDays.s">-
+                        <!-- <select ng-model="operate1" ng-options="opt.val as opt.tag for opt in operator"></select> -->
+                        <input class="margin-left-small" ng-model="retentionDays.e">
+                    </div>
+                    <div class="top-item margin-left-large d-flex range-input align-items-center">
+                        <span class="tag">滞留率: </span>
+                        <input class="margin-left-small" ng-model="retentionRate.s">-
+                        <!-- <select ng-model="operate1" ng-options="opt.val as opt.tag for opt in operator"></select> -->
+                        <input class="margin-left-small" ng-model="retentionRate.e">
+                    </div>
+                    <div class="top-item margin-left-small d-flex align-items-center" >
+                        <span ng-repeat="item in days">
+                            <span ng-click="changeDayFn(item)" class="select-day margin-left-small"
+                                ng-class="{'active-color': item.active}" ng-show="item.val">近{{item.tag}}天</span>
+                            <span ng-click="changeDayFn(item)" class="select-day margin-left-small"
+                                ng-class="{'active-color': item.active}" ng-show="!item.val">{{item.tag}}</span>
+                        </span>
+                    </div>
+                    <div class="top-item margin-left-small d-flex">
+                        <span class="btn" ng-click="page=1;getSkuStorageRetentionInfo();">查询</span>
+                        <span class="btn clean" ng-click="cleanCondition();">清除</span>
+                        <!-- <span class="btn">其余查询条件</span> -->
+                    </div>
+                </div>
+                <div class="top-bar d-flex align-items-center">
+                    <div class="top-item d-flex">
+                        <wui-date format="yyyy-mm-dd" ng-class="{'disable-opacity': disable.select}" placeholder="开始时间"
+                            btns="{'ok':'确定','now':'今天'}" ng-model="date.s"></wui-date>
+                        <wui-date format="yyyy-mm-dd" ng-class="{'disable-opacity': disable.select}"
+                            class="margin-left-small" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}"
+                            ng-model="date.e"></wui-date>
+                    </div>
+                    <!-- <div class="top-item d-flex margin-left-large">
+                                <span class="tag">可见性:</span>
+                                <select class="margin-left-small" ng-model="showRange"
+                                    ng-options="opt.val as opt.tag for opt in options3"></select>
+                            </div> -->
+                    <div class="top-item d-flex margin-left-large range-input align-items-center">
+                        <span class="tag">现有库存:</span>
+                        <input class="margin-left-small" ng-model="existInventory.s">-
+                        <!-- <select ng-model="operate2" ng-options="opt.val as opt.tag for opt in operator"></select> -->
+                        <input class="margin-left-small" ng-model="existInventory.e">
+                    </div>
+                    <div class="top-item d-flex margin-left-large range-input align-items-center">
+                        <span class="tag">销量:</span>
+                        <input class="margin-left-small" ng-model="salesVolume.s">
+                        <!-- <select ng-model="operate3" ng-options="opt.val as opt.tag for opt in operator"></select> -->
+                        <input class="margin-left-small" ng-model="salesVolume.e">
+                    </div>
+                </div>
+            </div>
+            <!-- 提供白色背景板 -->
+            <div class="c-ord-con">
+                <!-- 提供 pidding -->
+
+                <!-- top-bar -s- -->
+
+                <!-- tab-bar -e- -->
+
+                <!-- table-section -s- -->
+                <section class="box-shadow">
+                    <div id="table-header" class="table-thead d-flex">
+                        <!-- 5 + 6 + 19 + 11 + 7 + 7 + 7 + 7 + 7 + 12 + 12 -->
+                        <span class="item 1">序号</span>
+                        <span class="item 2">图片</span>
+                        <span class="item 3">商品名称</span>
+                        <span class="item 4">SKU</span>
+                        <span class="item 5">采购价格<br><span>(RMB)</span></span>
+                        <!-- <span class="6">可见性</span> -->
+                        <span class="item 7">
+                            <div>现有库存</div>
+                            <div class="btn-box">
+                                <span class="btn-sort" ng-click="sortTable('existInventory', 0)"
+                                    ng-class="{active: sort.existInventory[0].active}">公有</span>
+                                <span class="btn-sort" ng-click="sortTable('existInventory', 1)"
+                                    ng-class="{active: sort.existInventory[1].active}">私有</span>
+                            </div>
+                        </span>
+                        <span class="item 8">
+                            <div>滞留天数</div>
+                            <div class="btn-box">
+                                <span class="btn-sort" ng-click="sortTable('retentionDays', 0)"
+                                    ng-class="{active: sort.retentionDays[0].active}">公有</span>
+                                <span class="btn-sort" ng-click="sortTable('retentionDays', 1)"
+                                    ng-class="{active: sort.retentionDays[1].active}">私有</span>
+                            </div>
+                        </span>
+                        <span class="item 9">
+                            <div>销量</div>
+                            <div class="btn-box">
+                                <span class="btn-sort" ng-click="sortTable('salesVolume', 0)"
+                                    ng-class="{active: sort.salesVolume[0].active}">公有</span>
+                                <span class="btn-sort" ng-click="sortTable('salesVolume', 1)"
+                                    ng-class="{active: sort.salesVolume[1].active}">私有</span>
+                            </div>
+                        </span>
+                        <span class="item 10">
+                            <div>滞留率</div>
+                            <div class="btn-box">
+                                <span class="btn-sort" ng-click="sortTable('retentionRate', 0)"
+                                    ng-class="{active: sort.retentionRate[0].active}">公有</span>
+                                <span class="btn-sort" ng-click="sortTable('retentionRate', 1)"
+                                    ng-class="{active: sort.retentionRate[1].active}">私有</span>
+                            </div>
+                        </span>
+                        <span class="item 11">最近一次成交信息</span>
+                        <span class="item 12">最近一次入库信息</span>
+                    </div>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="body" ng-repeat="item in tableData.list">
+                                <td class="1">{{$index + 1}}</td>
+                                <td class="2 img-box">
+                                    <img ng-src="{{item.IMG | imgSeparator | IMG_SIZE: 40}}">
+                                    <img class="big-img" ng-src="{{item.IMG | imgSeparator | IMG_SIZE: 240}}">
+                                </td>
+                                <td class="3">{{item.NAME}}</td>
+                                <td class="4 sku">
+                                    <!-- <span ng-click="skipToCJ(item);">{{item.SKU}}</span> -->
+                                    <span ng-click="showErpDetail(item);">{{item.SKU}}</span>
+                                    <img class="copy-img-sty" ng-click="copySkuFun(item.SKU)" src="static/image/public-img/copy.png">
+                                </td>
+                                <td class="5">{{item.COSTPRICE}}</td>
+                                <!-- <td class="6">{{item}}</td> -->
+                                <td class="7 split">
+                                    <span>{{item.public}}</span>
+                                    <span>{{item.private}}</span>
+                                </td>
+                                <td class="8 split">
+                                    <span>{{item.pulRetentionDay}}</span>
+                                    <span>{{item.priRetentionDay}}</span>
+                                </td>
+                                <td class="9 split">
+                                    <span>{{item.pulSales}}</span>
+                                    <span>{{item.priSales}}</span>
+                                </td>
+                                <td class="10 split">
+                                    <span>{{item.pulRetention}}%</span>
+                                    <span>{{item.priRetention}}%</span>
+                                </td>
+                                <td class="11">{{item.outDate}}</td>
+                                <td class="12">{{item.putDate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <!-- table-section -e- -->
+
+                <div class="text-center" ng-if="tableData.list==0">暂无数据...</div>
+
+                <div class="bottom-box">
+                    <!-- 分页 -->
+                    <div class="pages-fun" ng-show="tableData.list.length>0">
+                        <select id="page-sel" class="c-select-page-num" ng-model="pageSize" ng-change="changePageFun()">
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                        </select>
+                        <span class="every-page">每页</span>
+                        <span class="every-page gong">共</span>
+                        <span class="c-all-num-line">{{tableData.count}}</span>
+                        <span class="every-page">条</span>
+                        <span id="demo3-text"></span>
+                        <div id="c-pages-fun"></div>
+                        <span class="every-page">跳转:</span>
+                        <input id="inp-num" class="c-inp-num-go" ng-model="page"></input>
+                        <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

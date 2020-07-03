@@ -1,0 +1,25 @@
+<div class="erp-common-tan-v2-wrap" ng-show="vm.visible">
+  <div class="erp-common-tan-v2" style="height: auto;max-height:90vh;" ng-style='{"width": vm.width}'>
+    <!-- 关闭按钮 -->
+    <a class="tan-v2-close" href="javascript:void(0);" ng-click="vm.visible=false;"><img
+        src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+    <div class="tan-v2-top">
+      <h6>{{ vm.tit || '标题' }}</h6>
+    </div>
+    <!-- 内容 -->
+    <div class="tan-v2-con" ng-transclude>
+    </div>
+    <!-- 底部 -->
+    <div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+      <k-button on-click="vm.visible=false">{{vm.cancelText}}</k-button>
+      <!-- 确认按钮（彩色） -->
+      <k-button type="primary" on-click="vm.onOk()" ng-show="vm.cancelText != '关闭'">{{vm.okText}}</k-button>
+    </div>
+  </div>
+</div>
+
+<style>
+
+</style>

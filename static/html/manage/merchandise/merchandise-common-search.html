@@ -1,0 +1,170 @@
+<div class="drop-down-search">
+    <div class="search-by">
+        <!-- 商品类目start -->
+        <div class="has-list has-list-cate clearfix">
+            <div class="serch-by-name">{{'100386' | translate}}：</div>
+            <div class="search-by-con">
+                <div class="default-con search-cate-name" ng-mouseenter="showCategory()"><span class="text cate-name">{{'100187' | translate}}</span><span class="caret"></span></div>
+                <div class="three-grade-list cate-list-box">
+                    <ul class="grade-one-ul">
+                        <li class="first-menu"><a href="javacsript: void(0);" ng-click="selectCategory($event)">{{'100187' | translate}}</a></li>
+                        <li class="first-menu" ng-repeat="itemOne in categoryListOne" ng-mouseenter="getCateSecondList(itemOne.id)">
+                            <a class="first-menu-a" href="javacsript: void(0);" ng-click="selectCategory($event, itemOne.id)">{{ itemOne.nameEn }}</a>
+                            <ul class="grade-two-ul second-menu-ul">
+                                <li class="second-menu" ng-repeat="itemTwo in itemOne.children" ng-mouseenter="getCateThirdList(itemTwo.id)">
+                                    <a class="second-menu-a" href="javacsript: void(0);" ng-click="selectCategory($event, itemTwo.id)">{{ itemTwo.nameEn }}</a>
+                                    <ul class="grade-three-ul thid-menu-ul">
+                                        <li class="third-menu" ng-repeat="itemThree in itemTwo.children">
+                                            <a class="third-menu-a" href="javacsript: void(0);" ng-click="selectCategory($event, itemThree.id)">{{ itemThree.nameEn }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 商品类目end -->
+        <!-- 消费人群start -->
+        <div class="has-list has-list-consumer clearfix">
+            <div class="serch-by-name">{{'100428' | translate}}：</div>
+            <div class="search-by-con">
+                <div class="default-con consumer-group-name" ng-mouseenter="showConsumerList()"><span class="text consumer-name">{{'100187' | translate}}</span><span class="caret"></span></div>
+                <div class="three-grade-list consumer-list-box">
+                    <ul class="grade-one-ul">
+                        <li class="first-menu"><a href="javacsript: void(0);" ng-click="selectConsumer($event)">{{'100187' | translate}}</a></li>
+                        <li class="first-menu" ng-repeat="item in consumerListOne" ng-mouseenter="getConsumerSecondList(item.id)">
+                            <a class="first-menu-a" href="javacsript: void(0);" ng-click="selectConsumer($event, item.id)">{{ item.nameEn }}</a>
+                            <ul class="grade-two-ul">
+                                <li class="second-menu" ng-repeat="item in consumerListTwo" ng-mouseenter="getConsumerThirdList(item.id)">
+                                    <a class="second-menu-a" href="javacsript: void(0);" ng-click="selectConsumer($event, item.id)">{{ item.nameEn }}</a>
+                                    <ul class="grade-three-ul">
+                                        <li class="third-menu" ng-repeat="item in consumerListThird">
+                                            <a class="third-menu-a" href="javacsript: void(0);" ng-click="selectConsumer($event, item.id)">{{ item.nameEn }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 消费人群end -->
+    </div>
+    <!-- 属性start -->
+    <div class="search-by serch-by-property clearfix">
+        <div class="serch-by-name">{{'100429' | translate}}：</div>
+        <div class="search-by-con">
+            <div class="check-box ">
+                <input type="checkbox" value="COMMON" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100083' | translate}}</label>
+            </div>
+            <!-- <div class="check-box w60">
+                <input type="checkbox" value="HAVE_ELECTRICITY" ng-click="getPropertyInfo($event)">
+                <label for="">含电</label>
+            </div> -->
+            <div class="check-box ">
+                <input type="checkbox" value="ELECTRONIC" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100084' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="BATTERY" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100085' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="IS_ELECTRICITY" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100086' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="HAVE_LIQUID" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100087' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="HAVE_STIVE" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100088' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="HAVE_CREAM" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100089' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="HAVE_MAGNETISM" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100090' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="EDGE" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100091' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="NO_ENTRY" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100092' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="CLONE" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100093' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="OVERSIZE" ng-click="getPropertyInfo($event)">
+                <label for="">{{'抛货'}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="THIN" ng-click="getPropertyInfo($event)">
+                <label for="">{{'轻薄'}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="FLAT" ng-click="getPropertyInfo($event)">
+                <label for="">{{'薄平'}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="PROOERTY" ng-click="getPropertyInfo($event)">
+                <label for="">{{'100430' | translate}}</label>
+            </div>
+        </div>
+    </div>
+    <!-- 属性end -->
+    <!-- 材质start -->
+    <div class="search-by serch-by-material clearfix">
+        <div class="serch-by-name">{{'100431' | translate}}： </div>
+        <div class="search-by-con">
+            <div class="check-box ">
+                <input type="checkbox" value="FARBIC" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100432' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="PLASTIC" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100433' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="METAL" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100434' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="WOOD" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100435' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="LEATHER" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100436' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="GLASS" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100437' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="WATER" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100438' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="STONE" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100439' | translate}}</label>
+            </div>
+            <div class="check-box ">
+                <input type="checkbox" value="MATERIAL" ng-click="getMaterialInfo($event)">
+                <label for="">{{'100430' | translate}}</label>
+            </div>
+        </div>
+    </div>
+    <!-- 材质end -->
+</div>

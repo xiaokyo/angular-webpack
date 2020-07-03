@@ -1,0 +1,375 @@
+<div class="sourcing-warp right-bar-wrap">
+	<div class="content-box">
+		<!-- 筛选 -->
+		<div class="filter-box">
+			<div class="item-box">
+				<select ng-model="type" ng-change="handleFilter()">
+					<option value="1">全部</option>
+					<option value="2">现有相似</option>
+					<option value="3">搜品超时</option>
+				</select>
+			</div>
+			<div class="item-box">
+				<select ng-model="sourceType" ng-change="handleFilter()">
+					<option value="">全部</option>
+					<option value="0">店铺搜品</option>
+					<option value="1">个人搜品</option>
+					<option value="2">平台搜品</option>
+					<option value="3">游客搜品</option>
+				</select>
+			</div>
+			<div class="item-box">
+				<select ng-model="sortType" ng-change="handleFilter()">
+					<option value="0">按创建时间排序</option>
+					<option value="2">按客户等级排序</option>
+				</select>
+			</div>
+			<div class="item-box">
+		   <input id="date1" ng-focus="dateFocus($event,'startTime')"
+		          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="起始日期" readonly="" ng-model="startTime">
+			<span class="line">-</span>
+      <input id="date2" ng-focus="dateFocus($event,'endTime')"
+             onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="结束日期" readonly="" ng-model="endTime">
+			</div>
+			<div class="item-box search-box">
+				<input type="text" ng-model="inputStr" placeholder="请输入搜品ID,客户或负责人名称">
+				<button ng-click="handleFilter()">搜索</button>
+			</div>
+			<div class="item-box ispay" ng-click="handleIsPay()">
+				<i ng-class="{'active':isFuFei === '1'}"></i>
+				付费客户
+			</div>
+			<div class="item-box" ng-if="sourceStatus === 'waitingExisting' && sourceType">
+				<button class="waiting-source-btn" ng-click="handleBatchWaitingSource()">批量等待搜品</button>
+			</div>
+			<div class="item-box" ng-if="sourceStatus === 'waitingSource' || sourceStatus === 'failed'">
+				<button class="waiting-source-btn" ng-click="handleBatchSupplierQuote()">批量转供应商报价</button>
+			</div>
+		</div>
+		<!-- 列表 -->
+		<div class="table-box">
+			<table>
+				<thead>
+				<tr>
+					<th class="check-box">
+						<i ng-click="handleCheckAll()" ng-class="{'checked':checkedAll}"></i>
+					</th>
+					<th class="w-100">提交时间</th>
+					<th class="w-100">截止时间</th>
+					<th class="tb-select">
+						<select
+							ng-show="loginJob !== '销售'"
+							ng-model='ownerName'
+							ng-change="handleFilter()"
+							ng-options="o as o.relate_salesman for o in ownerList">
+							<option value="">群主</option>
+						</select>
+						<select
+							ng-show="loginJob !== '销售'"
+							ng-model='salemanName'
+							ng-change="handleSalemanFilter()"
+							ng-options="o as o.LOGIN_NAME for o in salemanList">
+							<option value="">负责人</option>
+						</select>
+					</th>
+					<th>搜品状态</th>
+					<th>客户名称</th>
+					<th>搜品ID<br />搜品来源</th>
+					<th>商品名称</th>
+					<th>图片</th>
+					<th>客户URL</th>
+					<th ng-if="similarProductTableCol.includes(sourceStatus)">相似商品</th>
+					<th class="w-100" ng-if="causeFailureTableCol.includes(sourceStatus)">失败原因</th>
+					<th ng-if="similarProductLinkTableCol.includes(sourceStatus)">相似商品链接</th>
+					<th ng-if="erpUrLTableCol.includes(sourceStatus)">ERP URL</th>
+					<th class="w-100">店铺名称</th>
+					<th>客户店铺价格<br />目标价格</th>
+					<th>标签</th>
+					<th class="w-100">描述</th>
+					<th>类型</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tableData">
+						<td class="check-box">
+							<i ng-click="handleChecked(item)" ng-class="{'checked':item.checked}"></i>
+						</td>
+						<td>{{(item.sourceDate.time | date:'yyyy-MM-dd HH:mm:ss') || '-'}}</td>
+						<td>{{(item.jieZhiShiJian.time | date:'yyyy-MM-dd HH:mm:ss') || '-'}}</td>
+						<td>
+							<span class="d-block" title="群主">{{item.ownerName || '-'}}</span>
+							<span class="d-block" title="业务员">{{item.empName || '-'}}</span>
+						</td>
+						<td>{{item.statusTxt || '-'}}</td>
+						<td>
+							<span class="d-block">{{item.accountName}}</span>
+							<span ng-if="item.userLevel === 3" class="tag">优</span>
+              <span ng-if="item.userLevel === 2" class="tag">普</span>
+              <span ng-if="item.userLevel === 1" class="tag">潜</span>
+							<span ng-if="item.isFuFei" class="tag">付</span>
+							<span class="tag">{{'LV'+item.moneyLevel}}</span>
+						</td>
+						<td>
+							{{item.number || '-'}}<br />
+							{{item.search_source || '-'}}
+						</td>
+						<td>
+							<span title="{{item.productName}}" class="product-name" ng-click="productNameClick(item)">点击查看</span>
+						</td>
+						<td class="img-box">
+							<img class="img" ng-show="item.imageUrl" ng-src="{{item.imageUrl.split(',')[0] | httpPrefix}}" />
+							<span ng-show="!item.imageUrl">-</span>
+						</td>
+						<td>
+							<a ng-if="item.sourceUrl" ng-href="{{item.sourceUrl}}" target="_blank">链接</a>
+							<span ng-if="!item.sourceUrl">-</span>
+						</td>
+						<td ng-if="similarProductTableCol.includes(sourceStatus)" ng-click="showSimilarGoods(item)">
+							{{item.pids ? item.pids.split(',').length : 0}}
+						</td>
+						<td ng-if="causeFailureTableCol.includes(sourceStatus)"
+						    title="点击查看更多内容"
+						    ng-click="handleViewMoreContent(item.failExplain)">
+							<span class="content-txt">{{item.failExplain || '-'}}</span>
+						</td>
+						<td ng-if="similarProductLinkTableCol.includes(sourceStatus)">
+							<a ng-if="item.xiangSiLianJie" ng-href="{{item.xiangSiLianJie}}" target="_blank">链接</a>
+							<span ng-if="!item.xiangSiLianJie">-</span>
+						</td>
+						<td ng-if="erpUrLTableCol.includes(sourceStatus)">
+							<a ng-if="item.sourceUrlErp" ng-href="{{item.sourceUrlErp}}" target="_blank">链接</a>
+							<span ng-if="!item.sourceUrlErp">-</span>
+						</td>
+						<td>
+							<a title="{{item.ShopName}}" class="content-txt" ng-if="item.ShopName"
+							   ng-href="{{'https://' + item.ShopName + '.myshopify.com'}}"
+							   target="_blank">
+								{{item.ShopName}}
+							</a>
+							<span ng-if="!item.ShopName">-</span>
+						</td>
+						<td>
+							{{item.sourceType === '0' ? '$'+item.price : '-'}}<br />
+							{{item.sourceType !== '0' ? '$'+item.price : '-'}}
+						</td>
+						<td>{{item.category_name || '--'}}</td>
+						<td title="点击查看更多内容"
+						    ng-click="handleViewMoreContent(item.description)">
+							<span class="content-txt">{{item.description || '-'}}</span>
+						</td>
+						<td>{{sourceTypeArr[item.sourceType]}}</td>
+						<td>
+							<button ng-show="entryBtnAuth.includes(item.statusBtn)" ng-click="handleEntry(item)">录入</button>
+							<button ng-show="reEntryBtnAuth.includes(item.statusBtn)" ng-click="handleEntry(item)">重新录入</button>
+							<button ng-show="failedBtnAuth.includes(item.statusBtn)" ng-click="handleFailed(item)">失败</button>
+							<button ng-show="viewProductBtnAuth.includes(item.statusBtn)" ng-click="handleViewProduct(item.pid)">查看商品</button>
+							<button ng-show="existingProductBtnAuth.includes(item.statusBtn)" ng-click="handleExistingProduct(item)">现有商品</button>
+							<button ng-show="firstFailedBtnAuth.includes(item.statusBtn)" ng-click="handleFirstFailed(item)">初审失败</button>
+							<button ng-show="waitingSourceBtnAuth.includes(item.statusBtn)" ng-click="handelWaitingSource(item)">等待搜品</button>
+							<button ng-show="supplierBtnAuth.includes(item.statusBtn)" ng-click="handleSupplierQuote(item)">转供应商报价</button>
+						</td>
+					</tr>
+					<tr ng-show="tableData.length === 0">
+						<td colspan="100">暂无数据。</td>
+					</tr>
+				</tbody>
+			</table>
+			<page ng-show="tableData.length > 0"></page>
+		</div>
+	</div>
+</div>
+<!-- 现有商品操作的弹框 -->
+<div class="sbyy-wrap modal-warp" ng-show="existingProductModal">
+  <div class="existing-tankuang">
+	  <div class="center-block" style="width: 200px; background-color: #CBCBCB;margin-top: 10px;font-size: 13px;">
+      <input class="es-seach-inp" type="text" ng-model="existinginfo" placeholder="{{'100887' | translate}}"
+             style="height: 31px;padding-left: 3px;">
+      <a class="es-seach-btn" href="javascript:void(0)" ng-click="existingSearch(existinginfo)"
+         style="color:#767575;">{{'100025' | translate}}</a>
+  </div>
+	  <div class="existing-content" style="width: 100%;margin-top: 5px;min-height: 175px;">
+	      <ul>
+	          <li style="background-color: #f4f8fd;padding: 3px 2px;">
+	              <span style="width: 100px;">{{'100382' | translate}}</span>
+	              <span style="width: 120px;">{{'100107' | translate}}</span>
+	              <span style="width: 100px;">SKU</span>
+	              <span style="width: 120px;">{{'100350' | translate}}</span>
+	              <span style="width: 115px;">{{'100718' | translate}}</span>
+	          </li>
+	      </ul>
+	      <ul style="margin-top: 8px;height: 350px;overflow-y: auto;">
+	          <li style="border-bottom: 1px solid #ccc;padding-bottom: 2px;position:relative;"
+	              ng-repeat="item in existingPro">
+	              <div>
+	                  <img style="width: 16px;height: 16px;cursor: pointer;" class="esou-cheked"
+	                       ng-click="selectedExisting($event,item)" src="static/image/public-img/radiobutton1.png">
+		              <!-- <input type="radio"> -->
+	
+	                  <img style="width: 50px;height: 50px;margin-left: 10px;" ng-src={{item.bigImg}}>
+	              </div>
+	              <p style="width: 170px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"
+	                 title="{{item.name}}">{{item.name}}</p>
+	              <p style="width: 100px;">{{item.sku}}</p>
+	              <p style="width: 135px;">USD {{item.sellPrice}}</p>
+		          <!-- <div style="width: 100px;height:30px;border: 1px solid  #ccc;line-height: 30px;margin-top: 5px;font-size: 13px;" ng-click="wuliuRequire()">请选择</div>
+							<ol class="select-ol" style="width: 100px;height: 30px;font-size: 13px; margin-top: 8px;position: absolute;right: 0;top: 30px;">
+									<li>请选择</li>
+									<li>请选择</li>
+									<li>请选择</li>
+									<li>请选择</li>
+							</ol> -->
+	              <div ng-click="choseCurWuliu(item,$index)" class="asj-chose-wuliu" href="javascript:void(0);"
+	                   style="width: 100px;height: 30px; padding-left: 5px; font-size: 12px; margin-top: 8px; border: 1px solid #E0E0E0; background: rgb(248, 248, 248); border-radius: 4px; cursor: pointer;"
+	                   ng-show="item.existingWuliu.length == 0">
+	                  <span style="line-height: 30px;">{{'100693' | translate}}</span>
+	                  <span class="caret" style="position: absolute; top: 21px; right: 5px;"></span>
+	              </div>
+	              <select style="width: 100px;height: 30px;font-size: 12px; margin-top: 8px;"
+	                      ng-model="item.mylogistics" ng-change="wuliuRequire(mylogistics)"
+	                      ng-options="item2.enName as item2.enName for ($index,item2) in item.existingWuliu"
+	                      ng-show="item.existingWuliu.length > 0">
+	                  <!-- <option value="">请选择</option> -->
+	              </select>
+	          </li>
+	      </ul>
+	  </div>
+	  <div class="existing-btns center-block"
+	       style="width: 180px;display: flex;justify-content: space-between;margin-top: 15px;">
+	      <button style="background-color: #666;" ng-click="quxiaoFun()">{{'100051' | translate}}</button>
+	      <button style="background-color: #f88f29;" ng-click="quedingFun()">{{'100050' | translate}}</button>
+	  </div>
+  </div>
+</div>
+<!-- 选择商品变体 -->
+<div class="sbyy-wrap modal-warp" ng-show="spBtTkFlag">
+  <div class="existing-tankuang">
+	  <div class="existing-content" style="width: 100%;margin-top: 5px;min-height: 175px;">
+      <ul>
+          <li style="background-color: #f4f8fd;padding: 3px 2px;">
+              <span style="width: 100px;">{{'100382' | translate}}</span>
+              <span style="width: 120px;">{{'100107' | translate}}</span>
+              <span style="width: 100px;">SKU</span>
+              <span style="width: 120px;">{{'100350' | translate}}</span>
+              <span style="width: 115px;">变体SKU</span>
+          </li>
+      </ul>
+      <ul style="margin-top: 8px;height: 350px;overflow-y: auto;">
+          <li style="border-bottom: 1px solid #ccc;padding-bottom: 2px;" ng-repeat="item in spBtList">
+              <div>
+                  <!-- <img style="width: 16px;height: 16px;cursor: pointer;" class="esou-cheked"
+                       ng-click="selectedExisting($event,item)" src="static/image/public-img/radiobutton1.png"> -->
+                  <img style="width: 50px;height: 50px;margin-left: 10px;" ng-src={{item.cjImage}}>
+              </div>
+              <p style="width: 170px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                  {{item.cjproductnamecn}}</p>
+              <p style="width: 100px;">{{item.SKU}}</p>
+              <p style="width: 135px;">USD {{item.PRICE}}</p>
+              <div ng-click="choseCurWuliu(item,$index)" class="asj-chose-wuliu" href="javascript:void(0);"
+                   style="width: 100px;height: 30px; padding-left: 5px; font-size: 12px; margin-top: 8px; border: 1px solid #E0E0E0; background: rgb(248, 248, 248); border-radius: 4px; cursor: pointer; position: relative;"
+                   ng-show="item.existingWuliu.length == 0">
+                  <span style="line-height: 30px;">{{'100693' | translate}}</span>
+                  <span class="caret" style="position: absolute; top: 10px; right: 5px;"></span>
+              </div>
+              <select style="width: 100px;height: 30px;font-size: 12px; margin-top: 8px;"
+                      ng-model="item.skuName" ng-change="selSkuBtFun(item)">
+                      <option value="">请选择</option>
+                      <option ng-repeat="sku in resSkuBtList" value="{{sku}}">{{sku}}</option>
+              </select>
+          </li>
+      </ul>
+  </div>
+	  <div class="existing-btns center-block"
+	       style="width: 180px;display: flex;justify-content: space-between;margin-top: 15px;">
+	      <button style="background-color: #666;" ng-click="selBtConQuxiaoFun()">{{'100051' | translate}}</button>
+	      <button style="background-color: #f88f29;" ng-click="selBtConfirmFun()">{{'100050' | translate}}</button>
+	  </div>
+  </div>
+</div>
+<!-- 选择类目的弹框 -->
+<div ng-show="xzlmFlag" class="erp-common-tan-v2-wrap moadl-warp">
+	<div class="xzlm-tankuang">
+	  <div class="category-container">
+	    <div ng-repeat="category in categoryList">
+	      <div class="categoryItem" ng-class="{'categoryItem-active': chooseCateGoryId===category.id}" ng-click="chooseCateGory(category.id)">{{category.name}}</div>
+	    </div>
+	  </div>
+	
+	  <div class="btn-container">
+	    <button ng-click="closeCategory()">取消</button>
+	    <button ng-click="categoryConfirm()">确定</button>
+	  </div>
+	</div>
+</div>
+
+<!-- 选择供应商的弹窗 -->
+<div ng-show="dgzspFlag" class="erp-common-tan-v2-wrap">
+  <div class="xzlm-tankuang">
+    <div style="margin-bottom: 24px;">
+      单个转搜品
+    </div>
+
+    <div style="margin-bottom: 24px;">
+      <div style="margin-bottom: 12px">
+        <img ng-src={{chooseSource.imageUrl}} alt="" style="width:50px;height: 50px;">
+      </div>
+
+      <div>
+        <p style="margin-bottom: 12px;">搜品ID：{{chooseSource.id}}</p>
+        <p>商品名称：{{chooseSource.productName}}</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      转指定供应商：
+      <select ng-model="supplierId" ng-options='supplierItem.supplierId as supplierItem.companyName for supplierItem in supplierList' style="width: 210px">
+      </select>
+    </div>
+
+    <div class="btn-container">
+      <button ng-click="closeSingleSearch()">取消</button>
+      <button ng-click="handleSingleConform()">确定</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- 批量选择供应商的弹窗 -->
+<div ng-show="plzspFlag" class="erp-common-tan-v2-wrap">
+  <div class="plxz-tankuang">
+    <div style="margin-bottom: 24px">
+      批量转搜品
+    </div>
+
+    <div style="margin-bottom: 12px">
+      转搜品数量：{{batchChooseSource.length}}
+    </div>
+
+    <div style="margin-bottom: 12px">
+      转指定供应商：
+      <select ng-model="supplierId" ng-options='supplierItem.supplierId as supplierItem.companyName for supplierItem in supplierList' style="width: 210px">
+      </select>
+    </div>
+
+    <div class="btn-container">
+      <button ng-click="closeBatchSearch()">取消</button>
+      <button ng-click="handleBatchConform()">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 初审失败 -->
+<div ng-show="firstFaileModal" class="sbyy-wrap modal-warp">
+  <div class="content">
+	  <h3>初审失败</h3>
+    <p class="title">失败原因</p>
+    <textarea placeholder="请输入" ng-model="failExplain"></textarea>
+    <div class="btns">
+	    <button ng-click="firstFaileModal = false">取消</button>
+      <button ng-click="handleFirstFailedConfirm()">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 搜品失败 -->
+<new-source-error ng-if="isSetSourceError" no="no"></new-source-error>

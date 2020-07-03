@@ -1,0 +1,1829 @@
+[
+  {
+    "name": "100001",
+    "href": "#/mycj/commonHome",
+    "img": "static/image/manage/icon11.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "Home",
+        "href": "#/mycj/commonHome",
+        "count": "",
+        "hidden": false,
+        "children": []
+      },
+      {
+        "name": "100997",
+        "href": "#/mycj/CatchingGoods",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "抓货记录",
+            "href": "#/mycj/CatchingGoods",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "验单记录",
+            "href": "#/mycj/InspectionForm",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "101230",
+            "href": "#/erpfinance/OrderProfit",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100998",
+        "href": "#/mycj/mycjLuntan",
+        "count": "",
+        "hidden": false,
+        "children": []
+      },
+      {
+        "name": "101183",
+        "href": "#/mine/myaccount",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101184",
+        "href": "#/mine/staffp2",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101181",
+        "href": "javascript:void(0)",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101240",
+        "href": "#/mycj/copyhtml",
+        "count": "",
+        "children": [
+          {
+            "name": "101241",
+            "href": "#/mycj/copyhtml",
+            "count": ""
+          },
+          {
+            "name": "乌拉圭",
+            "href": "#/erpservice/CustomerService",
+            "count": ""
+          },
+          {
+            "name": "查看差价",
+            "href": "#/mycj/ViewTheDifference",
+            "count": ""
+          },
+          {
+            "name": "订单状态转移",
+            "href": "#/mycj/chuku",
+            "count": ""
+          },
+          {
+            "name": "USPS自动打单",
+            "href": "#/mycj/PlaySingle",
+            "count": ""
+          },
+          {
+            "name": "自动生成发票",
+            "href": "#/mycj/AutomaticInvoicing",
+            "count": ""
+          },
+          {
+            "name": "100698",
+            "href": "#/erplogistics/freighttrial",
+            "count": ""
+          },
+          {
+            "name": "打印暗转明",
+            "href": "javascript:void(0)",
+            "count": ""
+          },
+          {
+            "name": "检测不能发USPS+原因",
+            "href": "#/mycj/checkUPS",
+            "count": ""
+          },
+          {
+            "name": "设置物流列表",
+            "href": "#/mycj/logisticsSelect",
+            "count": ""
+          },
+          {
+            "name": "sku销量",
+            "href": "#/mycj/salesVolumeBySku",
+            "count": ""
+          },
+          {
+            "name": "CJpacket笑话",
+            "href": "#/mycj/joke",
+            "count": ""
+          },
+          {
+            "name": "批量设置设计商品价格折扣",
+            "href": "javascript:void(0)",
+            "count": ""
+          },
+          {
+            "name": "直发商品折扣",
+            "href": "javascript:void(0)",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100002",
+    "href": "#/custom-ord",
+    "img": "static/image/manage/icon10.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100012",
+        "href": "#/custom-ord",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "100016",
+            "href": "#/custom-ord",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100207",
+            "href": "#/mu-clz",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100017",
+            "href": "#mu-fone",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100018",
+            "href": "#mu-one",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100019",
+            "href": "#/mu-two",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100020",
+            "href": "#/mu-three",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100021",
+            "href": "#/mu-four",
+            "hidden": false,
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100013",
+        "href": "#/erp-czi-ord",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "100097",
+            "href": "#/erp-czi-ord",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100098",
+            "href": "#/zi-two",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100099",
+            "href": "#/zi-three",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100100",
+            "href": "#/zi-four",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100101",
+            "href": "#/zi-five",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100102",
+            "href": "#/zi-all",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "调度订单库存",
+            "href": "#/zi-diaodu",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "101254",
+            "href": "#/erplogistics/singleRecord",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "僵尸订单",
+            "href": "#/erplogistics/zombie-order",
+            "count": "",
+            "children": []
+          },
+          {
+            "name": "履行列表",
+            "href": "#/zi-fulfil",
+            "hidden": false,
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100014",
+        "href": "#/erp-Weight-conf",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "重量待确认",
+            "href": "#/erp-Weight-conf",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100095",
+            "href": "#/erp-zf-ord/3",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100067",
+            "href": "#/erp-zf-ord/2",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100346",
+            "href": "#/erp-zf-ord",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100037",
+            "href": "#/erp-zf-ord/1",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "已发货订单",
+            "href": "#/erp-zf-ord/4",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "已完成订单",
+            "href": "#/erp-zf-ord/7",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100021",
+            "href": "#/erp-zf-ord/5",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "纠纷订单",
+            "href": "#/erp-zf-ord/6",
+            "hidden": false,
+            "count": 0
+          },
+          {
+            "name": "状态查询",
+            "href": "#/StatusQuery",
+            "hidden": false,
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100015",
+        "href": "#/erp-stock-ord",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "100351",
+            "href": "#/erp-stock-ord",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100067",
+            "href": "#/erp-stock-ord/2",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100095",
+            "href": "#/erp-stock-ord/3",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "100352",
+            "href": "#/erp-stock-ord/4",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "纠纷订单",
+            "href": "#/erp-stock-ord/5",
+            "hidden": false,
+            "count": 0
+          }
+        ]
+      },
+      {
+        "name": "POD子订单",
+        "href": "#/custom-podzi-ord/1",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "待发货",
+            "href": "#/custom-podzi-ord/1",
+            "hidden": false,
+            "count": ""
+          },
+          {
+            "name": "同步供应商",
+            "href": "#/pod/ord-list",
+            "hidden": false,
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101211",
+        "href": "#/merchandise/VideoDemand",
+        "count": "",
+        "hidden": false,
+        "children": [
+          {
+            "name": "101212",
+            "href": "#/merchandise/VideoDemand",
+            "count": 707
+          },
+          {
+            "name": "100048",
+            "href": "#/VideoOrderPaid",
+            "count": "",
+            "hidden": false,
+            "children": []
+          },
+          {
+            "name": "100095",
+            "href": "#/VideoOrderUnPaid",
+            "count": "",
+            "hidden": false,
+            "children": []
+          },
+          {
+            "name": "100209",
+            "href": "#/VideoOrderCompleted",
+            "count": "",
+            "hidden": false,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100003",
+    "href": "#/merchandise/list/drop/3",
+    "img": "static/image/manage/icon9.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100353",
+        "href": "#/merchandise/list/drop/3",
+        "count": 36639,
+        "children": [
+          {
+            "name": "100356",
+            "href": "#/merchandise/list/drop/3",
+            "count": 35918
+          },
+          {
+            "name": "100357",
+            "href": "#/merchandise/list/drop/6",
+            "count": 36
+          },
+          {
+            "name": "100358",
+            "href": "#/merchandise/list/drop/1",
+            "count": 115
+          },
+          {
+            "name": "100359",
+            "href": "#/merchandise/list/drop/2",
+            "count": 12
+          },
+          {
+            "name": "100360",
+            "href": "#/merchandise/list/drop/4",
+            "count": 91
+          },
+          {
+            "name": "100361",
+            "href": "#/merchandise/list/drop/5",
+            "count": 325
+          },
+          {
+            "name": "100362",
+            "href": "#/merchandise/list/drop/0",
+            "count": 144
+          },
+          {
+            "name": "可能重复SKU",
+            "href": "#/merchandise/repeatSku",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "个性商品",
+        "href": "#/merchandise/list/personalize/3",
+        "count": "",
+        "children": [
+          {
+            "name": "100356",
+            "href": "#/merchandise/list/personalize/3",
+            "count": ""
+          },
+          {
+            "name": "100357",
+            "href": "#/merchandise/list/personalize/6",
+            "count": ""
+          },
+          {
+            "name": "100358",
+            "href": "#/merchandise/list/personalize/1",
+            "count": ""
+          },
+          {
+            "name": "100359",
+            "href": "#/merchandise/list/personalize/2",
+            "count": ""
+          },
+          {
+            "name": "100360",
+            "href": "#/merchandise/list/personalize/4",
+            "count": ""
+          },
+          {
+            "name": "100361",
+            "href": "#/merchandise/list/personalize/5",
+            "count": ""
+          },
+          {
+            "name": "100362",
+            "href": "#/merchandise/list/personalize/0",
+            "count": ""
+          },
+          {
+            "name": "个性商品（爬虫数据）",
+            "href": "#/merchandise/personalizeinquiry",
+            "count": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "101191",
+        "href": "#/merchandise/list/service/3",
+        "count": "",
+        "children": [
+          {
+            "name": "100356",
+            "href": "#/merchandise/list/service/3",
+            "count": ""
+          },
+          {
+            "name": "100358",
+            "href": "#/merchandise/list/service/1",
+            "count": ""
+          },
+          {
+            "name": "100359",
+            "href": "#/merchandise/list/service/2",
+            "count": ""
+          },
+          {
+            "name": "100360",
+            "href": "#/merchandise/list/service/4",
+            "count": ""
+          },
+          {
+            "name": "100361",
+            "href": "#/merchandise/list/service/5",
+            "count": ""
+          },
+          {
+            "name": "100362",
+            "href": "#/merchandise/list/service/0",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100354",
+        "href": "#/merchandise/inquiry",
+        "count": 88232,
+        "children": [
+          {
+            "name": "100356",
+            "href": "#/merchandise/inquiry",
+            "count": 85899
+          },
+          {
+            "name": "100361",
+            "href": "#/merchandise/inquiry/off-shlves",
+            "count": 0
+          },
+          {
+            "name": "100362",
+            "href": "#/merchandise/inquiry/recycle-bin",
+            "count": 1739
+          },
+          {
+            "name": "类目待录入",
+            "href": "#/merchandise/inquiry/off-Category",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "包装商品",
+        "href": "#/merchandise/package",
+        "count": ""
+      },
+      {
+        "name": "101185",
+        "href": "#/merchandise/VideoProductShelf",
+        "count": "",
+        "children": [
+          {
+            "name": "100356",
+            "href": "#/merchandise/VideoProductShelf",
+            "count": 161
+          },
+          {
+            "name": "100361",
+            "href": "#/merchandise/VideoProductObtained",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "name": "100355",
+        "href": "#/merchandise/ProductSettings",
+        "count": 116,
+        "children": []
+      },
+      {
+        "name": "101193",
+        "href": "#/merchandise/trademark",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "商品分析",
+        "href": "#/CommodityAnalysis/Turnover",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "组合SKU列表",
+        "href": "#/merchandise/SkuGroupList",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "重复SKU列表",
+        "href": "#/merchandise/SkuRepeatList",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "新服务商品",
+        "href": "#/merchandise/pendfuwu",
+        "count": "",
+        "children": [
+          {
+            "name": "新服务商品",
+            "href": "#/merchandise/pendfuwu",
+            "count": ""
+          },
+          {
+            "name": "新服务订单",
+            "href": "#/merchandise/fuwuDqs",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100004",
+    "href": "#/erppurchase/needbuy",
+    "img": "static/image/manage/icon8.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100549",
+        "href": "#/erppurchase/needbuy",
+        "count": "",
+        "children": [
+          {
+            "name": "100551",
+            "href": "#/erppurchase/needbuy",
+            "count": ""
+          },
+          {
+            "name": "初级采购",
+            "href": "#/erppurchasecg",
+            "count": ""
+          },
+          {
+            "name": "101186",
+            "href": "#/erppurchase/purchaseinventory",
+            "count": ""
+          },
+          {
+            "name": "100552",
+            "href": "#/erppurchase/cgdlist",
+            "count": ""
+          },
+          {
+            "name": "100553",
+            "href": "#/erppurchase/addpurchase",
+            "count": ""
+          },
+          {
+            "name": "100554",
+            "href": "#/erppurchase/arrivalabnormal",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100550",
+        "href": "#/supplier-gys",
+        "count": "",
+        "children": [
+          {
+            "name": "100606",
+            "href": "#/supplier-gys",
+            "count": ""
+          },
+          {
+            "name": "100608",
+            "href": "#/supplier-manage",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "POD供应商",
+        "href": "#/pod/supplier-list",
+        "count": "",
+        "children": [
+          {
+            "name": "供应商列表",
+            "href": "#/pod/supplier-list",
+            "count": ""
+          },
+          {
+            "name": "审核商品",
+            "href": "#/pod/supplier-product-review",
+            "count": ""
+          },
+          {
+            "name": "关联供应商",
+            "href": "#/pod/ord-link-suplier-list",
+            "count": ""
+          },
+          {
+            "name": "打印面单",
+            "href": "#/pod/print-sheet",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101255",
+        "href": "#/erppurchase/order/5",
+        "count": "",
+        "children": [
+          {
+            "name": "待确认",
+            "href": "#/erppurchase/order/5",
+            "count": ""
+          },
+          {
+            "name": "待付款",
+            "href": "#/erppurchase/order/0",
+            "count": ""
+          },
+          {
+            "name": "已付款",
+            "href": "#/erppurchase/order/1",
+            "count": ""
+          },
+          {
+            "name": "确认SKU",
+            "href": "#/erppurchase/order/6",
+            "count": ""
+          },
+          {
+            "name": "采购异常",
+            "href": "#/erppurchase/order/7",
+            "count": ""
+          },
+          {
+            "name": "线下完成",
+            "href": "#/erppurchase/order/8",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "缺货商品统计",
+        "href": "#/StockStatistics",
+        "count": "",
+        "children": [
+          {
+            "name": "缺货商品统计",
+            "href": "#/StockStatistics",
+            "count": ""
+          },
+          {
+            "name": "滞留订单查询",
+            "href": "#/stranded-order-query",
+            "hidden": false,
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100005",
+    "href": "#/erpwarehouse/warestock",
+    "img": "static/image/manage/icon7.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100622",
+        "href": "#/erpwarehouse/warestock",
+        "count": "",
+        "children": [
+          {
+            "name": "库存查询",
+            "href": "#/erpwarehouse/warestock",
+            "count": "",
+            "children": []
+          },
+          {
+            "name": "入库记录",
+            "href": "#/mycj/rkjxtj",
+            "count": ""
+          },
+          {
+            "name": "出库记录",
+            "href": "#/erplogistics/chuku-statistics",
+            "count": ""
+          },
+          {
+            "name": "下架商品库存",
+            "href": "#/erpwarehouse/xiaJiaKuCun",
+            "count": ""
+          },
+          {
+            "name": "滞留库存",
+            "href": "#/erpwarehouse/retention-order",
+            "count": "",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "100623",
+        "href": "#/erppurchase/order/2",
+        "count": "",
+        "children": [
+          {
+            "name": "待签收",
+            "href": "#/erppurchase/order/2",
+            "count": ""
+          },
+          {
+            "name": "已签收",
+            "href": "#/erppurchase/order/3",
+            "count": ""
+          },
+          {
+            "name": "部分签收",
+            "href": "#/erppurchase/order/4",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101210",
+        "href": "#/erpwarehouse/warelist",
+        "count": "",
+        "children": [
+          {
+            "name": "100624",
+            "href": "#/erpwarehouse/warelist",
+            "count": ""
+          },
+          {
+            "name": "100625",
+            "href": "#/erpwarehouse/warelinkcate",
+            "count": ""
+          },
+          {
+            "name": "设置区域长度",
+            "href": "#/erpwarehouse/qycdsz",
+            "count": ""
+          },
+					{
+						"name": "101425",
+						"href": "#/erpwarehouse/wareset",
+						"count": ""
+					}
+        ]
+      },
+      {
+        "name": "101219",
+        "href": "#/erpwarehouse/NotShipped",
+        "count": "",
+        "children": [
+          {
+            "name": "100096",
+            "href": "#/erpwarehouse/NotShipped",
+            "count": ""
+          },
+          {
+            "name": "100038",
+            "href": "#/erpwarehouse/InDelivery",
+            "count": ""
+          },
+          {
+            "name": "101220",
+            "href": "#/erplogistics/qswpp",
+            "count": ""
+          },
+          {
+            "name": "100039",
+            "href": "#/erpwarehouse/Completed",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "批次号",
+        "href": "#/erpwarehouse/picihao",
+        "count": "",
+        "children": [
+          {
+            "name": "100867",
+            "href": "#/erpwarehouse/picihao/0",
+            "count": ""
+          },
+          {
+            "name": "100325",
+            "href": "#/erpwarehouse/picihao/1",
+            "count": ""
+          },
+          {
+            "name": "100207",
+            "href": "#/erpwarehouse/picihao/2",
+            "count": ""
+          },
+          {
+            "name": "100209",
+            "href": "#/erpwarehouse/picihao/3",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100701",
+        "href": "#/erplogistics/forwarding",
+        "count": "",
+        "children": [
+          {
+            "name": "100038",
+            "href": "#/erplogistics/forwarding",
+            "count": ""
+          },
+          {
+            "name": "101221",
+            "href": "#/erplogistics/dppstu",
+            "count": ""
+          },
+          {
+            "name": "100818",
+            "href": "#/erplogistics/SpotCheck",
+            "count": ""
+          },
+          {
+            "name": "101300",
+            "href": "#/erplogistics/dbtj",
+            "count": ""
+          },
+          {
+            "name": "订单拦截中",
+            "href": "#/zi-lanjie/0",
+            "count": ""
+          },
+          {
+            "name": "订单已拦截",
+            "href": "#/zi-lanjie/1",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100702",
+        "href": "#/erplogistics/ReturnRecords",
+        "count": "",
+        "children": [
+          {
+            "name": "101178",
+            "href": "#/erplogistics/ReturnRecords",
+            "count": ""
+          },
+          {
+            "name": "101179",
+            "href": "#/erplogistics/yttrecord",
+            "count": ""
+          },
+          {
+            "name": "101180",
+            "href": "#/erplogistics/gnrecord",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100006",
+    "href": "#/erplogistics/logsearch",
+    "img": "static/image/manage/icon6.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100696",
+        "href": "#/erplogistics/setmoney",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "100697",
+        "href": "#/erplogistics/channelset",
+        "count": "",
+        "children": [
+          {
+            "name": "100733",
+            "href": "#/erplogistics/channelset",
+            "count": ""
+          },
+          {
+            "name": "100734",
+            "href": "#/erplogistics/coopcompany",
+            "count": ""
+          },
+          {
+            "name": "100735",
+            "href": "#/erplogistics/channelsetStyle",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100699",
+        "href": "#/erplogistics/orderLogisicsSearch",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "100700",
+        "href": "#/erplogistics/trackstatistics",
+        "count": "",
+        "children": [
+          {
+            "name": "100796",
+            "href": "#/erplogistics/trackstatistics",
+            "count": ""
+          },
+          {
+            "name": "100797",
+            "href": "#/erplogistics/logististylel",
+            "count": ""
+          },
+          {
+            "name": "100798",
+            "href": "#/erplogistics/cslogisti",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100007",
+    "href": "#/sourcing",
+    "img": "static/image/manage/icon5.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100864",
+        "href": "#/sourcing",
+        "count": "",
+        "children": [
+          {
+            "name": "100867",
+            "href": "#/sourcing",
+            "count": 1133
+          },
+          {
+            "name": "100868",
+            "href": "#/sourcing/1",
+            "count": 34
+          },
+          {
+            "name": "100869",
+            "href": "#/sourcing/2",
+            "count": 100
+          },
+          {
+            "name": "100870",
+            "href": "#/sourcing/3",
+            "count": 474
+          },
+          {
+            "name": "100871",
+            "href": "#/sourcing/4",
+            "count": 21
+          },
+          {
+            "name": "100252",
+            "href": "#/sourcing/5",
+            "count": 504
+          }
+        ]
+      },
+      {
+        "name": "100865",
+        "href": "#/individualsourcing",
+        "count": "",
+        "children": [
+          {
+            "name": "100867",
+            "href": "#/individualsourcing",
+            "count": 1231
+          },
+          {
+            "name": "100868",
+            "href": "#/individualsourcing/1",
+            "count": 80
+          },
+          {
+            "name": "100869",
+            "href": "#/individualsourcing/2",
+            "count": 143
+          },
+          {
+            "name": "100870",
+            "href": "#/individualsourcing/3",
+            "count": 810
+          },
+          {
+            "name": "100871",
+            "href": "#/individualsourcing/4",
+            "count": 31
+          },
+          {
+            "name": "100252",
+            "href": "#/individualsourcing/5",
+            "count": 167
+          }
+        ]
+      },
+      {
+        "name": "100866",
+        "href": "#/cjsourcing",
+        "count": "",
+        "children": [
+          {
+            "name": "100867",
+            "href": "#/cjsourcing",
+            "count": 857
+          },
+          {
+            "name": "100868",
+            "href": "#/cjsourcing/1",
+            "count": 43
+          },
+          {
+            "name": "100869",
+            "href": "#/cjsourcing/2",
+            "count": 76
+          },
+          {
+            "name": "100870",
+            "href": "#/cjsourcing/3",
+            "count": 661
+          },
+          {
+            "name": "100871",
+            "href": "#/cjsourcing/4",
+            "count": 32
+          },
+          {
+            "name": "100252",
+            "href": "#/cjsourcing/5",
+            "count": 45
+          }
+        ]
+      },
+      {
+        "name": "101222",
+        "href": "#/cumsourcing",
+        "count": "",
+        "children": [
+          {
+            "name": "100867",
+            "href": "#/cumsourcing",
+            "count": ""
+          },
+          {
+            "name": "100868",
+            "href": "#/cumsourcing/1",
+            "count": ""
+          },
+          {
+            "name": "100869",
+            "href": "#/cumsourcing/0",
+            "count": ""
+          },
+          {
+            "name": "100870",
+            "href": "#/cumsourcing/2",
+            "count": ""
+          },
+          {
+            "name": "101223",
+            "href": "#/cumsourcing/8",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "100008",
+    "href": "#/erpcustomer/KeHuLieBiao",
+    "img": "static/image/manage/icon4.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100890",
+        "href": "#/erpcustomer/KeHuLieBiao",
+        "count": 1562,
+        "children": []
+      },
+      {
+        "name": "100891",
+        "href": "#/erpcustomer/xushenhe",
+        "count": 12,
+        "children": []
+      },
+      {
+        "name": "分配客户",
+        "href": "#/erpcustomer/fpkh",
+        "count": 0,
+        "children": []
+      },
+      {
+        "name": "100892",
+        "href": "#/erpcustomer/shenhenopass",
+        "count": 19,
+        "children": []
+      },
+      {
+        "name": "100608",
+        "href": "#/erpcustomer/heimingdan",
+        "count": 2,
+        "children": []
+      },
+      {
+        "name": "100893",
+        "href": "#/erpcustomer/shoplist",
+        "count": 242,
+        "children": []
+      },
+      {
+        "name": "100895",
+        "href": "#/erpcustomer/Affiliate",
+        "count": 6,
+        "children": [
+          {
+            "name": "100966",
+            "href": "#/erpcustomer/Affiliate",
+            "count": ""
+          },
+          {
+            "name": "100608",
+            "href": "#/erpcustomer/blacklist",
+            "count": ""
+          },
+          {
+            "name": "100967",
+            "href": "#/erpcustomer/yongjin",
+            "count": ""
+          },
+          {
+            "name": "FAQ",
+            "href": "#/erpcustomer/FAQ",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100894",
+        "href": "#/erpcustomer/exhibition",
+        "count": 35,
+        "children": []
+      },
+      {
+        "name": "100896",
+        "href": "#/erpcustomer/GH",
+        "count": 57,
+        "children": []
+      },
+      {
+        "name": "101299",
+        "href": "#/erpcustomer/khgl",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "AppPush",
+        "href": "#/erpcustomer/pushtable",
+        "count": "",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "100009",
+    "href": "#/allmony",
+    "img": "static/image/manage/icon3.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100286",
+        "href": "#/allmony",
+        "count": "",
+        "children": [
+          {
+            "name": "100289",
+            "href": "#/allmony",
+            "count": ""
+          },
+          {
+            "name": "100290",
+            "href": "#/erpfinance/incomeshould",
+            "count": ""
+          },
+          {
+            "name": "100291",
+            "href": "#/erpfinance/receivables",
+            "count": ""
+          },
+          {
+            "name": "100292",
+            "href": "#/erpfinance/canceled",
+            "count": ""
+          },
+          {
+            "name": "100295",
+            "href": "#/erpfinance/remit",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101224",
+        "href": "#",
+        "count": "",
+        "children": [
+          {
+            "name": "101225",
+            "href": "#",
+            "count": ""
+          },
+          {
+            "name": "101226",
+            "href": "#",
+            "count": ""
+          },
+          {
+            "name": "101227",
+            "href": "#",
+            "count": ""
+          },
+          {
+            "name": "101228",
+            "href": "#/erpfinance/cwzc",
+            "count": ""
+          },
+          {
+            "name": "100293",
+            "href": "#/erpfinance/refund",
+            "count": ""
+          },
+          {
+            "name": "101229",
+            "href": "#",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100287",
+        "href": "#/erpfinance/walletcuslistdel",
+        "count": "",
+        "children": [
+          {
+            "name": "100316",
+            "href": "#/erpfinance/walletcuslistdel",
+            "count": ""
+          },
+          {
+            "name": "100317",
+            "href": "#/erpfinance/walletcash",
+            "count": ""
+          },
+          {
+            "name": "100318",
+            "href": "#/erpfinance/wallet-recharge",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100288",
+        "href": "#/erpfinance/accountquery",
+        "count": "",
+        "children": [
+          {
+            "name": "100288",
+            "href": "#/erpfinance/accountquery",
+            "count": ""
+          },
+          {
+            "name": "101230",
+            "href": "#/erpfinance/OrderProfit",
+            "count": ""
+          },
+          {
+            "name": "101231",
+            "href": "#/erpfinance/CommodityProfit",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101201",
+        "href": "#/bank/bankAcount",
+        "count": "",
+        "children": [
+          {
+            "name": "101202",
+            "href": "#/bank/bankAcount",
+            "count": ""
+          },
+          {
+            "name": "101203",
+            "href": "#/bank/bankWater",
+            "count": ""
+          },
+          {
+            "name": "101204",
+            "href": "#/bank/exchange",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "数据统计",
+        "href": "#/SalesmanManagement/DataStatistics",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "采购退款",
+        "href": "#/erppurchase/order/9",
+        "count": "",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "100010",
+    "href": "#/erpservice/sc",
+    "img": "static/image/manage/icon2.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "100157",
+        "href": "#/erpservice/sc",
+        "count": "",
+        "children": [
+          {
+            "name": "101209",
+            "href": "#/erpservice/sc",
+            "count": ""
+          },
+          {
+            "name": "101205",
+            "href": "#/erpservice/fastReply",
+            "count": ""
+          },
+          {
+            "name": "101250",
+            "href": "#/erpservice/complaint",
+            "count": ""
+          },
+          {
+            "name": "101297",
+            "href": "#/erpservice/MailSending",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100160",
+        "href": "#/erpservice/gd",
+        "count": "",
+        "children": [
+          {
+            "name": "CJ工单",
+            "href": "#/erpservice/gdcjreply",
+            "count": ""
+          },
+          {
+            "name": "100694",
+            "href": "#/erpservice/cusemailcancel",
+            "count": ""
+          },
+          {
+            "name": "收件箱",
+            "href": "#/erpservice/MailGeting",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "Document",
+        "href": "#/erpservice/document",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "100158",
+        "href": "#/erpservice/csdisputePendingm",
+        "count": "",
+        "children": [
+          {
+            "name": "100183",
+            "href": "#/erpservice/csdisputePendingm",
+            "count": ""
+          },
+          {
+            "name": "100184",
+            "href": "#/erpservice/csdisputePendingc",
+            "count": ""
+          },
+          {
+            "name": "101206",
+            "href": "#/erpservice/csdisputeWaite",
+            "count": ""
+          },
+          {
+            "name": "100185",
+            "href": "#/erpservice/csdisputeclose",
+            "count": ""
+          },
+          {
+            "name": "100186",
+            "href": "#/erpservice/csdisputeover",
+            "count": ""
+          },
+          {
+            "name": "101247",
+            "href": "#/erpservice/csdisputeFastReply",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100159",
+        "href": "#/erpservice/tz",
+        "count": "",
+        "children": [
+          {
+            "name": "100219",
+            "href": "#/erpservice/tz",
+            "count": ""
+          },
+          {
+            "name": "100220",
+            "href": "#/erpservice/tzdraft",
+            "count": ""
+          },
+          {
+            "name": "100221",
+            "href": "#/erpservice/tztime",
+            "count": ""
+          },
+          {
+            "name": "100222",
+            "href": "#/erpservice/tztemplet",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "100162",
+        "href": "#/erpservice/khbz",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "商品咨询",
+        "href": "#/erpservice/commodityConsult",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "热点问题",
+        "href": "#/mycj/CJhot",
+        "count": "",
+        "children": []
+      }
+    ]
+  },
+  {
+    "name": "100011",
+    "href": "#/staff/recruit",
+    "img": "static/image/manage/icon1.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "101023",
+        "href": "#/staff/recruit",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101018",
+        "href": "#/staff/IntegrationSetting",
+        "count": "",
+        "children": [
+          {
+            "name": "积分规则设置",
+            "href": "#/staff/IntegrationSetting",
+            "count": ""
+          },
+          {
+            "name": "入库绩效统计",
+            "href": "#/staff/rkjxtj",
+            "count": ""
+          },
+          {
+            "name": "抓货绩效统计",
+            "href": "#/staff/CatchingGoodsKPI",
+            "count": ""
+          },
+          {
+            "name": "验单绩效统计",
+            "href": "#/staff/InspectionFormKPI",
+            "count": ""
+          },
+          {
+            "name": "101300",
+            "href": "#/erplogistics/dbtj",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101020",
+        "href": "#/staff/stafffiles",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101021",
+        "href": "#/staff/stafftable",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "临时工",
+        "href": "#/staff/linshigong",
+        "count": "",
+        "children": [
+          {
+            "name": "临时工",
+            "href": "#/staff/linshigong",
+            "count": ""
+          },
+          {
+            "name": "工资结算页",
+            "href": "#/staff/lsgGzjs",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "搜品考核",
+        "href": "#/staff/shelfLink",
+        "count": "",
+        "children": [
+          {
+            "name": "101243",
+            "href": "#/staff/DifficultySetting",
+            "count": ""
+          },
+          {
+            "name": "101244",
+            "href": "#/staff/getTask",
+            "count": ""
+          },
+          {
+            "name": "101245",
+            "href": "#/staff/shelfLink",
+            "count": ""
+          },
+          {
+            "name": "101246",
+            "href": "#/staff/myTask",
+            "count": ""
+          },
+          {
+            "name": "101251",
+            "href": "#/staff/linkAssessment",
+            "count": ""
+          },
+          {
+            "name": "101252",
+            "href": "#/staff/enterAssessment",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "101235",
+    "href": "#/SalesmanManagement/SalesmanSetting",
+    "img": "static/image/manage/icon.png",
+    "count": "",
+    "hidden": false,
+    "children": [
+      {
+        "name": "业务员管理",
+        "href": "#/SalesmanManagement/SalesmanSetting",
+        "children": []
+      },
+      {
+        "name": "101022",
+        "href": "#/staff/nbtz",
+        "count": "",
+        "children": [
+          {
+            "name": "100219",
+            "href": "#/staff/nbtz",
+            "count": ""
+          },
+          {
+            "name": "100220",
+            "href": "#/staff/cgx",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101232",
+        "href": "#/erpservice/erpMailTemplate",
+        "count": "",
+        "children": [
+          {
+            "name": "101234",
+            "href": "#/erpservice/erpMailTemplate",
+            "count": ""
+          },
+          {
+            "name": "101253",
+            "href": "#/erpservice/erpPageModel",
+            "count": ""
+          },
+          {
+            "name": "发件箱",
+            "href": "#/erpservice/MailOutbox",
+            "count": ""
+          }
+        ]
+      },
+      {
+        "name": "101236",
+        "href": "#/sys/rolePer",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "101238",
+        "href": "#/sys/updateNav",
+        "count": "",
+        "children": []
+      },
+      {
+        "name": "100161",
+        "href": "#/erpservice/video",
+        "count": "",
+        "children": [
+          {
+            "name": "100261",
+            "href": "#/erpservice/video",
+            "count": ""
+          },
+          {
+            "name": "100262",
+            "href": "#/erpservice/article",
+            "count": ""
+          }
+        ]
+      }
+    ]
+  }
+]

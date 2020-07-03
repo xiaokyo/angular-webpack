@@ -1,0 +1,62 @@
+<div class="merchandise-box">
+    <div class="right-bar-wrap" ng-click="hideSearchCateRes()">
+      <div class="asj-h10"></div>
+        <div class="right-bar asj-chose-cate">
+            <!-- <h3>添加商品</h3> -->
+            <div class="search-cate-box">
+                <div class="search-cate-title">{{'100440' | translate}}</div>
+                <div class="input-group search-cate" ng-click="stopPropagation($event)">
+                    <input type="text" class="form-control" placeholder="" ng-model="searchCategoryVal" ng-change="serchCategory(searchCategoryVal)">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button"><img src="static/image/public-img/iconsearch.png" alt=""></button>
+                    </span>
+                </div>
+                <ul class="search-res-ul" ng-show="hasSearchCateRes" ng-click="stopPropagation($event)">
+                  <li ng-repeat="item in searchCategoryRes" ng-click="selectSearchCate(item.id)">{{ item.name }}</li>
+                </ul>
+                <div class="search-res-box" ng-show="NoSearchCateRes" ng-click="stopPropagation($event)">{{'100415' | translate}}</div>
+            </div>
+            <div class="three-grade-list">
+              <ul class="grade-one-ul">
+                  <li class="first-menu" ng-repeat="itemOne in categoryListOne" ng-mouseenter="getSecondList(itemOne.id)">
+                      <a class="first-menu-a" href="javacsript: void(0);">{{ itemOne.name }}</a>
+                      <span class="first-menu-span" style="display: none;">{{ itemOne.nameEn }}</span>
+                      <img src="static/image/home/arrow.png">
+                      <ul class="grade-two-ul second-menu-ul">
+                          <li class="second-menu" ng-repeat="itemTwo in itemOne.children" ng-mouseenter="getThirdList(itemTwo.id)">
+                              <a class="second-menu-a" href="javacsript: void(0);">{{ itemTwo.name }}</a>
+                              <span class="second-menu-span" style="display: none;">{{ itemTwo.nameEn }}</span>
+                              <img src="static/image/home/arrow.png">
+                              <ul class="grade-three-ul thid-menu-ul">
+                                  <li class="third-menu" ng-repeat="itemThree in itemTwo.children">
+                                      <a class="third-menu-a" href="javacsript: void(0);" ng-click="selectCategory($event, itemThree.id)">{{ itemThree.name }}</a>
+                                      <span class="third-menu-span" style="display: none;">{{ itemThree.nameEn }}</span>
+                                  </li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+                <!-- <ul class="grade-one-ul">
+                    <li class="first-menu">
+                        <a class="first-menu-a">Women's Clothing</a>
+                        <img src="static/image/home/arrow.png">
+                        <ul class="grade-one-ul">
+                            <li class="second-menu">
+                                <a class="second-menu-a">Women's Clothing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul> -->
+            </div>
+            <div class="chose-res">
+                {{'100441' | translate}}：<span id="show-selected-category"></span>
+            </div>
+            <!-- 按钮 -->
+            <div class="footer-btns chose-cate-footer">
+              <a href="javacsript:void(0);" type="button" class="btn btn-primary save-btn" ng-click="goAddMerchanTwo()">{{'100442' | translate}}</a>
+              <a href="javacsript:void(0);" type="button" class="btn btn-default cancel-btn" ng-click="cancelAdd()">{{'100051' | translate}}</a>
+            </div>
+        </div>
+    </div>
+</div>

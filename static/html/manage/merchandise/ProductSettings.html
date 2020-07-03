@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品设置</title>
+    <!--ProductSettings-->
+    <link rel="stylesheet" type="text/css" href="static/css/ProductSettings.css">
+</head>
+
+<body>
+    <!--页面开始-->
+    <div class="home-wrap">
+        <!--内容区域-->
+        <div class="content" ng-show="type==1">
+            <div class="clearfix">
+                <ul class="top-nav">
+                    <li ng-repeat="item in DateTab track by $index" ng-class="{active:item.flag}"
+                        ng-click="changeTab($index)">{{item.name}}</li>
+                </ul>
+                <span class="add-merch-btn" ng-click="addProduct()">添加</span>
+            </div>
+
+            <div class="c-us-stuv">
+                <div class="c-fun-right">
+                    <input placeholder="输入SKU进行查询" ng-model="dataObj.sku" class="c-seach-inp">
+                    <input class="Wdate data-inp" id="starttime" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="起始日期">
+                    <input id="endtime" placeholder="结束日期" class="Wdate data-inp" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                    <select class="select" ng-model="dataObj.state">
+                        <option value="">请选择</option>
+                        <option value="1">未上架</option>
+                        <option value="2">已上架</option>
+                        <option value="3">已下架</option>
+                    </select>
+                    <span class="add-merch-btn" ng-click="searchFun()">搜索</span>
+                </div>
+            </div>
+            <div class="table-list">
+                <div class="tr">
+                    <span class="th">商品SKU</span>
+                    <span class="th">商品图片</span>
+                    <span class="th">放置顺序</span>
+                    <span class="th">上架时间</span>
+                    <span class="th">下架时间</span>
+                    <span class="th">点击数</span>
+                    <span class="th">购买订单数</span>
+                    <span class="th">购买金额</span>
+                    <span class="th">状态</span>
+                    <span class="th">最近编辑时间</span>
+                    <span class="th">最近编辑人</span>
+                    <span class="th">操作</span>
+                </div>
+                <div class="tr" ng--repeat="item in proList track by $index">
+                    <span class="td">{{item.sku}}</span>
+                    <span class="td img">
+                        <img src="{{item.bigImg}}?x-oss-process=image/resize,m_lfit,h_50,w_50" alt="">
+                        <img class="bigimg" src="{{item.bigImg}}" alt="">
+                    </span>
+                    <span class="td">{{item.sort}}</span>
+                    <span class="td">{{item.startTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="td">{{item.stopTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="td">{{item.clickCount?item.clickCount:'/'}}</span>
+                    <span class="td">{{item.orderCount?item.orderCount:'/'}}</span>
+                    <span class="td">{{item.salesAmount?item.salesAmount:'/'}}</span>
+                    <span class="td">{{item.state | stateFil}}</span>
+                    <span class="td">{{item.updatedTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="td">{{item.updatedBy}}</span>
+                    <span class="td">
+                        <span class="puchord-czbtn" ng-show='item.state==1' ng-click="addProduct(item)">设置</span>
+                        <span class="puchord-czbtn" ng-show='item.state==1' ng-click="delFun(item)">删除</span>
+                        <span class="puchord-czbtn" ng-show='item.state==2' ng-click="downFun(item)">下架</span>
+                        <span ng-show='item.state==3'>/</span>
+                    </span>
+                </div>
+            </div>
+            <page></page>
+        </div>
+        <div class="content" ng-show="type==2">
+            <ul class="add-list">
+                <li class="add-item">
+                    <label class="label" for="">商品SKU</label>
+                    <input class="input" ng-model="addObj.sku" ng-readonly="isEdit" ng-blur="searchSKU()" type="text" placeholder="请输入商品SKU">
+                </li>
+                <li class="add-item">
+                    <label class="label" for="">放置位置</label>
+                    <select class="select" name="" id="" ng-model="addObj.positionKey">
+                        <option value="">请选择</option>
+                        <option ng-repeat="item in DateTab track by $index" ng-show="item.key!='category1'" value="{{item.key}}">{{item.name}}</option>
+                    </select>
+                </li>
+                <li class="add-item">
+                    <label class="label" for="">放置顺序</label>
+                    <select class="select" ng-model="addObj.sort">
+                        <option value="">请选择</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option ng-show="['Dropshipping', 'month', 'listed', 'POD'].includes(addObj.positionKey)" value="5">5</option>
+                        <option ng-show="['Dropshipping', 'month', 'listed', 'POD'].includes(addObj.positionKey)" value="6">6</option>
+                    </select>
+                </li>
+                <li class="add-item">
+                    <label class="label" for="">上架时间</label>
+                    <input class="input" type="text" id="starttimeadd" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{\'%y-%M-%d\'}'})" placeholder="请选择上架时间">
+                </li>
+                <li class="add-item">
+                    <label class="label" for="">下架时间</label>
+                    <input class="input" id="endtimeadd" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{\'%y-%M-%d\'}'})"
+                        placeholder="请选择下架时间">
+                </li>
+                <li class="add-item">
+                    <span class="add-merch-btn" ng-click="type=1">取消</span>
+                    <span class="add-merch-btn" ng-click="submitFun()">提交</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="asj-common-tanwrap" ng-show="isShowTip">
+        <div class="asj-common-tan comfirm-box">
+            <div class="table-list" ng-show="showType!=3">
+                <div class="tr">
+                    <span class="th">商品SKU</span>
+                    <span class="th">放置位置</span>
+                    <span class="th">放置顺序</span>
+                    <span class="th">上架时间</span>
+                    <span class="th">下架时间</span>
+                </div>
+                <div class="tr">
+                    <span class="td">{{addObj.sku}}</span>
+                    <span class="td">{{addObj.position}}</span>
+                    <span class="td">{{addObj.sort}}</span>
+                    <span class="td">{{addObj.startTime | date:'yyyy-MM-dd HH:mm'}}</span>
+                    <span class="td">{{addObj.stopTime | date:'yyyy-MM-dd HH:mm'}}</span>
+                </div>
+            </div>
+            <p class="comfirm-box-tip">{{showConfirmMsg}}</p>
+            <p class="center">
+                <span class="add-merch-btn" ng-show="showType==1||showType==2" ng-click="isShowTip=false">取消</span>
+                <span class="add-merch-btn" ng-click="sureFun()">确认</span>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

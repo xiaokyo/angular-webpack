@@ -1,0 +1,559 @@
+<link rel="stylesheet" href="static/css/activity.css">
+<div class="merchandise-box">
+  <div class="right-bar-wrap">
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+      <h3 style="margin: 10px;">商品管理</h3>
+      <button class="btn-confirm" ng-click="typeSwitchFlag=true">手动添加商品</button>
+      <button class="btn-confirm" ng-click="systemSelect()">系统选择商品</button>
+
+      <div class="right-bar" ng-show="typeSwitchFlag">
+        <div class="d-flex mb-10">
+          <select ng-options="item as item.name for item in threeNames" ng-model="threeNamesItem" ng-change="selectThreeTitle()">
+            <option value="" ng-hide="threeNamesItem">请选择三级标题</option>
+          </select>
+          <button class="btn-cancel" ng-click="goBack()">返回</button>
+          <button class="btn-confirm" ng-click="saveGoods()">保存</button>
+        </div>
+
+        <textarea name="threeTitleSKU" id="threeTitleSKU" cols="200" rows="30" placeholder="请输入商品SKU,用 “，”隔开" ng-model="skuList" ng-disabled="!skuList && skuList.length != 0"></textarea>
+      </div>
+
+      <div class="right-bar" ng-show="!typeSwitchFlag">
+        <style lang="less">
+          .scroll-style::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+          }
+
+          .scroll-style::-webkit-scrollbar-track {
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.06);
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+          }
+
+          /* 滚动条滑块 */
+          .scroll-style::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+          }
+
+          #push-new-wrap .button-yellow {
+            background: #F9AE08;
+          }
+
+          #push-new-wrap span {
+            font-size: 14px;
+          }
+
+          #push-new-wrap textarea {
+            border: 1px solid #D9D9D9;
+            width: 800px;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+          }
+
+          #push-new-wrap input {
+            font-size: 14px;
+            height: 32px;
+            border-radius: 5px;
+          }
+
+          #push-new-wrap select {
+            font-size: 14px;
+            width: 220px;
+            height: 32px;
+            border-radius: 5px;
+          }
+
+          #push-new-wrap button {
+            color: #fff;
+            width: 80px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 14px;
+          }
+
+          #push-new-wrap>.main {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            box-sizing: border-box;
+          }
+
+          .main>.operate-area>div {
+            display: flex;
+            padding: 10px 0;
+          }
+
+          .main>.operate-area>.last-line>section {
+            display: flex;
+            margin-right: 20px;
+          }
+
+          .last-line>section>span {
+            margin-right: 14px;
+            padding-top: 6px;
+          }
+
+          .last-line>section>button {
+            margin-right: 20px;
+          }
+
+          .main>.operate-area>div>span {
+            margin-right: 14px;
+            padding-top: 6px;
+          }
+
+          /*列表区域*/
+          .down-area {
+            position: relative;
+            width: fit-content;
+            background: aliceblue;
+          }
+
+          .pic-list-area {
+            display: flex;
+            position: relative;
+          }
+
+          .pic-list-area>.edit-wrap {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: rgba(255, 254, 255, 0);
+            z-index: 12;
+            /* height: 60px; width: 100%; */
+            right: 0;
+            top: 0;
+          }
+
+          .pic-list-area button {
+            font-size: 14px;
+          }
+
+          .pic-list-area>.left-area {
+            width: 842px;
+            box-sizing: border-box;
+            border: 1px solid #D9D9D9;
+            padding-bottom: 68px;
+            position: relative;
+          }
+
+          .pic-list-area>.left-area>.left-title {
+            height: 56px;
+            border-bottom: 1px solid #D9D9D9;
+            background: rgb(255, 247, 228);
+            line-height: 56px;
+            font-size: 14px;
+            color: #8B572A;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+
+          .left-area>.left-main>.goods-list {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            height: 580px;
+          }
+
+          .left-main>.goods-list>li {
+            width: 190px;
+            height: 280px;
+            background: rgba(247, 246, 246, 1);
+            margin-right: 16px;
+            box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.08);
+            border-radius: 4px 4px 0px 0px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+          }
+
+          .left-main>.goods-list>.checked {
+            background: rgb(255, 247, 228);
+            box-shadow: 0 0 0 0 #fff;
+          }
+
+          .left-main>.goods-list>li>img {
+            width: 190px;
+            height: 186px;
+            margin-bottom: 10px;
+          }
+
+          .left-main>.goods-list>li>p {
+            width: 190px;
+            padding: 0 13px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            overflow: hidden;
+          }
+
+          .left-main>.goods-list>li>div {
+            width: 190px;
+            padding: 0 13px;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .left-main>.goods-list>li:first-child {
+            margin: 0 16px 20px 16px;
+          }
+
+          .left-main>.goods-list>li:nth-child(4n+1) {
+            margin: 0 16px 10px 16px;
+          }
+
+          .left-main>.goods-list>li:nth-child(4n) {
+            margin: 0 0 20px 0px;
+          }
+
+          .left-area>.left-main>.footer-area {
+            width: 840px;
+            height: 58px;
+            display: flex;
+            background: rgba(247, 246, 246, 1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }
+
+          .all-select {
+            display: flex;
+            align-items: center;
+          }
+
+          .checkbox-false {
+            width: 16px;
+            height: 16px;
+            background: url('erp_otweb/images/checkbox-false.png') no-repeat center center;
+            margin-right: 5px;
+          }
+
+          .checkbox-true {
+            width: 16px;
+            height: 16px;
+            background: url('erp_otweb/images/checkbox-true.png') no-repeat center center;
+            margin-right: 5px;
+          }
+
+          .pic-list-area>.right-area {
+            width: 294px;
+            box-sizing: border-box;
+            border: 1px solid #D9D9D9;
+            margin-left: -1px;
+            padding-bottom: 68px;
+            position: relative;
+          }
+
+          .pic-list-area>.right-area>.right-title {
+            height: 56px;
+            border-bottom: 1px solid #D9D9D9;
+            background: rgb(255, 247, 228);
+            line-height: 56px;
+            font-size: 14px;
+            color: #8B572A;
+            text-align: center;
+            margin-bottom: 10px;
+          }
+
+          .right-area>.right-main>.goods-list {
+            overflow-y: auto;
+            height: 580px;
+          }
+
+          .right-main>.goods-list>li {
+            width: 254px;
+            height: 94px;
+            display: flex;
+            background: rgba(247, 246, 246, 1);
+            margin: 0 auto 20px;
+            overflow: hidden;
+          }
+
+          .right-main>.goods-list>.checked {
+            background: rgb(255, 247, 228);
+          }
+
+          .right-main>.goods-list>li>img {
+            min-width: 94px;
+            min-height: 94px;
+            max-width: 94px;
+            max-height: 94px;
+            margin-right: 14px;
+          }
+
+          .right-main>.footer-area {
+            width: 292px;
+            height: 58px;
+            background: rgba(247, 246, 246, 1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .right-main>.footer-area>button {
+            width: 80px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            background: rgb(255, 211, 114);
+            color: #fff;
+            border-radius: 5px;
+          }
+
+          /*page area*/
+          .page-area {
+            display: flex;
+            justify-content: space-around;
+            background: #fff;
+            align-items: center;
+          }
+
+          .page-area input,
+          .page-area select {
+            border-radius: 4px;
+            margin: 0 10px;
+          }
+
+          .page-area a,
+          .page-area div,
+          .page-area span,
+          .page-area button {
+            font-size: 14px;
+          }
+
+          .page-area a {
+            padding: 0 2px;
+          }
+
+          .page-size-area,
+          .page-go-area {
+            display: flex;
+            height: 32px;
+            align-items: center;
+          }
+
+          /* 多行文本缩略 */
+          .ellipsis-font {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+
+          .ellipsis-row {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          /* 自定义多选框 */
+          .my-select {
+            width: 200px;
+            height: 32px;
+            border: 1px solid #ddd;
+            position: relative;
+            border-radius: 4px;
+            z-index: 13;
+          }
+
+          .my-select .select-list {
+            position: absolute;
+            left: -1px;
+            top: 34px;
+            border: 1px solid #409eff;
+            width: 200px;
+            border-radius: 4px;
+          }
+
+          .my-select .select-list>li {
+            background: #fff;
+          }
+
+          .my-select .select-txt {
+            height: 30px;
+            line-height: 30px;
+            font-size: 12px;
+            text-indent: 1em;
+            position: relative;
+          }
+
+          .my-select .select-txt>i {
+            background: url('erp_otweb/images/back-arrow.png') no-repeat center center;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            background-size: 6px 12px;
+            width: 6px;
+            height: 12px;
+            transition: .3s;
+            transform: rotate(-90deg);
+          }
+
+          .my-select .select-txt .pull-down {
+            transform: rotate(-270deg);
+          }
+
+          .my-select .select-list>li>p {
+            text-indent: 16px;
+            padding: 2px;
+            font-size: 12px;
+            background: #fff;
+          }
+
+          .select-list>li>p {
+            position: relative;
+          }
+
+          .select-list>li>p::before {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 5px;
+            background: url('erp_otweb/images/checkbox-false.png') no-repeat center center;
+            background-size: 12px 12px;
+            width: 12px;
+            height: 12px;
+          }
+
+          .select-list>li>.actived::before {
+            background: url('erp_otweb/images/checkbox-true.png') no-repeat center center !important;
+            background-size: 12px 12px;
+            width: 12px;
+            height: 12px;
+          }
+
+          .my-select .select-list>li>.hover-actived {
+            background: #f5f7fa;
+          }
+
+          .my-select .actived {
+            color: #F9AE08;
+          }
+
+          .need-input {
+            position: relative;
+            text-indent: 6px;
+          }
+
+          .need-input::before {
+            content: '*';
+            color: #f70;
+            position: absolute;
+            left: -10px;
+            top: 7px;
+          }
+        </style>
+        <div id="push-new-wrap">
+          <div class="main">
+            <!-- 选项操作区域 -->
+            <section class="operate-area" style="margin-bottom: 10px; width: 1140px;">
+              <div class="last-line">
+                <section>
+                  <span>商品类目:</span>
+                  <div class="my-select">
+                    <p ng-click="showHandle($event)" class="select-txt">{{goodscheckbox.text}}<i ng-class="goodscheckbox.textblur ? 'pull-down' : ''"></i></p>
+                    <ul class="select-list" ng-show="goodscheckbox.selectAreaShow">
+                      <li ng-repeat="item in goodscheckbox.kindsList" :key="index" ng-mouseover="mouseoverHandle($index)">
+                        <p ng-class="[goodscheckbox.hoverIndex === $index ? 'hover-actived' : '', item.checked ? 'actived' : '']" ng-click="selectItem1($index,$event)">{{item.name}}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+                <section>
+                  <button class="button-yellow" ng-click="searchGoods()">查询</button>
+                  <span>当前选中的三级标题: {{threeNamesItem.name}}</span>
+                  <button class="button-yellow" style="background: #FF7700;" ng-click="sendHandle()">完成</button>
+                </section>
+              </div>
+            </section>
+            <!-- 选项操作以下区域 -->
+            <section class="down-area">
+              <!-- 商品列表显示区域 -->
+              <section class="pic-list-area">
+                <div class="left-area">
+                  <section class="left-title">商品列表</section>
+                  <section class="left-main">
+                    <ul class="goods-list scroll-style">
+                      <li ng-repeat="item in pushGoodsListInfo" ng-click="selectItem($index)" ng-class="item.checked ? 'checked' : ''">
+                        <img ng-src="{{item.img}}" alt="">
+                        <p class="ellipsis-font" ng-attr-title="{{item.productcate}}" style="min-height: 40px;">{{item.productname}}</p>
+                        <div>
+                          <span style="color: #FF7700;">lists: <em style="color: #666;">{{item.num}}</em></span>
+                          <span style="color: #FF7700;">$ {{item.sellPrice}}</span>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="footer-area page-area">
+                      <div class="page-index-area" style="display: flex;">
+                        <div class="push-page" style="margin-right: 5px;"></div>
+                        <div class="page-total-area">
+                          共&nbsp;&nbsp;{{ pushGoodsListPamrams.total }}&nbsp;&nbsp;条
+                        </div>
+                      </div>
+                      <div class="page-go-area">
+                        <span>跳转:</span>
+                        <input type="text" ng-model="pushGoodsListPamrams.navPage" style="width: 60px;" maxlength="6">
+                        <span style="margin-right: 5px;">页</span>
+                        <button ng-click="pageGo()" style="width: 60px; height: 30px; line-height: 30px; text-align:center; color: #fff; border-radius: 4px; background: #F9AE08;">确定</button>
+                      </div>
+                      <div class="all-select">
+                        <div ng-click="allSelectHandle()" style="display: flex; align-items: center; margin-right: 20p;">
+                          <i ng-class="pushGoodsListPamrams.hasAllSelected ? 'checkbox-true' : 'checkbox-false'"></i>
+                          全选本页商品
+                        </div>
+                        <button class="button-yellow" style="margin-left: 10px;" ng-click="addGoods()">添加</button>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <!-- 待推送区域商品 -->
+                <div class="right-area">
+                  <section class="right-title">待推送列表</section>
+                  <section class="right-main">
+                    <ul class="goods-list scroll-style">
+                      <li ng-repeat="item in goodsWaitingPush" ng-click="item.backChecked = !item.backChecked" ng-class="item.backChecked ? 'checked' : ''">
+                        <img ng-src="{{item.img}}" alt="">
+                        <div style="flex-grow: 1; display: flex; flex-direction: column; padding: 13px 10px 13px 0; justify-content: space-between;">
+                          <span class="ellipsis-row" ng-attr-title="{{item.productname}}" style="width: 136px;">{{item.productname}}</span>
+                          <div style="display: flex; flex-direction: column; ">
+                            <span style="color: #FF7700;">lists: <em style="color: #666;">{{item.num}}</em></span>
+                            <span style="color: #FF7700;">$ {{item.sellPrice}}</span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="footer-area">
+                      <button ng-click="backGoods()" style="background: #F9AE08">还原</button>
+                    </div>
+                  </section>
+                </div>
+              </section>
+
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 弹框 -->
+<div class="erp-common-tan-v2-wrap" ng-show="confirmBox.hasShow">
+  <div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: 160px;">
+    <p>{{confirmBox.title}}</p>
+    <div class="tan-v2-bot">
+      <a href="javascript:void(0)" class="qu-xiao-btn" ng-click="confirmBox.cancel()">取消</a>
+      <a href="javascript:void(0)" class="que-ding-btn" ng-click="confirmBox.ok()">确定</a>
+    </div>
+  </div>
+</div>

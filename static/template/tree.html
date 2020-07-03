@@ -1,0 +1,17 @@
+	<!-- 用于仓库树展示 -->
+	<!-- 用于：barcode.html, receive-instock.html, receive-old.html, receive-podsp.html, receive.html -->
+	<p class="top-info">
+		<a href="javascript:void(0);" class="openup-icon" ng-show="!currentFolder.open && currentFolder.childrens" ng-click="switchList({posi:currentFolder.sequence-2, event: $event, flag: true})">+</a>
+		<a href="javascript:void(0);" class="packup-icon" ng-show="currentFolder.open || !currentFolder.childrens" ng-click="switchList({posi:currentFolder.sequence-2, event: $event, flag: flase})">-</a>
+		<span class="index-span" style="display: none;">{{myIndex}}</span>
+		<span class="check-box" ng-if="currentFolder.checkFlag">
+      <input type="checkbox" name="" id="" ng-model="currentFolder.checked" ng-click="checkWare({check:currentFolder.checked, posi: currentFolder.sequence-2, index: myIndex})">
+      <label for=""></label>
+    </span>
+		<span ng-class="{'name-span': true, 'active': currentFolder.active}" ng-click="pointOne({item: currentFolder, event: $event, posi: currentFolder.sequence-2})">{{currentFolder.codeName + (currentFolder.codeType ? ' [' + currentFolder.codeType + ']' : '')}}</span>
+	</p>  
+	<ul class="domtree" ng-show="currentFolder.open">  
+	    <li ng-repeat="subfolder in currentFolder.childrens">
+	        <folder-tree current-folder="subfolder" my-index="$index" point-one="pointOne({item: item, event:event,posi:posi})" switch-list="switchList({posi:posi, event: event,flag: flag})" check-ware="checkWare({check:check, posi:posi, index: index})"></folder-tree>
+	    </li>  
+	</ul>

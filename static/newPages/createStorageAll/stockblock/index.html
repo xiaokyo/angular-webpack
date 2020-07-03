@@ -1,0 +1,109 @@
+
+		<!-- content -->
+		<div class="ea-content asj-ware-box">
+			<!-- right con -->
+			<div class="right-bar-wrap ea-right-content li_ea-right-content">
+				<!-- right nav -->
+				<div class="asj-h10"></div>
+				<!-- right search -->
+				<div class="right-bar">
+				<div class="ea-right-search">
+					<div class="add-merch" style="display: flex;">
+						<a href="javascript:void(0);" class="add-merch-btn" ng-click="openAddUpdatePupop()">新增区位</a>
+					</div>
+				</div>
+				
+				<!-- right list -->
+				<div class="table-con-box">
+				<table class="ea-list-table ea-erp-cs" id="ea-list-table">
+					<thead>
+					<tr>
+						<!-- <th><input type="checkbox"></th> -->
+						<th>区位</th>
+						<th>所属区域（国家）</th>
+						<th>区位描述</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody ng-repeat="(index1,item) in list">
+					<tr class="la_tr la_tr01">
+						<!-- <td><input name="need_inv" type="checkbox" value="1"></td> -->
+						<td>{{item.blockName}}</td>
+						<td>{{formatAreaId(item.areaId)}}</td>
+						<td>{{item.description}}</td>
+						<td class="relative active">
+							<div>
+								<a role="button" class="asj-btn-s asj-btn-s1" ng-click="openAddUpdatePupop(item)" href="javascript: void(0);">编辑</a>
+								<a role="button" class="asj-btn-s asj-btn-s3" ng-click="openComfrimDelBlock(item)">删除</a>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+				<!-- page -->
+				<page></page>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="asj-common-tanwrap" ng-show="addBlockFlag">
+			<div class="asj-common-tan tan-add-ware">
+				<span class="asj-common-close" ng-click="addBlockFlag=false"><i>+</i></span>
+				<div class="tan-title">{{operatorName}}</div>
+				<div>
+
+					<div class="input-item clearfix">
+						<label class=""><span class="asj-must-require">* </span>区位名称</label>
+						<div class="right-con">
+							<input type="text" placeholder="请输入区位名称" ng-model="editParams.blockName">
+						</div>
+					</div>
+
+					<div class="input-item clearfix">
+						<label class=""><span class="asj-must-require">* </span>所属国家</label>
+						<div class="right-con">
+							<select ng-model="editParams.areaId">
+								<option value="">请选择仓库所属国家</option>
+								<option ng-repeat="i in countryByareaIdArr" value="{{i.areaId}}">{{i.areaCn}}</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="input-item clearfix">
+						<label class=""><span class="asj-must-require"></span>区位描述</label>
+						<div class="right-con">
+							<textarea style="width:100%;height:60px;border:1px solid #e5e5e5;" ng-model="editParams.description"></textarea>
+						</div>
+					</div>
+
+					<div class="tan-btns">
+						<a class="tan-btn0" ng-click="addBlockFlag=false">{{'100051' | translate}}</a>
+						<a class="tan-btn1" ng-click="editOrNewBlock()">{{'100050' | translate}}</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="asj-common-tanwrap" ng-show="deleteWareFlag">
+			<div class="asj-common-tan tan-delete-ware">
+				<div class="tan-title">确认删除？</div>
+				<div class="tan-btns"><a class="tan-btn0" ng-click="deleteWareFlag=false">{{'100051' | translate}}</a><a class="tan-btn1" ng-click="delBlock()">{{'100050' | translate}}</a></div>
+			</div>
+		</div>
+
+	<style>
+		.input-item .right-con{min-height: 28px;padding-left:320px;display: flex;align-items: center;}
+		.input-item .right-con input[type=text]{max-height:28px;line-height: 28px;}
+		.input-item label{line-height: 28px;width:320px;}
+
+		/* flex */
+		.flex {display: flex;}
+		.flex.fdc {flex-direction: column;}
+		.flex.jcc {justify-content: center;}
+		.flex.fdrr {flex-direction: row-reverse;}
+		.flex.fdcr {flex-direction: column-reverse;}
+		.flex.aic {align-items: center;}
+		.flex.fwp {flex-wrap: wrap;}
+	</style>

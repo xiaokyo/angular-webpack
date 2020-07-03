@@ -1,0 +1,406 @@
+<style>
+    .checkbox-l {
+        float: left;
+        margin: 0px 4px 0 14px;
+    }
+
+    .c-seach-fun {
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        line-height: 44px;
+        display: flex;
+    }
+
+    .flex-item {
+        margin-left: 15px;
+    }
+
+    .checkbox-item {
+        margin-left: 15px;
+    }
+
+    .btn {
+        padding: 4px 12px;
+        margin-right: 10px;
+    }
+
+    .remark input {
+        margin-right: 10px;
+        line-height: 28px;
+        min-width: 290px;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #F8A636;
+        text-indent: .7em;
+    }
+
+    .sku-page {
+        position: relative;
+        overflow: hidden;
+        padding: 0 40px 0 100px;
+        min-height: 44px;
+        margin: 15px 0;
+        border: 1px solid #eee;
+    }
+
+    .sku-count {
+        color: #F8A636;
+    }
+
+    .sku-page .center {}
+
+    .sku-page .both-sides {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        font-size: 28px;
+        color: #ccc;
+        cursor: pointer;
+        user-select: none;
+        background: #fff;
+        z-index: 2;
+    }
+
+    .sku-page .both-sides.left {
+        left: 0;
+        width: 100px;
+    }
+
+    .sku-page .both-sides.right {
+        right: 0;
+    }
+
+    .sku-page .both-sides .indicate {
+        display: inline-block;
+        width: 40px;
+        background: #f4f8fd;
+        border: 2px solid #fff
+    }
+
+    .sku-page .list-box {
+        position: absolute;
+    }
+
+    .sku-page .list-box .item {
+        white-space: nowrap;
+        margin: 4px;
+        padding: 8px;
+        border-radius: 4px;
+        background: rgba(230, 230, 230, .3);
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .sku-page .list-box .item.active {
+        background: #f9a670;
+        color: #fff;
+        pointer-events: none;
+    }
+
+    .sku-page .list-box .item i {
+        padding: 0 5px;
+        border-radius: 20px;
+        color: #fff;
+        background: #fa6470;
+        font-size: 10px;
+    }
+
+    .flex-item>select {
+        height: 30px;
+        width: 195px;
+    }
+
+    .flex-item>button {
+        height: 30px;
+        padding: 0 15px;
+        background: #fff;
+        border: 1px solid #F8A636;
+        border-radius: 4px;
+        color: #F8A636;
+        line-height: 28px;
+        margin-right: 15px;
+    }
+
+    .flex-searchWrap {
+        display: flex;
+        align-items: center;
+    }
+
+    .c-ord-tbody td {
+        padding: 5px 0;
+    }
+
+    .editDecisonMakingBtn {
+        padding: 2px 8px;
+        font-size: 12px;
+        border: 1px solid #F8A636;
+        color: #F8A636;
+        background: #fff;
+        border-radius: 3px;
+        margin-top: 5px;
+    }
+
+    .treatmentShade {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 99999;
+    }
+
+    .treatmentWrap {
+        width: 300px;
+        min-height: 200px;
+        background: #fff;
+        border-radius: 4px;
+        margin: 150px auto;
+    }
+
+    .treatmentWrap h1 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #e1e1e1;
+        padding: 15px;
+    }
+
+    .treatmentCon {
+        padding: 0 25px;
+    }
+
+    .treatmentCon>p {
+        margin-bottom: 15px;
+    }
+
+    .treatmentBottom {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 30px;
+    }
+
+    .treatmentBottom button {
+        padding: 5px 15px;
+        border: 1px solid #e1e1e1;
+        background: #fff;
+        margin-left: 15px;
+        font-size: 12px;
+        border-radius: 4px;
+    }
+
+    .treatmentBottom button:hover {
+        background: #e1e1e1;
+    }
+
+    .treatmentBottom button:first-child {
+        background: #F8A636;
+        color: #fff;
+        border-color: #F8A636
+    }
+
+    /* .treatmentBottom button:first-child:hover{background:#F8A636; color: #fff;} */
+</style>
+
+<div class="zombie-order">
+    <div class="content">
+        <div class="c-ord-conall">
+            <!-- 提供白色背景板 -->
+            <div class="c-ord-con">
+                <!-- 提供 pidding -->
+                <div class="c-seach-fun d-flex" style="flex-wrap: wrap;">
+                    <div class="flex-item">
+                        <select ng-model="orderType" ng-change="changeZombieStatus()">
+                            <option value="{{option.value}}" ng-repeat="option in orderTypeList">{{option.label}}</option>
+                        </select>
+                    </div>
+                    <div class="flex-item">
+                        <select ng-change="changeZombieStatus()" ng-model="selected1"
+                            ng-options="opt.val as opt.tag for opt in options1"></select>
+                    </div>
+                    <div class="flex-item flex-searchWrap">
+                        <!-- <button ng-click="confirmFun(0)" ng-if="selected1=='0'">退款</button> -->
+                        <!-- <button ng-click="confirmFun(1)" ng-if="selected1=='0'">继续等待</button> -->
+                        <div ng-if="selected1=='0'" class="checkbox-box d-flex" style="margin-right:15px;">
+                            <div class="checkbox-item" ng-repeat="item in options2">
+                                <input type="checkbox" ng-model="item.pick">
+                                <span>{{item.tag}}</span>
+                            </div>
+                        </div>
+                        <button ng-click="confirmFun(2)" ng-if="selected1=='1'">同意</button>
+                        <button ng-click="confirmFun(3)" ng-if="selected1=='1'">不同意</button>
+                        <button ng-click="confirmFun(4)" ng-if="selected1=='1'">延后</button>
+                        <div ng-if="selected1=='0'" class="checkbox-box d-flex" style="margin-right:15px;">
+                            <div class="checkbox-item">
+                                <input type="checkbox" ng-model="isExpect" ng-click="checkExpect(isExpect)">
+                                <span>是否需要预期到货日期</span>
+                            </div>
+                        </div>
+                        <label ng-show="isExpect && selected1=='0'">预计到货日期：</label>
+                        <input ng-show="isExpect && selected1=='0'" class="Wdate data-inp" placeholder="请选择日期" style="text-indent: 12px;"
+                            id="c-data-time" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})">
+
+                        <button ng-click="confirmFun(1)" ng-if="selected1=='0'" style="margin-left:15px;">提交审核</button>
+                        <!-- <button ng-click="confirmFun(0)" ng-if="selected1=='3' || selected1=='4'"
+                            style="margin-left:15px;">退回未审批</button> -->
+                        <button ng-click="confirmFun(2)" ng-if="selected1=='3' || selected1=='4'"
+                            style="margin-left:15px;">同意审批</button>
+
+                    </div>
+                    <div class="flex-item" id="哈哈哈哈">
+                      <input
+                        style="width:224px;"
+                        placeholder="Search SKU"
+                        id='searchSKUInput'
+                        oninput="angular.element(this).scope().searchSKU(this.value)"
+                        onpaste="angular.element(this).scope().searchSKU(this.value)"
+                      >
+                    </div>
+                    <!-- <div class="flex-item">
+                        <div class="checkbox-box d-flex">
+                            <div class="checkbox-item" ng-repeat="item in options2">
+                                <input type="checkbox" ng-model="item.pick">
+                                <span>{{item.tag}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-item">
+                        <span ng-click="queryOrder('search')" class="btn search">搜索</span>
+                        <span ng-click="confirmFun()" class="btn confirm">确认提交</span>
+                        <span class="remark">
+                            <input type="text" placeholder="备注" ng-model="remarkTxt">
+                        </span>
+                    </div> -->
+                </div>
+
+                <!-- SKU分页 -->
+                <div class="sku-page text-center">
+                    <div class="left both-sides d-flex align-items-center">
+                        <span
+                            class="sku-count font-size-14px flex-fill">{{(cSku ? (cSku.idx + 1) + '/' : '') + skuArr.length}}</span>
+                        <span class="indicate" ng-click="changePage(false)">&lt;</span>
+                    </div>
+                    <div class="center flex-fill" id="scroll-wrap">
+                        <div class="list-box d-flex" ng-click="queryOrder($event)">
+                            <span class="item" data-flag="target" data-idx="{{$index}}" ng-class="{active: item.active}"
+                                ng-repeat="item in skuArr">
+                                <i data-flag="target" data-idx="{{$index}}">{{$index + 1}}</i>
+                                <span data-flag="target" data-idx="{{$index}}">{{item.sku}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="right both-sides">
+                        <span class="indicate" ng-click="changePage(true)">&gt;</span>
+                    </div>
+                </div>
+
+                <!-- 表格部分 -s- -->
+                <div class="c-ord-list">
+                    <table id="c-mu-ord-table">
+                        <thead class="c-ord-thead">
+                            <tr>
+                                <th>
+                                    <span class="checkbox-l">
+                                        <input type="checkbox" ng-click="isSelectAll(pickAll)" ng-model="pickAll">
+                                    </span>
+                                    <span>产品名称</span>
+                                </th>
+                                <th>CJ 订单号</th>
+                                <!-- <th>状态</th> -->
+                                <th>图片</th>
+                                <th>数量</th>
+                                <th>客户名称</th>
+                                <th>创建日期</th>
+                                <th>订单所属仓库</th>
+                                <th>付款时间</th>
+                                <th ng-show="selected1 !='0'">处理意见</th>
+                                <th ng-show="selected1 !='0'">预期到货日期</th>
+                            </tr>
+                        </thead>
+                        <!--
+                        客户订单号：orderId
+                        产品订单号：orderProductId
+                        数量：quantity
+                        客户名称：userName
+                        创建日期：createdate = { date: 14, day: 4, hours: 21, minutes: 1, month: 2, nanos: 0, seconds: 53, time: 1552568513000, timezoneOffset: -480, year: 119 }
+                        订单所属仓库：store
+                        付款时间：paymentDate
+                        状态：status
+                        -->
+                        <tbody class="c-ord-tbody" ng-click="tableHandle($event)">
+                            <tr ng-repeat='item in zombieOrderList'>
+                                <td>
+                                    <span class="checkbox-l">
+                                        <input type="checkbox" ng-model="item.pick">
+                                    </span>
+                                    <span>{{item.shippingName}}</span>
+                                </td>
+                                <!-- <td>
+                                    <span ng-if="item.status == 0">未审批</span>
+                                    <span ng-if="item.status == 1">审批中</span>
+                                    <span ng-if="item.status == 2">同意审批</span>
+                                    <span ng-if="item.status == 3">拒绝审批</span>
+                                    <span ng-if="item.status == 4">延后展示</span>
+
+                                </td> -->
+                                <td>{{item.orderId}}</td>
+                                <td>
+                                    <img ng-show="item.productImg" width="60" height="60" src="{{item.productImg}}"
+                                        alt="">
+                                    <span ng-show="!item.productImg">--</span>
+                                </td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.userName}}</td>
+                                <td>{{item.createdate}}</td>
+                                <td>
+                                    <span ng-if="item.store === 0">义乌</span>
+                                    <span ng-if="item.store === 1">深圳</span>
+                                    <span ng-if="item.store === 2">美国西</span>
+                                    <span ng-if="item.store === 3">美国东</span>
+                                </td>
+                                <td>{{item.paymentDate}}</td>
+                                <td ng-show="selected1 != '0' && selected1 !='5'">
+                                    <p ng-repeat="val in item.decisionMaking">
+                                        <span ng-show="val=='1'">退款</span>
+                                        <span ng-show="val=='2'">继续等待发货</span>
+                                    </p>
+
+                                </td>
+                                <td ng-show="selected1 != '0' && selected1 =='5'">
+                                    <span ng-show="item.operatingType =='1'">退款</span>
+                                    <span ng-show="item.operatingType =='2'">继续等待发货</span>
+									<span ng-show="item.operatingType =='3'">拆分订单发货</span>
+									<span ng-show="item.operatingType =='4'">系统退款</span>
+                                </td>
+                                <td ng-show="selected1 != '0'">{{item.remark}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 表格部分 -e- -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑处理意见 -->
+<div class="treatmentShade" ng-show="isEditFlag">
+    <div class="treatmentWrap">
+        <h1>编辑处理意见</h1>
+        <div class="treatmentCon">
+            <p>
+                <input type="checkbox">
+                <span>退款</span>
+            </p>
+            <p>
+                <input type="checkbox">
+                <span>继续等待发货</span>
+            </p>
+            <div class="treatmentBottom">
+                <button>确认</button>
+                <button>关闭</button>
+
+            </div>
+        </div>
+    </div>
+</div>

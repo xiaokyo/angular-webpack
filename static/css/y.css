@@ -1,0 +1,103 @@
+/* common css */
+*{box-sizing: border-box;}
+
+.flex {display: flex;}
+.fxl {justify-content: flex-start;}
+.fxc {justify-content: center;}
+.fxr {justify-content: flex-end;}
+.fxsa {justify-content: space-around;}
+.fxsb {justify-content: space-between;}
+.fyc {align-items: center;}
+.fdc {flex-direction: column;}
+.fg-1 {flex-grow: 1;}
+.fwp {flex-wrap: wrap;}
+
+.fs-12 {font-size: 12px;}
+.fs-14 {font-size: 14px;}
+.fs-16 {font-size: 16px;}
+
+.prel {position: relative;}
+.pabs {position: absolute;}
+.pfix {position: fixed;}
+
+.ml-5 {margin-left: 5px;}
+.mr-5 {margin-right: 5px;}
+.mr-10 {margin-right: 10px;}
+.mr-15 {margin-right: 15px;}
+.mr-20 {margin-right: 20px;}
+.mb-5 {margin-bottom: 5px;}
+.mb-10 {margin-bottom: 10px;}
+.mb-20 {margin-bottom: 20px;}
+.mb-30 {margin-bottom: 30px;}
+.pl-10 {padding-left: 10px;}
+
+.etc { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.tx-c {text-align: center;}
+.lh-15e {line-height: 1.5em;}
+.indent {text-indent: 1em;}
+
+.br-4 {border-radius: 4px;}
+.br-half {border-radius: 50%;}
+.bd-1e {border: 1px solid #eee;}
+
+.cp {cursor: pointer; user-select: none;}
+
+.fw-550 {font-weight: 550;}
+
+.c-y1 {color: #F9AE08;}
+.c-b1 {color: #4A90E2;}
+.c-w1 {color: #ffffff;}
+.c-th {color: #8B572A;}
+.c-err {color: red;}
+.bg-y1 {background-color: #F9AE08;}
+.bg-y2 {background-color: #FCF4D9;}
+.bg-b1 {background-color: #4A90E2;}
+.bg-r1 {background-color: red;}
+
+.wrap {position: fixed; left: 0; top: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background: #1b1b1b4d;}
+.url-wrap {word-wrap:break-word; word-break:break-all;}
+.overflow::-webkit-scrollbar { width: 4px; height: 1px; }
+.overflow::-webkit-scrollbar-thumb { border-radius: 10px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); background: #888; }
+.overflow::-webkit-scrollbar-track { box-shadow: inset 0 0 5px rgba(0,0,0,0.2); border-radius: 10px; background: #EDEDED; }
+
+/* table css */
+.table-head {background-color: #FCF4D9; min-height: 50px;}
+.table-head>li, .table-item>dl, .table-subitem>dl {display: flex; justify-content: center; align-items: center; padding: 4px;word-break: break-all;}
+.table .table-item, .table .table-subitem {min-height: 60px; border-top: 0;}
+.table-subitem {background: #FFFDF8;}
+.hover-img {position: absolute; right: -10px; top: 0px; box-shadow: 0 0 10px 5px #eee; transform: translateX(100%);}
+
+/* tab css */
+.tab { color: #666; }
+.tab>li { line-height: 28px; padding-bottom: 4px; position: relative; text-align: center; cursor: pointer; padding: 0 25px;}
+.tab>li:hover {color: rgb(248, 194, 15);}
+.bottom-bar-track {position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;}
+.bottom-bar {background: #F9AE08; height: 100%; width: 0%; transition: .2s;}
+.tab-active .bottom-bar { width: 80%; }
+.tab-active { color: #F9AE08;}
+
+/* mutiple-select css */
+.multiple-select>p {width: 200px; height: 30px; padding-left: 10px;}
+.multiple-select-arrow {background: url('/erp_otweb/images/back-arrow.png') no-repeat center center; background-size: 6px 12px; position: absolute; right: 15px; top: 10px;  width: 6px; height: 12px; transition: .3s; transform: rotate(-90deg);}
+.multiple-select.active .multiple-select-arrow {transform: rotate(-270deg);}
+.multiple-select-list {width: 200px; top: 32px; left: 0; box-shadow: 0 0 10px 3px #eee; background: #fff; max-height: 180px; overflow: auto;}
+.multiple-select-list>li {line-height: 20px; padding: 2px 6px;}
+.multiple-select-list>li:hover {background: rgb(250, 239, 214);}
+.table button {min-height: 30px; padding: 0 10px; border-radius: 4px; color: #fff; cursor: pointer;}
+.copy-btn {padding: 4px 6px; background: rgb(10, 159, 245); color: #fff; font-size: 12px; line-height: 16px;}
+.compose-btn {padding: 6px 14px; background: rgb(10, 159, 245); color: #fff;}
+
+/* checkbox css */
+.checkbox {width: 16px; height: 16px; border: 1px solid #eee; background-color: #fff; border-radius: 4px; cursor: pointer; display: inline-block;}
+.checkbox.active {background: url('/static/image/order-img/multiple2.png') no-repeat center center;}
+/* 须配合 checkbox js */
+.cursor-pointer{cursor: pointer;}
+.table .custome-tip-icon{
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 4px;
+    color: #fff;
+}
+.font-back-red{background-color: red;}
+.font-back-warn{background-color: #f0ad4e;}
+.font-back-green{background-color: green;}

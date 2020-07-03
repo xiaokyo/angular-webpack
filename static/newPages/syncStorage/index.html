@@ -1,0 +1,204 @@
+<div class="my-wrap">
+  <div class="submitBubble">
+    <div class="title1">海外仓库存同步设置</div>
+
+    <div class="flex aic" style="margin-top:20px;">
+      <div class="switch-box" ng-class="{'close1':!storageStatus}" ng-click="changeStatus(!storageStatus)">
+        <div class="yuan"></div>
+      </div>
+
+      <span class="theText" style="margin-left:20px;">{{ storageStatus?'开启':'关闭' }}</span>
+
+      <div class="note flex aic" style="margin-left:40px;">
+        <img src="/static/image/public-img/note.svg" width="25" />
+        <span style="margin-left:20px;">
+          {{ storageStatus?'海外仓虚拟库存已开启':'海外仓虚拟库存已关闭' }}
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .switch-box {
+    border-width: 0px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 36px;
+    height: 18px;
+    background: inherit;
+    background-color: rgba(19, 206, 102, 1);
+    border: none;
+    border-radius: 23px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .switch-box .yuan {
+    border-width: 0px;
+    position: absolute;
+    border-radius: 50%;
+    left: 19px;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    background: #fff;
+  }
+
+  .switch-box.close1 {
+    background-color: rgba(255, 73, 73, 1);
+  }
+
+  .switch-box.close1 .yuan {
+    left: 1px;
+  }
+
+  .my-wrap {
+    margin-left: 215px;
+    background: #fff;
+    padding: 15px;
+    min-height: 100vh;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex.fdc {
+    flex-direction: column;
+  }
+
+  .flex.jcc {
+    justify-content: center;
+  }
+
+  .flex.fdrr {
+    flex-direction: row-reverse;
+  }
+
+  .flex.fdcr {
+    flex-direction: column-reverse;
+  }
+
+  .flex.aic {
+    align-items: center;
+  }
+
+  .flex.fwp {
+    flex-wrap: wrap;
+  }
+
+  /* tablist */
+  .tablist {
+    height: 45px;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .tablist .item {
+    padding: 0 15px;
+    position: relative;
+  }
+
+  .tablist .item.active a::after,
+  .tablist .item:hover a::after {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #F9AE08;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+  }
+
+  .tablist .item.active a,
+  .tablist .item:hover a {
+    color: #F9AE08;
+  }
+
+  /* filter */
+  .filter input {
+    width: 150px;
+  }
+
+  .filter select {
+    height: 30px;
+    border-radius: 4px;
+  }
+
+  .filter textarea {
+    border: 1px solid #e6e6e6;
+    flex: 1;
+  }
+
+  .filter span.labela {
+    margin-right: 15px;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .filter .item {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #000;
+  }
+
+  /* tools */
+  .tools {
+    margin-top: 15px;
+  }
+
+  .tools a {
+    margin-left: 15px;
+  }
+
+  /* btn */
+  a.btn {
+    padding: 5px 10px;
+  }
+
+  a.btn.primary {
+    background-color: #F8A636;
+    color: #fff;
+  }
+
+  a.btn.primary:hover {
+    opacity: 0.6;
+  }
+
+  a.batch {
+    color: #F8A636;
+  }
+
+  a.batch:hover {
+    opacity: 0.6;
+  }
+
+  span.red {
+    color: red;
+  }
+
+  /* bottom_operator */
+  .bottom_operator {
+    margin-top: 20px;
+  }
+
+  /* submitBubble */
+  .submitBubble .filter .item {
+    margin-right: 20px;
+  }
+
+  .submitBubble .filter .item .con {
+    color: #999;
+  }
+</style>

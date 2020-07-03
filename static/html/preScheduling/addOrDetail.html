@@ -1,0 +1,137 @@
+<div class="right-bar-wrap">
+	<div class="pre-scheduling add-detail-warp">
+		<button class="back-btn" ng-click="handleBack()">< 返回</button>
+		<div class="form-box">
+		<div class="item">
+			<label>
+				始发仓:
+				<select ng-disabled="type === 'detail'" ng-model="processStore">
+					<option value="">请选择</option>
+					<option value="1">深圳</option>
+					<option value="0">义乌</option>
+				</select>
+			</label>
+			<label>
+				货代名称:
+		    <select ng-options="v as v for v in forwarderData" ng-model="forwarderName" ng-disabled="type === 'detail'">
+         <option value="">请选择</option>
+		   </select>
+			</label>
+			<label>
+				追踪号:
+				<input type="text" ng-disabled="type === 'detail'" ng-model="trackingNumber">
+			</label>
+			<label>
+				转单号:
+				<input type="text" ng-disabled="type === 'detail'" ng-model="transferNumber">
+			</label>
+		</div>
+		<div class="item">
+			<label class="remark">
+				调度备注:
+				<input type="text" style="width: 100%;" ng-disabled="type === 'detail'" ng-model="remark">
+			</label>
+		</div>
+	</div>
+		<table>
+			<thead>
+			<tr>
+				<th>图片</th>
+				<th>SKU</th>
+				<th>到达仓</th>
+				<th>可用库存</th>
+				<th>推荐调度数量</th>
+				<th>义乌仓可用库存</th>
+				<th>深圳仓可用库存</th>
+				<th>进入预调度时间</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in tableData">
+				<td>
+						<img ng-src="{{item.img}}" alt="" width="50" height="50">
+					</td>
+					<td>{{item.sku}}</td>
+					<td>{{warehouseEnums[item.demandStore]}}</td>
+					<td>{{item.availableNum}}</td>
+					<td>{{item.demandQuantity}}</td>
+					<td>{{item.yiWuGoodsNum}}</td>
+					<td>{{item.shenZhenGoodsNum}}</td>
+					<td>{{item.demandDate}}</td>
+			</tr>
+			<tr class="no-data" ng-show="tableData.length === 0">
+				<td colspan="10">暂无数据.</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="btns" ng-if="type === 'add'">
+			<button ng-click="handleBack()">取消</button>
+			<button ng-click="handleShowModal()">确定</button>
+		</div>
+	</div>
+</div>
+
+<!-- 确认弹窗 -->
+<div class="erp-common-tan-v2-wrap pre-scheduling" ng-show="isShowModail">
+	<div class="erp-common-tan-v2" style="width: 60%;height: initial;">
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>调度</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="form-box">
+				<div class="item">
+					<label>始发仓:{{warehouseEnums[processStore] || '未选择'}}</label>
+					<label>货代名称:{{forwarderName || '未选择'}}</label>
+					<label>追踪号:{{trackingNumber || '未填写'}}</label>
+					<label>转单号:{{transferNumber || '未填写'}}</label>
+				</div>
+				<div class="item">
+					<label class="remark">调度备注:{{remark || '未填写'}}</label>
+				</div>
+			</div>
+			<div class="confirm-table">
+				<table>
+			<thead>
+			<tr>
+				<th>图片</th>
+				<th>SKU</th>
+				<th>到达仓</th>
+				<th>可用库存</th>
+				<th>推荐调度数量</th>
+				<th>义乌仓可用库存</th>
+				<th>深圳仓可用库存</th>
+				<th>进入预调度时间</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="item in tableData">
+				<td>
+						<img ng-src="{{item.img}}" alt="" width="50" height="50">
+					</td>
+					<td>{{item.sku}}</td>
+					<td>{{warehouseEnums[item.demandStore]}}</td>
+					<td>{{item.availableNum}}</td>
+					<td>{{item.demandQuantity}}</td>
+					<td>{{item.yiWuGoodsNum}}</td>
+					<td>{{item.shenZhenGoodsNum}}</td>
+					<td>{{item.demandDate}}</td>
+			</tr>
+			<tr class="no-data" ng-show="tableData.length === 0">
+				<td colspan="10">暂无数据.</td>
+			</tr>
+			</tbody>
+			</table>
+			</div>
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot" style="text-align: right;">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="isShowModail = false;" class="qu-xiao-btn">取消</a>
+      <!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="handleConfirm()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,253 @@
+// 注册页css
+body,html{
+  height: 100%;
+}
+.forgot-wrap{
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  min-width: 1200px;
+}
+//元素水平居中
+.xauto{
+  margin: 0 auto;
+}
+//切圆角
+@radius:4px;
+// 给元素添加border
+.border{
+  border:1px solid red;
+}
+.main{
+  margin: 0 auto;
+  width: 1200px;
+  text-align: center;
+}
+
+.forgot-header{
+  width: 100%;
+  height: 91px;
+  background-color: #ffab49;
+  .main{
+    display: table;
+    text-align: left;
+    height: 100%;
+    margin: 0 auto;
+    width: 1200px;
+    .main-child{
+      display: table-cell;
+      vertical-align: middle;
+      a{
+        text-align: left;
+        display: inline-block;
+        img{
+          display: inline-block;
+          height: 58px;
+          width: 391px;
+        }
+      }
+    }
+  }
+}
+@background:#f8f8f8;
+//输入框的边框样式
+.inp-style{
+  border-radius: 4px;
+  height: 40px;
+  text-indent: 12px;
+  background: none;
+  border: 1px solid #e0e0e0;
+}
+// 字体样式
+.lable-style{
+  font-size: 16px;
+  font-family: Tahoma;
+  color: #9fa6b3;
+  line-height: 32px;
+}
+//单选复选的样式
+.radorche{
+  img{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-top: -6px;
+    margin-right: -8px;
+
+  }
+  input{
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
+    opacity: 0;
+  }
+  span{
+    margin-left: 12px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: top;
+    margin-top: -2px;
+  }
+}
+// 中间内容部分
+.register-con{
+  padding: 98px 0 62px;
+  background-color: @background;
+  .register-center{
+    width: 498px;
+    margin: 0 auto;
+    form{
+      li{
+        .md-inp{
+          width: 258px;
+          .inp-style;
+        }
+        .lg-inp{
+          width: 498px;
+          .inp-style;
+        }
+        //报错提示
+        .color-span{
+          color: red;
+        }
+        .reg-lable{
+          height: 32px;
+          width: 498px;
+          ul{
+            width: 498px;
+            height: 32px;
+            li{
+              width: 154px;
+              float: left;
+              box-sizing: border-box;
+              .lable-style;
+            }
+            .province{
+              margin: 0 18px;  
+            }
+          }
+          p{
+            .lable-style;
+          }
+          .full-name{
+            display: inline-block;
+            height: 16px;
+            margin-top: 12px;
+            line-height: 16px;
+          }
+          .user-length{
+            font-size: 10px;
+            float: right;
+            display: inline-block;
+            height: 10px;
+            margin-top: 2px;
+            padding: 0;
+            line-height: 10px;
+          }
+        }
+        .user-lable{
+          width: 258px;
+        }
+        //app
+        .app-select{
+          select{
+            .inp-style;
+            // text-align: left;
+            text-indent: 8px;
+            font-size: 16px;
+            width: 110px;
+          }
+          input{
+            // margin-top: -4px;
+          }
+        }
+        // 地址
+        .adress-controls{
+          select{
+            width: 154px;
+            .inp-style;
+          }
+        }
+        .daily-orders{
+          .orders-num{
+            margin-top: 16px;
+            height: 20px;
+            overflow: hidden;
+            .radorche
+          }
+        }
+        // 提交
+        .reg-submit{
+          margin-top: 46px;
+          input{
+            width: 250px;
+            height: 40px;
+            background-color: #f79c27;
+            color: #fff;
+            border: 1px solid #fff;
+            font-size: 16px;
+            border-radius: @radius;
+          }
+        }
+      }
+      .order-li{
+        margin-top: 54px;
+      }
+      .platform-li{
+        margin-top: 54px;
+        .platform{
+          margin-top: 16px;
+          .radorche;
+          position: relative;
+        }
+      }
+      .marketing-li{
+        margin-top: 54px;
+        .marketing{
+          margin-top: 16px;
+          position: relative;
+          .radorche;
+        }
+      }
+    }
+  }
+}
+.border1{
+  border: 1px solid black;
+}
+@color:#c1c1c1;
+@footer-size:14px;
+.forgot-footer{
+  height: 91px;
+  width: 100%;
+  background-color: @background;
+  display: table;
+  .forfoo-con{
+    min-width: 1200px;
+    width: 1200px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    span{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      .copyright-logo{
+        padding: 0 5px 0 0;
+        font-size: 22px;
+        vertical-align: middle;
+      }
+    }
+    a{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      border-left: 1px solid @color;
+      border-right: 1px solid @color;
+    }
+  }
+}
+

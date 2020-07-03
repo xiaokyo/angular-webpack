@@ -1,0 +1,173 @@
+<div class="content ruzhu-wrap">
+    <div class="filter clearfix">
+        <a class="like-navbtn" ng-click="typeStuFun(0)" ng-class="{'tab-act':typeStu==0}" href="javascript:void(0)">待确认</a>
+        <a class="like-navbtn" ng-click="typeStuFun(1)" ng-class="{'tab-act':typeStu==1}" href="javascript:void(0)">已确认</a>
+        <select class="sel-store" ng-model="selStroge" ng-change="changeStrogeFun()">
+            <option value="{{item.id}}" ng-repeat="item in strogeList">{{item.storageName}}</option>
+        </select>
+    </div>
+    <div class="filter-box margin-top20px d-flex">
+        <div>
+            <input class="seach-inp" placeholder="请输入供应商名称" ng-keyup="keyUpFun($event)" ng-model="seachVal"></input>
+            <button class="search" style="float: none;" ng-click="searchInput()">查询</button>
+            <select class="width200" ng-model="gysId" ng-change="selGysFun()">
+                <option value="">请选择入驻商名称</option>
+                <option value="{{item.supplierId}}" ng-repeat="item in gysList">{{item.companyName}}</option>
+            </select>
+        </div>
+        <!-- <div>
+            <button class="bulk-btn">批量通过</button>
+            <button class="bulk-btn">批量拒绝</button>
+       </div> -->
+    </div>
+    <div class="table-box">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <!-- <div class="check-box">
+                            <input type="checkbox" ng-model="checkAllMark" ng-change="checkAllFun(checkAllMark)">
+                            <label for=""></label>
+                        </div> -->
+                        编号
+                    </th>
+                    <th>商户名称</th>
+                    <th>提交时间</th>
+                    <th>总重量</th>
+                    <th>实际重量</th>
+                    <th>总数量</th>
+                    <th>入库数量</th>
+                    <th>异常数量</th>
+                    <th>始发地</th>
+                    <th>发往仓库</th>
+                    <th>运单号</th>
+                    <th ng-show="typeStu==0">运费</th>
+                    <th ng-show="typeStu==0">其它费用</th>
+                    <th ng-show="typeStu==1">费用</th>
+                    <th ng-show="typeStu==1">支付状态</th>
+                    <th ng-show="typeStu==1">支付时间</th>
+                    <th ng-show="typeStu==1">备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="item in dataList" ng-click="toogleSpFun(item)" ng-init="pIndex = $index">
+                <tr>
+                    <td>
+                        <!-- <div class="check-box" ng-click="stopPropFun($event)">
+                            <input type="checkbox" ng-model="item.checkFlag" ng-change="checkItemFun(item)">
+                            <label for=""></label>
+                        </div> -->
+                        {{item.packageCode}}
+                    </td>
+                    <td>{{item.companyName}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.packageWeight}}g</td>
+                    <td>{{item.actualWeight}}g</td>
+                    <td>{{item.productNum}}</td>
+                    <td>{{item.storageNum}}</td>
+                    <td>{{item.damagedNum}}</td>
+                    <td>{{item.originAddress}}</td>
+                    <td>{{item.generationOriginName}}</td>
+                    <td>{{item.logisticsNumber}}</td>
+                    <td ng-show="typeStu==0">{{item.freightAmountCurrency}}{{item.freightAmount}}</td>
+                    <td ng-show="typeStu==0">{{item.freightAmountCurrency}}{{item.otherAmount}}</td>
+                    <td ng-show="typeStu==1">{{item.freightAmountCurrency}}{{item.otherAmount+item.freightAmount}}</td>
+                    <td ng-show="typeStu==1">{{item.payStatusText}}</td>
+                    <td ng-show="typeStu==1">{{item.payTime}}</td>
+                    <td ng-show="typeStu==1">{{item.remark}}</td>
+                    <td>
+                        <button ng-show="typeStu==0" ng-click="delBaoGuoFun(item)" class="link-tip">处理</button>
+                        <span>
+                            <i ng-click="toogleFun(item,$event)"
+                                ng-class="{'glyphicon glyphicon-triangle-top':item.spFlag,'glyphicon glyphicon-triangle-bottom':!item.spFlag}"
+                                style="font-size: 20px;cursor: pointer;"
+                                class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                    </td>
+                </tr>
+                <tr ng-show="item.spFlag" ng-repeat="sp in item.productResultVOS">
+                    <td colspan="3">
+                        <!-- <img class="w60h60-img" src="{{sp.imageUrl}}"> -->
+                        <span class="blank-span">
+                            <img class="w60h60-img" ng-src="{{sp.imageUrl}}">
+                            <img class="hide-bigimg" ng-class="{'hide-bigimg-act':pIndex>4}" ng-src="{{sp.imageUrl}}">
+                        </span>
+                        <span>商品名称: {{sp.title}}</span>
+                    </td>
+                    <td colspan="2">
+                        SKU: {{sp.sku}}
+                    </td>
+                    <td colspan="2">
+                        总数量: {{sp.productNum}}
+                    </td>
+                    <td colspan="2">
+                        <div>入库数量: {{sp.numOfPutInStorage}}</div>
+                        <div>异常数量: {{sp.badNum}}</div>
+                    </td>
+                    <td colspan="2">
+                        <div>单个重量: {{sp.productSingleWeight}}g</div>
+                        <div>单个邮寄重量: {{sp.productSingleMailWeight}}g</div>
+                    </td>
+                    <td colspan="2">
+                        实际总重量: {{sp.productActualWeight}}g
+                    </td>
+                    <td ng-show="typeStu==0">
+                        单价: ${{sp.price}}
+                    </td>
+                    <td ng-show="typeStu==1" colspan="2">
+                        单价: ${{sp.price}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="totalNum<1" class="no-data-box">暂无数据</div>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show="feiYongFlag">
+    <div class="tk-con">
+        <div class="d-flex">
+            <span>更改费用</span>
+            <img ng-click="feiYongFlag = false" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">运费: </span>
+            <input class="feiyong-input" ng-keyup="clearNoNum()" ng-model="logistPrice" type="text"><select class="feiyong-select" ng-model="yfUnit">
+                <option value="$">$</option>
+                <!-- <option value="¥">¥</option> -->
+            </select>
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">其他费用: </span>
+            <input class="feiyong-input" ng-keyup="clearNoNum2()" ng-model="qtPrice" type="text"><select class="feiyong-select" ng-model="qtfyUnit">
+                <option value="$">$</option>
+                <!-- <option value="¥">¥</option> -->
+            </select>
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">备注: </span><textarea ng-model="remarkVal" class="text-area w210px" placeholder="请输入至少五个字符"></textarea>
+        </div>
+        <div class="isaddyfh-btns">
+            <button ng-click="feiYongFlag=false;" class="ispc-can-btn">取消</button>
+            <button ng-click="sureChangePrice()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="page-box" ng-show="hasMerch">
+    <div class="select-page-num">
+        <select class="form-control" ng-model="pageSize" ng-change="getPageSize()">
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select>
+        <span>每页</span>
+    </div>
+    <div class="total-num">
+        共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+    </div>
+    <div class="page-index">
+        <div id="pagination1" class="pagination2"></div>
+    </div>
+    <div class="to-go">
+        <span>跳转：</span>
+        <input type="text" class="form-control" placeholder="" ng-model="specifiedPage">
+        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="getSpecifiedPage()">go</a>
+    </div>
+</div>

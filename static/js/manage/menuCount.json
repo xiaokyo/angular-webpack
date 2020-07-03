@@ -1,0 +1,427 @@
+{
+  "100003": {
+		"remark": "商品",
+		"javaName": "100003",
+		"child": {
+			"100353": {
+				"remark": "代发商品",
+				"strName": "locA",
+				"child": {
+					"100356": "loc3",
+					"100357": "loc6",
+					"100358": "loc1",
+					"100359": "loc2",
+					"100360": "loc4",
+					"100361": "loc5",
+					"100362": "loc0"
+				}
+			},
+			"100354": {
+				"remark": "询价商品",
+				"strName": "repA",
+				"child": {
+					"100356": "rep1",
+					"100361": "rep2",
+					"100362": "rep0"
+				}
+			},
+			"101185": {
+				"remark": "视频商品",
+				"strName": "videoTotalCount",
+				"child": {
+					"100356": "upVideo",
+					"100361": "downVideo",
+					"101212": "videoDemand"
+				}
+			},
+			"101191": {
+				"remark": "服务商品",
+				"strName": "sLocA",
+				"child": {
+					"100356": "sLoc3",
+					"100358": "sLoc1",
+					"100359": "sLoc2",
+					"100360": "sLoc4",
+					"100361": "sLoc5",
+					"100362": "sLoc0"
+				}
+			},
+			"101339": {
+				"remark": "个性商品",
+				"strName": "iLocA",
+				"child": {
+					"100356": "iLoc3",
+					"100357": "iLoc6",
+					"100358": "iLoc1",
+					"100359": "iLoc2",
+					"100360": "iLoc4",
+					"100361": "iLoc5",
+					"100362": "iLoc0"
+				}
+			},
+			"个性商品": {
+				"strName": "iLocA",
+				"child": {
+					"100356": "iLoc3",
+					"100357": "iLoc6",
+					"100358": "iLoc1",
+					"100359": "iLoc2",
+					"100360": "iLoc4",
+					"100361": "iLoc5",
+					"100362": "iLoc0"
+				}
+			},
+			"101346": {
+				"remark": "新服务商品",
+				"child": {
+					"老服务商品": "sLocA"
+				}
+			}
+		}
+	},
+	"101235": {
+		"remark": "系统设置",
+		"javaName": "100003",
+		"child": {
+			"100355": {
+				"remark": "首页运营",
+				"strName": "custom"
+			}
+		}
+	},
+	"100004": {
+		"remark": "采购",
+		"javaName": "100004",
+		"child": {
+			"100549": {
+				"remark": "采购管理",
+				"child": {
+					"100551": "outwardPurchase",
+					"101186": "procurementInventory",
+					"100552": "purchaseList"
+				}
+			},
+			"100550": {
+				"remark": "供应商管理",
+				"child": {
+					"100606": "supplierList",
+					"100608": "blackSupplier"
+				}
+			},
+			"POD供应商": {
+				"remark": "POD供应商",
+				"child": {
+					"供应商列表": "PODSupplierVendors",
+					"101355": "PODSupplierVendors",
+					"审核商品": "auditCommodity",
+					"101356": "auditCommodity",
+					"关联供应商": "associatedSupplier",
+					"打印面单": "printingSheet",
+					"101357": "printingSheet"
+				}
+			},
+			"101255": {
+				"remark": "采购订单",
+				"child": {
+					"待确认": "confirmed",
+					"101349": "confirmed",
+					"待付款": "obligation",
+					"101350": "obligation",
+					"已付款": "accountPaid",
+					"101351": "accountPaid",
+					"待签收": "waitingReceipt",
+					"101365": "waitingReceipt",
+					"已签收": "alreadySigned",
+					"101366": "alreadySigned",
+					"部分签收": "partSign",
+					"101367": "partSign",
+					"确认SKU": "enterSku",
+					"101352": "enterSku",
+					"采购异常": "procurementAbnormity",
+					"101353": "procurementAbnormity",
+					"线下完成": "offlineCompletion",
+					"101354": "offlineCompletion"
+				}
+			}
+		}
+	},
+	"100005": {
+		"remark": "仓库",
+		"javaName": "100005",
+		"child": {
+			"包裹": {
+				"remark": "包裹",
+				"child": {
+					"未添加到调度任务": "notAddedDispatcherTask",
+					"已添加到调度任务": "addedDispatcherTask",
+					"已完成调度任务": "completedDispatcherTask"
+				}
+			},
+			"101219": {
+				"remark": "调度任务",
+				"child": {
+					"100096": "noShipped",
+					"100038": "shipped",
+					"101220": "received",
+          "100039": "completed",
+          "101432": "yuDiaoDu"
+				}
+			},
+			"101371": {
+				"remark": "批次号",
+				"child": {
+					"100867": "allBatchNumber",
+					"100325": "pendingBatchNumber",
+					"100207": "progressBatchNumber",
+					"100209": "completedBatchNumber"
+				}
+			},
+			"100701": {
+				"remark": "出货记录",
+				"child": {
+					"100038": "allShipment",
+					"货代已揽收": "allShipment",
+					"101221": "daipeiqiShipment",
+					"100818": "chouchaShipment",
+					"101300": "dabaoShipment",
+					"等待出库": "erpWeiPiPei",
+					"已出库": "erpYiPiPei",
+					"DHL小包未生成清单": "dhlWeiShengChengQingDan"
+				}
+			},
+			"100702": {
+				"remark": "退件记录",
+				"child": {
+					"101178": "weituotouBounce",
+					"101179": "yituotouBounce",
+					"101180": "inlandBounce"
+				}
+			},
+			"100623": {
+				"remark": "待入库商品",
+				"child": {
+					"101213": "noSignIn",
+					"101214": "haveSignIn",
+					"101215": "signInException",
+					"101216": "offlinePurchase",
+					"101217": "combinedShipping",
+					"101218": "deceitfulDelivery"
+				}
+			}
+		}
+	},
+	"100007": {
+		"remark": "搜品",
+		"javaName": "100007",
+		"child": {
+			"100864": {
+				"remark": "客户店铺",
+				"child": {
+					"100867": "stoAll",
+					"100868": "stoWait",
+					"100869": "stoFail",
+					"100870": "stoSucc",
+					"100871": "stoOn",
+					"100252": "stoDel",
+					"等待现有": "stoExisting",
+					"初审失败": "stoFirstFail"
+				}
+			},
+			"100865": {
+				"remark": "独有商品",
+				"child": {
+					"100867": "autAll",
+					"100868": "autWait",
+					"100869": "autFail",
+					"100870": "autSucc",
+					"100871": "autOn",
+					"100252": "autDel",
+					"等待现有": "autExisting",
+					"初审失败": "autFirstFail"
+				}
+			},
+			"100866": {
+				"remark": "平台搜品",
+				"child": {
+					"100867": "cjAll",
+					"100868": "cjWait",
+					"100869": "cjFail",
+					"100870": "cjSucc",
+					"100871": "cjOn",
+					"100252": "cjDel",
+					"等待现有": "cjExisting",
+					"初审失败": "cjFirstFail"
+				}
+			},
+			"101222": {
+				"remark": "游客搜品",
+				"child": {
+					"100867": "tAll",
+					"100868": "tWait",
+					"100869": "tFail",
+					"100870": "tSucc",
+					"101223": "tOn",
+					"等待现有": "tExisting",
+					"初审失败": "tFirstFail"
+				}
+			}
+		}
+	},
+	"100010": {
+		"remark": "客服",
+		"javaName": "100010",
+		"child": {
+			"100158": {
+				"remark": "纠纷",
+				"strName": "jiuFenCount",
+				"child": {
+					"100183": "daiXiangYing",
+					"100184": "daiChuLi",
+					"101206": "dengDaiWuLiu",
+					"100185": "quXiao",
+					"100186": "yiWanCheng",
+					"101247": "huiFu"
+				}
+			}
+		}
+	},
+	"100008": {
+		"remark": "客户",
+		"javaName": "100008",
+		"child": {
+			"100890": {
+				"remark": "客户列表",
+				"strName": "client"
+			},
+			"100895": {
+				"remark": "客户分销",
+				"strName": "affUserNum",
+				"child": {
+					"100966": "acc0",
+					"100891": "acc1",
+					"100892": "acc2",
+					"100608": "acc3",
+					"100967": "commission",
+					"FAQ": "FAQ"
+				}
+			},
+			"100896": {
+				"remark": "客户公海",
+				"strName": "customerResourceNum"
+			},
+			"100893": {
+				"remark": "店铺列表",
+				"strName": "shopNum"
+			},
+			"100894": {
+				"remark": "展会客户",
+				"strName": "exhibition"
+			},
+			"101372": {
+				"remark": "分配客户",
+				"strName": "dispenseUser"
+			},
+			"100891": {
+				"remark": "需审核",
+				"strName": 3
+			},
+			"100892": {
+				"remark": "审核未通过",
+				"strName": 0
+			},
+			"100608": {
+				"remark": "黑名单",
+				"strName": 2
+      },
+      "101427": {
+				"remark": "COD用户列表",
+				"child": {
+					"101428": "CodPendingReview",
+					"101429": "CodAudited",
+					"101430": "CodRejected"
+				}
+			}
+		}
+	},
+	"100002": {
+		"remark": "订单",
+		"javaName": "100002",
+		"child": {
+			"100012": {
+				"remark": "母订单",
+				"strName": "shipCount",
+				"child": {
+					"100016": "yi",
+					"100207": "jia",
+					"100017": "er",
+					"100018": "san",
+					"100019": "si",
+					"100020": "wu",
+					"100021": "liu"
+				}
+			},
+			"100013": {
+				"remark": "子订单",
+				"strName": "orderCount",
+				"child": {
+					"100097": "yi",
+					"100098": "er",
+					"100099": "san",
+					"100100": "si",
+					"100101": "wu"
+				}
+			},
+			"100014": {
+				"remark": "直发订单",
+				"strName": "zfOrderCount",
+				"child": {
+					"100346": "PAID",
+					"100037": "OPTPAID",
+					"100067": "UNTOPAID",
+					"100095": "UNPAID",
+					"101332": "zfYiWanCheng",
+					"已发货订单": "zfYiWanCheng",
+					"101333": "zfXinYiWanCheng",
+					"已完成订单": "zfXinYiWanCheng",
+					"100021": "STOP",
+					"101331": "WEIGHTCONFIRMED",
+					"重量待确认": "WEIGHTCONFIRMED",
+					"101334": "zfJiuFenDingDan",
+					"纠纷订单": "zfJiuFenDingDan"
+				}
+			},
+			"100015": {
+				"remark": "私有库存订单",
+				"strName": "zfOrderCount",
+				"child": {
+					"100351": "PAIDIMP",
+					"100067": "UNTOPAIDIMP",
+					"100095": "UNPAIDIMP",
+					"100352": "FINISHIMP",
+					"101334": "syJiuFenDingDan",
+					"纠纷订单": "syJiuFenDingDan"
+				}
+			},
+			"101211": {
+				"remark": "视频订单",
+				"strName": "spOrderCount",
+				"child": {
+					"100048": "paidCount",
+					"100095": "canHandleCount",
+					"100209": "accomplishCount",
+					"101212": "videoDemand"
+				}
+			}
+		}
+	},
+	"运营与数据分析": {
+		"remark": "运营与数据分析",
+		"javaName": "100003",
+		"child": {
+			"100355": {
+				"remark": "首页运营",
+				"strName": "custom"
+			}
+		}
+	}
+}

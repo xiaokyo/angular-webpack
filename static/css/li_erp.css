@@ -1,0 +1,185 @@
+
+
+.la_kucun ul li{
+    float: left;
+}
+.lashop_img img{
+    width: 50px;
+    height:50px;
+
+}
+.la_tr td poplink{
+    padding: 5px 20px;
+    cursor:pointer;
+}
+.la_tr td poplink.active{
+    color: #08aceb;
+    border: 1px solid #08aceb;
+}
+/*以上是出库*/
+.la_tr01 td a{
+    margin-right: 15px;
+}
+/*以上是入库*/
+.la_meaus .la_div{
+    float: left;
+}
+
+ .la_menu li{
+     float: left;
+ }
+.la_menu li {
+    margin-right: 18px;
+}
+.la_menu li.active a{
+    color: #08aceb;
+}
+.la_meaus .la_meau{
+    margin-left: 20px;
+}
+
+
+/*以上是采购库存*/
+.la_tr01 .active01{
+    background:#08aceb ;
+    border: 1px solid #08aceb;
+    color: white;
+}
+/*以上是出单需采购*/
+.la_cont ul li{
+    margin-top: 20px;
+}
+.la_cont ul li span:first-child{
+    width: 80px;
+    text-align: right;
+    display: inline-block;
+}
+.la_search .search-text-box{
+    width: 200px;
+    height:30px;
+}
+.la_search .search-button{
+    height: 34px;
+    padding: 0 14px;
+}
+.la_addimg img{
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+    }
+.la_select{
+    width: 275px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+.la_search .search-text-box.la_else{
+    width: 120px;
+    border-radius: 10px;
+}
+.la_moresec select{
+    width: 140px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+.la_moresec .la_inp01{
+    width: 150px;
+}
+.la_search .search-text-box.la_else02{
+    width: 60px;
+}
+.la_shop{
+    color:#08aceb ;
+    background: white;
+}
+.ea-right-search .la_shop{
+
+    border: 1px solid #08aceb;
+
+}
+.la_search .search-text-box.la_shop{
+    width: auto;
+}
+.la_sub{
+    text-align: center;
+    margin-top: 30px;
+}
+.la_sub button{
+    display: inline-block;
+    width: 100px;
+    padding:  6px 0;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-left: 20px;
+}
+.la_sub .la_btn02{
+    background: #08aceb;
+    border: 1px solid #08aceb;
+    color: white;
+}
+.la_search{
+    border-left: none;
+}
+.la_addcont{
+    border-left: 1px solid #eee;
+}
+/*以上是采购库存添加采购单页面*/
+.la_spgl{
+    margin-left: 39px;
+    margin-top: 8px;
+}
+.la_spgl ul li button{
+    border: 1px solid #333;
+    background: white;
+    padding: 5px 8px;
+}
+.la_spdc button{
+    color: #08aceb;
+    border: 1px solid #08aceb;
+    padding: 5px 20px;
+    background: white;
+}
+.la_spdc{
+    text-align: right;
+    padding-right: 50px;
+}
+.la_tr01 .active02 .active{
+    color: #333;
+    border: 1px solid #333;
+}
+/*以上是采商品管理已下载*/
+.wa-right-twoNav{text-align:center;padding-top:27px;}
+.wa-right-twoNav ul li{display:inline-block;width:98px;height:30px;line-height:30px;text-align:center;margin-right:20px;}
+.wa-right-twoNav ul .active{border:1px solid #08aceb;color:#08aceb;}
+.wa-right-search{ margin: 0 50px; margin-top: 12px !important; padding-top: 30px; border-top: solid #e1e1e1 1px;}
+.la_tr01 .active03 .active{
+    background: orange;
+    border: 1px solid orange;
+    color: white;
+}
+/*以上是采商品管理需报价*/
+.la_cg{
+    margin-top: 20px;
+    padding-top: 22px;
+    margin-bottom: 20px;
+   margin-left: 0;
+}
+
+.la_cg .la_select{
+    width: 100px;
+}
+.la_wl td{
+    height: 30px;
+}
+.la_wl td span{
+    color: #333;
+}
+.ea-right-search .la_tj{
+    border: solid #08aceb 1px;
+    background: #08aceb;
+    padding: 0 30px;
+    color: white;
+    border-radius: 6px;
+
+}
+/*以上是采购库存_添加采购单*/

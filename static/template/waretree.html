@@ -1,0 +1,21 @@
+<!-- 用于仓库树展示 -->
+<!-- 用于：#/erpwarehouse/warestock, #/erpwarehouse/waredetail/xxx, /erpwarehouse/warelinkcate -->
+	<p ng-class="{'top-info': true, 'last-top-info': currentFolder.childrens==undefined}" leval="{{currentFolder.sequence}}">
+		<!-- sequence -- 层级-->
+		<!-- <a href="javascript:void(0);" class="openup-icon" ng-show="!currentFolder.open && currentFolder.childrens" ng-click="switchList({posi:currentFolder.sequence-2, event: $event, flag: true})">+</a> -->
+		<a href="javascript:void(0);" class="openup-icon" ng-show="!currentFolder.open && currentFolder.codeFlag=='1'" ng-click="switchList({item: currentFolder, flag: 1})">+</a>
+		<a href="javascript:void(0);" class="packup-icon" ng-show="currentFolder.open || currentFolder.codeFlag=='0'" ng-click="switchList({item: currentFolder, flag: 0})">-</a>
+		<!-- <a href="javascript:void(0);" class="packup-icon" ng-show="currentFolder.open || !currentFolder.childrens" ng-click="switchList({posi:currentFolder.sequence-2, event: $event, flag: flase})">-</a> -->
+		<span class="index-span" style="display: none;" data-index="{{myIndex}}">{{myIndex}}</span>
+		<span class="check-box" ng-if="currentFolder.checkFlag">
+      <input type="checkbox" name="" id="" ng-model="currentFolder.checked" ng-click="checkWare({item:currentFolder})">
+      <label for=""></label>
+    </span>
+		<span ng-class="{'name-span': true, 'active': currentFolder.active}" ng-click="pointOne({item: currentFolder})">{{currentFolder.codeName + (currentFolder.codeType ? ' [' + currentFolder.codeType + ']' : '')
+			+ (currentFolder.positionType ? ' [' + currentFolder.positionType + ']' : '')}}</span>
+	</p>  
+	<ul class="domtree" ng-show="currentFolder.open">  
+	    <li ng-repeat="subfolder in currentFolder.childrens">
+	        <ware-tree current-folder="subfolder" my-index="$index" point-one="pointOne({item: item})" switch-list="switchList({item: item, flag:flag})" check-ware="checkWare({item: item})"></ware-tree>
+	    </li>  
+	</ul>

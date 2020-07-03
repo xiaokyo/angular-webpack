@@ -1,0 +1,18 @@
+<div class="page-box">
+    <div class="select-page-num" ng-show="pageObj.showSelect" ng-cloak>
+        <select class="form-control" ng-model="pageObj.pageSize" ng-change="changeFun('size')">
+            <option ng-repeat="item in pageObj.pagesizeList" value="{{item}}">{{item}}</option>
+        </select>
+        <span>每页</span>
+    </div>
+    <div class="total-num" ng-show="pageObj.showTotal">
+        共 <span ng-cloak >{{pageObj.totalCounts}}</span> 条
+    </div>
+    <div class="page-index">
+    </div>
+    <div class="to-go" ng-show="pageObj.showGo" ng-cloak>
+        <span>跳转：</span>
+        <input type="text" class="form-control" placeholder="" ng-change="numberInput()" ng-model="pageNum">共 <span ng-cloak>{{pageObj.totalNum}}</span> 页
+        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="changeFun('input')">go</a>
+    </div>
+</div>

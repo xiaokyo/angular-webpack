@@ -1,0 +1,320 @@
+<style>
+  .consult .nav {
+    padding: 0 74px;
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  .consult .nav li {
+    float: left;
+    height: 62px;
+    line-height: 62px;
+    margin-right: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+  }
+
+  .consult .right-bar {
+    padding-top: 20px;
+    background-color: #fff;
+  }
+
+  .consult .nav li:hover {
+    color: #F9AE08;
+  }
+
+  .consult .nav .active {
+    color: #F9AE08;
+  }
+
+  .consult .main {
+    padding: 0 20px;
+    background-color: #fff;
+  }
+
+  .consult .main table {
+    width: 100%;
+  }
+
+  .consult .main-table .color {
+    color: #F48B31;
+    cursor: pointer;
+  }
+
+  .consult .main-table span {
+    cursor: pointer;
+  }
+
+  .consult .main thead {
+    height: 48px;
+    line-height: 48px;
+    background-color: #FCF4D9;
+    border-radius: 6px 6px 0px 0px;
+  }
+
+  .consult .main th {
+    color: #8B572A;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .consult .main td {
+    height: 72px;
+    text-align: center;
+    border: 1px solid #F3F3F3;
+  }
+
+  .consult .main-table tbody {
+    border: 1px solid #F3F3F3;
+  }
+
+  .consult .main-table tbody a,
+  .consult .main-table tbody a:hover {
+    color: #4A90E2;
+  }
+
+  .consult .main-table .popover-p {
+    width: 180px;
+  }
+
+  .consult .main-table .popover-p p {
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .consult .main-table p:hover {
+    color: #F48B31;
+    cursor: pointer;
+  }
+
+  .editmesstc-wrap .consult-model {
+    width: 780px;
+    height: 380px;
+    padding: 20px 24px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    z-index: 1000;
+  }
+
+  .comodity .model-top {
+    height: 40px;
+    text-align: center;
+  }
+
+  .comodity .model-content ul {
+    height: 230px;
+    border-top: 1px solid #EBEBEB;
+    overflow-y: auto;
+  }
+
+  .comodity .model-content {
+    overflow: hidden;
+  }
+
+  .comodity .model-content li {
+    height: 44px;
+    margin-top: 15px;
+  }
+
+  .comodity .model-content li div {
+    float: left;
+  }
+
+  .comodity .model-content li .img {
+    margin-right: 15px;
+  }
+
+  .comodity .model-content li img {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+
+  .comodity .model-content .p1 {
+    height: 17px;
+    line-height: 17px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #333;
+  }
+
+  .comodity .model-content .p2 {
+    height: 17px;
+    line-height: 17px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .comodity .model-content .bold {
+    font-weight: 500;
+  }
+
+  .comodity .model-content .del-active {
+    color: #D9D9D9;
+  }
+
+  .comodity .model-content .del {
+    margin-left: 20px;
+    color: #F48B31;
+    cursor: pointer;
+  }
+
+  .comodity .model-content .form {
+    height: 60px;
+    margin-top: 30px;
+  }
+
+  .comodity .model-content .revert {
+    width: 720px;
+    height: 60px;
+    padding-left: 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(238, 238, 238, 1);
+  }
+
+  .comodity .model-bottom {
+    text-align: center;
+    margin-top: 27px;
+  }
+
+  .comodity .model-bottom button {
+    display: inline-block;
+    width: 70px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid rgba(230, 230, 230, 1);
+  }
+
+  .comodity .model-bottom .cancel {
+    background-color: #fff;
+    color: #666;
+  }
+
+  .comodity .model-bottom .reply {
+    background-color: #FFB900;
+    color: #fff;
+  }
+</style>
+<div class="ea-content">
+  <div class="right-bar-wrap consult">
+    <div class="right-bar">
+      <div class="nav">
+        <ul class="clearfix">
+          <li class="active" ng-click="tabShow(1)">商品操作日志</li>
+          <li ng-click="tabShow(2)">商品咨询</li>
+        </ul>
+      </div>
+      <div class="main">
+        <div class="main-content" ng-show="logShow">
+          <table class="main-log">
+            <thead>
+              <tr>
+                <th width=15%>编号</th>
+                <th width=55%>操作描述</th>
+                <th width=15%>工号</th>
+                <th width=15%>日期</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>修改：修改商品描述修改对手链接修改变体价格修改sku别名 修改变体价格修改sku别名修改变体价格修改sku别名</td>
+                <td>工号</td>
+                <td>2019-04-01 10:39:50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="main-content" ng-show="!logShow">
+          <table class="main-table">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>咨询时间</th>
+                <th>用户名</th>
+                <th>商品名称</th>
+                <th>SKU</th>
+                <th>咨询问题</th>
+                <th>最近回复时间</th>
+                <th>处理人</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>序号</td>
+                <td>咨询时间</td>
+                <td>用户名</td>
+                <td>
+                  <a href="https://app.cjdropshipping.com/product-detail.html" target="_blank">651651651651</a>
+                </td>
+                <td>SKU</td>
+                <td class="popover-p">
+                  <p data-toggle="tooltip" data-placement="bottom" title="最近回复时间最近回复时间最近回复时间">最近回复时间最近回复时间最近回复时间最近回复时间
+                  </p>
+                </td>
+                <td>最近回复时间</td>
+                <td>处理人</td>
+                <td>
+                  <span class="color" ng-click="modelShow()">详情</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 待回复 -->
+    <div class="editmesstc-wrap comodity" ng-show="model">
+      <div class="editmess-con consult-model">
+        <div class="model-top">{{title}}</div>
+        <div class="model-content">
+          <ul class="clearfix">
+            <li class="del-active">
+              <div class="img"><img
+                  src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15096384/2702829948_217195227.400x400.jpg" alt="">
+              </div>
+              <div>
+                <p class="p1">
+                  <span class="bold">任命</span>
+                  hiuhiu
+                </p>
+                <p class="p2">
+                  <span>20198-6416</span>
+                  <span class="del">删除</span>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div><img src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15446304/1598619392508.jpg" alt=""></div>
+              <div>
+                <p class="p1">
+                  <span class="bold">任命:</span>
+                  hiuhiu
+                </p>
+                <p class="p2">
+                  <span>20198-6416</span>
+                  <span ng-click="del()" class="del"></span>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="model-bottom">
+          <button ng-click="cancel()" class="reply">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+  </script>

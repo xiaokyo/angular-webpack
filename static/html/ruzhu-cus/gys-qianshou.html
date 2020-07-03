@@ -1,0 +1,193 @@
+<div class="content ruzhu-wrap">
+    <!-- <div class="filter clearfix">
+        <a class="like-navbtn" ng-click="typeStuFun(0)" ng-class="{'tab-act':typeStu==0}" href="javascript:void(0)">待确认</a>
+        <a class="like-navbtn" ng-click="typeStuFun(1)" ng-class="{'tab-act':typeStu==1}" href="javascript:void(0)">已确认</a>
+        <select class="sel-store" ng-model="selStroge" ng-change="changeStrogeFun()">
+            <option value="{{item.id}}" ng-repeat="item in strogeList">{{item.name}}</option>
+        </select>
+    </div> -->
+    <div class="filter-box margin-top20px d-flex">
+        <div>
+            <input class="Wdate data-inp" id="c-data-time" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"></input><input id="cdatatime2" placeholder="Now" class="Wdate data-inp" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"/>
+            <select class="width90" ng-model="searchKey" ng-change="selGysFun()">
+                <option value="productSku">变体SKU</option>
+                <option value="logisticsNumber">追踪号</option>
+                <option value="companyName">入驻供应商名称</option>
+                <option value="productTitle">商品名称</option>
+                <option value="originName">到货仓库</option>
+                <option value="packageCode">供应商包裹号</option>
+            </select><input class="seach-inp border-radiusnone" ng-keyup="keyUpFun($event)" ng-model="seachVal"></input>
+            <button class="search" style="float: none;" ng-click="searchInput()">查询</button>
+            <a ng-click="timeDayType(2)" ng-class="{'timenum-act':dayStu==2}" href="javascript:void(0)">前日</a>
+            <a ng-click="timeDayType(1)" ng-class="{'timenum-act':dayStu==1}" href="javascript:void(0)">昨日</a>
+            <a ng-click="timeDayType(0)" ng-class="{'timenum-act':dayStu==0}" href="javascript:void(0)">今日</a>
+        </div>
+        <div>
+            <a class="bulk-btn abtn-style" target="_blank" href="query-parcel.html">查询包裹</a>
+            <a class="bulk-btn abtn-style" target="_blank" href="print-code.html">打印条形码</a>
+            <a class="bulk-btn abtn-style" target="_blank" href="receive.html">签收</a>
+            <a class="bulk-btn abtn-style" target="_blank" href="receive-instock.html">分标</a>
+            <!-- <a class="bulk-btn abtn-style" target="_blank" href="https://www.kuaidi100.com/">快递100查询</a> -->
+       </div>
+    </div>
+    <div class="filter-box margin-top20px d-flex">
+        <div>
+            <button ng-repeat="item in strogeList" ng-click="strogeTypeFun(item.id,$event)" class="fault-option-btn margin-right20px" ng-class="{'filter-btnact':item.id == typeStrogeId}">{{item.storageName}}</button>
+       </div>
+    </div>
+    <div class="table-box">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <!-- <div class="check-box">
+                            <input type="checkbox" ng-model="checkAllMark" ng-change="checkAllFun(checkAllMark)">
+                            <label for=""></label>
+                        </div> -->
+                        序号
+                    </th>
+                    <th>供应商包裹号</th>
+                    <th>追踪号</th>
+                    <th>创建时间</th>
+                    <th>入驻供应商名称</th>
+                    <th>总重量</th>
+                    <th>总数量</th>
+                    <th>总价值</th>
+                    <th>发往仓库</th>
+                    <th>目的地仓库</th>
+                    <th ng-show="qsStuNum==2">签收时间</th>
+                    <!-- <th ng-show="typeStu==0">运费</th>
+                    <th ng-show="typeStu==1">费用</th>
+                    <th ng-show="typeStu==1">支付状态</th>
+                    <th ng-show="typeStu==1">支付时间</th>
+                    <th ng-show="typeStu==1">备注</th> -->
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="item in dataList" class="qs-tbody" ng-init="pIndex = $index">
+                <tr class="sp-tr">
+                    <td>
+                        <!-- <div class="check-box" ng-click="stopPropFun($event)">
+                            <input type="checkbox" ng-model="item.checkFlag" ng-change="checkItemFun(item)">
+                            <label for=""></label>
+                        </div> -->
+                        {{(pageNum-1)*pageSize + $index+1}}
+                    </td>
+                    <td>
+                        {{item.packageCode}}
+                        <span class="yc-style" title="有异常商品" ng-show="item.logisticsStatus==3">异</span>
+                    </td>
+                    <td>{{item.logisticsNumber}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.companyName}}</td>
+                    <td>{{item.packageWeight}}g</td>
+                    <td>{{item.productNum}}</td>
+                    <td>${{item.packageProductAmount}}</td>
+                    <td>
+                        <span ng-show="item.generationOriginName">{{item.generationOriginName}}</span>
+                        <span ng-show="!item.generationOriginName">--</span>
+                    </td>
+                    <td>{{item.originName}}</td>
+                    <td ng-show="qsStuNum==2">{{item.signInTime}}</td>
+                    <td ng-click="stopPropFun($event)">
+                        <button ng-click="queryWuLiuFun(item)" class="link-tip min-width98">获取物流信息</button>
+                    </td>
+                </tr>
+                <tr ng-repeat="sp in item.productResultVOS" class="bt-tr">
+                    <td colspan="2">
+                        <!-- <img class="w60h60-img" src="{{sp.imageUrl}}"> -->
+                        <span class="blank-span">
+                            <img class="w60h60-img" ng-src="{{sp.imageUrl}}">
+                            <img class="hide-bigimg" ng-class="{'hide-bigimg-act':pIndex>4}" ng-src="{{sp.imageUrl}}">
+                        </span>
+                    </td>
+                    <td colspan="3">
+                        <p>SKU: {{sp.sku}}</p>
+                        <span class="yc-style" title="异常商品" ng-show="sp.logisticsStatus==3">异</span>
+                        <button ng-click="openYcFun(sp)" ng-show="qsStuNum==2" class="link-tip">异常</button>
+                    </td>
+                    <td ng-show="qsStuNum==1" colspan="3">
+                        <span>商品名称: {{sp.title}}</span>
+                    </td>
+                    <td ng-show="qsStuNum==2" colspan="4">
+                        <span>商品名称: {{sp.title}}</span>
+                    </td>
+                    <td colspan="2">
+                        单价: ${{sp.price}}
+                    </td>
+                    <td>
+                        数量: {{sp.productNum}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="totalNum<1" class="no-data-box">暂无数据</div>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show="wuLiuMesFlag">
+    <div class="tk-con" style="max-height: 600px;overflow-y: auto;width: 680px;">
+        <div class="d-flex">
+            <span>物流信息</span>
+            <img ng-click="wuLiuMesFlag = false" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <div class="margin-top20px">
+            <span class="perw20">时间: </span>
+            <span class="perw80">信息</span>
+        </div>
+        <div class="margin-top20px" ng-repeat="item in wlMsgList">
+            <span class="perw20">{{item.AcceptTime}}</span>
+            <span class="perw80">{{item.AcceptStation}}</span>
+        </div>
+        <div class="isaddyfh-btns">
+            <button ng-click="wuLiuMesFlag=false;" class="ispc-can-btn">关闭</button>
+        </div>
+    </div>
+</div>
+<!-- 异常 -->
+<div class="tkbg-wrap" ng-show="ycFlag">
+    <div class="tk-con">
+        <div class="d-flex">
+            <span>异常处理</span>
+            <img ng-click="ycFlag = false" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">异常数量: </span>
+            <input class="feiyong-input w210px" ng-keyup="clearNoNum()" ng-model="ycNum">
+            </select>
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">异常原因: </span>
+            <select ng-model="ycType" class="w210px h30px">
+                <option value="1">损坏</option>
+                <option value="2">缺货</option>
+                <option value="3">其它</option>
+            </select>
+        </div>
+        <div class="margin-top20px">
+            <span class="w100px">备注: </span><textarea ng-model="remarkVal" class="text-area w210px"></textarea>
+        </div>
+        <div class="isaddyfh-btns">
+            <button ng-click="ycFlag=false;" class="ispc-can-btn">取消</button>
+            <button ng-click="sureYcFun()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>

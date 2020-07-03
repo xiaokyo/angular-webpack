@@ -1,0 +1,17 @@
+<!-- 分页 -->
+<div class="pages-fun" ng-show="erpordTnum>0">
+  <select id="page-sel" class="c-select-page-num">
+    <option value="30">30</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+  <span class="every-page">每页</span>
+  <span class="every-page gong">共</span>
+  <span class="c-all-num-line">{{erpordTnum}}</span>
+  <span class="every-page">条</span>
+  <span id="demo3-text"></span>
+  <div id="c-pages-fun"></div>
+  <span class="every-page">跳转:</span>
+  <input id="inp-num" class="c-inp-num-go"></input>
+  <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+</div>

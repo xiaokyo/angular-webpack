@@ -1,0 +1,21 @@
+<!-- 商品留言的弹框 -->
+<div class="messageTk-wrap">
+    <div class="messageTk-con" style="height: auto;">
+        <h3 style="text-align: center;margin-bottom: 5px;">采购留言 ({{noteListArr.length}}条记录)<span class="close" ng-click="closeNoteFun()">×</span></h3>
+        <div class="message-list" style="max-height: 500px;overflow-y:auto;" ng-show="noteListArr.length>0">
+            <div class="item-mess" ng-repeat="item in noteListArr track by $index" style="padding-bottom: 10px;border-bottom: 1px dashed #333333;margin:10px 0;">
+                <p style="height: 20px;">
+                    <span>{{item.createDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span>{{item.createUserName}}</span>
+                    <span style="float: right;">第{{$index+1}}条</span>
+                </p>
+                <p style="height: auto;">{{item.message}}</p>
+            </div>
+        </div>
+        <textarea class="custom-mes" ng-model="spMessVal"></textarea>
+        <div class="custom-btns" style="margin-bottom: 20px;">
+            <button class="editmes-qxbtn" ng-click="closeNoteFun()">关闭</button>
+            <button class="editmes-surebtn" ng-click="spMesSurnFun()">确定</button>
+        </div>
+    </div>
+</div>

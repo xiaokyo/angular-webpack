@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .skuGroupTop-table-thead{
+            display: flex;
+        }
+        .inputGroup{
+            display: flex;
+        }
+        .inputGroup input{
+            width: 250px;
+            height: 30px;
+            padding: 0 10px;
+        }
+        .inputGroup button{
+            padding: 0 15px;
+            background: rgba(255,185,0,1);
+            color: #fff;
+            font-size: 14px;
+        }
+        .skuGoupTop-search{
+            padding-bottom: 20px;
+            /*background: red;*/
+        }
+        .sku-th{
+            width: 10%;
+            background: rgba(252,244,217,1);
+            text-align: center;
+            color: rgba(139,87,42,1);
+            padding: 10px;
+            font-weight: 600;
+        }
+        .skuGroupTop{
+            position: fixed;
+            width: calc(100% - 280px);
+            background: #fff;
+            padding: 15px 20px 0 20px;
+            /*left: 0;*/
+            /*top: 0;*/
+            /*padding-left: 280px;*/
+            /*background: #fff;*/
+            z-index: 9999;
+        }
+        .skuGroup-tr{
+            display: flex;
+            border-left: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGroup-tr span.overhideSpan{
+            display: block;
+            width: 100%;
+            /* white-space: nowrap; */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*padding: 8px ;*/
+            text-align: center;
+        }
+        .skuGroup-td{
+            width: 10%;
+            border-right: 1px solid #f0f0f0;
+        }
+        .oneRow{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .twoRow:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .productImgWrap>span{
+            width: 80px;
+            height: 80px;
+            border: 1px solid #f0f0f0;
+        }
+        .skuGroup-tr span.productImgWrap2{
+            width: 60px;
+            height: 60px;
+            border: 1px solid #f0f0f0;
+        }
+        .productImgWrap3>span{
+            /*width: 60px;*/
+            height: 60px;
+        }
+        /*.skuGroup-tr span.productImgWrap2{*/
+            /*display: flex;*/
+            /*justify-content: center;*/
+        /*}*/
+        .skuGoup-row{
+            display: flex;
+        }
+        .skuGoup-row:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGoup-row:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGroup-row-td{
+            border-right: 1px solid #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .skuGroup-row-td:not(:first-child)>span{
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: default;
+        }
+        .moreActionBtn{
+            position: relative;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .moreActionWrap{
+            display: none;
+            position: absolute;
+            width: 100px;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0px 8px 20px;
+            top: 29px;
+            left: -10px;
+        }
+        .moreActionWrap li>span{
+            display: block;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+        .moreActionWrap li>span:hover{
+            background: #e6e6e6;
+            /*color: #fff;*/
+        }
+        .moreActionBtn:hover .moreActionWrap{
+            display: block;
+        }
+        .groupZzc{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 99999;
+        }
+        .groupWrap{
+            background: #fff;
+            border-radius: 4px;
+            width: 710px;
+            min-height: 200px;
+            padding: 20px;
+            margin: 150px auto;
+        }
+        .groupWrap>h1{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .groupWrap .inputGroup{
+            align-items: center;
+        }
+        .groupWrap .inputGroup input{
+            width: 200px;
+        }
+        .groupInput-tr{
+            display: flex;
+            margin-top: 15px;
+            /*justify-content: space-between;*/
+        }
+        .groupInput-tr .inputGroup:first-child{
+            margin-right: 15px;
+        }
+        .groupZzc{
+            display: none;
+        }
+        .inputGroup>img{
+            margin-left: 10px;
+        }
+        .groupBtnWrap{
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .groupBtnWrap button{
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        .sureBtn{
+            background: rgba(255,185,0,1);
+            color: #fff;
+            border: 1px solid rgba(255,185,0,1);
+        }
+        .canceleBtn{
+            border: 1px solid rgba(217,217,217,1);
+            background: #fff;
+        }
+        .bigImg{
+            display: none;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid #f0f0f0;
+            top: -115px;
+            left: 85px;
+            z-index: 99999;
+        }
+        .bigImgHover:hover .bigImg{
+            display: block;
+        }
+        .green2{
+            color: green;
+        }
+        .red2{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div class="ea-content">
+    <div class="left-bar">
+        <ul>
+            <li><a href="#/erpservice/sc">{{'100157' | translate}}</a></li>
+            <li><a href="#/erpservice/document">{{'Document'}}</a></li>
+            <li><a href="#/erpservice/csdisputePendingm">{{'100158' | translate}}</a></li>
+            <li class="active"><a href="#/erpservice/tz">{{'100159' | translate}}</a></li>
+            <li><a href="#/erpservice/gd">{{'100160' | translate}}</a></li>
+            <li><a href="#/erpservice/video">{{'100161' | translate}}</a></li>
+            <li><a href="#/erpservice/khbz">{{'100162' | translate}}</a></li>
+        </ul>
+    </div>
+    <div class="right-bar-wrap ea-right-content" style="padding-left: 230px">
+        <!--<div class="asj-h10"></div>-->
+        <div class="skuGroupTop">
+            <div class="skuGoupTop-search d-flex justify-content-between">
+                <div class="inputGroup">
+                    <input ng-model="searchInfo" type="text" placeholder="请输入SKU/业务员姓名"/>
+                    <button ng-click="searchFun()">搜索</button>
+                </div>
+                <div class="add-merch" style="margin-right: 10px;"><a href="javascript:void(0);" ng-click="combineSkuFlag=true;" class="add-merch-btn">组合SKU</a></div>
+            </div>
+            <div class="skuGroupTop-table-thead">
+                <div class="sku-th" style="width:5%;">序号</div>
+                <div class="sku-th" style="width:15%;">组合时间</div>
+                <div class="sku-th">图片</div>
+                <div class="sku-th" style="width:15%;">
+                    <p>主SKU</p>
+                    <p style="font-size:13px;">重量(g)</p>
+                </div>
+                <div class="sku-th" style="width:9%;">图片</div>
+                <div class="sku-th" style="width:18%;">
+                    <p>次SKU</p>
+                    <p style="font-size:13px;">重量(g)</p>
+                </div>
+                <div class="sku-th" style="width: 9%">数量</div>
+                <div class="sku-th">业务员</div>
+                <div class="sku-th" style="width: 9%">操作</div>
+            </div>
+        </div>
+        <div class="right-bar" style="padding:0 20px 15px 20px;margin-top: 125px">
+
+            <div class="skuGroupBottom">
+                <!--<div class="skuGroup-tr">-->
+                <div class="skuGroup-tr" ng-repeat="group in groupList">
+                    <div class="skuGroup-td oneRow" style="width:5%;"><span>{{$index+1}}</span></div>
+                    <div class="skuGroup-td oneRow" style="width:15%;"><span class="overhideSpan">{{group.sheZhiShiJian | date:"yyyy-MM-dd HH:mm:ss"}}</span></div>
+                    <div class="skuGroup-td oneRow productImgWrap">
+                        <span class="bigImgHover" style="position: relative;">
+                            <img width="78" height="78" src="{{group.jiuBianTiImg}}" alt=""/>
+                            <b class="bigImg">
+                                <img width="298" height="298" src="{{group.jiuBianTiImg}}" alt=""/>
+                            </b>
+                        </span>
+                    </div>
+                    <div class="skuGroup-td oneRow" title="{{group.jiuBianTiSku}}" style="width: 15%;cursor: default">
+                        <div>
+                            <span class="overhideSpan">{{group.jiuBianTiSku}}</span>
+                            <span ng-show="group.jiuBianTiWeight" class="overhideSpan">{{group.jiuBianTiWeight}} g</span>
+                        </div>
+                    </div>
+
+                    <div class="skuGroup-td-f" style="width:36%;">
+                        <div class="skuGoup-row" ng-repeat="child in group.xinBianTiZuHe">
+                            <div class="skuGroup-row-td" style="width: 25%">
+                                <span class="productImgWrap2 bigImgHover" style="position: relative;">
+                                    <img width="58" height="58" src="{{child.xinBianTiZuHeImg}}" alt=""/>
+                                    <b class="bigImg">
+                                        <img width="298" height="298" src="{{child.xinBianTiZuHeImg}}" alt=""/>
+                                    </b>
+                                </span>
+                            </div>
+                            <div title="{{child.xinBianTiZuHeSku}}" class="skuGroup-row-td" style="width: 50%">
+                                <div>
+                                    <span class="overhideSpan">{{child.xinBianTiZuHeSku}}</span>
+                                    <span ng-show="child.xinBianTiWeight" class="overhideSpan">{{child.xinBianTiWeight}} g</span>
+                                </div>
+                                
+                            </div>
+                            <div class="skuGroup-row-td" style="width: 25%">{{child.xinBianTiZuHeShuLiang}}</div>
+                        </div>
+
+                    </div>
+                    <div class="skuGroup-td oneRow"><span>{{group.sheZhiRen}}</span></div>
+                    <div class="skuGroup-td oneRow" style="width: 9%">
+                        <div class="moreActionBtn">
+                            更多操作
+                            <ul class="moreActionWrap">
+                                <li><span ng-click="editGroupSku(group)">编辑</span></li>
+                                <li><span ng-click="deleteFun(group.zuHeSkuId)">删除</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-box">
+                    <div class="select-page-num">
+                        <select class="form-control" ng-model="pageSize" ng-change="pagesizechange(pageSize)">
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span>每页</span>
+                    </div>
+                    <div class="total-num">
+                        共&nbsp;&nbsp;{{ totalCounts }}&nbsp;&nbsp;条
+                    </div>
+                    <div class="page-index">
+                        <div class="pagegroup">
+                            <a href="#">&lt;&lt;</a>
+                            <a href="#">&lt;</a>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a class="current" href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">···</a>
+                            <a href="#">&gt;</a>
+                            <a href="#">&gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="to-go">
+                        <span>跳转：</span>
+                        <input type="text" class="form-control" placeholder="" ng-model="pageNum">
+                        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑组合sku-->
+<div class="groupZzc">
+    <div class="groupWrap">
+        <h1>编辑组合SKU</h1>
+        <div class="inputGroup" style="margin-bottom: 15px">
+            <label>主sku：</label>
+            <input style="background: #e0e0e0" readonly ng-model="mainSku" type="text"/><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{zuWeight}} </span>
+        </div>
+        <div style="max-height: 450px;overflow: auto">
+            <div class="groupInput-tr" ng-repeat="ss in groupArr">
+                <div class="inputGroup">
+                    <label>次sku：</label>
+                    <input ng-disabled="isDisabled" ng-model="ss.xinBianTiZuHeSku" type="text"/>
+                </div>
+                <div class="inputGroup">
+                    <label>数量：</label>
+                    <input ng-disabled="isDisabled" ng-model="ss.xinBianTiZuHeShuLiang" type="number"/>
+                    <img style="cursor: pointer;" ng-if="$index!=groupArr.length-1" src="./static/image/public-img/reduce.png" ng-click="removeCisku($index)" alt=""><img style="cursor: pointer;" ng-if="$index==groupArr.length-1" src="./static/image/public-img/small-plus.png" ng-click="addCisku()" alt="">
+                    <span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}"  style="margin-left:15px;">{{ss.isweight}}</span>
+                </div>
+            </div>
+        </div>
+        <p style="margin-bottom:10px;text-align: center;margin-top:15px;">{{errMsg}}</p>
+        <div class="groupBtnWrap">
+            <button ng-show="isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="submitGroupFun()">验证</button>
+            <button ng-show="!isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="gotoBackYanzheng()">退回</button>
+            <button ng-show="!isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="sureSubmitSkuFun()">提交</button>
+            <button class="canceleBtn" ng-click="closeGroup()">取消</button>
+        </div>
+    </div>
+</div>
+<!--组合sku弹窗-->
+<style type="text/css">
+  .comine-sku-layer .comine-sku {
+    height: 500px;
+    overflow: auto;
+    font-size: 14px;
+  }
+
+  .comine-sku-layer .comine-sku .top .zhu-title {
+    width: 200px;
+    text-align: center;
+  }
+
+  .comine-sku-layer .comine-sku .top .ci-title {
+    width: 200px;
+    text-align: center;
+  }
+
+  .comine-sku-layer .comine-sku .top .num-title {
+    width: 60px;
+    text-align: center;
+  }
+
+  .comine-sku-layer .comine-sku input {
+    width: 200px;
+  }
+
+  .comine-sku-layer .comine-sku .notice {
+    font-size: 13px;
+    color: #777;
+    line-height: 22px;
+    border-top: 1px solid #eee;
+    margin-top: 15px;
+    padding-top: 10px;
+  }
+
+  .comine-sku-layer .zhu {
+    /* margin-top: 5px; */
+  }
+
+  .comine-sku-layer .ci {
+    /* margin-top: 10px; */
+    margin-left: 15px;
+  }
+
+  .comine-sku-layer .ci p {
+    margin-bottom: 5px;
+  }
+
+  .sku-text {
+    width: 420px;
+    height: 140px;
+    border: 1px solid #ececec;
+    vertical-align: top;
+    text-indent: 12px;
+  }
+
+  .repeat-tab {
+    border: 1px solid #ececec;
+    width: 100%;
+    text-align: center;
+  }
+
+  .repeat-skuthead th {
+    height: 40px;
+    background-color: #f4f8fd;
+    text-align: center;
+  }
+
+  .repeat-tbody .sku-img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .repeat-tbody .sel-sturadio {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .repeat-tbody tr {
+    border-top: 1px solid #ececec;
+    padding: 10px;
+  }
+
+  .dt-img-td {
+    overflow: visible;
+  }
+
+  .dt-img-td .blank-span {
+    position: relative;
+  }
+
+  .dt-img-td .blank-span:hover .hide-bigimg {
+    display: block;
+  }
+
+  .dt-img-td .sp-smallimg {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+  .dt-img-td .hide-bigimg {
+    /* max-width: 360px; */
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    left: 60px;
+    top: -60px;
+    background-color: #fff;
+    z-index: 9;
+    display: none;
+    cursor: pointer;
+    max-width: none;
+    max-height: none;
+  }
+
+  .dt-img-td .tk-ziimg {
+    height: 60px;
+  }
+
+  .green2 {
+    color: green;
+  }
+
+  .red2 {
+    color: red;
+  }
+</style>
+<div class="asj-common-tanwrap" ng-show="combineSkuFlag">
+  <div class="asj-common-tan comine-sku-layer" style="width: 800px; height: 632px;">
+    <div class="tan-title">组合SKU</div>
+    <div class="comine-sku" style="margin-bottom:15px;">
+      <div class="top flex">
+        <div class="zhu">
+          <!-- 主SKU： -->
+          <div class="zhu-title">主SKU</div>
+          <p><input ng-disabled="isDisabled" type="text" ng-model="zhuSKu"><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{zuWeight}} </span>
+            <span>&nbsp;&nbsp;x&nbsp;&nbsp;1&nbsp;&nbsp;=</span>
+          </p>
+        </div>
+        <div class="ci">
+          <!-- 次SKU： -->
+          <!-- 数量： -->
+          <div class="flex">
+            <span class="ci-title">次SKU</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="num-title">数量</span>
+          </div>
+          <p ng-repeat="item in ciSkuArr"><input ng-disabled="isDisabled" type="text" ng-model="item.sku">&nbsp;&nbsp;x&nbsp;&nbsp;<input style="width: 60px;" ng-model="item.num" ng-disabled="isDisabled" type="number">&nbsp;&nbsp;&nbsp;&nbsp;<img style="cursor: pointer;" ng-if="$index!=ciSkuArr.length-1" src="./static/image/public-img/reduce.png" ng-click="removeCisku2($index)" alt=""><img style="cursor: pointer;" ng-if="$index==ciSkuArr.length-1" src="./static/image/public-img/small-plus.png" ng-click="addCisku2()" alt=""><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{item.isweight}}</span></p>
+        </div>
+      </div>
+      <p class="notice">
+        1、填写的sku均为变体sku <br>
+        2、设置关系如下 主sku*1=次sku*数量 <br>
+        3、设置关系成功之后,后续流入cj的订单里面的主sku会被替换为次sku,替换的比例为(主sku:次sku=1:数量) <br>
+        4、设置的关系直接影响整个订单的处理流程,请慎重 <br>
+        <b>例1:</b>
+        CJNSFSCF00190-7style和CJNSFSYJ00093-Pink是同一个商品,可以设置CJNSFSCF00190-7style为主sku,CJNSFSYJ00093-Pink为次sku,数量填写1,那么后续流入cj的订单中包含的CJNSFSCF00190-7style会被按1:1的比例替换为CJNSFSYJ00093-Pink;
+        <br>
+        <b>例2:</b>
+        CJQCMTMT00020-S3是CJQCMTMT00020-S的组合,一个CJQCMTMT00020-S3实际是3个CJQCMTMT00020-S打包一起卖,那么需要设置CJQCMTMT00020-S3为主sku,CJQCMTMT00020-S为次sku,数量填写3,那么后续流入cj的订单中包含的CJQCMTMT00020-S3会被按1:3(原订单中1个S3变体,替换后S变体的数量为3;原订单中2个S3变体,替换后S变体的数量为6)的比例替换为CJQCMTMT00020-S;
+        <br>
+        <b>例3:</b> CJBJPFTX00033-Set 2是CJBJPFTX00033-Gold和CJBJPFTX00033-Black的组合,一个CJBJPFTX00033-Set
+        2实际是2个CJBJPFTX00033-Gold和4个CJBJPFTX00033-Black打包一起卖,那么需要设置CJBJPFTX00033-Set
+        2为主sku,CJBJPFTX00033-Gold为次sku,数量为2,CJBJPFTX00033-Black为次sku,数量为4,那么后续流入cj的订单中包含的CJBJPFTX00033-Set2按照比例替换为2个CJBJPFTX00033-Gold以及4个CJBJPFTX00033-Black;<br>
+        如有疑问,请QQ或电话联系
+      </p>
+    </div>
+
+    <div class="tan-btns" style="height:60px;">
+      <p style="margin-bottom:10px;">{{errMsg}}</p>
+      <a class="tan-btn0" ng-click="combineSkuFlag = false;">关闭</a>
+      <a ng-show="isYanzheng" class="tan-btn1 yanzhengBtn1" ng-click="goCombineSku()">验证</a>
+      <a ng-show="!isYanzheng" class="tan-btn1 yanzhengBtn2" ng-click="gotoSureSKU()">提交</a>
+      <a ng-show="!isYanzheng" class="tan-btn1 yanzhengBtn2" ng-click="gotoBackYanzheng()">退回</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

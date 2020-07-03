@@ -1,0 +1,10 @@
+/*客户-列表页*/
+.wa-SpColor{color:#047aa7;text-decoration: underline;}
+
+/*客户-审核页*/
+.wa-contBox{width:1120px;margin:15px auto 0 auto;padding-top:65px;}
+.wa-contBox ul li{float:left;font-size:16px;}
+/*.liSp{height:90px;}*/
+.wa-contBoxAll{width:1629px;margin:0 auto;background-color:#fff;}
+.wa-contBox ul li:nth-child(1){width:139px;color:#fff;background-color:#c2c2c2;text-align: right;padding:15px 18px 15px 0;}
+.wa-contBox ul li:nth-child(2){width:949px;padding-left:24px;border:1px solid #f1f1f1;border-bottom:0;box-sizing: border-box;line-height:50px;height:51px;}

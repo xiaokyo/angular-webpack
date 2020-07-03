@@ -1,0 +1,14 @@
+<!--查看订单操作记录-->
+<div class="lookOperationRecord">
+	<div class="content">
+		<h3>操作日志<span class="close" ng-click="closeTkFun()">×</span></h3>
+		<ul ng-click="stopProgFun($event)" style="min-height: 300px;max-height:300px;overflow-y:auto;">
+			<li class="clearfix" ng-repeat="item in logList">
+				<b></b>
+				<span class="name">{{item.operatorName}}</span>
+				<p>{{item.description}}</p> 
+				<span class="date">{{item.operatorTime}}</span>
+			</li>
+		</ul>
+	</div>
+</div>

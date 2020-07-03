@@ -1,0 +1,53 @@
+<style>
+.uploadimg-main{
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #EFEFEF;
+  color: #999;
+  font-size: 16px;
+  margin-top: 16px;
+  position: relative;
+}
+.uploadimg-box-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.uploadimg-box-uploadimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.uploadimg-box-content-file{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+</style>
+
+<div class="uploadimg-main" ng-style="{width:upLoadImgProps.width,height:upLoadImgProps.height}">
+  <div ng-show="upLoadImgProps.imgUrl!=''">
+    <img src="{{upLoadImgProps.imgUrl}}" class="uploadimg-box-uploadimg" alt="">
+    <input type="file" class="uploadimg-box-content-file" onchange="angular.element(this).scope().upLoadImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+  </div>
+  <div ng-show="upLoadImgProps.imgUrl==''" class="uploadimg-box-content">
+    <div>
+      <i class="icon iconfont" alt="">&#xe651;</i>
+      <span>请上传图片</span>
+      <input type="file" class="uploadimg-box-content-file" onchange="angular.element(this).scope().upLoadImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+    </div>
+    <span class="tip">支持jpg、jpeg、png、bmp格式，且照片小于20M</span>
+  </div>
+</div>

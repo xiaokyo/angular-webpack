@@ -1,0 +1,64 @@
+
+<link rel="stylesheet" href="static/assets/design/css/trumbowyg.css">
+<script src="static/assets/trumbowyg.js"></script>
+<script src="static/assets/plugins/base64/trumbowyg.base64.js"></script>
+<div class="cj-am-wrap">
+    <div class="right-bar-wrap cj-am-main">
+        <div class="asj-h10"></div>
+        <div class="right-bar">
+            <div class="erp-main-top">
+                <p>新增模板</p>
+            </div>
+            <div class="tips-add-main">
+                <div class="tips-add-item">
+                    <div class="tips-add-title">
+                        生效时间:
+                    </div>
+                    <!-- <select class="tips-add-select" ng-model="title">
+                        <option value="1">每年</option>
+                        <option value="0"></option>
+                    </select>
+                    <input class="Wdate tips-add-data" type="text" ng-model="startDate1" onfocus="WdatePicker({dateFmt:'MM-dd',readOnly:true,onpicked:function(){$(this).trigger('change')}})" placeholder="开始日期">
+                    <input class="Wdate tips-add-data" type="text" ng-model="endDate1" onfocus="WdatePicker({dateFmt:'MM-dd',readOnly:true,onpicked:function(){$(this).trigger('change')}})" placeholder="开始日期"> -->
+                    <input class="Wdate tips-add-data" type="text" ng-model="addParam.startTime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,onpicked:function(){$(this).trigger('change')}})" placeholder="开始日期">
+                    <input class="Wdate tips-add-data" type="text" ng-model="addParam.endTime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,onpicked:function(){$(this).trigger('change')}})" placeholder="结束始日期">
+                </div>
+                <div class="tips-add-item">
+                    <div class="tips-add-title">
+                        模板主题:
+                    </div>
+                    <input type="text" maxlength="20" ng-model="addParam.topic" class="tips-add-input">
+                </div>
+                <div class="tips-add-item">
+                    <div class="tips-add-title">
+                        模版名称:
+                    </div>
+                    <input class="tips-add-text" maxlength="30" ng-model="addParam.title"/>
+                </div>     
+                <div class="tips-add-item">
+                    <div class="tips-add-title">
+                        {{'100244' | translate}}:
+                    </div>
+                    <div id="wang"></div>
+                </div>  
+                <div class="erp-mes-btns">
+                    <a href="javascript:void(0)" ng-click="previewFun()">{{'100245' | translate}}</a>
+                    <a href="javascript:void(0)" ng-click="closeFun()">{{'100066' | translate}}</a>
+                </div>            
+            </div>
+        </div>
+    </div>
+</div>
+<div class="confirm-box f-center ng-scope" ng-show="showCountryTip">
+    <div class="confirm-main">
+      <div class="confirm-title">
+        {{addParam.title}}
+      </div>
+      <div class="confirm-content" ng-bind-html="content">
+      </div>
+      <div class="confirm-btn-box">
+        <span ng-click="showCountryTip=false" class="no-btn">Cancel</span>
+        <span ng-click="submitFun()" class="yes-btn btn-theme">Accept</span>
+      </div>
+    </div>
+  </div>

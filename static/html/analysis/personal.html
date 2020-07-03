@@ -1,0 +1,118 @@
+<section class="analysis-wrap">
+  <div class="tab mb-20">
+    <a class="active">邮件营销</a>
+    <a href="#/analysis/setemail">邮件发送设置</a>
+    <a href="#/analysis/emailmodel">邮件模板设置</a>
+  </div>
+  <main class="analysis-main flex">
+    <aside class="menu bd mr-20">
+      <h3 class="mb-10">维度</h3>
+      <div class="menu-wrap">
+        <ul class="menu-list flex fdc fyc" ng-show="menuList.length">
+          <li class="flex fxc fyc fs-14 lh-30 br-4 bd mb-10 cp" ng-repeat="item in menuList"
+            ng-class="{selected:item.checked, active: menuIndex === $index}" ng-click="handleMenuSelect($index)">
+            {{item.name_cn}}</li>
+        </ul>
+      </div>
+    </aside>
+    <div class="display-area fg-1 prel fs-12">
+      <header class="condition-area bd mb-10 flex fdc fxsb">
+        <ul class="checked-list flex fyc fw">
+          <li class="fs-12" ng-show="!checkedList.length">暂无维度条件</li class="fs-12">
+          <li ng-repeat="item in checkedList" class="prel bd mr-10 mb-10 br-4 lh-20 fs-12">
+            {{item.name_cn}}: {{item.text}}
+            <img src="static/image/analysis/close.png" alt="" class="pabs cp" ng-click="handleDelMenu(item.id)">
+          </li>
+        </ul>
+        <div class="operate-area lh-30">
+          <button class="mr-10" ng-click="handleSearch()">筛选</button>
+          <button ng-click="handleExportExcel()">导出excel</button>
+          <!-- <button ng-click="stopSend()">停止发送</button>
+          <button ng-click="toBlackList()" class="blacklistBtn">黑名单</button> -->
+        </div>
+      </header>
+      <button class="back mb-10" ng-click="handleSearch()" ng-show="isBlackList">返回</button>
+      <main class="table-area flex fdc">
+        <div class="tb-thead d-flex">
+          <!-- <div style="width: 5%" class="tb-thead-th check_box" ng-show="!isBlackList">
+            <input type="checkbox" id="check-all" class="check-all" ng-model="check_All" ng-change="checkAll()">
+            <label for="check-all">全选</label>
+          </div> -->
+          <div style="width: 20%" class="tb-thead-th">用户姓名</div>
+          <div style="width: 20%" class="tb-thead-th">邮箱</div> 
+          <div style="width: 20%" class="tb-thead-th">注册日期</div>
+          <!-- <div style="width: 20%" class="tb-thead-th">发送次数</div> -->
+        </div>
+        <div class="tb-tbody table-content">
+          <div class="tb-tbody-tr" ng-repeat="user in userList" ng-show="userList.length">
+            <!-- <div style="width: 5%" class="tb-tbody-td" ng-show="!isBlackList">
+              <span>
+                <input type="checkbox" class="check-one" ng-model="user.check" ng-change="checkOne(user,index)">
+              </span>            
+            </div> -->
+            <div style="width: 20%" class="tb-tbody-td"><span>{{user.accountName}}</span></div>
+            <div style="width: 20%" class="tb-tbody-td"><span>{{user.email}}</span></div>
+            <div style="width: 20%" class="tb-tbody-td"><span>{{user.regTime.substring(0,10)}}</span></div>
+            <!-- <div style="width: 20%" class="tb-tbody-td"><span>{{user.totalMail}}</span></div> -->
+          </div>
+          <div class="no-data flex fyc fxc" style="height: 300px;" ng-show="!userList.length">暂无数据</div>
+        </div>
+
+      </main>
+      <!-- 分页区域 -->
+      <div class="page-nav pabs" ng-show="pageTotal">
+        <div class="page-box" style="margin: 0;">
+          <div class="select-page-num">
+            <select class="form-control" ng-model="pageSize" ng-change="changePageSize()">
+              <option value="10">10</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+            </select>
+            <span>每页</span>
+          </div>
+          <div class="total-num">
+            共&nbsp;&nbsp;{{ pageTotal }}&nbsp;&nbsp;条
+          </div>
+          <div class="page-index" id="page">
+            <div class="pagination2"></div>
+          </div>
+          <div class="to-go">
+            <span>跳转：</span>
+            <input type="text" class="form-control" ng-model="goPageNum">
+            <a class="btn btn-default" href="javascript: void(0);" style="line-height: 24px" ng-click="pageNav()">go</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="erp-common-tan-v2-wrap" ng-show="boxInfo.hasShow">
+    <div class="erp-common-tan-v2" style="width: 500px; height: 210px;">
+      <!-- 关闭按钮 -->
+      <a class="tan-v2-close" href="javascript:void(0);" ng-click="hideBox()"><img
+          src="static/image/public-img/close-img.png"></a>
+      <!-- title -->
+      <div class="tan-v2-top">
+        <h6>{{boxInfo.title}}</h6>
+      </div>
+      <!-- 内容 -->
+      <div class="box-content flex fyc">
+        <p class="mr-20">{{boxInfo.desc}}</p>
+        <select class="select-area" ng-change="handleBoxSelect()" ng-model="boxInfo.value" ng-show="boxInfo.list.length"
+          ng-prop-title="boxInfo.value">
+          <option value="{{item.value}}" ng-repeat="item in boxInfo.list">
+            {{item.text}}
+          </option>
+        </select>
+      </div>
+      <!-- 底部 -->
+      <div class="tan-v2-bot">
+        <!-- 取消按钮（灰色） -->
+        <a href="javascript:void(0);" class="qu-xiao-btn" ng-click="hideBox()">取消</a>
+        <!-- 确认按钮（彩色） -->
+        <a href="javascript:void(0);" class="que-ding-btn" ng-click="handleBoxConfirm()">确定</a>
+      </div>
+    </div>
+  </div>
+</section>

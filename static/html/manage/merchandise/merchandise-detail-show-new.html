@@ -1,0 +1,572 @@
+<div class="merchandise-box analysis-detail">
+  <div
+    class="right-bar-wrap show-detail-box consult"
+    ng-click="hideSearchRes()"
+  >
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+      <!-- 基本信息 -->
+      <div class="basicInfo flex jcb bgWhite">
+        <div class="proInfo flex fdc">
+          <div class="_tit">商品基本信息</div>
+          <div class="_box flex fwp">
+            <div class="line-item">
+              <span class="label">类型：</span>
+              <span class="con">{{getProductType()}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">名称：</span>
+              <span class="con">{{detail.nameEn}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">SKU：</span>
+              <span class="con">{{detail.sku}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">类目：</span>
+              <span class="con">{{detail.catagory}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">采购次数：</span>
+              <span class="con">{{purchaseCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">采购难度：</span>
+              <span class="con">
+                <div class="bubble difficulty">
+                  {{purchasingDifficulty.linkCount<=0?'无':''}}
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>0"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=20"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=40"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=60"></i>
+                  <i class="star star-fill" ng-if="purchasingDifficulty.score>=80"></i>
+                  <div class="bubble-hover" ng-if="purchasingDifficulty.linkCount>0">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        当前分值为{{formatPurchasing(purchasingDifficulty.score)}}分<br/>
+                        分值越大采购难度越小
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="line-item">
+              <span class="label">首页展示：</span>
+              <span class="con">{{IndexShowCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">推送次数：</span>
+              <span class="con">{{pushCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">咨询次数：</span>
+              <span class="con">{{consultCount}}次</span>
+            </div>
+            <div class="line-item">
+              <span class="label">供应商入驻：</span>
+              <span class="con">{{hasSupplierIn?'是':'否'}}</span>
+            </div>
+            <div class="line-item">
+              <span class="label">商品描述：</span>
+              <div class="con">
+                <a href="javascript:void(0)" ng-click="detailBubbleShow=true" class="more">查看详情</a>
+              </div>
+            </div>
+            <div class="line-item">
+              <span class="label">变体分析：</span>
+              <div class="con">
+                <a href="javascript:void(0)" class="more" ng-click="variantsBubble=true">查看分析</a
+                >
+              </div>
+            </div>
+            <div class="line-item" style="width:100%;">
+              <span class="label">销售建议：</span>
+              <div class="con" ng-bind-html="detail.xiaoShouJianYi || '无'"></div>
+              <!-- <div class="con"><a href="javascript:void(0)" class="more" ng-click="openLayerHtml(detail.xiaoShouJianYi,'销售建议')">查看建议</a></div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="proImgs">
+          <div class="_tit">商品图片</div>
+          <div class="_box">
+            <div class="flex fdrr aic top-tools">
+              <a href="javascript:void(0)" class="batch-download" ng-click="downloadPic()">批量下载</a>
+            </div>
+            <div class="videoOrPics flex fdr">
+              <div class="my-swiper" ng-show="videos.length>0">
+                <div class="swiper-container">
+                  <div class="swiper-wrapper">
+                      <div class="swiper-slide" ng-repeat="i in videos">
+                        <div style="position: relative;width:100%;height:100%;">
+                          <img src="{{i.coverURL}}" />
+                          <div class="play-video flex jcc aic" ng-click="playVideo(i.videoId)">
+                            <div class="arrow right"></div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- Add Pagination -->
+                  <div class="swiper-pagination"></div>
+              </div>
+              </div>
+              <ul class="box-pics clearfix" ng-class="{'hasVD':videos.length>0}">
+                <li ng-repeat="i in picContainer" ng-class="{'frist-pic':$index==0 && videos.length<=0}">
+                  <div class="edit-tools flex fdcr">
+                    <div class="_tools flex aic jcc">
+                      <a href="javascript:void(0)" ng-click="previewPic(i.src)">预览</a>
+                    </div>
+                  </div>
+                  <img src="{{i.src}}" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 折线图 -->
+      <product-detail-graph productid="productId"></product-detail-graph>
+
+      <!-- 变体列表 -->
+      <div class="variants bgWhite">
+        <table class="k-table">
+          <thead>
+            <th>图片</th>
+            <th width="160" ng-show="!isHasSizeField">型号</th>
+            <th width="80" ng-show="isHasSizeField">颜色</th>
+            <th width="80" ng-show="isHasSizeField">尺寸</th>
+            <th width="100">净量/g</th>
+            <th width="100">邮寄重量/g</th>
+            <th>价格</th>
+            <th width="200">SKU</th>
+            <th width="160">SKU别名</th>
+            <th>采购价格</th>
+            <th>申报价值</th>
+            <th>体积（长*宽*高cm）</th>
+            <!-- <th>仓库</th> -->
+            <th>档案</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="i in detail.stanProducts">
+              <td><div class="td"><img src="{{i.img}}" class="preview" ng-click="previewPic(i.img)" /></div></td>
+              <!-- 型号 -->
+              <td ng-show="!isHasSizeField"><div class="td">{{formatColorSize(i.variantKey || i.VARIANTKEY)}}</div></td>
+              <!-- 颜色 -->
+              <td ng-show="isHasSizeField"><div class="td">{{formatColorSize(i.variantKey || i.VARIANTKEY)}}</div></td>
+              <!-- 尺寸 -->
+              <td ng-show="isHasSizeField"><div class="td">{{formatColorSize(i.variantKey || i.VARIANTKEY,'size')}}</div></td>
+              <td><div class="td">{{i.weight}}</div></td>
+
+              <td><div class="td">{{i.packWeight}}</div></td>
+              <td><div class="td">${{i.sellPrice}}</div></td>
+              <td><div class="td">{{i.sku}}<img style="height: 18px;cursor: pointer;margin-left:10px;" src="./static/image/public-img/copy.png" alt="" title="复制sku" ng-click="handleCopySku(i.sku)" /></div></td>
+
+              <td>
+                <div class="td">
+                  <div class="cut-word skuAlisa" title="{{i.skuAlisa}}">
+                    {{i.skuAlisa || '-'}}
+                  </div>
+                </div>
+              </td>
+              <td><div class="td">¥{{i.costPrice}}</div></td>
+              <td><div class="td">${{i.entryValue || i.ENTRYVALUE}}</div></td>
+
+              <td><div class="td">{{formatStandard(i.standard || i.STANDARD)}}</div></td>
+              <!-- <td>
+                <div class="bubble left">
+                  <div class="td">{{getInventorySum(i)}}</div>
+                  <div class="bubble-hover">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        <ul>
+                          <li ng-repeat="j in i.invs">{{formatInventory(j.storageId)}}：{{j.inventory}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td> -->
+              
+              <td><div class="td"><a href="/manage.html#/merchandise/show-detail-variant/{{productId}}/{{i.id}}/{{productFlag}}/{{productStatus}}/{{productType}}" target="_blank" class="more">查看详情</a></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 仓库信息 -->
+      <div class="warehouse bgWhite">
+        <div class="_tit">仓库信息</div>
+        <div class="_box flex fwp">
+          <div class="line-item">
+            <span class="label">中文名称：</span>
+            <span class="con">{{detail.name}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">海关编码：</span>
+            <span class="con">{{detail.entryCode || '无'}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">申报品名(英文)：</span>
+            <span class="con">{{detail.entryNameEn}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">包装：</span>
+            <span class="con">{{detail.packingKey}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">申报品名(中文)：</span>
+            <span class="con">{{detail.entryName}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">产品属性：</span>
+            <span class="con">{{detail.propertyKey}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">产品主要材质：</span>
+            <span class="con"> {{detail.materialKey}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">商品消费人群：</span>
+            <div class="con">
+              <span
+                ng-repeat="i in detail.selectConsumer"
+                style="margin-right:15px;"
+                >{{i.name}}</span
+              >
+            </div>
+          </div>
+          <div class="line-item">
+            <span class="label">首选业务员：</span>
+            <span class="con">{{detail.shelve || '无'}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">供应商信息：</span>
+            <span class="con">无</span>
+          </div>
+          <div class="line-item">
+            <span class="label">备注信息：</span>
+            <span class="con">{{detail.remarkInfo || '无'}}</span>
+          </div>
+          <div class="line-item">
+            <span class="label">可见：</span>
+            <span class="con" ng-if="detail.authorityStatus == '1'"
+              >全部可见</span
+            >
+            <div class="con" ng-if="detail.authorityStatus == '0'">
+              <div class="bubble">
+                <div>部分可见</div>
+                <div class="bubble-hover">
+                  <div class="bubble-content">
+                    <div class="bubble-arrow"></div>
+                    <div class="bubble-inner">
+                      <ul>
+                        <li ng-repeat="item in detail.authorityUsers">
+                          {{ item.num + '-' + item.name }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line-item" width="100%">
+            <span class="label">对手链接：</span>
+            <span class="con" ng-if="detail.rivalLinkList.length==0">无</span>
+            <div class="con" ng-if="detail.rivalLinkList.length>0">
+              <div class="bubble rivalLink">
+                <a href="javascript:void(0);" class="more"
+                  >{{detail.rivalLinkList.length}}个</a
+                >
+                <div class="bubble-hover">
+                  <div class="bubble-content">
+                    <div class="bubble-arrow"></div>
+                    <div class="bubble-inner">
+                      <ul>
+                        <li ng-repeat="item in detail.rivalLinkList">
+                          价格：{{item.price }}--<a
+                            class="more"
+                            href="{{item.name}}"
+                            >链接查看</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作日志 -->
+      <div class="operation bgWhite">
+        <div class="_tit">商品操作日志</div>
+        <div class="_box">
+          <table class="k-table">
+            <thead>
+              <th width="80">编号</th>
+              <th>操作描述</th>
+              <th width="130">工号</th>
+              <th width="130">日期</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="i in operateLogs">
+                <td><div class="td">{{$index+1}}</div></td>
+                <td><div class="td">{{i.operate}}</div></td>
+                <td><div class="td">{{i.operator}}</div></td>
+                <td>
+                  <div class="td">
+                    {{ (i.operateDate || i.OPERATEDATE).time | date:"yyyy-MM-dd
+                    HH:mm:ss"}}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 详情弹窗 -->
+<div class="erp-common-tan-v2-wrap" ng-show="detailBubbleShow">
+	<div class="erp-common-tan-v2" style="width: 1000px; height: auto;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="detailBubbleShow=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>商品描述</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con detailBubbleShow">
+      <div class="detail-html" ng-bind-html="detail.description"></div>
+		</div>
+    <!-- 底部 -->
+		<!-- <div class="tan-v2-bot"> -->
+      <!-- 取消按钮（灰色） -->
+			<!-- <a href="javascript:void(0);" ng-click="detailBubbleShow=false;" class="qu-xiao-btn">关闭</a> -->
+		<!-- </div> -->
+	</div>
+</div>
+
+<!-- 视频弹窗 -->
+<div class="erp-common-tan-v2-wrap" ng-show="videoFlag">
+	<div class="erp-common-tan-v2" style="width: 1000px; height: 500px;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="videoFlag=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>播放视频</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con">
+      <div id="J_prismPlayer"></div>
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="videoFlag=false;" class="qu-xiao-btn">关闭</a>
+		</div>
+	</div>
+</div>
+
+<!-- 变体分析弹窗 -->
+<div class="erp-common-tan-v2-wrap variantsBubble" ng-show="variantsBubble">
+  <div class="erp-common-tan-v2" style="width: 1100px; height: auto;">
+    <!-- 关闭按钮 -->
+    <a
+      class="tan-v2-close"
+      href="javascript:void(0);"
+      ng-click="variantsBubble=false;"
+      ><img src="static/image/public-img/close-img.png"
+    /></a>
+    <!-- title -->
+    <div class="tan-v2-top">
+      <h6>商品变体数据</h6>
+    </div>
+    <!-- 内容 -->
+    <div class="tan-v2-con">
+      <!-- 变体列表 -->
+      <div class="variants bgWhite">
+        <table class="k-table">
+          <thead>
+            <th>图片</th>
+            <th width="160">SKU</th>
+            <th width="160">SKU别名</th>
+            <th>库存</th>
+            <th>次品率</th>
+            <th>
+              <div class="flex fdr aic jcc">
+                <span>供应商数</span>
+                <!-- <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div> -->
+              </div>
+            </th>
+            <th>
+              <div class="flex fdr aic jcc">
+                <span>销售客户</span>
+                <!-- <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div> -->
+              </div>
+            </th>
+            <th>
+              <div class="flex fdr aic jcc">
+                <span>供应商是否支持退货</span>
+                <!-- <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div> -->
+              </div>
+            </th>
+            <th>
+              <div class="flex fdr aic jcc">
+                <span>商品纠纷率</span>
+                <!-- <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div> -->
+              </div>
+            </th>
+            <th>上次采购时间</th>
+            <th>首次订单时间</th>
+            <!-- <th>
+              <div class="flex fdr aic jcc">
+                <span>是否符合预采购条件</span>
+                <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div>
+              </div>
+            </th>
+            <th>
+              <div class="flex fdr aic jcc">
+                <span>断货预警阈值</span>
+                <div class="sort-by flex fdc">
+                  <i class="arrow up active"></i>
+                  <i class="arrow down"></i>
+                </div>
+              </div>
+            </th> -->
+          </thead>
+          <tbody>
+            <tr ng-repeat="i in detail.stanProducts">
+              <td>
+                <div class="td">
+                  <img
+                    src="{{i.img}}"
+                    class="preview"
+                    ng-click="previewPic(i.img)"
+                  />
+                </div>
+              </td>
+              <td><div class="td">{{i.sku || '-'}}</div></td>
+              <td>
+                <div class="td">
+                  <div class="cut-word skuAlisa" title="{{i.skuAlisa}}">
+                    {{i.skuAlisa || '-'}}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="bubble left">
+                  <div class="td">{{getInventorySum(i) || 0}}</div>
+                  <div class="bubble-hover inventoryBubble" ng-if="getInventorySum(i)>0">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        <ul>
+                          <li ng-repeat="j in i.inventoryNumArr">{{j.storageName}}：{{j.goodsNum}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="td">{{i.faultRate || '-'}}</div></td>
+
+              <td>
+                <div class="bubble">
+                  <div class="td">{{suppliers.length}}家</div>
+                  <div class="bubble-hover supplierBubble" ng-if="suppliers.length>0">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        <ul>
+                          <li ng-repeat="j in suppliers">{{j.gongSiMing}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td><div class="td">{{i.customerNum || 0}}次</div></td>
+              <td>
+                <div class="bubble">
+                  <div class="td">否</div>
+                  <div class="bubble-hover" ng-if="false">
+                    <div class="bubble-content">
+                      <div class="bubble-arrow"></div>
+                      <div class="bubble-inner">
+                        <ul>
+                          <li>A供应商</li>
+                          <li>B供应商</li>
+                          <li>C供应商</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+              <td><div class="td">{{i.disputeValue || '0.00'}}%</div></td>
+              <td><div class="td">{{i.procurementTime || '-'}}</div></td>
+              <td><div class="td">{{i.paymentDate || '-'}}</div></td>
+
+              <!-- <td><div class="td"><span class="color-blue">是</span><span class="color-c999">(超过3名客户出过订单)</span></div></td>
+              <td><div class="td"><span class="color-red">1天急需采购</span></div></td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- 底部 -->
+    <!-- <div class="tan-v2-bot"> -->
+      <!-- 取消按钮（灰色） -->
+      <!-- <a href="javascript:void(0);" ng-click="variantsBubble=false;" class="qu-xiao-btn">关闭</a> -->
+    <!-- </div> -->
+  </div>
+</div>
+
+<style>
+  .flex {display: flex;}
+  .flex.jcc {justify-content: center;}
+  .flex.jcs {justify-content: flex-start;}
+  .flex.jcb {justify-content: space-between;}
+  .flex.aic {align-items: center;}
+  .flex.ais {align-items: flex-start;}
+  .flex.aie {align-items: flex-end;}
+  .flex.fdcr {flex-direction: column-reverse;}
+  .flex.fdrr {flex-direction: row-reverse;}
+  .flex.fdr {flex-direction: row;}
+  .flex.fdc {flex-direction: column;}
+  .flex.fwp {flex-wrap: wrap;}
+
+  hr {border-top: 1px dashed #e6e6e6;padding: 15px 0;}
+
+  .color-blue {color: #70b9fe;}
+  .color-red {color: #f5222d;}
+  .color-green {color: #52c41a;}
+  .color-gray {color: #666666;}
+  .color-c999 {color: #999999;}
+</style>

@@ -1,0 +1,327 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+
+		<!-- filter -->
+		<div class="filter flex fwp">
+
+			<div class="item flex aic jcc">
+				<span class="labela">CJ订单号</span>
+				<input type="text" ng-model="getParams.orderNumber"/>
+			</div>
+
+			<div class="item flex aic jcc">
+				<span class="labela">母单号</span>
+				<input type="text" ng-model="getParams.parentOrderId" />
+			</div>
+
+			<div class="item flex aic jcc">
+				<span class="labela">运单号</span>
+				<input type="text" ng-model="getParams.freightId" />
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn ghost"
+					ng-click="isHighSearch=!isHighSearch">{{ isHighSearch?"收起":"高级筛选" }}</a>
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="getList()">查询</a>
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="exportOrder()">导出</a>
+			</div>
+
+			<div class="item" ng-show="status==5">
+				<a href="javascript:void(0)" class="btn primary" ng-click="batchResolve()">批量返回至待处理</a>
+			</div>
+
+		</div>
+
+		<div class="filter flex fwp" ng-show="isHighSearch">
+			<div class="item flex aic jcc">
+				<span class="labela">订单编号</span>
+				<input type="text" ng-model="getParams.orderSequenceId"/>
+			</div>
+			<!-- <div class="item flex aic jcc">
+				<span class="labela">商品sku</span>
+				<input type="text" ng-model=""/>
+			</div> -->
+			<div class="item flex aic jcc">
+				<span class="labela">收件人</span>
+				<input type="text" ng-model="getParams.reveiver" />
+			</div>
+		</div>
+
+		<section class="table-area">
+			<!-- 表格列表 -->
+			<div class="tb-thead d-flex k-tb-thead">
+					<div style="width: 25px" class="tb-thead-th">
+						<div class="check-box " style="margin-left:5px;">
+							<input type="checkbox" ng-model="checkAll" ng-change="selectAll()">
+							<label for=""></label>
+						</div>
+					</div>
+					<div style="width: 9%" class="tb-thead-th">订单编号</div>
+					<div style="width: 9%" class="tb-thead-th">CJ订单号<br />母订单号</div>
+					<div style="width: 9%" class="tb-thead-th">付款时间</div>
+					<div style="width: 9%" class="tb-thead-th">数量/金额<br />重量/邮费</div>
+					<div style="width: 9%" class="tb-thead-th">收件人</div>
+					<div style="width: 9%" class="tb-thead-th">收件地址</div>
+					<div style="width: 9%" class="tb-thead-th">物流</div>
+					<div style="width: 9%" class="tb-thead-th">运单号</div>
+					<div style="width: 9%" class="tb-thead-th" ng-show="status!=4 || status!=5">供应商</div>
+					<div style="width: 9%" class="tb-thead-th">订单类型</div>
+					<div style="width: 9%" class="tb-thead-th" ng-show="status!=1">操作</div>
+			</div>
+			<div class="tb-tbody">
+				<div class="tb-tbody-tr item-tr fdc" ng-repeat="i in list">
+					<div class="flex">
+							<div style="width: 25px" class="tb-tbody-td">
+								<div class="check-box ">
+									<input type="checkbox" ng-model="i.checked" ng-change="refreshItemChecked()">
+									<label for=""></label>
+								</div>
+							</div>
+							<div style="width: 9%" class="tb-tbody-td"><span class="breakAll">{{i.orderSequenceId || '--'}}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span class="breakAll">{{ i.orderNumber }}<br/>{{ i.parentOrderId }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span>{{i.payTime |  date : 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span>
+								{{i.quantity }}个/${{ i.totalAmount}}<br/>
+								{{i.realityWeight || 0 }}g/${{ i.freight || 0}}
+							</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span>{{ i.reveiver || '--' }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span class="cut-word" title="{{ (i.country || '--')+','+(i.countryCode || '--')+','+(i.phone || '--')+','+(i.zip || '--')+','+(i.province || '--')+','+(i.city) || '--'+','+(i.shippingAddress || '--')+','+(i.shippingAddress2 || '--') }}">{{ (i.country || '--')+','+(i.countryCode || '--')+','+(i.phone || '--')+','+(i.zip || '--')+','+(i.province || '--')+','+(i.city) || '--'+','+(i.shippingAddress || '--')+','+(i.shippingAddress2 || '--') }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span>{{ i.logistics }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span class="cut-word" title="{{ i.freightId }}">{{ i.freightId }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td" ng-show="status!=4 || status!=5"><span>{{ i.supplierName || '--' }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td"><span>{{ i.deliverType | orderType:i.cjOrderType }}</span></div>
+							<div style="width: 9%" class="tb-tbody-td" ng-show="status!=1">
+								<div class="tools">
+									<a href="javascript:void(0)" class="btn primary" ng-show="status==2" ng-click="openLogisticsBubble(i)">查看物流信息</a>
+									<a href="{{i.logisticsUrl}}" target="_blank" class="btn primary" ng-show="status==3 || status==4">查询物流</a>
+									<a href="javascript:void(0)" class="btn primary" ng-show="status==5">返回至待处理</a>
+								</div>
+							</div>
+					</div>
+
+					<!-- hover sku box -->
+					<div class="hover_sku_list">
+						<div class="li-tr flex" ng-repeat="j in i.orderProductList track by j.id">
+							<div class="li-td">
+								<div class="img-box">
+									<img src="{{j.productImgUrl}}" alt="" class="pic"/>
+									<img src="{{j.productImgUrl}}" alt="" class="preview"/>
+								</div>
+							</div>
+							<div class="li-td">商品名称:{{j.productName || '--'}}</div>
+							<div class="li-td">SKU:{{j.productSku}}</div>
+							<div class="li-td">商品数量:{{j.productNum}}</div>
+							<div class="li-td">单价:${{j.productPrice}}</div>
+							<div class="li-td">总金额:${{j.productPrice*j.productNum}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<!-- 分页 -->
+			<page></page>
+		</section>
+
+	</div>
+</div>
+
+<!-- 查看物流弹窗 -->
+<div class="erp-common-tan-v2-wrap" ng-show="logisticsBubble">
+	<div class="erp-common-tan-v2" style="width: 500px; height: auto;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="logisticsBubble=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>物流信息</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="flex fdc">
+				<div class="ipt-line flex">
+					<span class="labela">物流公司：</span>
+					<span class="cona">{{currentItem.logistics}}</span>
+				</div>
+				<div class="ipt-line flex">
+					<span class="labela">物流运单号：</span>
+					<span class="cona">{{currentItem.freightId}}</span>
+				</div>
+				<div class="ipt-line flex">
+					<span class="labela">物流查询链接：</span>
+					<span class="cona">{{currentItem.logisticsUrl}}</span>
+				</div>
+				<div class="ipt-line flex">
+					<span class="labela">面单链接：</span>
+					<span class="cona">{{currentItem.orderUrl}}</span>
+				</div>
+			</div>
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="logisticsBubble=false;" class="qu-xiao-btn">关闭</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.breakAll{    word-break: break-all;}
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* tools */
+	.tools a {
+		margin-left: 15px;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+
+	.img-box{position:relative;}
+	.img-box img.preview{width:200px;display: none;position: absolute;left:100%;top:0;}
+	.img-box:hover img.preview{display: block;}
+
+	.table-area{padding:15px;}
+	.item-tr{position:relative;}
+	.item-tr .hover_sku_list{display: none;width:100%;background-color:#f7f3e6;z-index:1;}
+	.item-tr .hover_sku_list .li-tr{padding:15px 10px;}
+	.item-tr .hover_sku_list .li-tr .li-td{padding:0 15px;font-size:12px;display: flex;align-items: center;justify-content: center;flex:1;}
+	.item-tr .hover_sku_list .li-tr .li-td img.pic{width:45px;height:45px;}
+	.item-tr:hover .hover_sku_list{display: block!important;}
+
+	/* ipt-line */
+	.ipt-line{margin-bottom:10px;}
+</style>

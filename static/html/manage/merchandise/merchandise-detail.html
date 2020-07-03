@@ -1,0 +1,1350 @@
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1265799_xdrhsm1m0qo.css" />
+<div class="merchandise-box">
+  <div class="right-bar-wrap" ng-click="hideSearchRes()">
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+      <!-- 供应商信息 -->
+      <div
+        class="account-info"
+        style="padding: 15px 30px; color: #666; line-height: 30px; background: #f6f6f6;"
+      >
+        <div>用户名：{{ accountInfo.userName }}</div>
+        <div>
+          账户类型：{{ accountInfo.accountType == 1 ? '个体' : '企业' }}
+        </div>
+        <div>供应商编号：{{ accountInfo.supplierSn }}</div>
+        <div ng-show="accountInfo.accountType == 0">
+          企业名称：{{ accountInfo.companyName }}
+        </div>
+        <div ng-show="accountInfo.accountType == 0">
+          法人代表：{{ accountInfo.legalPerson }}
+        </div>
+        <div ng-show="accountInfo.accountType == 1">
+          姓名：{{ accountInfo.userName }}
+        </div>
+      </div>
+      <!-- 基本信息 -->
+      <div class="basic-info">
+        <div class="basic-title">{{ '100443' | translate }}</div>
+        <div class="inputs-basic">
+          <!-- 销售类型 -->
+          <!-- <div class="input-item">
+              <label><span class="asj-must-require">* </span>销售类型</label>
+              <div style="display: flex;">
+                <div style="display: flex; align-items: center;margin-right: 10px;">
+                  <input ng-model="productInfo.salesType" type="radio" name="salesType" id="salesType1" value="0" />
+                  <label style="float: none; width: auto;" for="salesType1">现货</label>
+                </div>
+                <div style="display: flex; align-items: center;">
+                  <input ng-model="productInfo.salesType" type="radio" name="salesType" id="salesType2" value="1"/>
+                  <label style="float: none; width: auto;" for="salesType2">预售</label>
+                </div>
+              </div>
+          </div> -->
+          <!-- 到货周期  -->
+          <div class="input-item arrival-cycle clearfix">
+            <label class=""
+              ><span class="asj-must-require"></span>{{ '100463' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <input
+                type="text"
+                id="arrival-cycle"
+                placeholder=""
+                ng-model="productInfo.arrivalDay"
+              />
+              <span>{{ '100539' | translate }}</span>
+              <div class="error-message" ng-show="verifyArrivalCycle">
+                {{ '100522' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 商品类型 -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">{{ '商品类型' }}</label>
+            <div class="right-con">
+              <span>{{ '供应商商品' }}</span>
+            </div>
+          </div>
+          <!-- 商品名称 -->
+          <div class="input-item clearfix">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100494' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <input
+                type="text"
+                class="merchan-name-inp"
+                id="merchan-name"
+                placeholder=""
+                ng-model="productInfo.title"
+              />
+              <div class="error-message" ng-show="verifyMerchName">
+                {{ '100495' | translate }}
+              </div>
+              <div class="error-message" ng-show="verifyMerchName2">
+                {{ verifyMerchName2 }}
+              </div>
+            </div>
+          </div>
+          <!-- 商品sku -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">SKU</label>
+            <div class="right-con">
+              {{ productInfo.sku }}
+              <!-- <input type="text" class="merchan-name-inp" id="" placeholder="" autofocus> -->
+            </div>
+          </div>
+          <!-- 商品类目 -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">{{ '100386' | translate }}</label>
+            <div class="right-con">
+              <span id="show-selected-category"
+                >{{ productInfo.categoryName }}</span
+              >
+              <!-- <a class="btn btn-default re-chose-btn" href="javascript: void(0);" ng-click="reChoseCate()" role="button">重新选择商品类目</a> -->
+            </div>
+          </div>
+          <!-- 描述 -->
+          <div class="input-item merchan-desc clearfix">
+            <label class="label-desc" for=""
+              ><span class="asj-must-require">* </span>{{ '100496' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <div id="wang-editor" class="wang-editor"></div>
+              <!-- <div id="editor-trigger" ng-model="editorContent" contenteditable="true"></div> -->
+              <!-- 以下是编辑器的内容： -->
+              <!-- <p style="display: none;" ng-bind="editorContent"></p> -->
+              <div class="error-message" ng-show="verifyMerchDesc">
+                {{ '100497' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 销售建议 -->
+          <!-- <div class="input-item merchan-desc clearfix" ng-show="productType=='0' || productType=='1'">
+                        <label class="label-desc" for="">{{'销售建议'}}</label>
+                        <div class="right-con">
+                          <div style="display: inline-block; border: 1px solid #ddd; padding: 10px;" id="wang-editor-2-show" class="wang-editor" ng-hide="editXSJY"></div>
+                          <div style="display: inline-block;" id="wang-editor-2" class="wang-editor" ng-show="editXSJY"></div>
+                          <a href="javascript:void(0);" style="display: inline-block; height: 30px; line-height: 30px; padding: 0 10px; border: 1px solid #ccc; background: #eee; border-radius: 4px; margin-left: 20px;" ng-hide="editXSJY" ng-click="editXSJY=true;">编辑</a>
+                          <a href="javascript:void(0);" style="display: inline-block; height: 30px; line-height: 30px; padding: 0 10px; border: 1px solid #ccc; background: #eee; border-radius: 4px; margin-left: 10px;" ng-show="editXSJY" ng-click="editXSJY=false;cancelEditXSJY()">取消</a>
+                          <a href="javascript:void(0);" style="display: inline-block; height: 30px; line-height: 30px; padding: 0 10px; border: 1px solid #ccc; background: #eee; border-radius: 4px; margin-left: 10px;" ng-show="editXSJY" ng-click="goEditXSJY()">确定</a>
+                        </div>
+                    </div> -->
+          <!-- 商品图片 -->
+          <div class="input-item merch-pics">
+            <div class="merch-pics-title clearfix">
+              <div class="pull-left title-left">
+                <span class="asj-must-require">* </span>{{ '100445' | translate
+                }}
+              </div>
+              <div class="pull-right title-right">
+                <a
+                  href="javascript: void(0);"
+                  ng-click="addPic()"
+                  title="添加URL图片"
+                  >{{ '100498' | translate }}</a
+                >
+                <span class="add-local" style="width: 130px;margin-left: 10px;">
+                  <a href="javascript: void(0);" class="add-local-pic-btn"
+                    >{{ '100499' | translate }}</a
+                  >
+                  <form
+                    action=""
+                    method="post"
+                    enctype="multipart/form-data"
+                    id="uploadimg"
+                  >
+                    <input
+                      type="file"
+                      name="file"
+                      id="upload-img"
+                      class="add-local-pic-inp"
+                      multiple
+                      onchange="angular.element(this).scope().upLoadImg(this.files)"
+                      title="添加本地图片"
+                    />
+                  </form>
+                </span>
+              </div>
+            </div>
+            <div class="show-pics-box clearfix">
+              <ul>
+                <li
+                  ng-drop="true"
+                  ng-drop-success="dropComplete($index,$data)"
+                  ng-repeat="item in picContainer track by $index"
+                >
+                  <div ng-drag="true" ng-drag-data="item">
+                    <img ng-src="{{ item.src }}" alt="" />
+                    <div class="edit-box-wrap">
+                      <div class="edit-box">
+                        <a
+                          href="javascript:void(0);"
+                          class="preview-btn"
+                          ng-click="previewPic($event)"
+                          >{{ '100245' | translate }}</a
+                        >
+                        <a
+                          href="javascript:void(0);"
+                          class="delete-btn"
+                          ng-click="deletePic(item.pid)"
+                          >{{ '100227' | translate }}</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="error-message" ng-show="verifyMerchPic">
+              {{ '100500' | translate }}
+            </div>
+          </div>
+          <!-- 商品变量 -->
+          <div class="input-item merch-variable">
+            <div class="merch-variable-title clearfix">
+              <div class="pull-left">
+                <!-- <div class="pull-left title-left">变量</div> -->
+                <div class="pull-left title-left">
+                  <span class="asj-must-require">* </span>
+                </div>
+                <div class="pull-left batch-setting">
+                  <span class="setting-title">{{ '100422' | translate }}</span>
+                  <select
+                    class="form-control setting-key"
+                    ng-model="banchSetKey"
+                    id="batch-select"
+                  >
+                    <option value="">{{ '100501' | translate }}</option>
+                    <option value="grams">{{ '100380' | translate }}(g)</option>
+                    <option value="weight"
+                      >{{ '100447' | translate }}(g)</option
+                    >
+                    <option value="price">{{ '100350' | translate }}($)</option>
+                    <!-- <option value="buyprice">{{'100449' | translate}}(¥)</option> -->
+                    <option value="customsValue"
+                      >{{ '100451' | translate }}($)</option
+                    >
+                    <!-- <option value="sku-aname">{{'100448' | translate}}</option> -->
+                    <option value="plong"
+                      >{{ '100452' | translate }}(mm)</option
+                    >
+                    <option value="pwidth"
+                      >{{ '100453' | translate }}(mm)</option
+                    >
+                    <option value="pheight"
+                      >{{ '100454' | translate }}(mm)</option
+                    >
+                  </select>
+                  <input
+                    type="text"
+                    class="form-control setting-value"
+                    ng-model="banchSetVal"
+                  />
+                  <button
+                    class="btn btn-default batch-setting-btn"
+                    type="submit"
+                    ng-click="banchSetAttr(banchSetKey, banchSetVal)"
+                  >
+                    {{ '100050' | translate }}
+                  </button>
+                </div>
+              </div>
+              <!-- <div class="pull-right title-right">
+                                <button class="btn btn-default add-variable-btn" type="submit" ng-click="editVarible()">{{'100502' | translate}}</button>
+                            </div> -->
+            </div>
+            <div class="merch-varible-box-wrap">
+              <div class="merch-varible-box">
+                <div class="merch-varible-thead clearfix">
+                  <ul class="pull-left">
+                    <li class="li-check">
+                      <div class="check-box">
+                        <input
+                          type="checkbox"
+                          name=""
+                          id=""
+                          ng-model="checkAllMark"
+                          ng-click="checkAllMerch(checkAllMark, $event)"
+                        />
+                        <label for=""></label>
+                      </div>
+                    </li>
+                    <li class="li-img">{{ '100382' | translate }}</li>
+                  </ul>
+                  <ul class="pull-left" id="varible-new">
+                    <li ng-show="productInfo.option1" class="li-new can-edit">
+                      {{ isCN ? productInfo.option1.split('#_')[0] :
+                      productInfo.option1.split('#_')[1] }}
+                    </li>
+                    <li ng-show="productInfo.option2" class="li-new can-edit">
+                      {{ isCN ? productInfo.option2.split('#_')[0] :
+                      productInfo.option2.split('#_')[1] }}
+                    </li>
+                    <li ng-show="productInfo.option3" class="li-new can-edit">
+                      {{ isCN ? productInfo.option3.split('#_')[0] :
+                      productInfo.option3.split('#_')[1] }}
+                    </li>
+                  </ul>
+                  <ul class="pull-left">
+                    <li class="li-pweight">{{ '100380' | translate }}(g)</li>
+                    <li class="li-postweight">{{ '100447' | translate }}(g)</li>
+                    <li class="li-pprice">{{ '100350' | translate }}($)</li>
+                    <li class="li-SKU">SKU</li>
+                    <li class="li-sku-aname">{{ '100448' | translate }}</li>
+                    <!-- <li class="li-buyprice">{{'100449' | translate}}(¥)</li> -->
+                    <li class="li-unit">{{ '100450' | translate }}</li>
+                    <li class="li-declarevalue">
+                      {{ '100451' | translate }}($)
+                    </li>
+                    <li class="li-length">{{ '100452' | translate }}(mm)</li>
+                    <li class="li-width">{{ '100453' | translate }}(mm)</li>
+                    <li class="li-height">{{ '100454' | translate }}(mm)</li>
+                  </ul>
+                  <ul class="pull-left" id="storage-name">
+                    <!-- <li class="li-yiwu">义乌仓</li>
+                            <li class="li-shenzhen">深圳仓</li>
+                            <li class="li-meiguo">美国仓</li> -->
+                  </ul>
+                  <ul class="pull-left">
+                    <!-- <li class="li-remove" style="width:88px; text-align:center;">操作</li> -->
+                  </ul>
+                </div>
+                <div
+                  class="merch-varible-tbody clearfix"
+                  ng-mouseenter="showCanEditTd($event)"
+                  ng-mouseleave="hideCanEditTd($event)"
+                  id="varible-line-0"
+                  ng-repeat="item in variantList"
+                >
+                  <ul class="pull-left">
+                    <li class="li-check">
+                      <div class="check-box">
+                        <input
+                          type="checkbox"
+                          name=""
+                          class="check-inp"
+                          ng-model="item.checked"
+                          ng-click="checkOneLine($event)"
+                        />
+                        <label for=""></label>
+                      </div>
+                    </li>
+                    <li class="li-img" ng-click="choseVariblePic($event, item)">
+                      <div class="li-img-box">
+                        <span>
+                          <img
+                            ng-show="!item.imageUrl"
+                            src="./static/image/public-img/iconplus.png"
+                            alt=""
+                          />
+                          <img
+                            ng-show="item.imageUrl"
+                            src="{{ item.imageUrl }}"
+                            alt=""
+                          />
+                        </span>
+                        <div class="asj-listimg-span">
+                          <img
+                            src="{{ item.imageUrl }}"
+                            alt=""
+                            class="small-img merch-variable-pic"
+                          />
+                          <img
+                            src="{{ item.imageUrl }}"
+                            alt=""
+                            class="hidden-bigimg variable-pic-big bottom"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="pull-left varible-new">
+                    <li ng-show="productInfo.option1" class="li-new can-edit">
+                      <input
+                        class="edit-inp"
+                        ng-model="item.option1"
+                        ng-blur="optionChange(item.option1,'option1', item, $event)"
+                      />
+                    </li>
+                    <li ng-show="productInfo.option2" class="li-new can-edit">
+                      <input
+                        class="edit-inp"
+                        ng-model="item.option2"
+                        ng-blur="optionChange(item.option2,'option2', item, $event)"
+                      />
+                    </li>
+                    <li ng-show="productInfo.option3" class="li-new can-edit">
+                      <input
+                        class="edit-inp"
+                        ng-model="item.option3"
+                        ng-blur="optionChange(item.option3,'option3', item, $event)"
+                      />
+                    </li>
+                  </ul>
+                  <ul class="pull-left">
+                    <!-- ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event,'weight')" -->
+                    <li class="li-pweight can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-pweight no-empty"
+                        ng-model="item.grams"
+                        placeholder="0"
+                      />
+                    </li>
+                    <!-- ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event, 'weight')" -->
+                    <li class="li-postweight can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-postweight no-empty"
+                        ng-model="item.weight"
+                        placeholder="0"
+                      />
+                      <a
+                        href="javascript:void(0);"
+                        class="weight-tip"
+                        title="请保证商品邮寄重量大于商品重量"
+                        >!</a
+                      >
+                    </li>
+                    <!-- ng-blur="addDollarIcon($event)" ng-focus="removeDollarIcon($event)" -->
+                    <li class="li-pprice can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-pprice no-empty"
+                        ng-model="item.price"
+                        placeholder="0"
+                      />
+                    </li>
+                    <!--
+                              ======= sku 联动处理 》》》》》>>>>>
+                             -->
+                    <li class="li-SKU">
+                      <div class="span-SKU">
+                        {{ variantList.length === 1 ? item.sku : concatSku(item)
+                        }}
+                      </div>
+                    </li>
+                    <!-- ng-blur="removeGrayBg($event)" -->
+                    <li class="li-sku-aname can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-sku-aname"
+                        ng-model="item.skuAlisa"
+                        placeholder="SKU别名"
+                        ng-focus="alertEditSkuAname($event, item)"
+                      />
+                    </li>
+
+                    <!-- <li class="li-buyprice can-edit"
+                              <input type="text" class="edit-inp edit-buyprice no-empty" value="" placeholder="0" ng-blur="addRMBIcon($event)" ng-focus="removeRMBIcon($event)">
+                            </li> -->
+                    <li class="li-unit">
+                      <select
+                        class="form-control edit-punit"
+                        ng-model="item.weightUnit"
+                      > 
+                        <option value="unit(s)">{{'100503' | translate}}</option>
+                        <option value="set(s)">{{'100504' | translate}}</option>
+                        <option value="pair(s)">{{'100505' | translate}}</option>
+                        <option value="dozen(s)">{{'100506' | translate}}</option>
+                        <!-- <option value="个">{{ '100503' | translate }}</option>
+                        <option value="套">{{ '100504' | translate }}</option>
+                        <option value="双">{{ '100505' | translate }}</option>
+                        <option value="打">{{ '100506' | translate }}</option> -->
+                      </select>
+                    </li>
+                    <!-- ng-focus="removeDollarIcon($event)" -->
+                    <!-- ng-blur="addDollarIcon($event)" -->
+                    <li class="li-declarevalue can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-declarevalue no-empty"
+                        ng-model="item.customsValue"
+                        placeholder="0"
+                      />
+                    </li>
+                    <!-- ng-blur="checkIsNum($event)" -->
+                    <!-- ng-focus="addGrayBg($event)" -->
+                    <li class="li-length can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-length no-empty"
+                        ng-model="item.plong"
+                        placeholder="0"
+                      />
+                    </li>
+
+                    <!-- ng-blur="checkIsNum($event)" -->
+                    <!-- ng-focus="addGrayBg($event)" -->
+                    <li class="li-width can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-width no-empty"
+                        ng-model="item.pwidth"
+                        placeholder="0"
+                      />
+                    </li>
+
+                    <!-- ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event)" -->
+                    <li class="li-height can-edit">
+                      <input
+                        type="text"
+                        class="edit-inp edit-height no-empty"
+                        ng-model="item.pheight"
+                        placeholder="0"
+                      />
+                    </li>
+                  </ul>
+                  <ul class="pull-left storage-con">
+                    <!-- <li class="li-yiwu can-edit"><input class="edit-inp edit-yiwu" value="" placeholder="0" ng-focus="addGrayBg($event)" ng-blur="checkIsNum($event)"></li>-->
+                  </ul>
+                  <ul class="pull-left">
+                    <!-- <li class="li-remove"><a href="javascript: void(0);" ng-click="removeVaribleTr($event)">{{'100227' | translate}}</a></li>
+                            <li class="li-xiaji"><a  href="javascript: void(0);" ng-click="xiajiaFun($event)">下架</a></li>
+                            <li class="li-shangjia"><a href="javascript: void(0);" ng-click="shangjiaFun($event)">上架</a></li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- <a href="javascript: void(0);" ng-click="addVaribleLine()" class="add-varible-line"><img src="./static/image/public-img/iconplus.png" alt=""></a> -->
+            <!-- <input class="add-varible-num" type="text" ng-model="addLineNum"> {{'100537' | translate}} -->
+            <!-- <button style="width: 60px;" class="btn btn-default add-varline-btn" type="submit" ng-click="goAddVaribleLine()">{{'100050' | translate}}</button> -->
+          </div>
+          <div class="error-message" ng-show="verifyVeribleRes">
+            请检查变体信息：<br />
+            1、图片、变量、重量、邮寄重量、价格、采购价格、申报价值、长宽高为必填项<br />
+            2、变体不能重复<br />
+            3、SKU长度不能超过40<br />
+            4、抛货必填长宽高
+          </div>
+          <div style="font-size: 12px;color: rgba(0,0,0,.5);">
+            备注：尺寸为发货打包后的小包裹尺寸，用于抛重计算。
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <!-- 辅助信息 -->
+      <div class="supply-info">
+        <div class="basic-title">{{ '100455' | translate }}</div>
+        <div class="inputs-supply">
+          <!-- 中文名称 -->
+          <div
+            ng-cloak
+            id="chinese-name"
+            class="input-item chinese-name clearfix"
+          >
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100456' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <input
+                ng-change="chineseNameChange(scope.chineseName[0], 0)"
+                ng-model="scope.chineseName[0]"
+                type="text"
+                class="chinese-name-inp top-three"
+              />
+              <input
+                ng-change="chineseNameChange(scope.chineseName[1], 1)"
+                ng-model="scope.chineseName[1]"
+                type="text"
+                class="chinese-name-inp top-three"
+              />
+              <input
+                ng-change="chineseNameChange(scope.chineseName[2], 2)"
+                ng-model="scope.chineseName[2]"
+                type="text"
+                class="chinese-name-inp top-three"
+              />
+              <input
+                ng-change="chineseNameChange(scope.chineseName[3], 3)"
+                ng-model="scope.chineseName[3]"
+                type="text"
+                class="chinese-name-inp"
+              />
+              <input
+                ng-change="chineseNameChange(scope.chineseName[4], 4)"
+                ng-model="scope.chineseName[4]"
+                type="text"
+                class="chinese-name-inp"
+              />
+              <input
+                ng-change="chineseNameChange(scope.chineseName[5], 5)"
+                ng-model="scope.chineseName[5]"
+                type="text"
+                class="chinese-name-inp"
+              />
+              <span class="chinese-name-tip">{{ '100508' | translate }}</span>
+            </div>
+          </div>
+          <div class="input-item customs-code clearfix">
+            <label class="">
+              <span class="asj-must-require">* </span>
+              {{ '100457' | translate }}
+            </label>
+            <div class="right-con">
+              <input
+                type="text"
+                id="customs-code"
+                placeholder=""
+                ng-model="productInfo.entryCode"
+              />
+              <!-- <button type="button" class="btn btn-default" ng-click="editDeclarationCode()">编辑海关编码</button> -->
+              <div class="error-message" ng-show="verifyCustomsCode">
+                {{ '100509' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="input-item entry-name clearfix">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100458' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <div class="right-contop clearfix">
+                <input
+                  type="text"
+                  id="entry-name-en"
+                  placeholder=""
+                  ng-model="productInfo.entryNameEn"
+                />
+                <div class="entry-name-tip">{{ '100510' | translate }}</div>
+              </div>
+              <div class="error-message" ng-show="verifyEntryName">
+                {{ '100511' | translate }}
+              </div>
+              <!-- <input type="text" id="entry-name-en" placeholder="" ng-model="entryNameEn"> -->
+              <!-- <div class="error-message" ng-show="verifyEntryName">请输入申报品名(英文)（不能包含中文字符）</div> -->
+            </div>
+          </div>
+          <div class="input-item entry-name clearfix">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100459' | translate
+              }}</label
+            >
+            <div class="right-con">
+              <div class="right-contop clearfix">
+                <input
+                  type="text"
+                  id="entry-name"
+                  placeholder=""
+                  ng-model="productInfo.entryName"
+                />
+                <div class="entry-name-tip">{{ '100512' | translate }}</div>
+              </div>
+              <div class="error-message" ng-show="verifyEntryNameEn">
+                {{ '100513' | translate }}
+              </div>
+              <!-- <input type="text" id="entry-name" placeholder="" ng-model="entryName"> -->
+              <!-- <div class="error-message" ng-show="verifyEntryNameEn">请输入申报品名(中文)(中文字符不能少于两个)</div> -->
+            </div>
+          </div>
+          <!-- 尺寸 -->
+          <!-- <div class="input-item merch-size clearfix">
+                        <label class="">尺寸</label>
+                        <div class="right-con">
+                            <input type="text" id="" placeholder="长">
+                            <input type="text" id="" placeholder="宽">
+                            <input type="text" id="" placeholder="高">
+                            <span class="merch-size-unit">mm</span>
+                        </div>
+                    </div> -->
+          <!-- 包装 -->
+          <div class="input-item item-packing clearfix" id="merchan-packing">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100460' | translate
+              }}</label
+            >
+            <div class="right-con baozhuang">
+              <div class="clearfix">
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PLASTIC_BAG"
+                    ng-click="getPackingInfo($event)"
+                  />
+                  <label for="">{{ '100514' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PAPER_BOX"
+                    ng-click="getPackingInfo($event)"
+                  />
+                  <label for="">{{ '100515' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PLASTIC_BOX"
+                    ng-click="getPackingInfo($event)"
+                  />
+                  <label for="">{{ '100516' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="FARBIC_BAG"
+                    ng-click="getPackingInfo($event)"
+                  />
+                  <label for="">{{ '100517' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PAPER_BAG"
+                    ng-click="getPackingInfo($event)"
+                  />
+                  <label for="">{{ '100518' | translate }}</label>
+                </div>
+                <!-- <div class="check-box " ng-show="productType=='3'">
+                              <input type="checkbox" name="HANG_TAG" ng-click="getPackingInfo($event)">
+                              <label for="">{{'吊牌'}}</label>
+                            </div> -->
+              </div>
+              <div class="error-message" ng-show="verifyPacking">
+                {{ '100519' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 产品属性 -->
+          <div class="input-item item-packing clearfix" id="merchan-property">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100461' | translate
+              }}</label
+            >
+            <div class="right-con chanpingshuxing">
+              <div class="clearfix">
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="COMMON"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100083' | translate }}</label>
+                </div>
+                <!-- <div class="check-box w60">
+                                <input type="checkbox" name="HAVE_ELECTRICITY" ng-click="getPropertyInfo($event)">
+                                <label for="">含电</label>
+                            </div> -->
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="ELECTRONIC"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100084' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="BATTERY"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100085' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="IS_ELECTRICITY"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100086' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="HAVE_LIQUID"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100087' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="HAVE_STIVE"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100088' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="HAVE_CREAM"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100089' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="HAVE_MAGNETISM"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100090' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="EDGE"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100091' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="NO_ENTRY"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100092' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="CLONE"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100093' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="OVERSIZE"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '抛货' }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="THIN"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for=""
+                    >{{ '轻薄' }}
+                    <i class="iconfont iconquestion property-thin-notiy"></i>
+                  </label>
+                </div>
+                <!-- <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="FLAT"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '薄平' }}</label>
+                </div> -->
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PROOERTY"
+                    ng-click="getPropertyInfo($event)"
+                  />
+                  <label for="">{{ '100430' | translate }}</label>
+                </div>
+              </div>
+              <div class="error-message" ng-show="verifyProperty">
+                {{ '100520' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 产品主要材质 -->
+          <div class="input-item item-packing clearfix" id="merchan-material">
+            <label class=""
+              ><span class="asj-must-require">* </span>{{ '100462' | translate
+              }}</label
+            >
+            <div class="right-con chanpingzhuyaocaizhi">
+              <div class="clearfix">
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="FARBIC"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100432' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="PLASTIC"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100433' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="METAL"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100434' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="WOOD"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100435' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="LEATHER"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100436' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="GLASS"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100437' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="WATER"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100438' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="STONE"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100439' | translate }}</label>
+                </div>
+                <div class="check-box ">
+                  <input
+                    type="checkbox"
+                    name="MATERIAL"
+                    ng-click="getMaterialInfo($event)"
+                  />
+                  <label for="">{{ '100430' | translate }}</label>
+                </div>
+              </div>
+              <div class="error-message" ng-show="verifyMaterial">
+                {{ '100521' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 仓位编号 -->
+          <!-- <div class="input-item position-num clearfix">
+                        <label class="">仓位编号</label>
+                        <div class="right-con">
+                            <span>sss-12</span>
+                        </div>
+                    </div> -->
+          <!-- 商品消费人群 -->
+          <div class="input-item consumers-group clearfix">
+            <label class="">{{ '100464' | translate }}</label>
+            <div class="right-con">
+              <!-- <button type="button" class="btn btn-primary edit-group-btn">编辑</button> -->
+              <div class="chose-group-box">
+                <select
+                  class="chose-consumer-one"
+                  ng-model="consOneVal"
+                  ng-change="getSeconeConList(consOneVal)"
+                >
+                  <option value="">{{ '100501' | translate }}</option>
+                  <option
+                    ng-repeat="item in consumerListOne track by $index"
+                    value="{{ item.id }}"
+                    >{{ item.name || item.nameEn }}</option
+                  >
+                </select>
+                <select
+                  class="chose-consumer-one"
+                  ng-model="consTwoVal"
+                  ng-change="getThirdConList(consTwoVal)"
+                  ng-show="hasSecondCon"
+                >
+                  <option value="">{{ '100501' | translate }}</option>
+                  <option
+                    ng-repeat="item in consumerListTwo track by $index"
+                    value="{{ item.id }}"
+                    >{{ item.name || item.nameEn }}</option
+                  >
+                </select>
+                <select
+                  id="chose-consumer-three"
+                  ng-model="consThreeVal"
+                  ng-change="setConsItem(consThreeVal)"
+                  ng-show="hasThirdCon"
+                >
+                  <option value="">{{ '100501' | translate }}</option>
+                  <option
+                    ng-repeat="item in consumerListThree track by $index"
+                    value="{{ item.id }}"
+                    >{{ item.name || item.nameEn }}</option
+                  >
+                </select>
+              </div>
+              <div class="show-group-box">
+                <div
+                  class="select-consumer-item"
+                  ng-repeat="item in selectConsumer track by $index"
+                >
+                  <button type="button" class="btn btn-default chose-group">
+                    {{ item.name }}
+                  </button>
+                  <span ng-click="removeOneConsumer(item.id)">x</span>
+                </div>
+              </div>
+              <div class="error-message" ng-show="verifyConsumersGroup">
+                {{ '100523' | translate }}
+              </div>
+            </div>
+          </div>
+          <!-- 首选业务员 -->
+          <div class="input-item consumers-group clearfix">
+            <label class="">{{ '100465' | translate }}</label>
+            <div class="right-con">
+              <div class="chose-group-box">
+                <select
+                  class="chose-consumer-one"
+                  ng-model="productInfo.salesmanId"
+                >
+                  <option value="">{{ '100501' | translate }}</option>
+                  <option
+                    ng-repeat="item in salemanList track by $index"
+                    value="{{ item.ID }}"
+                  >
+                    {{ item.LOGIN_NAME }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- 可见 -->
+          <div class="input-item attribute clearfix" id="authrity-users">
+            <label class=""><span class="asj-must-require">* </span>{{'100467' | translate}}</label>
+            <div class="right-con">
+                <div class="all-see">
+                    <div class="radio-box">
+                        <input type="radio" name="authority-type" id="authority-type" ng-click="choseAuthorityType()">
+                        <label for="">{{'100391' | translate}}</label>
+                    </div>
+                </div>
+                <div class="part-see">
+                  <div class="part-see-top clearfix">
+                    <div class="part-see-radio">
+                      <div class="radio-box">
+                        <input type="radio" name="authority-type" ng-click="choseAuthorityType()" id="authority-type2">
+                        <label for="">{{'100396' | translate}}</label>
+                      </div>
+                    </div>
+                    <div class="search-user-box">
+                      <div class="input-group search-user" ng-show="authorityPart" ng-click="stopPropagation($event)">
+                          <input type="text" class="form-control" placeholder="请输入用户名搜索添加" ng-model="searchUserName" ng-change="searchByUserName(searchUserName)" ng-focus="searchByUserName(searchUserName)">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">{{'100025' | translate}}</button>
+                          </span>
+                      </div>
+                      <ul class="search-res-ul" ng-show="hasSearchUserRes" ng-click="stopPropagation($event)">
+                        <li ng-repeat="item in searchUserRes track by $index" ng-click="selectSearchUser(item.id)">{{ item.num + '-' + item.name }}</li>
+                      </ul>
+                      <div class="search-res-box" ng-show="noSearchUserRes" ng-click="stopPropagation($event)">{{'100415' | translate}}</div>
+                    </div>
+                  </div>
+                  <div class="part-see-bottom" ng-show="authorityPart">
+                    <ul>
+                      <li ng-repeat="item in authorityUsers track by $index"><span class="aname">{{ item.num + '-' + item.name }}</span><span class="remove-aname" ng-click="removeAuthUser(item.id)">x</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="error-message" ng-show="verifyAuthUser">{{'100524' | translate}}</div>
+            </div>
+          </div> 
+          <div class="input-item remark-info clearfix">
+            <label>货/款号</label>
+            <div class="right-con">
+              {{ productInfo.itemNo || '-' }}
+            </div>
+          </div>
+          <div class="input-item remark-info clearfix">
+            <label class="">{{ '100483' | translate }}</label>
+            <div class="right-con">
+              <textarea
+                id="remark-info"
+                ng-model="productInfo.remarks"
+              ></textarea>
+              <div class="error-message" ng-show="verifyRemarkInfo">
+                {{ '100527' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          ng-show="merchanStatus==0"
+          class="shenhe"
+          style="background: #f6f6f6;"
+        >
+          <h6>审核</h6>
+          <div class="radio-boxs">
+            <div class="radio-box">
+              <input type="radio" name="audit" id="pass" />
+              <label for="pass">审核通过</label>
+            </div>
+            <div class="radio-box">
+              <input type="radio" name="audit" id="reject" />
+              <label for="reject">审核失败</label>
+            </div>
+          </div>
+          <div class="shenhe-remark">
+            <label>
+              审核备注：
+            </label>
+            <div class="right-con">
+              <textarea ng-model="reason"></textarea>
+            </div>
+          </div>
+          <div class="btn-box">
+            <button
+              type="button"
+              class="btn btn-primary save-btn"
+              ng-show="merchanStatus==0 || merchanStatus==3"
+              ng-click="saveInfo()"
+            >
+              提交
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- 按钮 -->
+      <div ng-show="merchanStatus!=0 && !isDetail" class="footer-btns">
+        <!-- <div class="third-btn" ng-cloak>
+                    <a class="btn btn-default onshelves-btn" href="javascript: void(0);" ng-click="onShelve()" role="button" ng-cloak>{{'100528' | translate}}</a>
+                    <a class="btn btn-default onshelves-btn" href="javascript: void(0);" ng-click="onShelve()" role="button" ng-cloak>{{'100529' | translate}}</a>
+                </div> -->
+        <!-- <button type="button" class="btn btn-primary save-btn" ng-click="saveInfo()">{{'100133' | translate}}</button>
+                <a class="btn btn-default cancel-btn" href="javascript: void(0);" ng-click="cancelAdd()" role="button">{{'100051' | translate}}</a> -->
+        <!-- 0审核中 1上架 2用户下架 3审核失败，4平台下架，5待上架 -->
+        <button
+          type="button"
+          class="btn btn-primary save-btn"
+          ng-show="productInfo.status==1"
+          ng-click="onUpdateData()"
+        >
+          保存
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary save-btn"
+          ng-show="productInfo.status==4 || productInfo.status==2"
+          ng-click="onUpdateData()"
+        >
+          上架
+        </button>
+        <button
+          type="button"
+          class="btn btn-default"
+          ng-show="!isDetail"
+          onclick="window.close()"
+        >
+          取消
+        </button>
+
+        <!-- <div class="seperate-line"></div> -->
+      </div>
+      <!-- 商品操作记录 -->
+      <div class="pro-ops-log">
+        <h3 style="margin-bottom: 10px;">商品操作日志</h3>
+        <div class="main-content">
+          <table style="width: 100%;">
+            <thead>
+              <tr>
+                <th width="100">编号</th>
+                <th width="100">操作描述</th>
+                <th>审核备注</th>
+                <th>工号</th>
+                <th>日期</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="(key, item) in productInfo.auditLogs">
+                <td>{{key + 1}}</td>
+                <td>{{_status[+item.operation]}}</td>
+                <td>{{item.remark || '-'}}</td>
+                <td>{{item.auditBy}}</td>
+                <td>{{item.auditAt | date : 'yyyy-MM-dd HH:mm'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            ng-show="!productInfo.auditLogs || productInfo.auditLogs.length < 1"
+            style="text-align: center;"
+          >
+            暂无数据
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .shenhe {
+    padding: 20px;
+  }
+  .shenhe h6 {
+    font-size: 20px;
+  }
+  .shenhe .radio-boxs {
+    display: flex;
+    margin: 15px 0;
+    color: rgb(78,146,255);
+    font-size: 20px;
+  }
+  .shenhe .radio-box {
+    margin-right: 50px;
+  }
+  .shenhe .shenhe-remark {
+    display: flex;
+  }
+  .shenhe .shenhe-remark textarea {
+    width: 600px;
+    height: 150px;
+  }
+  .shenhe .btn-box {
+    text-align: right;
+    margin: 30px 0;
+  }
+  .shenhe .save-btn {
+    height: 36px;
+    width: 150px;
+  }
+  .pro-ops-log {
+    border: 1px solid #eee;
+    padding: 20px;
+  }
+  .pro-ops-log th,
+  td {
+    padding: 5px 10px;
+    border: 0.1px solid #eee;
+  }
+  .pro-ops-log th {
+    background: #f7e6a8;
+    color: #f8a636;
+    border-color: #f7e6a8;
+  }
+  /* 轻薄属性提示语 */
+  .property-thin-notiy {
+    color: #999;
+  }
+  .property-thin-notiy:hover::after {
+    visibility: visible;
+  }
+  .property-thin-notiy::after {
+    content: '打包范围在10*10*2cm范围内';
+    display: block;
+    position: absolute;
+    top: -200%;
+    right: -50%;
+    width: 204px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 6px;
+    font-size: 50%;
+    visibility: hidden;
+  }
+</style>
+
+<!-- 验证图片弹框 -->
+<script type="text/template" id="add-pic">
+  <img src="#" alt="" id="show-verify-img">
+  <input type="text" placeholder="图片地址" id="add-img-url">
+  <a href="javascript: void(0);" class="verify-adress" id="verify-img-url">验证地址</a>
+</script>
+
+<!-- 编辑变量弹框 -->
+<script type="text/template" id="add-varible">
+  <h5>编辑变量</h5>
+  <div class="show-varible-box">
+    <span>当前变量：</span>
+    <ul class="show-current-varible">
+
+    </ul>
+  </div>
+  <div class="add-varible-box">
+    <!-- 修改 -->
+    <select name="" id="default-varible" class="form-control select-default-varible">
+      <option value="">选择常用变量</option>
+      <option value="颜色-Color">颜色</option>
+      <option value="尺寸-Size">尺寸</option>
+      <option value="款式-Style">款式</option>
+      <option value="数量-Quantity">数量</option>
+      <option value="型号-Model">型号</option>
+      <option value="customize">自定义</option>
+    </select>
+    <input type="text" placeholder="请输入中文变量名" id="add-varible-inp" class="add-varible-inp">
+    <input type="text" placeholder="请输入对应的英文变量名" id="add-varibleEn-inp" class="add-varibleEn-inp">
+    <a href="javascript: void(0);" class="add-varible-btn"><img src="./static/image/public-img/iconplus.png" alt="" title="增加变量"></a>
+  </div>
+</script>
+
+<!-- sku别名弹框 -->
+<script type="text/template" id="asj-sku-aname">
+  <h5>编辑sku别名</h5>
+  <div class="show-sku-aname-box">
+    <span>当前sku别名：</span>
+    <ul class="show-current-sku-aname">
+
+    </ul>
+  </div>
+  <div class="add-sku-aname-box">
+    <!-- 修改 -->
+    <input type="text" placeholder="请输入sku别名" id="add-sku-aname-inp" class="add-sku-aname-inp">
+    <a href="javascript: void(0);" class="add-sku-aname-btn"><img src="./static/image/public-img/iconplus.png" alt="" title="增加sku别名"></a>
+  </div>
+</script>
+
+<!-- 选择变量对应图片弹框 -->
+<script type="text/template" id="chose-varible-pic">
+  <ul class="chose-pic-box">
+  </ul>
+</script>
+
+<div class="erp-common-tan-v2-wrap" ng-show="shenheConfirm">
+  <div
+    class="erp-common-tan-v2 erp-common-tan-confirm"
+    style="width: 400px;height: 200px;padding: 0 10px;"
+  >
+    <p style="font-size: 18px;">
+      是否确认审核{{ action == 'pass' ? '通过' : '失败' }}?
+    </p>
+    <p
+      style="margin-top: 10px;color: rgba(0 ,0,0,.5);"
+      ng-show="action == 'pass'"
+    >
+      通过后则供应商商品会上架至商店，请谨慎操作。
+    </p>
+    <p
+      style="margin-top: 5px;color: rgba(0 ,0,0,.5);"
+      ng-show="action == 'reject'"
+    >
+      确认后用户需重新提交审核，请谨慎操作。
+    </p>
+    <div class="tan-v2-bot">
+      <a
+        href="javascript:void(0)"
+        class="qu-xiao-btn"
+        ng-click="shenheConfirm=false"
+        >取消</a
+      >
+      <a href="javascript:void(0)" class="que-ding-btn" ng-click="goActPass()"
+        >确定</a
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="static/css/activity.css">
+<div class="merchandise-box">
+  <div class="right-bar-wrap">
+    <div class="asj-h10"></div>
+    <div class="right-bar d-flex">
+      <div class="barLeft-flex-box">
+        <div class="input-row">
+          <label for="">活动名称</label>
+          <input type="text" class="w300" ng-model="activityName">
+        </div>
+        <div class="input-row">
+          <label for="">页面title</label>
+          <input type="text" class="w300" ng-model="activityTitle">
+        </div>
+        <div class="input-row">
+          <label for="">活动时间</label>
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" id="txtBeginDate" placeholder="{{'100300' | translate}}" />
+          <span style="padding: 0 15px;">至</span>
+          <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true})" id="txtEndDate" placeholder="{{'100301' | translate}}" />
+        </div>
+        <div class="d-flex input-row">
+          <label for="">颜色设置</label>
+          <ul>
+            <li ng-repeat="item in colorJSON">
+              <label for="" style="width: 200px;text-align: left;">{{item.label}}</label>
+              <input type="color" id="" class="p0" ng-model="item.color">
+              <span id="colorInfo">{{item.color}}<span>
+            </li>
+          </ul>
+          <!-- <ul>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">页面背景色</label>
+              <input type="color" id="" class="p0" ng-model="backColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{bgColor}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">总三级标题字体色</label>
+              <input type="color" id="" class="p0" ng-model="allThreeFontColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{allThreeTitleColor}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">单个三级标题字体色</label>
+              <input type="color" id="" class="p0" ng-model="oneThreeFontColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">总三级标题背景色</label>
+              <input type="color" id="" class="p0" ng-model="allThreeBackColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">单个三级标题背景色</label>
+              <input type="color" id="" class="p0" ng-model="oneThreeBackColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">三级标题移动条色</label>
+              <input type="color" id="" class="p0" ng-model="threeMoveColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{}}<span>
+            </li>
+            <li>
+              <label for="" style="width: 200px;text-align: left;">商品资料卡颜色</label>
+              <input type="color" id="" class="p0" ng-model="merchCardColor" onchange="angular.element(this).scope().changeColor(this)">
+              <span id="colorInfo">{{}}<span>
+            </li>
+          </ul> -->
+        </div>
+
+        <div class="d-flex input-row">
+          <label for="">三级标题</label>
+          <ul class="w300">
+            <li ng-repeat="item in threeNamesArr">
+              <input type="text" class="w-100 mb-10" placeholder="{{item.tips}}" ng-model="item.name">
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="barRight-flex-box">
+        <div class="input-row">
+          <label for="" style="width: 150px;">上传PC端图片</label>
+          <upload-img width="500" height="300" id="pcimg"></upload-img>
+        </div>
+        <div class="input-row">
+          <label for="" style="width: 150px;">上传移动端图片</label>
+          <upload-img width="500" height="300" id="mobileimg"></upload-img>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button class="btn-cancel" ng-click="toActivityConfig()">取消</button>
+        <button class="btn-confirm" ng-show="editFlag" ng-click="save('saveEdit')">保存编辑</button>
+        <button class="btn-confirm" ng-show="!editFlag" ng-click="save('saveNew')">保存新增</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 弹框 -->
+<div class="erp-common-tan-v2-wrap" ng-show="confirmBox.hasShow">
+  <div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: 160px;">
+    <p>{{confirmBox.title}}</p>
+    <div class="tan-v2-bot">
+      <a href="javascript:void(0)" class="qu-xiao-btn" ng-click="confirmBox.cancel()">取消</a>
+      <a href="javascript:void(0)" class="que-ding-btn" ng-click="confirmBox.ok()">确定</a>
+    </div>
+  </div>
+</div>

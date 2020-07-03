@@ -1,0 +1,82 @@
+/* 活动配置相关页面公共样式 */
+.btn-cancel,
+.btn-confirm {
+  border-radius: 4px;
+  padding: 5px 20px;
+  margin: 0 10px;
+}
+
+.btn-cancel {
+  background: rgb(228, 228, 228);
+  color: rgb(134, 134, 134);
+}
+
+.btn-confirm {
+  background: #08ACE9;
+  color: #fff;
+}
+
+.btn {
+  padding: 2px 10px !important;
+  margin: 0 !important;
+  font-size: 13px !important;
+}
+
+.w300 {
+  width: 300px;
+}
+
+.p0 {
+  padding: 0;
+}
+
+/* activityConfig.html */
+.title-row {
+  display: flex;
+  align-items: center;
+  margin: 0 10px 20px;
+}
+
+.right-btn {
+  position: absolute;
+  right: 80px;
+}
+
+.ea-list-table span {
+  cursor: auto !important;
+}
+/* activityConfig.html */
+
+/* activityEdit.html */
+.barLeft-flex-box {
+  width: 50%;
+}
+
+.barRight-flex-box {
+  width: 50%;
+}
+
+.submit-row {
+  position: absolute;
+  bottom: 50px;
+  right: 50%;
+  text-align: center;
+  transform: translateX(50%);
+}
+
+.input-row {
+  margin: 10px;
+}
+
+.input-row label {
+  padding-right: 10px;
+  text-align: right;
+  width: 100px;
+}
+
+/* activityEdit.html */
+
+textarea {
+  resize: both;
+  border: 2px solid #E0E0E0;
+}

@@ -1,0 +1,15 @@
+<p class="top-info">
+	<!-- <a href="javascript:void(0);" class="openup-icon" ng-show="!cateList.open && cateList.children" ng-click="switchList({posi:cateList.posi, event: $event, flag: true, cateflag: 1})">+</a>
+	<a href="javascript:void(0);" class="packup-icon" ng-show="cateList.open || !cateList.children" ng-click="switchList({posi:cateList.posi, event: $event, flag: flase, cateflag: 1})">-</a> -->
+	<a href="javascript:void(0);" class="openup-icon" ng-show="!cateList.open && cateList.children"
+		ng-click="switchList({item: cateList, flag: 1})">+</a>
+	<a href="javascript:void(0);" class="packup-icon" ng-show="cateList.open || !cateList.children"
+		ng-click="switchList({item: cateList, flag: 0})">-</a>
+	<span class="index-span" style="display: none;">{{myIndex}}</span>
+	<span ng-class="{'name-span': true, 'active': cateList.active}" ng-click="pointOne({item: cateList})">{{cateList.name}}</span>
+</p>  
+<ul class="domtree" ng-show="cateList.open">  
+    <li ng-repeat="subfolder in cateList.children">
+        <cate-tree cate-list="subfolder" my-index="$index" point-one="pointOne({item: item})" switch-list="switchList({item: item, flag:flag})"></cate-tree>
+    </li>  
+</ul>

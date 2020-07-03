@@ -1,0 +1,392 @@
+<style type="text/css">
+  .bigimg {
+    position: absolute;
+    top: -70px;
+    left: 100%;
+    z-index: 999;
+    max-width: 360px;
+    width: 360px;
+    height: auto;
+    display: none;
+  }
+
+  .proimg:hover .bigimg {
+    display: block;
+  }
+
+  .descripte-tankuang,
+  .action-tankuang {
+    width: 500px;
+    height: 300px;
+    padding: 10px 25px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 30px lightgray;
+    border-radius: 5px;
+  }
+
+  .descripte-tankuang .title {
+    width: 98%;
+    height: 30px;
+    color: #000;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .descripte-tankuang .word {
+    width: 100%;
+    height: 160px;
+    border: 1px solid lightgrey;
+    color: gray;
+    margin-top: 5px;
+  }
+
+  .descripte-tankuang .clos {
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    background: #a3a1a1;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .action-tankuang div {
+    width: 50%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .action-tankuang div button {
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .date-box input {
+    height: 30px;
+    border-right: none;
+    border: 1px solid #ececec;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .date-box .erp-seachInp {
+    height: 30px;
+    background-color: #fff;
+    width: 50px;
+    vertical-align: top;
+  }
+
+  .existing-tankuang {
+    width: 800px;
+    height: 500px;
+    /*min-height: 300px;*/
+    padding: 10px 15px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 30px #ccc;
+    border-radius: 5px;
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+
+  .existing-tankuang .existing-content ul li {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+  }
+
+  .existing-tankuang .existing-content ul li span {
+    text-align: center;
+  }
+
+  .existing-tankuang .existing-content ul li p {
+    font-size: 13px;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .existing-tankuang .existing-btns button {
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .sbyy-wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .sbyy-con {
+    width: 450px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -46%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+
+  .sbyy-con button {
+    color: #6b6b6b;
+    height: 30px;
+    width: 76px;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+
+  .boreder_red {
+    border-bottom: 2px solid red !important;
+    border: 2px solid red;
+  }
+  .border-span {
+    height: 100% !important;
+  }
+  .filter {
+    margin-bottom: 10px;
+    padding-left: 10px;
+    line-height: 30px !important;
+    /* display: flex; */
+  }
+
+  .filter .datetab {
+    margin-left: 15px;
+  }
+
+  .filter .dateact {
+    color: #0d8efb;
+  }
+  .filter .search {
+    cursor: pointer;
+    padding: 0 5px;
+    height: 30px;
+    line-height: 30px;
+    /* background: #0d8efb; */
+    background: rgba(249, 174, 8, 1);
+    color: #fff;
+    border-radius: 5px;
+  }
+  .filter input {
+    margin: 0 5px;
+    width: 140px;
+    /* width: auto; */
+  }
+  .filter select {
+    float: none;
+    width: auto;
+  }
+  .show-variant-btn img {
+    width: 24px;
+  }
+</style>
+
+<div class="e-sourcing-wrap">
+  <div class="left-bar">
+    <ul class="left-bar-tabs">
+      <li>
+        <a href="#/sourcing">{{'100864' | translate}}<span></span></a>
+      </li>
+      <li>
+        <a href="#/individualsourcing">{{'100865' | translate}}<span></span></a>
+      </li>
+      <li class="active">
+        <a href="#/cjsourcing">{{'100866' | translate}}<span></span></a>
+      </li>
+    </ul>
+  </div>
+  <div class="right-bar-wrap e-sou-con">
+    <div class="asj-h10"></div>
+    <div
+      class="right-bar e-sou-content"
+      style="min-height: 1000px; background-color: #fff;"
+    >
+      <div class="filter clearfix">
+        商品名称\sku：
+        <input
+          class="seach-inp"
+          ng-model="sku"
+          style="border-radius: 0; float: none;"
+          placeholder=""
+        />
+        &nbsp;&nbsp;&nbsp;&nbsp; cj账户：
+        <input
+          class="seach-inp"
+          ng-model="accountName"
+          style="border-radius: 0; float: none;"
+          placeholder=""
+        />
+        &nbsp;&nbsp;&nbsp;&nbsp; 供应商账户：
+        <input
+          class="seach-inp"
+          ng-model="supplier"
+          style="border-radius: 0; float: none;"
+          placeholder=""
+        />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button
+          class="search"
+          style="float: none; border-radius: 0;"
+          ng-click="searchInput()"
+        >
+          查询
+        </button>
+      </div>
+      <!-- 订单的列表部分 -->
+      <div class="es-ord-list">
+        <table id="sourcelist-table" style="width: 100%;">
+          <thead class="es-ord-thead">
+            <tr>
+              <th style="width: 100px;">Images</th>
+              <th style="width: 300px;">Products</th>
+              <th style="width: 100px;">SKU</th>
+              <th style="width: 100px;">China</th>
+              <th style="width: 100px;">Inventory USA</th>
+              <th style="width: 100px;">Thailand</th>
+              <th style="width: 100px;">Value</th>
+              <th style="width: 100px;">Cj账号</th>
+              <th style="width: 100px;">转移时间</th>
+              <th style="width: 100px;">转移供应商</th>
+              <th style="width: 100px;">Rcord</th>
+            </tr>
+          </thead>
+          <tbody class="es-ord-tbody" ng-repeat="i in list">
+            <tr>
+              <td style="width: 100px;">
+                <div style="padding: 10px;">
+                  <img style="width: 100%;" ng-src="{{i.img}}" alt="" />
+                </div>
+
+                <span class="border-span"></span>
+              </td>
+              <td>{{i.nameEn}}<span class="border-span"></span></td>
+              <td>{{i.sku}}<span class="border-span"></span></td>
+              <td>
+                {{i.realInventory.China}}<span class="border-span"></span>
+              </td>
+              <td>{{i.realInventory.USA}}<span class="border-span"></span></td>
+              <td>{{i.realInventory.TH}}<span class="border-span"></span></td>
+              <td>
+                ${{i.money}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{i.accountName}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{i.transferDate.time | date:'yyyy-MM-dd HH:mm:ss'}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{i.scn}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="show-variant-btn"
+                    title=""
+                    ng-show="!i.down"
+                    ng-click="showVariant(i, $index)"
+                    >Collapse<br /><img
+                      src="static/image/public-img/to-down.png"
+                      alt=""
+                  /></a>
+
+                  <a
+                    href="javascript:void(0);"
+                    class="show-variant-btn"
+                    title=""
+                    ng-show="i.down"
+                    ng-click="hideVariant(i, $index)"
+                    >Collapse<br /><img
+                      src="static/image/public-img/to-up.png"
+                      alt=""
+                  /></a>
+                </div>
+              </td>
+            </tr>
+            <tr
+              ng-repeat="iv in i.vlist"
+              style="background: #f8f8f8; border-top: 1px solid #eee;"
+            >
+              <td style="width: 100px;">
+                <div style="padding: 10px;">
+                  <img style="width: 100%;" ng-src="{{iv.img}}" alt="" />
+                </div>
+
+                <span class="border-span"></span>
+              </td>
+              <td>{{iv.nameEn}}<span class="border-span"></span></td>
+              <td>{{iv.sku}}<span class="border-span"></span></td>
+              <td>
+                {{iv.realInventory.China}}<span class="border-span"></span>
+              </td>
+              <td>{{iv.realInventory.USA}}<span class="border-span"></span></td>
+              <td>{{iv.realInventory.TH}}<span class="border-span"></span></td>
+              <td>
+                ${{iv.money}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{i.accountName}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{iv.transferDate.time | date:'yyyy-MM-dd HH:mm:ss'}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{iv.scn}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <page></page>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<ul class="storage-box" ng-show="!isSelect">
+    <li class="btna" ng-click="onChange('default')" ng-class='{"active":currentId == "all"}' ng-show="hasAll">全部</li>
+    <li class="btna" ng-repeat="i in storageList" ng-class='{"active":i.dataId == currentId}' ng-click="onChange(i)">
+        {{ i.dataName }}</li>
+</ul>
+
+<select class="global-storage-select" ng-show="isSelect" ng-model="currentId" ng-change="onChange()">
+    <option value="all" ng-show="hasAll">全部</option>
+    <option ng-repeat="i in storageList" value="{{ i.dataId }}">{{ i.dataName }}</option>
+</select>

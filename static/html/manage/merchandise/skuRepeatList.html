@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .skuGroupTop-table-thead{
+            display: flex;
+        }
+        .inputGroup{
+            display: flex;
+        }
+        .inputGroup input{
+            width: 250px;
+            height: 30px;
+            padding: 0 10px;
+        }
+        .inputGroup button{
+            padding: 0 15px;
+            background: rgba(255,185,0,1);
+            color: #fff;
+            font-size: 14px;
+        }
+        .skuGoupTop-search{
+            padding-bottom: 20px;
+            /*background: red;*/
+        }
+        .sku-th{
+            width: 10%;
+            background: rgba(252,244,217,1);
+            text-align: center;
+            color: rgba(139,87,42,1);
+            padding: 10px;
+            font-weight: 600;
+        }
+        .skuGroupTop{
+            position: fixed;
+            width: calc(100% - 280px);
+            background: #fff;
+            padding: 15px 20px 0 20px;
+            /*left: 0;*/
+            /*top: 0;*/
+            /*padding-left: 280px;*/
+            /*background: #fff;*/
+            z-index: 9999;
+        }
+        .skuGroup-tr{
+            display: flex;
+            border-left: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGroup-tr span.overhideSpan{
+            display: block;
+            width: 100%;
+            /* white-space: nowrap; */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /*padding: 8px ;*/
+            text-align: center;
+        }
+        .skuGroup-td{
+            width: 10%;
+            border-right: 1px solid #f0f0f0;
+        }
+        .oneRow{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .twoRow:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .productImgWrap>span{
+            width: 80px;
+            height: 80px;
+            border: 1px solid #f0f0f0;
+        }
+        .skuGroup-tr span.productImgWrap2{
+            width: 60px;
+            height: 60px;
+            border: 1px solid #f0f0f0;
+        }
+        .productImgWrap3>span{
+            /*width: 60px;*/
+            height: 60px;
+        }
+        /*.skuGroup-tr span.productImgWrap2{*/
+            /*display: flex;*/
+            /*justify-content: center;*/
+        /*}*/
+        .skuGoup-row{
+            display: flex;
+        }
+        .skuGoup-row:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGoup-row:not(:last-child){
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .skuGroup-row-td{
+            border-right: 1px solid #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .skuGroup-row-td:not(:first-child)>span{
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: default;
+        }
+        .moreActionBtn{
+            position: relative;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .moreActionWrap{
+            display: none;
+            position: absolute;
+            width: 100px;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0px 8px 20px;
+            top: 29px;
+            left: -10px;
+        }
+        .moreActionWrap li>span{
+            display: block;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+        .moreActionWrap li>span:hover{
+            background: #e6e6e6;
+            /*color: #fff;*/
+        }
+        .moreActionBtn:hover .moreActionWrap{
+            display: block;
+        }
+        .groupZzc{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 99999;
+        }
+        .groupWrap{
+            background: #fff;
+            border-radius: 4px;
+            width: 710px;
+            min-height: 200px;
+            padding: 20px;
+            margin: 150px auto;
+        }
+        .groupWrap>h1{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .groupWrap .inputGroup{
+            align-items: center;
+        }
+        .groupWrap .inputGroup input{
+            width: 200px;
+        }
+        .groupInput-tr{
+            display: flex;
+            margin-top: 15px;
+            /*justify-content: space-between;*/
+        }
+        .groupInput-tr .inputGroup:first-child{
+            margin-right: 15px;
+        }
+        .groupZzc{
+            display: none;
+        }
+        .inputGroup>img{
+            margin-left: 10px;
+        }
+        .groupBtnWrap{
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .groupBtnWrap button{
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        .sureBtn{
+            background: rgba(255,185,0,1);
+            color: #fff;
+            border: 1px solid rgba(255,185,0,1);
+        }
+        .canceleBtn{
+            border: 1px solid rgba(217,217,217,1);
+            background: #fff;
+        }
+        .bigImg{
+            display: none;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid #f0f0f0;
+            top: -115px;
+            left: 85px;
+            z-index: 99999;
+        }
+        .bigImgHover:hover .bigImg{
+            display: block;
+        }
+        .green2{
+            color: green;
+        }
+        .red2{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div class="ea-content">
+    <div class="right-bar-wrap ea-right-content" style="padding-left: 230px">
+        <!--<div class="asj-h10"></div>-->
+        <div class="skuGroupTop">
+            <div class="skuGoupTop-search">
+                <div class="inputGroup">
+                    <input class="search-inp" ng-model="searchInfo" type="text" placeholder="请输入SKU/操作人"/>
+                    <button ng-click="searchFun()">搜索</button>
+                </div>
+            </div>
+            <div class="skuGroupTop-table-thead">
+                <div class="sku-th" style="width:5%;">序号</div>
+                <div class="sku-th" style="width:15%;">操作时间</div>
+                <div class="sku-th" style="width: 10%;">保留图片</div>
+                <div class="sku-th" style="width:20%;">
+                    保留SKU
+                </div>
+                <div class="sku-th" style="width:15%;">下架图片</div>
+                <div class="sku-th" style="width:25%;">
+                    下架SKU
+                </div>
+                <!-- <div class="sku-th" style="width: 9%">数量</div> -->
+                <div class="sku-th" style="width: 10%;">操作人</div>
+                <!-- <div class="sku-th" style="width: 9%">操作</div> -->
+            </div>
+        </div>
+        <div class="right-bar" style="padding:0 20px 15px 20px;margin-top: 105px">
+
+            <div class="skuGroupBottom">
+                <!--<div class="skuGroup-tr">-->
+                <div class="skuGroup-tr" ng-repeat="group in groupList">
+                    <div class="skuGroup-td oneRow" style="width:5%;"><span>{{$index+1}}</span></div>
+                    <div class="skuGroup-td oneRow" style="width:15%;"><span class="overhideSpan">{{group.shiJian | date:"yyyy-MM-dd HH:mm:ss"}}</span></div>
+                    <div class="skuGroup-td oneRow productImgWrap" style="width: 10%;">
+                        <span class="bigImgHover" style="position: relative;"
+                        ng-mouseover="group.showBigimg1 = 1"
+                        >
+                            <img width="78" height="78" src="{{group.baoLiuImg | IMG_SIZE : 78}}" alt=""/>
+                            <b class="bigImg">
+                                <img ng-if="group.showBigimg1" width="298" height="298" src="{{group.baoLiuImg | IMG_SIZE : 298}}" alt=""/>
+                            </b>
+                        </span>
+                    </div>
+                    <div class="skuGroup-td oneRow" title="{{group.baoLiuSku}}" style="width: 20%;cursor: default">
+                        <div>
+                            <span class="overhideSpan">{{group.baoLiuSku}}</span>
+                            <!-- <span ng-show="group.jiuBianTiWeight" class="overhideSpan">{{group.jiuBianTiWeight}} g</span> -->
+                        </div>
+                    </div>
+
+                    <div class="skuGroup-td-f" style="width:40%;">
+                        <div class="skuGoup-row" ng-repeat="child in group.jiuBianTis">
+                            <div class="skuGroup-row-td" style="width: 35%">
+                                <span class="productImgWrap2 bigImgHover" style="position: relative;"
+                                ng-mouseover="group.showBigimg1 = 1"
+                                >
+                                    <img width="58" height="58" src="{{child.img | IMG_SIZE : 58}}" alt=""/>
+                                    <b class="bigImg">
+                                        <img ng-if="group.showBigimg1" width="298" height="298" src="{{child.img | IMG_SIZE : 298}}" alt=""/>
+                                    </b>
+                                </span>
+                            </div>
+                            <div title="{{child.xinBianTiZuHeSku}}" class="skuGroup-row-td" style="width: 65%">
+                                <div>
+                                    <span class="overhideSpan">{{child.sku}}</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="skuGroup-td oneRow"><span>{{group.caoZuoRen}}</span></div>
+                    <!-- <div class="skuGroup-td oneRow" style="width: 9%">
+                        <div class="moreActionBtn">
+                            更多操作
+                            <ul class="moreActionWrap">
+                                <li><span ng-click="editGroupSku(group)">编辑</span></li>
+                                <li><span ng-click="deleteFun(group.zuHeSkuId)">删除</span></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="page-box">
+                    <div class="select-page-num">
+                        <select class="form-control" ng-model="pageSize" ng-change="pagesizechange(pageSize)">
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span>每页</span>
+                    </div>
+                    <div class="total-num">
+                        共&nbsp;&nbsp;{{ totalCounts }}&nbsp;&nbsp;条
+                    </div>
+                    <div class="page-index">
+                        <div class="pagegroup">
+                        </div>
+                    </div>
+                    <div class="to-go">
+                        <span>跳转：</span>
+                        <input type="text" class="form-control" placeholder="" ng-model="pageNum">
+                        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑组合sku-->
+<div class="groupZzc">
+    <div class="groupWrap">
+        <h1>编辑组合SKU</h1>
+        <div class="inputGroup" style="margin-bottom: 15px">
+            <label>主sku：</label>
+            <input style="background: #e0e0e0" readonly ng-model="mainSku" type="text"/><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{zuWeight}} </span>
+        </div>
+        <div style="max-height: 450px;overflow: auto">
+            <div class="groupInput-tr" ng-repeat="ss in groupArr">
+                <div class="inputGroup">
+                    <label>次sku：</label>
+                    <input ng-disabled="isDisabled" ng-model="ss.xinBianTiZuHeSku" type="text"/>
+                </div>
+                <div class="inputGroup">
+                    <label>数量：</label>
+                    <input ng-disabled="isDisabled" ng-model="ss.xinBianTiZuHeShuLiang" type="number"/>
+                    <img style="cursor: pointer;" ng-if="$index!=groupArr.length-1" src="./static/image/public-img/reduce.png" ng-click="removeCisku($index)" alt=""><img style="cursor: pointer;" ng-if="$index==groupArr.length-1" src="./static/image/public-img/small-plus.png" ng-click="addCisku()" alt="">
+                    <span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}"  style="margin-left:15px;">{{ss.isweight}}</span>
+                </div>
+            </div>
+        </div>
+        <p style="margin-bottom:10px;text-align: center;margin-top:15px;">{{errMsg}}</p>
+        <div class="groupBtnWrap">
+            <button ng-show="isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="submitGroupFun()">验证</button>
+            <button ng-show="!isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="gotoBackYanzheng()">退回</button>
+            <button ng-show="!isYanzheng" class="sureBtn" style="margin-right: 25px" ng-click="sureSubmitSkuFun()">提交</button>
+            <button class="canceleBtn" ng-click="closeGroup()">取消</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

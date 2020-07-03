@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+  <meta charset="UTF-8">
+  <title>活动统计</title>
+	<link rel="stylesheet" type="text/css" href="static/css/SalesmanManagement.css">
+</head>
+<style>
+	 body {
+		 background-color: #F2F7FA;
+		 padding: 0 20px;
+	 }
+	
+	 .content {
+		 background-color: #fff;
+		 padding: 20px;
+	 }
+	
+	 .tab {
+		 position: fixed;
+		 width: calc(100% - 300px);
+		 margin-left: 220px;
+		 background-color: #fff;
+		 padding: 0 20px;
+		 margin-bottom: 10px;
+		 height: 58px;
+		 line-height: 58px;
+		 box-shadow: 2px 2px 14px 2px rgba(232, 244, 251, 1);
+		 /*box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18), 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 6px 0px rgba(0, 0, 0, 0.04);*/
+		 z-index: 100;
+	 }
+	
+	 .tab li {
+		 float: left;
+		 padding: 0 10px;
+		 margin: 0 15px;
+		 line-height: 54px;
+	 }
+	
+	 .tab .Act {
+		 color: #F9AE08;
+		 border-bottom: 4px solid #F9AE08;
+	 }
+	
+	 .tab .Act a {
+		 color: #F9AE08;
+	 }
+	
+	 table {
+		 width: 100%;
+		 text-align: center;
+	 }
+	
+	 table thead {
+		 height: 44px;
+		 background: rgba(252, 244, 217, 1);
+		 border-radius: 4px 4px 0px 0px;
+		 line-height: 44px;
+		
+	 }
+	
+	 table thead th {
+		 text-align: center;
+		 font-size: 14px;
+		 font-family: PingFangSC-Medium;
+		 font-weight: 500;
+		 color: rgba(139, 87, 42, 1);
+	 }
+	
+	 table thead th .sort {
+		 display: inline-block;
+		 position: relative;
+		 width: 15px;
+	 }
+	
+	 table thead th .asc {
+		 border-width: 0 6px 8px;
+		 border-style: solid;
+		 border-color: transparent transparent #666;
+		 cursor: pointer;
+		 position: absolute;
+		 right: 0;
+		 top: -15px;
+	 }
+	
+	 table thead th .desc {
+		 border-color: #666 transparent transparent transparent;
+		 border-style: solid;
+		 border-width: 8px 6px 0 6px;
+		 height: 0;
+		 width: 0;
+		 cursor: pointer;
+		 position: absolute;
+		 right: 0;
+		 bottom: -5px;
+	 }
+	
+	 table thead th .asc.active {
+		 border-color: transparent transparent #F9AE08;
+	 }
+	
+	 table thead th .desc.active {
+		 border-color: #F9AE08 transparent transparent transparent;
+	 }
+	
+	 .count tr {
+		 border: 1px solid #F3F3F3;
+		 height: 40px;
+		 line-height: 40px;
+		 font-size: 12px;
+		 font-family: PingFangSC-Regular;
+		 font-weight: 400;
+		 color: rgba(51, 51, 51, 1);
+	 }
+	
+	 .count tr td {
+		 border-right: 1px solid #F3F3F3;
+	 }
+	
+	 .filter-box {
+		 display: flex;
+		 align-items: center;
+		 flex-wrap: wrap;
+	 }
+	
+	 .filter-box .item {
+		 margin-right: 20px;
+		 margin-bottom: 10px;
+	 }
+	
+	 .filter-box .item .label {
+		 font-size: 14px;
+		 color: #000;
+		 padding: 0;
+	 }
+	
+	 .filter-box .item input {
+		 line-height: 32px;
+		 height: 32px;
+	 }
+	
+	 .filter-box .item select, input {
+		 line-height: 32px;
+		 height: 32px;
+		 width: 150px;
+		 font-size: 14px;
+	 }
+	
+	 .filter-box .item button {
+		 padding: 6px 8px;
+		 font-size: 14px;
+		 background-color: #F9AE08;
+		 color: #fff;
+		 border-radius: 4px;
+	 }
+	
+	 .filter-tab {
+		 margin-bottom: 10px;
+	 }
+	
+	 .filter-tab span {
+		 font-size: 14px;
+		 margin-right: 10px;
+		 color: #666;
+		 cursor: pointer;
+	 }
+	
+	 .filter-tab .active {
+		 color: #F9AE08;
+	 }
+</style>
+<body>
+<div class="tab">
+    <ul class="clearfix">
+        <li><a href="#/CommodityAnalysis/Turnover">成交</a></li>
+        <li><a href="#/CommodityAnalysis/dispute">纠纷</a></li>
+        <li><a href="#/CommodityAnalysis/NewProduct">新品</a></li>
+        <li><a href="#/CommodityAnalysis/cusStore">客户店铺</a></li>
+        <li><a href="#/CommodityAnalysis/quanzhong">猜你喜欢</a></li>
+        <li><a href="#/CommodityAnalysis/LinkageAndPublication">刊登与关联</a></li>
+        <li class="Act"><a href="#/CommodityAnalysis/activityStatistics">活动统计</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics-new">新-活动统计</a></li>
+    </ul>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+	<div class="filter-box">
+		<div class="item">
+			<span class="label">时间范围：</span>
+	    <input id="date1" class="Wdate data-inp" ng-focus="dateFocus()"
+	           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="起始日期" readonly="">
+			<span class="line">-</span>
+      <input id="date2" class="Wdate data-inp" ng-focus="dateFocus()"
+             onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="结束日期" readonly="">
+		</div>
+		<div class="item">
+			<span class="label">活动ID：</span>
+			<select ng-options="o.id as o.title for o in activityData" ng-model="activityId">
+				<option value="">全部</option>
+			</select>
+		</div>
+		<div class="item">
+			<span class="label">商品名称：</span>
+			<input type="text" ng-model="productName">
+		</div>
+		<div class="item">
+			<span class="label">商品SKU：</span>
+			<input type="text" ng-model="productSku">
+		</div>
+		<div class="item">
+			<button style="margin-right: 10px;" ng-click="hadelSearch()">查询</button>
+			<button ng-click="hadelExprot()">导出数据</button>
+		</div>
+	</div>
+	<div class="filter-tab">
+		<span ng-class="{active: tabActive === '1'}" ng-click="handleTabActive('1')">昨天</span>
+		<span ng-class="{active: tabActive === '2'}" ng-click="handleTabActive('2')">近一周</span>
+		<span ng-class="{active: tabActive === '3'}" ng-click="handleTabActive('3')">近一月</span>
+		<span ng-class="{active: tabActive === '4'}" ng-click="handleTabActive('4')">全部</span>
+	</div>
+  <table>
+    <thead>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名称</th>
+      <th>商品SKU</th>
+      <th>商品图片</th>
+      <th ng-repeat="(idx,item) in tableHeader">
+	      {{item.name}}
+	      <div class="sort">
+		      <i class="asc" ng-class="{active:sortActive === item.ascKey}" ng-click="handleSort(item.ascKey)"></i>
+	        <i class="desc" ng-class="{active:sortActive === item.descKey}" ng-click="handleSort(item.descKey)"></i>
+	      </div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in productData" ng-show="productData.length>0">
+      <td>
+        <span style="max-width: 200px;display: inline-block;line-height: 20px;">{{item['商品ID']}}</span>
+      </td>
+      <td ng-attr-title="{{item['商品名称']}}">
+          <span style="max-width: 200px;display: inline-block;line-height: 20px;">{{item['商品名称']}}</span>
+      </td>
+	    <td>{{item['商品SKU']}}</td>
+	    <td style="position: relative;">
+        <img ng-mouseenter="item.over = true;" ng-mouseleave="item.over = false;" width="30" height="30px"
+             ng-src="{{item['商品图片'] | IMG_SIZE : 30}}" alt="">
+        <img style="position: absolute;bottom: 0;" ng-if="item.over" src="" alt="" width="200" height="200"
+             ng-src="{{item['商品图片'] | IMG_SIZE : 200}}">
+      </td>
+      <td>{{item['点击量']}}</td>
+      <td>{{item['收藏量']}}</td>
+      <td>{{item['刊登量']}}</td>
+      <td>{{item['关联']}}</td>
+      <td>{{item['添加SKU']}}</td>
+      <td>{{item['添加购物车']}}</td>
+      <td>{{item['购买']}}</td>
+      <td>{{item['纠纷']}}</td>
+    </tr>
+    <tr ng-show="productData.length == 0">
+      <td colspan="12" style="font-size: 14px;">暂无数据。</td>
+    </tr>
+    </tbody>
+    </table>
+	<page ng-show="productData.length > 0"></page>
+</div>
+</body>
+</html>

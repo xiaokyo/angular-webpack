@@ -1,0 +1,53 @@
+<!-- 缺货处理弹窗 -->
+<modal tit="缺货处理" width="500" visible="vm.visible" on-ok="handleStockout()">
+    <div class="flex aic" style="margin-bottom:10px;">
+        <span>处理方式：</span>
+        <select ng-model="handleForm.handleStockoutWay" ng-change="handleStockoutWayChange(handleForm.handleStockoutWay)">
+            <option value="">请选择处理方式</option>
+            <option value="1">分开发货</option>
+            <option value="2">缺货商品退款</option>
+            <option value="3">全部商品退款</option>
+        </select>
+    </div>
+
+    <div class="flex aic" ng-show="handleForm.handleStockoutWay == 2 || handleForm.handleStockoutWay == 3">
+        <span>协商后退款金额（$）：</span>
+        <input type="number" step="0.01" ng-model="handleForm.handleStockoutPrice"
+            ng-change="handleStockoutPriceChange(handleForm.handleStockoutPrice)" />
+    </div>
+    <div class="stockout-detail"  ng-if="handleForm.handleStockoutWay==2 || handleForm.handleStockoutWay==3">
+      <p><span ng-show="orderType!=1">母</span>订单原总价：{{computeObj.orderMoneyReality}}</p>
+      <p><span ng-show="orderType!=1">母</span>订单折后总金额：{{computeObj.orderMoney}}</p>
+      <ng-template ng-if="handleForm.handleStockoutWay==2">
+        <p>去除缺货商品后订单物流费用：{{computeObj.stockoutLogistics}}</p>
+        <p>建议退款金额：{{computeObj.stockoutSuggest}}（退款商品折后价{{computeObj.stockoutProduct}}+邮费差额{{computeObj.stockoutPostage}}）</p>
+        <p>建议退款算法：退款金额=退款商品折后总金额+邮费差额（邮费差额=原邮费-未退款商品重量新计算邮费）</p>
+      </ng-template>
+      <ng-template ng-if="handleForm.handleStockoutWay==3">
+        <p>去除缺货商品后订单物流费用：{{computeObj.allLogistics}}</p>
+        <p>建议退款金额：{{computeObj.allSuggest}}（退款商品折后价{{computeObj.allProduct}}+邮费差额{{computeObj.allPostage}}）</p>
+        <p>建议退款算法：退款金额=退款商品折后总金额+邮费差额（邮费差额=原邮费-未退款商品重量新计算邮费）</p>
+      </ng-template>
+      
+    </div>
+</modal>
+
+<!-- 缺货处理记录 -->
+<modal tit="缺货处理记录" width="1000" visible="visibleRecords" on-cancelText="关闭">
+    <table class="k-table" style="width:100%;margin-top:20px;">
+      <thead>
+        <th>处理人</th>
+        <th>处理结果</th>
+        <th>处理时间</th>
+        <th>补充</th>
+      </thead>
+      <tbody style="max-height: 500px;">
+        <tr ng-repeat="i in handleStockoutList track by i.id">
+          <td><div class="td">{{ i.handler }}</div></td>
+          <td><div class="td">{{ handleWayObj[i.handlerResult] }}</div></td>
+          <td><div class="td">{{ i.processingTime | date:'yyyy-MM-dd HH:mm:ss' }}</div></td>
+          <td><div class="td">{{ i.supplement || '--' }}</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </modal>

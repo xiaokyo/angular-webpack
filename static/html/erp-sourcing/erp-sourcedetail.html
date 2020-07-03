@@ -1,0 +1,71 @@
+<div class="seachdetail-wrap">
+  <div class="seachdetail-con">
+    <h3>搜品详情</h3>
+    <div class="product-status">
+      <p>
+        <span>搜品ID：<b>{{sourcecontent.number}}</b></span>
+        <span>搜品类型：<b>{{fitType1}}</b></span>
+        <span>搜品状态：<b>{{fitType2}}</b></span>
+      </p>
+      <p style="margin-top: 24px;" ng-show="fitType2 =='搜品失败'">
+        <span>失败原因：<br /> <b>{{sourcecontent.failExplain}}</b></span>
+      </p>
+      <div style="text-align: center;" ng-show="fitType2 == '搜品成功'">
+        <button class="toDetail" ng-click="succeed(sourcecontent)">查看商品</button>
+      </div>
+    </div>
+    <!-- user部分 -->
+    <!-- 产品详情部分 -->
+    <div class="product-detail">
+      <ul>
+        <li>
+          <p style="width: 100%;">
+            <span class="gray-span">商品名称：</span>
+            <span class="light-span">{{sourcecontent.productName}}</span>
+          </p>
+        </li>
+        <li class="threeStyle">
+					<span class="gray-span">价格：<span class="light-span">$
+							{{sourcecontent.price?sourcecontent.price:'-'}}</span></span>
+
+					<span class="gray-span">用户名：<span class="light-span">{{sourcecontent.name}}</span></span>
+
+					<span class="gray-span">提交日期：<span class="light-span" ng-if="sourcecontent.ate">{{sourcecontent.ate}}</span>
+						<span class="light-span" ng-if="!sourcecontent.ate">
+							{{sourcecontent.createDate.year+1900}}-{{sourcecontent.createDate.month+1}}-{{sourcecontent.createDate.date}} {{sourcecontent.createDate.hours}}:{{sourcecontent.createDate.minutes}}:{{sourcecontent.createDate.seconds}}
+						</span></span>
+        </li>
+
+        <li>
+          <p>
+            <span class="gray-span">客户URL：</span>
+            <span ng-show="!sourcecontent.sourceUrl">-</span>
+            <a ng-show="sourcecontent.sourceUrl" ng-href={{sourcecontent.sourceUrl}} target="view_window">
+              <span class="light-span" id="sdc-souurl">{{sourcecontent.sourceUrl}}</span>
+            </a>
+          </p>
+        </li>
+        <li class="image-li">
+          <p>
+            <span class="gray-span">图片：</span>
+            <ul ng-if="sourcecontent.imageUrl!='https://'">
+              <li ng-repeat="item in sourcecontent.imageUrl track by $index">
+                <img class="first-img" ng-src={{item}}>
+              </li>
+            </ul>
+            <span ng-if="sourcecontent.imageUrl=='https://'">-</span>
+          </p>
+        </li>
+        <li class="note-li">
+          <p>
+            <span class="gray-span">备注：</span>
+            <span ng-show="!sourcecontent.description">-</span>
+          </p>
+          <p class="des">
+            {{sourcecontent.description}}
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

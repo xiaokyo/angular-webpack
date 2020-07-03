@@ -1,31 +1,39 @@
-export default (app, Angular) => {
-  app.config(($stateProvider) => {
-    $stateProvider.state('page4', {
-      url: '/page4',
-      templateProvider: ['$q', function ($q) {
-        let deferred = $q.defer();
-        require.ensure(['../pages/page4/index.template.html'], function () {
-          let template = require('../pages/page4/index.template.html');
-          deferred.resolve(template);
-        });
-        return deferred.promise;
-      }],
-      controller: 'Page4Controller',
-      controllerAs: 'test',
-      resolve: {
-        foo: ['$q', '$ocLazyLoad', function ($q, $ocLazyLoad) {
-          let deferred = $q.defer();
-          require.ensure([], function () {
-            let module = require('../pages/page4/index.controller.js')(Angular);
-            $ocLazyLoad.load({
-              name: 'page4App'
-            });
-            deferred.resolve(module);
-          });
+import routers from './routers'
 
-          return deferred.promise;
-        }]
-      }
+export default (app) => {
+  app.config(($stateProvider, $locationProvider, $urlRouterProvider, $translateProvider) => {
+
+    /**
+     * 翻译配置
+     */
+
+    $translateProvider.preferredLanguage('cn');
+    //默认的语言
+    $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.useStaticFilesLoader({
+      files: [{
+        prefix: 'static/angular-1.5.8/i18n/', //语言包路径
+        suffix: '.json' //语言包后缀名
+      }]
     });
+
+    /**
+     * 路由配置
+     */
+    routers.forEach(({ name, url, controller }) => {
+      $stateProvider
+        .state(name, {
+          url,
+          controller,
+          templateUrl: `/src/pages/${name}/index.template.html`,
+          lazyLoad: transition => {
+            const $lazy = transition.injector().get('$ocLazyLoad');
+            return import(`@src/pages/${name}/index.module.js`).then(m => $lazy.load(m.default));
+          },
+        })
+    })
+
+    $locationProvider.hashPrefix(''); // 去掉路径中的! (/#!/ -> /#/)
+    $urlRouterProvider.otherwise('/ywyHome');
   })
 }

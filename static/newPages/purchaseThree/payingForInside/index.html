@@ -1,0 +1,306 @@
+<div class="my-wrap">
+    <main class="my-main">
+      <div id="top-tab" class="top-tab position-fixed" style="padding-top:0;">
+        <!-- tab -->
+        <div class="top-tab-nav d-flex">
+          <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':caigouType==2}" ng-click="changeCaigouType(2)">淘宝</span>
+          <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':caigouType==3}" ng-click="changeCaigouType(3)">天猫</span>
+          <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':caigouType==4}" ng-click="changeCaigouType(4)">线下采购</span>
+          <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':caigouType==0}" ng-click="changeCaigouType(0)">1688非API</span>
+          <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':caigouType==1}" ng-click="changeCaigouType(1)">1688API</span>
+          <span class="tab-span tab-border-bt cursor-pointer tab-active">内部采购</span>
+        </div>
+      </div>
+      <div style="height:68px"></div>
+      <section class="filter-area bd">
+        <div class="flex fsc fyc">
+          <div class="input-group">
+            <wui-date format="yyyy-mm-dd" placeholder="开始时间" btns="{'ok':'确定','now':'今天'}" ng-model="params.startTime"></wui-date>
+            <wui-date format="yyyy-mm-dd" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}" ng-model="params.endDate"></wui-date>
+          </div>
+          <div>
+            <input type="text" ng-model="params.orderId" placeholder="请输入订单号" ng-keyup="keyupRefresh($event)">
+            <purchaseselect callback="purchasePersonCallback"></purchaseselect>
+          </div>
+        </div>
+        <div style="height:10px;"></div>
+        <div class="flex fsc fyc fbt">
+          <div>
+            <button class="btn primary" ng-click="getList()">搜索</button>
+          </div>
+        </div>
+      </section>
+      <section class="table-area">
+        <!-- 表格列表 -->
+        <div class="tb-thead d-flex k-tb-thead">
+            <div style="width: 12.5%" class="tb-thead-th">序号</div>
+            <div style="width: 12.5%" class="tb-thead-th">订单号</div>
+            <div style="width: 14%" class="tb-thead-th">供货公司</div>
+            <div style="width: 12.5%" class="tb-thead-th">共需支付（￥）</div>
+            <div style="width: 12.5%" class="tb-thead-th">打款状态</div>
+            <div style="width: 12.5%" class="tb-thead-th">所属类型</div>
+            <div style="width: 12.5%" class="tb-thead-th">运单号</div>
+            <div style="width: 12.5%" class="tb-thead-th">申请人</div>
+            <div style="width: 12.5%" class="tb-thead-th">创建人</div>
+            <div style="width: 12.5%" class="tb-thead-th">创建时间</div>
+            <div style="width: 12.5%" class="tb-thead-th">操作</div>
+        </div>
+        <div class="tb-tbody">
+          <div class="tb-tbody-tr item-tr fdc" ng-repeat="item in list">
+            <div class="flex">
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.id }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.orderId }}</span></div>
+                <div style="width: 14%" class="tb-tbody-td"><span>{{ item.sellerCompany }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.totalPay }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ PAYFOR_TYPE[item.payStatus] }}</span></div>
+
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ PAY_TYPE[item.payType] }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>
+                  {{ formatZhuiZongHao(item) }} 
+                  <a href="javascript:void(0)" class="abtn" ng-show="!formatZhuiZongHao(item) && status == 1" ng-click="openLogisticsBubble(item)">填写运单号</a>
+                </span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.applicantName }}</span></div>
+
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.buyerName }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>{{ item.createTime | date:'yyyy-MM-dd hh:mm:ss' }}</span></div>
+                <div style="width: 12.5%" class="tb-tbody-td"><span>
+                  <a href="javascript:void(0)" class="abtn" ng-click="showThisDetial(item)" ng-show="status == 0">查看</a>
+                  <a href="javascript:void(0)" class="abtn" ng-click="showThisDetial(item)" ng-show="status == 1 && item.payStatus != 1 && !item.refundAmount">退款</a>
+                  <a href="javascript:void(0)" class="abtn" ng-click="previewPic(item)" ng-show="status == 1">查看凭证</a>
+                </span></div>
+            </div>
+
+            <!-- hover sku box -->
+            <!-- <div class="hover_sku_list">
+              <div class="li-tr flex" ng-repeat="i in item.productList">
+                <div class="li-td">
+                  <div class="img-box">
+                    <img src="{{ i.cjImg }}" alt="" class="pic"/>
+                    <img src="{{ i.cjImg }}" alt="" class="preview"/>
+                  </div>
+                </div>
+                <div class="li-td">SKU : {{i.cjSku}}</div>
+                <div class="li-td txt wrap fdc" ng-show="i.caiGouLianJie!=''">采购链接：<a href="{{ i.caiGouLianJie }}" target="_blank">{{ i.caiGouLianJie }}</a></div>
+                <div class="li-td">单价：{{ item.onlineType=='2'?i.danJia:i.cjDanJia }}</div>
+                <div class="li-td">数量：{{ i.shuLiang }}</div>
+                <div class="li-td">操作人：{{ item.caigouRen || '无' }}</div>
+                <div class="li-td">时间：{{ i.createDate.time | date:'yyyy-MM-dd hh:mm:ss' }}</div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+    
+        <!-- 分页 -->
+        <page></page>
+      </section>
+    </main>
+  </div>
+
+  <!-- 详情 -->
+  <div class="erp-common-tan-v2-wrap" ng-show="showDetail">
+      <div class="erp-common-tan-v2" style="width: 1000px; height: auto;">
+        <!-- 关闭按钮 -->
+        <a class="tan-v2-close" href="javascript:void(0);" ng-click="showDetail=false;"><img src="static/image/public-img/close-img.png"></a>
+        <!-- title -->
+        <div class="tan-v2-top">
+          <h6>{{ status == 0 ? '详情' : '退款'}}</h6>
+        </div>
+        <!-- 内容 -->
+        <div class="tan-v2-con">
+            <ul class="flex aic fwp insidePop">
+                <li>申请人：<span>{{ currentDetail.caigouInternalProcurement.applicantName }}</span></li>
+                <li>申请原因：<span>{{ currentDetail.caigouInternalProcurement.pursueReason }}</span></li>
+                <li>采购方式：<span>{{ CAIGOU_TYPE[currentDetail.caigouInternalProcurement.type] }}</span></li>
+                <li>收货地址：<span>{{ currentDetail.caigouInternalProcurement.shippingAddress }}</span></li>
+                <li>收货联系人：<span>{{ currentDetail.caigouInternalProcurement.shippingName }}</span></li>
+                <li>收货人电话：<span>{{ currentDetail.caigouInternalProcurement.shippingPhone }}</span></li>
+                <li>卖家公司：<span>{{ currentDetail.caigouInternalProcurement.sellerCompany }}</span></li>
+                <li>卖家姓名：<span>{{ currentDetail.caigouInternalProcurement.sellerName }}</span></li>
+                <li>卖家电话：<span>{{ currentDetail.caigouInternalProcurement.sellerPhone }}</span></li>
+        
+                <li>付款方式：<span>{{ PAY_TYPE[currentDetail.caigouInternalProcurement.payType] }}</span></li>
+                <li ng-show="!depositShow()">共需支付：<span>{{ currentDetail.caigouInternalProcurement.totalPay }}</span></li>
+                <li ng-show="depositShow()">支付订金：<span>{{ currentDetail.caigouInternalProcurement.deposit }}</span></li>
+                <li ng-show="depositShow()">尾款：<span>{{ currentDetail.caigouInternalProcurement.totalPay }}</span></li>
+        
+                <li>收款方式：<span>{{ ACCEPT_TYPE[currentDetail.caigouInternalProcurement.paymentTerm] }}</span></li>
+                <li ng-show="bankShow()">收款银行：<span>{{ currentDetail.caigouInternalProcurement.bankName }}</span></li>
+                <li ng-show="bankShow()">收款银行支行：<span>{{ currentDetail.caigouInternalProcurement.branchAddress }}</span></li>
+                <li ng-show="bankShow()">账户名称：<span>{{ currentDetail.caigouInternalProcurement.accountName }}</span></li>
+                <li ng-show="bankShow()">银行账号：<span>{{ currentDetail.caigouInternalProcurement.account }}</span></li>
+        
+                <li ng-show="!bankShow()">支付宝账号名称：<span>{{ currentDetail.caigouInternalProcurement.accountName }}</span></li>
+                <li ng-show="!bankShow()">支付宝账号：<span>{{ currentDetail.caigouInternalProcurement.account }}</span></li>
+        
+              </ul>
+        
+              <!-- 物流 -->
+              <div class="flex ais" style="width:100%;margin-bottom:15px;" ng-repeat="i in currentDetail.caigouInternalProcurementLogisticss">
+                <div class="item" style="margin-right:15px;">
+                  <span>物流公司：</span>
+                  {{ i.logisticsName || '未填写' }}
+                </div>
+        
+                <div class="item">
+                  <span>物流单号：</span>
+                  {{ i.logisticsNum || '未填写' }}
+                </div>
+        
+              </div>
+              <!-- 物流 -->
+        
+              <div class="item flex aic" style="margin-top:20px;">
+                <div class="tit">采购凭证：</div>
+                <div class="con flex fdr">
+                  <uploadfiles id="'uploadFiles2'" show-component="true" init-files="certPic"></uploadfiles>
+                </div>
+              </div>
+        
+              <table class="k-table" style="width:100%;margin-top:20px;">
+                <thead>
+                  <th>商品名称</th>
+                  <th>商品单价</th>
+                  <th>商品数量</th>
+                </thead>
+                <tbody style="max-height: 500px;">
+                  <tr ng-repeat="i in currentDetail.caigouInternalProcurementProducts">
+                    <td>
+                      <div class="td">{{ i.productName || '--' }}</div>
+                    </td>
+                    <td>
+                      <div class="td">{{ i.productPrice || '--' }}</div>
+                    </td>
+                    <td>
+                      <div class="td">{{ i.num || '0' }}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div class="flex fdr aic fwp" style="margin-top:20px;" ng-show="status == 1">
+                <div class="item" style="margin-right:20px;">
+                  <span>实际支付：</span>
+                  {{ currentDetail.caigouInternalProcurement.actualPayment }}
+                </div>
+  
+                <div class="item" style="margin-right:20px;">
+                  <span>退款金额：</span>
+                  <input type="number" ng-model="refundParams.refundAmount" />
+                </div>
+
+                <div class="item" style="margin-right:20px;">
+                  <span>退款原因：</span>
+                  <input type="text" ng-model="refundParams.refundRemark" />
+                </div>
+
+                <div class="item flex aic" style="margin-top:20px;width:100%">
+                  <div class="tit">退款凭证：</div>
+                  <div class="con flex fdr">
+                    <uploadfiles id="'uploadFiles3'" init-files="refundProofs" callback="refundProofscallback"></uploadfiles>
+                  </div>
+                </div>
+
+              </div>
+
+        </div>
+        <!-- 底部 -->
+        <div class="tan-v2-bot">
+          <!-- 取消按钮（灰色） -->
+          <a href="javascript:void(0);" ng-click="showDetail=false;" class="qu-xiao-btn">关闭</a>
+          <!-- 确认按钮（彩色） -->
+          <a href="javascript:void(0);" ng-click="openRefund()" ng-show="status == 1" class="que-ding-btn">确定</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 添加物流 -->
+  <div class="erp-common-tan-v2-wrap" ng-show="logisticsFlag">
+    <div class="erp-common-tan-v2" style="width: 740px; height: auto;">
+      <!-- 关闭按钮 -->
+      <a class="tan-v2-close" href="javascript:void(0);" ng-click="logisticsFlag=false;"><img src="static/image/public-img/close-img.png"></a>
+      <!-- title -->
+      <div class="tan-v2-top">
+        <h6>填写物流信息</h6>
+      </div>
+      <!-- 内容 -->
+      <div class="tan-v2-con">
+        <div class="flex fyc" ng-repeat='i in logisticsList'>
+          <div class="input-item flex fyc">
+            <span>物流公司：</span>
+            <input type="text" placeholder="请填写物流公司" ng-model='i.logisticsName' />
+          </div>
+          <div class="input-item flex fyc">
+            <span>运单号：</span>
+            <input type="text" placeholder="请输入运单号" ng-model='i.logisticsNum' />
+          </div>
+          <div class="operation flex" style='margin-bottom:10px;'>
+            <button class="btn primary" ng-click="addLogistics()">+</button>
+            <button class="btn primary" ng-click="logisticsList.splice($index,1)" ng-show="logisticsList.length>1">-</button>
+          </div>
+        </div>
+      </div>
+      <!-- 底部 -->
+      <div class="tan-v2-bot">
+        <!-- 取消按钮（灰色） -->
+        <a href="javascript:void(0);" ng-click="logisticsFlag=false;" class="qu-xiao-btn">取消</a>
+        <!-- 确认按钮（彩色） -->
+        <a href="javascript:void(0);" ng-click="saveLogistics()" class="que-ding-btn">确定</a>
+      </div>
+    </div>
+  </div>
+
+<style>
+	.my-wrap { margin-left:215px; padding:15px; }
+    .my-main { background: #fff;}
+    .filter-area { padding: 10px;}
+
+    input,select{height:34px;line-height:34px;}
+
+    ul.insidePop li {
+      margin-bottom: 15px;
+      margin-right: 15px;
+    }
+
+    ul.insidePop li span {
+      color: #999;
+    }
+
+    .fs-14 {font-size: 14px;}
+    .lh-30 {line-height: 30px;}
+    .mb-20 {margin-bottom: 20px;}
+    .mr-10 {margin-right: 10px;}
+    .bd {border: 1px solid #eee;}
+    .flex {display: flex;}
+    .fbt{justify-content: space-between;}
+    .fxc {justify-content: center;}
+    .fyc {align-items: center;}
+    .fdc {flex-direction: column;}
+    .fwp {flex-wrap: wrap;}
+    .fg-1 {flex-grow: 1;}
+
+    a.abtn{color:#f9ae08;}
+    a.abtn:hover{opacity:0.6;}
+    .my-main .search-btn{height:37px;line-height: 37px;padding:0 15px;border:1px solid #eee;background-color:#fff;}
+
+    select{font-size:14px;color:#999;}
+
+    .txt.wrap{word-break: break-word;}
+
+    .img-box{position:relative;}
+    .img-box img.preview{width:200px;display: none;position: absolute;left:100%;top:0;}
+    .img-box:hover img.preview{display: block;}
+
+    /* btn */
+    button.btn{height:37px;line-height: 37px;padding:0 15px;}
+    button.primary{border:1px solid #f9ae08;background-color:#f9ae08;color:#fff;}
+    button.ghost{border:1px solid #eee;background-color:#fff;}
+
+    .table-area{padding:15px;}
+    .item-tr{position:relative;}
+    .item-tr .hover_sku_list{display: none;width:100%;background-color:#f7f3e6;z-index:1;}
+    .item-tr .hover_sku_list .li-tr{padding:15px 10px;}
+    .item-tr .hover_sku_list .li-tr .li-td{padding:0 15px;font-size:12px;display: flex;align-items: center;justify-content: center;flex:1;}
+    .item-tr .hover_sku_list .li-tr .li-td img.pic{width:45px;height:45px;}
+    .item-tr:hover .hover_sku_list{display: block!important;}
+
+</style>

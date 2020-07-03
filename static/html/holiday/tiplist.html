@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>特殊节假日付款提醒</title>
+</head>
+<body>
+    <!-- content -->
+    <div class="ea-content">
+        <!-- right con -->
+        <div class="right-bar-wrap ea-right-content">
+            <!-- right nav -->
+            <div class="asj-h10"></div>
+            <!-- right search -->
+            <div class="right-bar">
+                <div class="ea-right-search">
+                    <a class="dc-btn" href="#/holiday/tipadd/0">新增通知</a>
+                </div>
+                <!-- right list -->
+                <div class="table-con-box">
+                    <table class="ea-list-table ">
+                        <tr>
+                            <th><span>模板主题</span></th>
+                            <th>模板名称</th>
+                            <th>模板内容</th>
+                            <th>日期</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr ng-repeat="item in list">
+                            <td>{{item.topic}}</td>
+                            <td><p class="tip-list-content">{{item.title}}</p></td>
+                            <td><p class="tip-list-content">{{item.content}}</p></td>
+                            <td>{{item.startTime | date:"yyyy-MM-dd"}}-{{item.endTime | date:"yyyy-MM-dd"}}</td>
+                            <td>
+                                <span class="opera-btn" ng-click="editFun(item)">编辑</span>
+                                <span class="opera-btn gray" ng-show="item.status==0" ng-click="onOrOff(item)">启用</span>
+                                <span class="opera-btn" ng-show="item.status==1" ng-click="onOrOff(item)">禁用</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div ng-show="totalNum<1" style="text-align: center;">暂无数据</div>
+                    <!-- 分页 -->
+                    <page ng-show="totalNum>1"></page ng-show="totalNum<1">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

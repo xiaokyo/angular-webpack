@@ -1,0 +1,1759 @@
+<style>
+  .selectGys {
+    margin-left: 10px;
+    /*position: relative;*/
+  }
+
+  .selectGys>span.selectDropBtn {
+    display: block;
+    background: #fff;
+    width: 140px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .selectDropBtn>span:first-child {
+    display: inline-block;
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .selectDropBtn>span:last-child {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border: 5px solid transparent;
+    border-top-color: #333;
+    position: relative;
+    top: -7px;
+
+  }
+
+  .selectWrap {
+    background: #fff;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    position: absolute;
+    left: 325px;
+    top: 40px;
+    z-index: 9999;
+    display: none;
+  }
+
+  .wrap-top {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+  }
+
+  .wrap-top>input {
+    width: 100%;
+    min-width: 200px;
+    border-radius: 50px;
+    padding: 0 22px 0 10px;
+    height: 26px;
+
+  }
+
+  .resetBtn {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url("static/image/public-img/close.png") no-repeat;
+    background-size: 15px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .wrap-bottom {
+    /*padding: 8px 10px;*/
+    font-size: 12px;
+    max-height: 390px;
+    overflow-y: auto;
+  }
+
+  .wrap-bottom>ul>li>span {
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+  }
+
+  .wrap-bottom>ul>li>span:hover {
+    color: #fff;
+    background: #5CACEE;
+  }
+
+  .resetBtn {
+    display: none;
+  }
+
+  .soldOutNav {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    height: 60px;
+    padding: 0 20px;
+    width: calc(100% - 270px);
+    z-index: 999;
+  }
+
+  .inquiry-and-drop .right-bar.soldOutWrap {
+    margin-top: 70px;
+  }
+
+  .soldOutNav>a {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    /* width: 60px; */
+    padding: 0 15px;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .soldOutNav>a:hover {
+    color: rgba(255, 162, 0, 1);
+  }
+
+  .soldOutNav>a.act {
+    color: rgba(255, 162, 0, 1);
+    border-bottom-color: rgba(255, 162, 0, 1);
+  }
+
+  .supply-price-layer .sell-price-list .sp-vlist-title li {
+    width: 12.5%;
+  }
+
+  .supply-price-layer .sell-price-list .sp-vlist-body .line-item .line-item-item {
+    width: 12.5%;
+  }
+
+  .prism-big-play-btn {
+    left: calc(50% - 32px) !important;
+    bottom: calc(50% - 32px) !important;
+  }
+
+  #uploadVideoBtn {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    background: #fff;
+    font-size: 12px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 29px;
+    position: absolute;
+    top: -4px;
+    cursor: pointer;
+  }
+
+  .prism-player .prism-cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .more-operate .drop-down {
+    left: -50px;
+  }
+
+  .merchan-list .merchan-list-con .li-img .hidden-bigimg-po {
+    top: -300px;
+  }
+  .search-text {color: blue; font-weight: 550;}
+</style>
+<div class="merchandise-box">
+  <div class="right-bar-wrap inquiry-and-drop">
+    <div class="soldOutNav" ng-show="isSoldOut && spType !== 'service'">
+      <a class="act">商品</a>
+      <a ng-click="gotoSoldOut()">变体</a>
+    </div>
+    <div class="soldOutNav" ng-show="spType === 'service'">
+      <a ng-class="{'act': serviceTab.active}" ng-href="{{serviceTab.href}}" ng-repeat="serviceTab in serviceTabList track by $index">{{serviceTab.name}}</a>
+    </div> 
+    <div class="right-bar" ng-class="{soldOutWrap:isSoldOut || spType === 'service'}">
+      <div class="asj-h15"></div>
+      <div class="top-nav-wrap">
+        <div class="top-nav clearfix" ng-if="merchanStatus=='3' && merchType=='0'">
+          <ul class="top-nav-ul">
+            <li class="active" ng-click="shoAllDrop()">{{'100187' | translate}}</li>
+            <li ng-click="getListAuto()">{{'100363' | translate}}</li>
+            <li ng-click="getListListed()">{{'100364' | translate}}</li>
+            <!-- <li>搜品关联</li> -->
+            <li ng-click="getListOffAss()">{{'100365' | translate}}</li>
+          </ul>
+        </div>
+        <div ng-hide="spType=='service'" class="add-merch"><a href="javascript:;" class="add-merch-btn"
+            ng-click="similarGoods()">{{'100366' | translate}}</a></div>
+        <!-- <div ng-hide="spType=='service'" class="add-merch"><a href="{{'#/merchandise/addSKU1///'+(dropFlag=='service'?'1':(optType=='personality'?'2':'0'))}}"  class="add-merch-btn">{{'100366' | translate}}</a></div> -->
+        <!-- <div class="add-merch" style="margin-right: 10px;"><a href="javascript:void(0);" ng-click="combineSkuFlag=true;"
+            class="add-merch-btn">组合SKU</a></div> -->
+        <div class="add-merch" ng-show="repeatSkuBtnFlag" style="margin-right: 10px;"><a href="javascript:void(0);"
+            ng-click="repeatSkuFlag=true;" class="add-merch-btn">重复SKU</a></div>
+      </div>
+      <!-- 上面功能条 -->
+      <div class="function-bar">
+        <div class="top-search">
+          <div class="input-group search-box">
+            <select class="form-control top-search-sel" ng-model="topSearchKey">
+              <option value="SKU">SKU</option>
+              <option value="CH">{{'100367' | translate}}</option>
+              <option value="EN">{{'100368' | translate}}</option>
+            </select>
+            <div style="display: flex; border: 1px solid #08aceb;">
+              <div class="img-box" ng-mouseover="isHover = true" ng-mouseleave="isHover = false"
+                ng-class="{'hover-boder':isHover,'no-hover-boder':!isHover}"
+                ng-repeat="item in uploadImgs track by $index">
+                <img src="{{item.url}}" alt="">
+                <div class="img-clear" ng-class="{'hover':isHover,'no-hover':!isHover}" ng-click="imgClear()">x</div>
+              </div>
+              <input type="text" class="top-search-inp change-inp" autoFocus id="searchVal" placeholder="" ng-model="topSearchVal" ng-keypress="enterSearch($event)" ng-keyup="selectSearch($event)">
+              <label for="img-upload" ng-mouseover="isShow = true" ng-mouseleave="isShow = false" ng-show="merchanStatus=='3'">
+                <input type="file" id="img-upload" style="display: none;" onchange="angular.element(this).scope().upLoadImg4(this.files)">
+                <img class="img-upload" src="static\image\public-img\img-upload.png" ng-show="!isShow">
+                <img class="img-upload" src="static\image\public-img\img-upload-hover.png" ng-show="isShow">
+              </label>
+            </div>
+            <a role="button" class="btn btn-default top-search-btn" type="button"
+              ng-click="getSearchList()">{{'100025' | translate}}</a>
+          </div>
+          <div class="right-btns">
+            <div class="yzy-export-box" ng-show='isDaifaYishangjia'>
+              <div class="export-select">
+                导出
+                <b></b>
+              </div>
+              <ul class="export-drop-box">
+                <li ng-click="exportDrop(1)">按销量导出</li>
+                <li ng-click="exportDrop(2)">按刊登量导出</li>
+              </ul>
+            </div>
+            <a style="width: 100px" role="button" type="button" class="btn btn-default drop-search-btn"
+              ng-click="showHideSerch($event)"><span class="text">{{'100369' | translate}}</span>&nbsp;<span
+                class="caret"></span></a>
+            <!-- <a role="button" type="button" class="btn btn-default export-btn">{{'100068' | translate}}</a> -->
+            <a role="button" type="button" class="btn btn-default banch-remove-btn"
+              ng-if="merchanStatus=='1' || merchanStatus=='5' || merchanStatus=='4'"
+              ng-click="goActDelete()">{{'100370' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-if="isRecycleMerchan"
+              ng-click="goActClear()">{{'100371' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-offshelve-btn" ng-if="merchanStatus=='3'"
+              ng-click="goActOffShelves()" 
+              ng-show="(loginName == 'admin' || loginName == '王慧云')"
+            >{{'100372' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-changecate-btn" ng-if="merchanStatus=='3'"
+              ng-click="banchChangeCate()">{{'100373' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-submit-btn"
+              ng-if="merchanStatus=='1' || merchanStatus=='4'" ng-click="goActSubmit()">{{'100374' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-onshelve-btn" ng-if="merchanStatus=='5'"
+              ng-click="goActSubmit()">{{'100375' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-reback-btn" ng-if="merchanStatus=='0'"
+              ng-click="goActSubmit()">{{'100376' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-clear-btn" ng-if="merchanStatus=='0'"
+              ng-click="goActClear('deleteall')">{{'100377' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-reback-btn" ng-if="merchanStatus=='2'"
+              ng-click="goActPass()">{{'100378' | translate}}</a>
+            <a role="button" type="button" class="btn btn-default banch-reback-btn" ng-if="merchanStatus=='2'"
+              ng-click="goForbidPass()">{{'100379' | translate}}</a>
+          </div>
+        </div>
+        <div ng-include="'./static/html/manage/merchandise/merchandise-common-search.html'" onload="afterGetSearch()">
+        </div>
+        <div class="bottom-search">
+          <div class="search-item">
+            <div class="serch-by-name">{{'100350' | translate}}</div>
+            <div class="search-by-con">
+              <div class="price-inp-box">
+                <input type="text" class="price-inp" id="search-price-lower">
+                <span class="dollar-icon">$</span>
+              </div>
+              <span>——</span>
+              <div class="price-inp-box">
+                <input type="text" class="price-inp" id="search-price-upper">
+                <span class="dollar-icon">$</span>
+              </div>
+              <a role="button" type="button" class="btn btn-primary bottom-search-btn"
+                ng-click="getSearchList()">{{'100050' | translate}}</a>
+            </div>
+          </div>
+          <div class="search-item">
+            <div class="serch-by-name">{{'100380' | translate}}</div>
+            <div class="search-by-con">
+              <input type="text" id="search-weight-lower">
+              <span>——</span>
+              <input type="text" id="search-weight-upper">
+              <span>g</span>
+              <a role="button" type="button" class="btn btn-primary bottom-search-btn"
+                ng-click="getSearchList()">{{'100050' | translate}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 列表 -->
+      <div id="merchan-list-all"
+        ng-class="{'merchan-list': true, 'merchan-audit-fail': (merchanStatus=='4' || merchanStatus=='5'), 'merchan-list-auto': (isAutoLinkMerch || isListedMerch || isOffAssMerch), 'merchan-list-waitsubmit': merchanStatus=='1', 'merchan-list-underreview': merchanStatus=='2','merchan-list-service':dropFlag=='service'}">
+        <!-- 列表top -->
+        <ul class="merchan-list-top">
+          <li class="li-img">
+            <div class="check-box">
+              <input type="checkbox" name="" id="" ng-model="checkAllMark"
+                ng-click="checkAllMerch(checkAllMark, $event)">
+              <label for=""></label>
+            </div>
+            <span>{{'100382' | translate}}</span>
+          </li>
+          <li class="li-name">{{'100107' | translate}}</li>
+          <li class="li-SKU">SKU</li>
+          <li ng-if="merchanStatus=='1' || merchanStatus=='2'" class="li-FZR">
+            <div><span>{{'100383' | translate}}</span></div>
+            <div>
+              <select name="" id="" ng-model="chargemanType" ng-change="changeChargemanType(chargemanType)">
+                <option value="销售">{{'101318' | translate}}</option>
+                <option value="搜品" ng-if="merchType=='0'">{{'100384' | translate}}</option>
+              </select>
+              <select name="" id="" ng-change="changeChargeman(chargemanName)" ng-model="chargemanName"
+                ng-options="item.ID as item.LOGIN_NAME for item in chargemanList">
+                <option value="">{{'100187' | translate}}</option>
+              </select>
+            </div>
+          </li>
+          <li class="li-guest-num" ng-if="isAutoLinkMerch || isListedMerch || isOffAssMerch">{{'100385' | translate}}
+          </li>
+          <li class="li-category">{{'100386' | translate}}</li>
+          <li class="li-price" ng-if="merchType=='0'">
+            {{'100387' | translate}}
+            <br>
+            ($)
+          </li>
+          <li class="li-price" ng-if="merchType=='1'">
+            {{'服务费'}}
+            <br>
+            ($)
+          </li>
+          <li class="li-stock">
+            <div class="storage-title">
+              {{'运费试算'}}
+            </div>
+            <div class="storage-name">
+              <span>国家</span>
+              <span>物流</span>
+              <span>运费($)</span>
+            </div>
+          </li>
+          <li class="li-sumprice">{{'总价($)'}}</li>
+          <li class="li-rivalprice" ng-show="merchType=='0'">
+            {{'对手价格'}}
+            <br>
+            ($)
+          </li>
+          <li class="li-weight">
+            <p>{{'100388' | translate}}(g)</p>
+            <p>邮寄重量(g)</p>
+          </li>
+          <li class="li-authority">
+            <div class="left-con"><span>{{'100389' | translate}}</span></div>
+            <div>
+              <select name="" id="" ng-change="goSearchAuth()" ng-model="authoFlag" ng-show="merchType=='0'">
+                <option value="01">{{'100390' | translate}}</option>
+                <option value="1">{{'100391' | translate}}</option>
+                <option value="0">{{'100392' | translate}}</option>
+              </select>
+            </div>
+          </li>
+          <li class="li-fail-reason" ng-if="merchanStatus=='4'">{{'100393' | translate}}</li>
+          <li class="li-fail-reason" ng-if="merchanStatus=='5'">{{'下架原因'}}</li>
+          <li class="li-operate">{{'100043' | translate}}</li>
+        </ul>
+        <!-- 列表body -->
+        <!-- merchList -->
+        <!-- ng-show="hasMerch" -->
+        <div class="erp-load-box">
+          <div class="merchan-list-con-wrap" ng-show="!needOptimisation" ng-repeat="item in merchList">
+            <!-- ng-click="showDetail(item.id)" -->
+            <ul class="merchan-list-con clearfix">
+              <li class="li-img">
+                <div class="check-box">
+                  <!-- ng-change="checkMerch(item.sku, item.checked)" -->
+                  <!-- ng-model="item.checked" -->
+                  <!-- ng-click="stopPropagation($event)" -->
+                  <input type="checkbox" name="" id="" ng-model="item.checked"
+                    ng-click="checkMerch(item, $index, $event)">
+                  <label for=""></label>
+                </div>
+                <span class="list-preview-img"
+                 ng-mouseover="item.showBigimg = 1">
+                  <img ng-src="{{ item.bigImg | IMG_SIZE: 40 }}" alt="" class="small-img">
+                  <img ng-if="item.showBigimg" ng-src="{{ item.bigImg | IMG_SIZE: 360 }}" alt="" class="hidden-bigimg" ng-class="{'hidden-bigimg-po':$index>5}">
+                </span>
+              </li>
+              <li class="li-name">
+                <a class="span-name" ng-if="merchanStatus=='3'" href="javascript:void(0);" target="_blank"
+                  title="{{item.nameEn}}" ng-click="toFrontDetail(item.id)">{{ item.nameEn }}</a>
+                <span class="span-name" ng-if="merchanStatus!='3'">{{ item.nameEn }}</span>
+                <span class="asj-xiu-icon" ng-if="item.isCopy == 1">修</span>
+                <span class="asj-xiu-icon asj-sou-icon"
+                  ng-if="(merchanStatus=='1' || merchanStatus=='2') && item.isCopy != 1 && item.shangJiaStatus != 1 && (item.origin == 1 || item.origin == 2 || item.origin == 4)">搜</span>
+                <span class="asj-xiu-icon asj-pod-icon" ng-if="item.isClientDesign=='1'">个</span>
+                <span class="asj-xiu-icon asj-custom-icon" ng-if="item.isClientDesign=='2'">客</span>
+              </li>
+              <li class="li-SKU">
+                <div class="sku-name">{{ item.sku }}</div>
+                <div class="sku-property">
+                  <span class="y-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_LIQUID') != -1">液</span>
+                  <span class="f-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_STIVE') != -1">粉</span>
+                  <span class="c-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_MAGNETISM') != -1">磁</span>
+                  <!-- <img src="static/image/order-img/icondian.png" ng-if="item.propertyKey.split(',').indexOf('ELECTRONIC') != -1"> -->
+                  <img src="static/image/order-img/icondianzi.png"
+                    ng-if="item.propertyKey.split(',').indexOf('ELECTRONIC') != -1">
+                  <img src="static/image/order-img/iconbattery.png"
+                    ng-if="item.propertyKey.split(',').indexOf('BATTERY') != -1">
+                  <img src="static/image/order-img/icondianchi.png"
+                    ng-if="item.propertyKey.split(',').indexOf('IS_ELECTRICITY') != -1">
+                  <span class="g-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_CREAM') != -1">膏</span>
+                  <span class="jan-pro" ng-if="item.propertyKey.split(',').indexOf('EDGE') != -1">尖</span>
+                  <span class="jin-pro" ng-if="item.propertyKey.split(',').indexOf('NO_ENTRY') != -1">禁</span>
+                  <span class="f-pro" ng-if="item.propertyKey.split(',').indexOf('CLONE') != -1">仿</span>
+                  <span class="pao-pro" ng-if="item.propertyKey.split(',').indexOf('OVERSIZE') != -1">抛</span>
+                  <span class="bo-pro" ng-if="item.propertyKey.split(',').indexOf('THIN') != -1">薄</span>
+                  <span class="ping-pro" ng-if="item.propertyKey.split(',').indexOf('FLAT') != -1">平</span>
+                </div>
+              </li>
+              <li ng-if="merchanStatus=='1' || merchanStatus=='2'" class="li-FZR">
+                <!-- item.creater -->
+                <span>{{'101318' | translate}}：{{item.shelve || '无'}}</span>
+                <br>
+                <span ng-if="merchType=='0'">{{'100384' | translate}}：{{item.sourcer || '无'}}</span>
+              </li>
+              <li class="li-guest-num" ng-if="isAutoLinkMerch || isListedMerch || isOffAssMerch">{{ item.accountCount }}
+              </li>
+              <!-- <li class="li-category">{{ item.catagory }}</li> -->
+              <li class="li-category">{{ item.categoryName.split(',')[2].replace('amp;','') }}</li>
+              <li class="li-price">{{item.sellPrice ? item.sellPrice.replace(' -- ', '-') : 0}}</li>
+              <li class="li-stock">
+                <!-- <div class="storage-num">
+                    <span ng-repeat="stockItem in stockData">{{ item.inventory[stockItem.id] || 0 }}</span>
+                  </div> -->
+                <div class="storage-num">
+                  <span>
+                    <select style="max-width: 100%;" ng-change="chanListCoun(item)"
+                      ng-options="itemC.ID as itemC.NAME_EN for itemC in countrylist"
+                      ng-model="item.countryCode"></select>
+                  </span>
+                  <span>
+                    <select style="max-width: 100%;" ng-options="itemW as itemW for itemW in item.shiSuan.logSet"
+                      ng-model="item.wuliuway" ng-change="chanListWuliuway(item)"></select>
+                  </span>
+                  <span style="width:auto;">
+                    {{item.shiSuanRes.replace(' -- ', '-')}}
+                  </span>
+                </div>
+              </li>
+              <li class="li-sumprice">{{item.sumPrice}}</li>
+              <li class="li-rivalprice" ng-show="merchType=='0'">{{item.rivalPrice || 0}}</li>
+              <li class="li-weight">
+                <p ng-if="item.isChangeWeight == 0">{{ item.weight.replace(' -- ', '-') }}</p>
+                <p ng-if="item.isChangeWeight == 0">{{ item.packWeight.replace(' -- ', '-') }}</p>
+                <p ng-if="item.isChangeWeight == 1" style="color:#04a452;">{{ item.weight.replace(' -- ', '-') }}g</p>
+                <p ng-if="item.isChangeWeight == 1" style="color:#04a452;">{{ item.packWeight.replace(' -- ', '-') }}g
+                </p>
+              </li>
+              <li ng-class="{'li-authority':true, 'add-cursor': true}" ng-click="showPartUsers(item)">
+                {{ item.authorityStatus == 1 ? ('全部') : ('部分') }}
+                <!-- 标记 -->
+                <span class="forever-icon" ng-if="item.isAut == '1'">永久</span>
+              </li>
+              <li class="li-fail-reason" ng-if="merchanStatus=='4'" title="{{item.auditFailExplain}}">
+                {{ item.auditFailExplain || '--'}}</li>
+              <li class="li-fail-reason" ng-if="merchanStatus=='5'" title="{{item.unshelveExplain}}">
+                {{ item.unshelveExplain || '--'}}</li>
+              <li class="li-operate" style="position: relative;">
+                <span style="position:absolute;top:18px;font-size: 12px;"
+                  ng-show="item.schedule">上传进度：{{item.schedule}}%</span>
+                <a style="position:relative;top:-8px;" role="button" class="btn btn-primary drop-detail-btn"
+                  ng-click="showDetail(item)" href="javascript: void(0);"
+                  ng-if="merchanStatus=='3'">{{'100394' | translate}}</a>
+                <!-- <a role="button" class="btn btn-default edit-btn" ng-click="dropEdit(item)" ng-if="merchanStatus=='3'">{{'100120' | translate}}</a> -->
+                <div style="position:relative;top:-8px;" class="more-operate" ng-click="stopPropagation($event)"
+                  ng-if="merchanStatus=='3'">
+                  <a href="javascript:void(0);" class="more-btn">{{'更多'}}</a><span class="caret"></span>
+                  <ol class="drop-down">
+                    <li ng-click="dropEdit(item)">{{'100120' | translate}}</li>
+                    <li ng-click="productDoc(item)" ng-show="proDocBtnShow">商品档案</li>
+                    <li ng-click="productPurOrRiv(item)">编辑采购及对手链接</li>
+                    <li ng-click="moduleList(item)">多语言模板</li>
+                    <li ng-click="goActOffShelves(item)" ng-show="(loginName == 'admin' || loginName == '王慧云')">{{'100395' | translate}}</li>
+                    <!-- 全部可见商品，可线下指派（服务商品不线下指派） -->
+                    <li ng-click="offlineAssign(item)" ng-if="item.authorityStatus == 1 &&  item.productType != '1'">
+                      {{'100365' | translate}}</li>
+                    <!-- 客户设计商品，不再操作可见性 -->
+                    <ng-template ng-hide="item.isClientDesign==2">
+                      <!-- 代发商品部分可见，可以继续指定可见 -->
+                      <li ng-click="authoOneUser(item)" ng-if="item.authorityStatus == 0&&item.productType==0">
+                        {{'100396' | translate}}</li>
+                      <!-- 全部可见，管理员可以改为部分可见 -->
+                      <li ng-click="authoOneUser(item)" ng-if="loginName == 'admin' && item.authorityStatus == 1">
+                        {{'100392' | translate}}</li>
+                      <!-- 部分可见，管理员可以改为全部可见 -->
+                      <li ng-click="authoAllUser(item)" ng-if="loginName == 'admin' &&item.authorityStatus == 0 && item.isAut != '1'">
+                        {{'100391' | translate}}</li>
+                    </ng-template>
+                    <li ng-click="changeCate(item)">{{'100397' | translate}}</li>
+                    <li ng-click="setSupplyPrice(item,$index)" ng-if="item.productType != '1'">{{'100398' | translate}}
+                    </li>
+                    <!-- 私有商品可设置为永久私有，服务商品不可操作，客户设计商品不可操作 -->
+                    <ng-template ng-if="(loginName == 'admin' || loginName == '王慧云') && item.authorityStatus == '0' && item.productType != '1' && item.isClientDesign!=2">
+                    <li ng-click="setPrivForever(item,$index)"
+                      ng-if="item.isAut != '1'">
+                      {{'永久私有'}}</li>
+                    <li ng-click="cancelPrivForever(item,$index)"
+                      ng-if="item.isAut == '1'">
+                      {{'取消永久私有'}}</li>
+                    </ng-template>
+                    <!-- <li ng-click="deleteMerchan(item.id)">删除</li> -->
+                    <li ng-click="UploadVideo(item)" ng-if="item.productType != '1'">上传视频</li>
+                    <li ng-show="repeatSkuBtnFlag" ng-click="addZombie(item)">添加到僵尸订单</li>
+                    <li ng-show="repeatSkuBtnFlag" ng-click="deleteZombie(item)">删除僵尸订单</li>
+                  </ol>
+                </div>
+                <!-- <a role="button" class="btn btn-default submit-edit-btn" ng-click="detailEdit(item)" ng-if="merchanStatus=='1'">{{'100120' | translate}}</a> -->
+                <a role="button" class="btn btn-default submit-edit-btn" ng-click="detailEdit(item)"
+                  ng-if="merchanStatus=='5'">{{'100120' | translate}}</a>
+                <a role="button" class="btn btn-primary submit-btn" href="javascript: void(0);"
+                  ng-if="merchanStatus=='1'" ng-click="goActSubmit(item)">{{'100399' | translate}}</a>
+                <div class="more-operate" ng-click="stopPropagation($event)" ng-if="merchanStatus=='1'">
+                  <a href="javascript:void(0);" class="more-btn">{{'更多'}}</a><span class="caret"></span>
+                  <ol class="drop-down">
+                    <li ng-click="detailEdit(item)">{{'100120' | translate}}</li>
+                    <li ng-click="goActDelete(item)">{{'100227' | translate}}</li>
+                  </ol>
+                </div>
+                <!-- <a role="button" class="btn btn-default detail-btn" ng-click="showDetail(item)" href="javascript: void(0);"  ng-if="merchanStatus=='2'">{{'100394' | translate}}</a> -->
+                <a role="button" class="btn btn-primary pass-btn" ng-click="goActPass(item)" href="javascript: void(0);"
+                  ng-if="merchanStatus=='2'">{{'100400' | translate}}</a>
+                <div class="more-operate" ng-click="stopPropagation($event)" ng-if="merchanStatus=='2'">
+                  <a href="javascript:void(0);" class="more-btn">{{'更多'}}</a><span class="caret"></span>
+                  <ol class="drop-down">
+                    <li ng-click="goForbidPass(item)">{{'100401' | translate}}</li>
+                    <li ng-click="showDetail(item)">{{'100394' | translate}}</li>
+                  </ol>
+                </div>
+                <!-- <a role="button" class="btn btn-primary no-pass-btn" href="javascript: void(0);"  ng-if="merchanStatus=='2'" ng-click="goForbidPass(item)">{{'100401' | translate}}</a> -->
+                <!-- AF-edit-btn -->
+                <a role="button" class="btn btn-default edit-btn" ng-click="detailEdit(item)"
+                  href="javascript: void(0);" ng-if="merchanStatus=='4'">{{'100120' | translate}}</a>
+                <a role="button" class="btn btn-primary submit-btn" href="javascript: void(0);"
+                  ng-if="merchanStatus=='4'" ng-click="goActSubmit(item)">{{'100399' | translate}}</a>
+                <a role="button" class="btn btn-primary onshelve-btn" ng-if="merchanStatus=='5'"
+                  ng-click="goActSubmit(item)">{{'100403' | translate}}</a>
+                <!-- <a role="button" class="btn btn-default delete-btn" href="javascript: void(0);"  ng-if="merchanStatus=='1' || merchanStatus=='4' || merchanStatus=='5'" ng-click="goActDelete(item)">{{'100227' | translate}}</a> -->
+                <a role="button" class="btn btn-primary recover-btn" href="javascript: void(0);"
+                  ng-if="merchanStatus=='0'" ng-click="goActSubmit(item)">{{'100404' | translate}}</a>
+                <div class="more-operate" ng-click="stopPropagation($event)" ng-if="merchanStatus=='0'">
+                  <a href="javascript:void(0);" class="more-btn">{{'更多'}}</a><span class="caret"></span>
+                  <ol class="drop-down">
+                    <li ng-click="goActClear(item.id)">{{'100405' | translate}}</li>
+                  </ol>
+                </div>
+                <!-- <a role="button" class="btn btn-default delete-btn delete-forever-btn" href="javascript: void(0);"  ng-if="merchanStatus=='0'" ng-click="goActClear(item.id)">{{'100405' | translate}}</a> -->
+                <a role="button" class="btn btn-default set-sp-btn" href="javascript: void(0);"
+                  ng-if="merchanStatus=='6'" ng-click="setSupplyPrice(item, $index)">{{'供应商价格'}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex fxc fyc" style="min-height: 400px;" ng-show="needOptimisation">
+            <p>您好，为了节省服务器带宽，默认将不显示所有商品，但你仍可通过 <a class="search-text" href="javascript:;" ng-click="getSearchList()">搜索</a> 查找所有商品信息</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分页 -->
+      <!-- <div ng-include="'./static/html/manage/merchandise/merchandise-common-page.html'" onload="do($parent)"></div> -->
+      <!-- <p id="demo3-text"></p> -->
+      <page ng-show="!needOptimisation"></page>
+      <!-- <div ng-hide="hasMerch">没有找到数据</div> -->
+    </div>
+  </div>
+</div>
+<!-- 审核失败弹框 -->
+<script type="text/template" id="forbid-pass">
+  <h5>审核失败</h5>
+  <dl class="pro-info clearfix">
+    <dt><img src="#" alt="" class="pro-img"></dt>
+    <dd>
+      <p class="clearfix">
+        <span class="left-span">商品名称：</span><span class="right-span pro-name"></span>
+      </p>
+      <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p>
+    </dd>
+  </dl>
+  <div class="audit-fail">
+    <label for="">审核失败原因：</label>
+    <div>
+      <textarea id="forbid-pass-reason"></textarea>
+    </div>
+  </div>
+</script>
+<!-- 下架商品弹框 -->
+<script type="text/template" id="off-shelve">
+  <h5>商品下架</h5>
+  <dl class="pro-info clearfix">
+    <dt><img src="#" alt="" class="pro-img"></dt>
+    <dd>
+      <p class="clearfix">
+        <span class="left-span">商品名称：</span><span class="right-span pro-name"></span>
+      </p>
+      <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p>
+    </dd>
+  </dl>
+  <div class="audit-fail">
+    <label for="">下架原因：</label>
+    <div>
+      <textarea id="off-shelve-reason"></textarea>
+    </div>
+    <p class="warn" style="color: red; font-size: 12px; display: none;">该商品有指派关系！！！</p>
+  </div>
+</script>
+<!-- 线下指派弹框 -->
+<script type="text/template" id="offline-assign">
+  <h5>线下指派</h5>
+  <dl class="pro-info clearfix">
+    <dt><img src="#" alt="" id="offline-assign-img"></dt>
+    <dd>
+      <p class="clearfix">
+        <span class="left-span">商品名称：</span><span class="right-span pro-name"></span>
+      </p>
+      <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p>
+    </dd>
+  </dl>
+  <div class="chose-ship-method clearfix">
+    <label for="">选择物流：</label>
+    <select id="assign-ship-sele"></select>
+  </div>
+  <div class="assign-to">
+    <label for="">指派：</label>
+    <div class="default-con">
+      <input type="text" id="offline-assign-inp" name="">
+      <span class="remove-assign-user" style="display: none;" id="remove-assign">x</span>
+      <div class="search-res-wrap" style="display: none;">
+        <ul class="search-res-ul">
+        </ul>
+      </div>
+       <div class="search-res-box" style="display: none;" data="1">没有搜索到结果</div>
+    </div>
+  </div>
+</script>
+<!-- 指定可见弹框 -->
+<script type="text/template" id="autho-users">
+  <h5>指定可见</h5>
+  <dl class="pro-info clearfix">
+    <dt><img src="#" alt="" id="autho-users-img"></dt>
+    <dd>
+      <p class="clearfix">
+        <span class="left-span">商品名称：</span><span class="right-span pro-name"></span>
+      </p>
+      <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p>
+    </dd>
+  </dl>
+  <div class="chose-ship-method clearfix">
+    <label for="">选择物流：</label>
+    <select class="assign-ship-sele"></select>
+  </div>
+  <div class="assign-to">
+    <label for="">指定客户：</label>
+    <div class="default-con">
+      <input type="text" id="autho-users-inp" name="">
+      <span class="remove-assign-user" style="display: none;" id="remove-autho-users">x</span>
+      <div class="search-res-wrap" style="display: none;">
+        <ul class="search-res-ul">
+        </ul>
+      </div>
+       <div class="search-res-box" style="display: none;" data="1">没有搜索到结果</div>
+    </div>
+  </div>
+</script>
+
+<!-- 修改类目弹框 -->
+<script type="text/template" id="change-cate">
+  <h5>修改类目</h5>
+  <dl class="pro-info clearfix">
+    <dt><img src="#" alt="" class="pro-img"></dt>
+    <dd>
+      <p class="clearfix">
+        <span class="left-span">商品名称：</span><span class="right-span pro-name"></span>
+      </p>
+      <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p>
+    </dd>
+  </dl>
+  <div class="assign-to">
+    <label for="">一级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele1">
+      <option value="">请选择</option>
+    </select>
+  </div>
+  <div class="assign-to">
+    <label for="">二级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele2">
+      <option value="">请选择</option>
+    </select>
+  </div>
+  <div class="assign-to">
+    <label for="">三级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele3">
+      <option value="">请选择</option>
+    </select>
+  </div>
+</script>
+<!-- 批量修改类目弹框 -->
+<script type="text/template" id="banch-change-cate">
+  <h5>批量修改类目</h5>
+  <div class="assign-to">
+    <label for="">一级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele1">
+      <option value="">请选择</option>
+    </select>
+  </div>
+  <div class="assign-to">
+    <label for="">二级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele2">
+      <option value="">请选择</option>
+    </select>
+  </div>
+  <div class="assign-to">
+    <label for="">三级类目：</label>
+    <select class="change-cate-sele" name="" id="change-cate-sele3">
+      <option value="">请选择</option>
+    </select>
+  </div>
+</script>
+
+<script type="text/template" id="guest-info">
+  <div class="wa-GuestsDetails">
+      <h4>代发客人详情</h4>
+      <table class="ea-list-table ea-erp-cs">
+        <thead>
+          <tr>
+              <th><span>用户名</span></th>
+              <th><span>客户名称</span></th>
+              <th><span>关联日期</span></th>
+              <th><span>价格折扣</span></th>
+              <th><span>运费折扣</span></th>
+              <th><span>历史销量</span></th>
+          </tr>
+        </thead>
+        <tbody class="guest-info-tbody">
+          <tr class="la_tr la_tr01">
+              <td><span>dfdgdg3</span></td>
+              <td><span><p>aaa Chen</p><p><i class="ea-gard-star ea-gard4"></i></p></span></td>
+              <td><span>2017-10-25</span></td>
+              <td><span>80%</span></td>
+              <td><span>80%</span></td>
+              <td><span>580</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="page-box">
+        <div class="page-index" id="guest-page"></div>
+      </div>
+  </div>
+
+</script>
+<!-- 部分可见用户弹框 -->
+<!-- ng-show="showUserFlag" -->
+<div class="asj-common-tanwrap" ng-show="showUserFlag">
+  <div class="asj-common-tan" style="width:760px; height: 330px;">
+    <div class="tan-title">{{nowOpeItem.authorityStatus==0?'可见':nowOpeItem.authorityStatus==1?'指派':''}}用户详情</div>
+    <div class="wa-GuestsDetails" style="max-height: 210px;overflow: auto;">
+      <div class="ea-list-table-wrap">
+        <table class="ea-list-table ea-erp-cs">
+          <thead>
+            <tr>
+              <th><span>用户名</span></th>
+              <th><span>客户名称</span></th>
+              <th><span>添加日期</span></th>
+              <th><span>业务员</span></th>
+              <th class="ope-th" ng-show="nowOpeItem.authorityStatus==0"><span>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+          <tr class="la_tr la_tr01" ng-repeat="item in authUserList track by $index">
+            <td><span>{{item.LOGIN_NAME || item.loginName}}</span></td>
+            <td class="cus-lvtd">
+              <p>{{item.NAME || item.name}}</p>
+              <p>
+                <b ng-if="item.userLevel==3" class="yzkehu-flag">优</b>
+                <b ng-if="item.userLevel==2" class="ptkehu-flag">普</b>
+                <b ng-if="item.userLevel==1" class="qzkehu-flag">潜</b>
+                <img src="static/image/public-img/order.png">
+                <b class="cus-dengji">LV{{item.cunLevel}}</b>
+                <img src="static/image/public-img/money.png">
+                <b class="cus-dengji">LV{{item.moneyLevel}}</b>
+              </p>
+            </td>
+            <td><span>{{(item.createDate || item.autAccDate).time | date:'yyyy-MM-dd HH:mm:ss'}}</span></td>
+            <td><span>{{item.RELATE_SALESMAN || item.operator}}</span></td>
+            <td ng-show="nowOpeItem.authorityStatus==0"><a href="javascript:void(0);"
+                ng-click="deleteOneUser(item,$index)">删除</a></td>
+          </tr>
+          <tr ng-show="nowOpeItem.authorityStatus==1 && authUserList.length==0" class="la_tr la_tr01">
+            <td colspan="4">该商品没有指派关系</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="showUserFlag=false;authUserList=[];">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goDeleteUser()">{{'100050' | translate}}</a>
+    </div>
+  </div>
+</div>
+<!-- 设置供应商价格弹框 -->
+<div class="asj-common-tanwrap" ng-show="setSPFlag">
+  <div class="asj-common-tan supply-price-layer" style="width:790px;">
+    <div class="tan-title" translate="100406"></div>
+    <span style="position: absolute;top:24px;" class="sp-hyd-tit">货源地:</span>
+    <input style="position: absolute;left: 70px;top:20px;height: 30px;text-align: center;" ng-model="spHydModel">
+    <a href="#/supplier-gys" target="_blank" class="add-supply-btn">{{'100416' | translate}}</a>
+    <a href="javascript:void(0);" style="right:110px;" class="add-supply-btn" ng-click="addSupplyFlag=true;">新增供应商链接</a>
+    <div class="link-box-wrap">
+      <div class="link-box" ng-repeat="(index1,item) in buyLinks track by index1">
+        <div class="sp-top2 clearfix">
+          <span>{{'100417' | translate}}</span>
+          <a href="{{item.supplierLink}}" target="_blank" class="supply-link">{{item.supplierLink}}</a>
+          <a href="javascript:void(0);" class="delete-supply-btn" ng-click="removeOneLink(item,index1)">x</a>
+        </div>
+        <div class="sp-bottom">
+          <div class="banch-price clearfix" style="display: flex;align-content: center;position: relative;">
+            <div class="set-star clearfix">
+              <div class="left">{{'100418' | translate}}：</div>
+              <div class="right set-star-right">
+                <a ng-class="{'star':item.star >= 1}" href="javascript:void(0);" data="1"
+                  ng-click="changeBuyLinkStar(1,index1)" ng-mouseenter="showYellStar(1,index1)"
+                  ng-mouseleave="hideYellStar(1,index1)"></a>
+                <a ng-class="{'star':item.star >= 2}" href="javascript:void(0);" data="2"
+                  ng-click="changeBuyLinkStar(2,index1)" ng-mouseenter="showYellStar(2,index1)"
+                  ng-mouseleave="hideYellStar(2,index1)"></a>
+                <a ng-class="{'star':item.star >= 3}" href="javascript:void(0);" data="3"
+                  ng-click="changeBuyLinkStar(3,index1)" ng-mouseenter="showYellStar(3,index1)"
+                  ng-mouseleave="hideYellStar(3,index1)"></a>
+                <a ng-class="{'star':item.star >= 4}" href="javascript:void(0);" data="4"
+                  ng-click="changeBuyLinkStar(4,index1)" ng-mouseenter="showYellStar(4,index1)"
+                  ng-mouseleave="hideYellStar(4,index1)"></a>
+                <a ng-class="{'star':item.star >= 5}" href="javascript:void(0);" data="5"
+                  ng-click="changeBuyLinkStar(5,index1)" ng-mouseenter="showYellStar(5,index1)"
+                  ng-mouseleave="hideYellStar(5,index1)"></a>
+              </div>
+            </div>
+            <!--<select class="gyssel-list" style="font-size: 12px;height: 30px;width: 140px;margin-left: 20px;" ng-change="selGsFun(item,index1)" ng-model="item.gysGsModel">-->
+            <!--<option value="">请选择供应商</option>-->
+            <!--<option value="{{item.gongSiMing}}#{{item.id}}" ng-repeat="item in gysGsList">{{item.gongSiMing}}</option>-->
+            <!--</select>-->
+            <div class="set-grade clearfix">
+              <div class="left">{{'100419' | translate}}：</div>
+              <div class="right set-grade-right">
+                <select name="" id="" ng-model="item.rank">
+                  <option value="{{item2}}" ng-repeat="(index2,item2) in gradeNums track by index2">{{item2}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="selectGys" style="margin-left: 10px;">
+              <span class="selectDropBtn" ng-click="dropWrapFun(index1)"><span>请选择供应商</span> <span></span></span>
+              <div class="selectWrap">
+                <div class="wrap-top">
+                  <input id="searchGys" type="text" placeholder="请输入供应商名称"
+                    ng-keyup="myfun($event)" />
+                  <span class="resetBtn" ng-click="resetFun()" style="cursor: pointer"></span>
+                </div>
+                <div class="wrap-bottom">
+                  <ul>
+                    <li ng-repeat="gys in gysGsList"><span data-id="{{gys.id}}"
+                        ng-click="setGysFun(gys,index1)">{{gys.gongSiMing}}</span></li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <span class="ban-setsp-span">{{'100422' | translate}}：</span>
+            <select class="ban-setsp-sele" ng-model="item.banSetSPKey">
+              <option value="price">{{'100420' | translate}}</option>
+              <option value="number">{{'100421' | translate}}</option>
+            </select>
+            <input type="text" ng-model="item.banSetSPVal" class="ban-setsp-inp"
+              ng-change="verifyIsNum(item.banSetSPVal,index1)">
+            <a href="javascript:void(0);" class="ban-setsp-btn"
+              ng-click="goBanSetSP(index1, item.banSetSPVal,item.banSetSPKey)">{{'100050' | translate}}</a>
+          </div>
+          <div class="sp-vlist">
+            <div class="sp-vlist-title clearfix">
+              <ul>
+                <li class="sku-li">
+                  <div class="check-box">
+                    <input type="checkbox" name="" id="" ng-model="item.checked"
+                      ng-click="checkAllLinkv(index1,item.checked)">
+                    <label for=""></label>
+                  </div>
+                  <span>sku</span>
+                </li>
+                <li>{{'100421' | translate}}</li>
+                <li>{{'100420' | translate}}</li>
+                <li>{{'100423' | translate}}</li>
+              </ul>
+              <div class="place-box"></div>
+            </div>
+            <div class="sp-vlist-body">
+              <div class="line-item clearfix" ng-repeat="(index2,itemV) in item.vPrices track by index2">
+                <div class="sp-sku">
+                  <div class="check-box">
+                    <input type="checkbox" name="" id="" ng-model="itemV.checked"
+                      ng-click="checkOneLinkv(index1,index2,itemV.checked)">
+                    <label for=""></label>
+                  </div>
+                  <span class="sp-sku-name">{{itemV.sku}}</span>
+                </div>
+                <div class="line-item-center">
+                  <div class="line-item-item clearfix">
+                    <div class="line-item-inner">
+                      <!-- <span class="greater-icon">></span> -->
+                      <!-- <span ng-if="itemV.minCount===0 || itemV.minCount==='0'">0</span> -->
+                      <input type="text" ng-model="itemV.minCount"
+                        ng-change="verifyIsNum(itemV.minCount,index1,index2,'count')">
+                      <img class="icon" src="./static/image/public-img/minus_brown.png" alt=""
+                        ng-click="removeOneLinkV(index1, index2, itemV)">
+                      <img class="icon" src="./static/image/public-img/add_brown.png" alt=""
+                        ng-click="addOneLinkV(index1, index2, itemV)">
+                    </div>
+                    <div class="line-item-inner">
+                      <span>¥</span>
+                      <input type="text" ng-model="itemV.costPrice"
+                        ng-change="verifyIsNum(itemV.costPrice,index1,index2,'price')">
+                    </div>
+                  </div>
+                </div>
+                <div class="sp-is-supply">
+                  <div class="check-box">
+                    <input type="checkbox" name="" id="" ng-click="stopSupply(index1, index2, itemV.isSupplier)"
+                      ng-checked="{{itemV.isSupplier=='0'?false:true}}">
+                    <label for="">{{'100424' | translate}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="cancelSetSPF()">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goSetSPF()">{{'100050' | translate}}</a>
+    </div>
+  </div>
+</div>
+<!-- 搜品待提交弹框 -->
+<!-- ng-show="setSPFlag" -->
+<div class="asj-common-tanwrap" ng-show="setPriceBeforeSubmitFlag">
+  <div class="asj-common-tan supply-price-layer" style="width:1000px;">
+    <div class="tan-title">搜品商品价格设置</div>
+    <!-- <a href="javascript:void(0);" class="add-supply-btn" ng-click="addSupplyFlag=true;">{{'100416' | translate}}</a> -->
+    <div class="source-detail">
+      <h4>搜品详情</h4>
+      <p class="clearfix"><span class="left">编号：</span><span class="right">{{source.number}}</span></p>
+      <p class="clearfix" ng-show="source.firstName"><span class="left">姓名：</span><span class="right"
+          style="width: 123px;word-break: break-all;line-height: 20px;">{{source.firstName}}&nbsp;&nbsp;{{source.lastName}}</span>
+      </p>
+      <p class="clearfix"><span class="left">链接：</span><span class="right" style="line-height: 24px;"><a class="link"
+            href="{{source.sourceUrl}}" target="_blank">{{source.sourceUrl}}</a></span></p>
+      <p class="clearfix"><span class="left">价格：</span><span class="right">${{source.price || 0}}</span></p>
+      <p class="clearfix">
+        <span class="left">图片：</span>
+        <span class="right" style="max-height: 300px; overflow: auto;">
+          <a href="{{img.indexOf('https://') == -1 ?'https://' + img : img}}" target="_blank"
+            ng-repeat="img in source.img.split(',') track by $index"><img
+              src="{{img.indexOf('https://') == -1 ?'https://' + img : img}}" alt=""></a>
+          {{source.img ? '' : '无'}}
+        </span>
+      </p>
+      <p class="clearfix"><span class="left">描述：</span><span
+          class="right">{{source.description ? source.description : '无'}}</span></p>
+    </div>
+    <div class="competitor-link clearfix">
+      <div class="add-competitor-link">
+        <span>对手链接：</span>
+        <input style="width: 310px; margin-right: 15px;" type="text" ng-model="addCompVal">
+        <span>对手价格：</span>
+        <input style="width: 100px;" type="number" ng-model="addCompPri">
+        <img ng-click="addOneCompeLink(index1)" src="./static/image/public-img/iconplus.png" alt="">
+      </div>
+      <div class="sp-vlist competitor-link-list">
+        <div class="sp-vlist-title clearfix">
+          <ul>
+            <li>链接</li>
+            <li>价格</li>
+            <li>操作</li>
+          </ul>
+          <div class="place-box"></div>
+        </div>
+        <div class="sp-vlist-body">
+          <div class="line-item clearfix" ng-repeat="(index1,item) in competitorLins track by index1">
+            <div class="line-item-item clearfix">
+              <a href="{{item.name}}" target="_blank">{{item.name}}</a>
+            </div>
+            <div class="line-item-item clearfix">
+              {{item.price}}
+            </div>
+            <div class="line-item-item clearfix">
+              <a href="javascript:void(0);" ng-click="removeOneCompeLink(index1)">删除</a>
+            </div>
+          </div>
+        </div>
+        <div class="no-data" ng-show="competitorLins.length == 0">无对手链接</div>
+      </div>
+      <a href="javascript:void(0);" class="inner-sure-btn" ng-click="updataRivalLink()">保存对手链接</a>
+    </div>
+    <div class="competitor-link set-price clearfix set-sell-price">
+
+      <div class="banch-price clearfix">
+        <div class="set-star clearfix">
+          <!-- <span style="margin-right: 10px;">目标价格：{{sourceTargetPri || '0'}}</span> -->
+          <span>国家：
+            <select style="width: 200px;" ng-change="chanTargetCoun()"
+              ng-options="item.ID as item.NAME_EN for item in countrylist" ng-model="sourceTargetCoun"></select>
+          </span>
+          <!-- <span>目标国家：{{sourceTargetCoun || 'US'}}</span> -->
+        </div>
+        <a href="javascript:void(0);" class="ban-setsp-btn" ng-click="goBanSetPrice()">{{'100050' | translate}}</a>
+        <input type="number" class="ban-setsp-inp" ng-model="banchPrice">
+        <!--  <select class="ban-setsp-sele" ng-model="item.banSetSPKey">
+            <option value="price">{{'100420' | translate}}</option>
+            <option value="number">{{'100421' | translate}}</option>
+          </select> -->
+        <span class="ban-setsp-span">批量设置价格：</span>
+      </div>
+
+      <div class="sp-vlist sell-price-list" id="sell-price-list">
+        <div class="sp-vlist-title clearfix">
+          <ul>
+            <li class="sku-li">
+              <div class="check-box">
+                <input type="checkbox" name="" id="" ng-model="spListChecked" ng-click="spListCheckAll()">
+                <label for=""></label>
+              </div>
+              <span>图片</span>
+            </li>
+            <li>SKU</li>
+            <li>邮寄重量(g)</li>
+            <li>运费($)</li>
+            <li>运费成本($)</li>
+            <li>总价($)</li>
+            <li>设置价格($)</li>
+            <li>采购价格($)</li>
+          </ul>
+          <div class="place-box"></div>
+        </div>
+        <div class="sp-vlist-body">
+          <div class="line-item clearfix" ng-repeat="(index1,item) in spVlist track by index1">
+            <div class="sp-img line-item-item">
+              <div class="check-box">
+                <input type="checkbox" name="" id="" ng-model="item.checked" ng-click="checkOne(item.checked)">
+                <label for=""></label>
+              </div>
+              <span>
+                <img ng-src="{{ item.img }}" alt="" class="small-img" ng-click="showBigImg(item.img)">
+                <!-- <img ng-src="{{ item.img }}" alt="" class="hidden-bigimg"> -->
+              </span>
+            </div>
+            <!-- <div class="line-item-center"> -->
+            <div class="line-item-item clearfix">
+              <span>{{item.sku}}</span>
+              <div class="sku-property">
+                <span class="y-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_LIQUID') != -1">液</span>
+                <span class="f-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_STIVE') != -1">粉</span>
+                <span class="c-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_MAGNETISM') != -1">磁</span>
+                <!-- <img src="static/image/order-img/icondian.png" ng-if="item.propertyKey.split(',').indexOf('ELECTRONIC') != -1"> -->
+                <img src="static/image/order-img/icondianzi.png"
+                  ng-if="item.propertyKey.split(',').indexOf('ELECTRONIC') != -1">
+                <img src="static/image/order-img/iconbattery.png"
+                  ng-if="item.propertyKey.split(',').indexOf('BATTERY') != -1">
+                <img src="static/image/order-img/icondianchi.png"
+                  ng-if="item.propertyKey.split(',').indexOf('IS_ELECTRICITY') != -1">
+                <span class="g-pro" ng-if="item.propertyKey.split(',').indexOf('HAVE_CREAM') != -1">膏</span>
+                <span class="jan-pro" ng-if="item.propertyKey.split(',').indexOf('EDGE') != -1">尖</span>
+                <span class="jin-pro" ng-if="item.propertyKey.split(',').indexOf('NO_ENTRY') != -1">禁</span>
+                <span class="f-pro" ng-if="item.propertyKey.split(',').indexOf('CLONE') != -1">仿</span>
+                <span class="pao-pro" ng-if="item.propertyKey.split(',').indexOf('OVERSIZE') != -1">抛</span>
+                <span class="bo-pro" ng-if="item.propertyKey.split(',').indexOf('THIN') != -1">薄</span>
+                <span class="ping-pro" ng-if="item.propertyKey.split(',').indexOf('FLAT') != -1">平</span>
+              </div>
+            </div>
+            <div class="line-item-item clearfix">
+              {{item.packWeight}}
+            </div>
+            <div class="line-item-item clearfix">
+              {{shiSuanRes(item.shiSuan)}}
+            </div>
+            <div class="line-item-item clearfix">
+              <span ng-show="!isEPacket">{{classChengbenJia(item.shiSuan)}}</span>
+              <p ng-show="isEPacket" style="font-size: 12px;text-align: left;">深圳：{{shenzhen}}</p>
+              <p ng-show="isEPacket" style="font-size: 12px;text-align: left;">义乌：{{yiwu}}</p>
+              <p ng-show="isEPacket" style="font-size: 12px;text-align: left;">北京：{{beijing}}</p>
+            </div>
+            <div class="line-item-item clearfix">
+              {{(shiSuanRes(item.shiSuan) + (item.sellPrice * 1)).toFixed(2)}}
+            </div>
+            <div class="line-item-item clearfix">
+              <input type="text" ng-model="item.sellPrice" class="price-inp">
+            </div>
+            <div class="line-item-item clearfix">
+              {{item.costPrice}}
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-wuliu">
+        <span>物流方式</span>
+        <select ng-options="item as item for item in wuliulist" ng-model="wuliuway" ng-change="getwuliuway(wuliuway)">
+        </select>
+        <!-- <span>目标国家：</span>
+          <select ng-options="item.country as item.countryfull for item in countrylist" ng-model="countryCode" ng-change="getwuliuway(wuliuway)">
+            <option></option>
+          </select> -->
+      </div>
+      <!-- <a href="javascript:void(0);" class="inner-sure-btn">确定</a> -->
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0"
+        ng-click="setPriceBeforeSubmitFlag=false;spVlist=[];competitorLins=[];">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goSetPriceAndSave()">{{'保存价格并提交'}}</a>
+    </div>
+  </div>
+</div>
+<div class="asj-common-tanwrap" ng-show="addSupplyFlag">
+  <div class="asj-common-tan add-supply-layer" style="width:790px;">
+    <div class="tan-title">{{'100416' | translate}}</div>
+    <div class="add-supply-item clearfix">
+      <div class="left">{{'100417' | translate}}：</div>
+      <div class="right"><textarea ng-model="addLinkName"></textarea></div>
+      <!-- <div class="right"><input type="text" ng-model="addLinkName"></div> -->
+    </div>
+    <div class="add-supply-item clearfix">
+      <div class="left">{{'100425' | translate}}：</div>
+      <div class="right set-star-right">
+        <a ng-class="{'star':addLinkStars >= 1}" href="javascript:void(0);" data="1" ng-click="changeBuyLinkStar(1)"
+          ng-mouseenter="showYellStar(1)" ng-mouseleave="hideYellStar(1)"></a>
+        <a ng-class="{'star':addLinkStars >= 2}" href="javascript:void(0);" data="2" ng-click="changeBuyLinkStar(2)"
+          ng-mouseenter="showYellStar(2)" ng-mouseleave="hideYellStar(2)"></a>
+        <a ng-class="{'star':addLinkStars >= 3}" href="javascript:void(0);" data="3" ng-click="changeBuyLinkStar(3)"
+          ng-mouseenter="showYellStar(3)" ng-mouseleave="hideYellStar(3)"></a>
+        <a ng-class="{'star':addLinkStars >= 4}" href="javascript:void(0);" data="4" ng-click="changeBuyLinkStar(4)"
+          ng-mouseenter="showYellStar(4)" ng-mouseleave="hideYellStar(4)"></a>
+        <a ng-class="{'star':addLinkStars >= 5}" href="javascript:void(0);" data="5" ng-click="changeBuyLinkStar(5)"
+          ng-mouseenter="showYellStar(5)" ng-mouseleave="hideYellStar(5)"></a>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="addSupplyFlag=false;cancelAddSupply()">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goAddSupply()">{{'100050' | translate}}</a>
+    </div>
+  </div>
+</div>
+<div class="asj-common-tanwrap" ng-show="removeSupplyFlag">
+  <div class="asj-common-tan add-supply-layer">
+    <!-- <div class="tan-title">删除供应商</div> -->
+    <div class="delete-supply-item clearfix">
+      {{'100426' | translate}}？
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0"
+        ng-click="removeSupplyFlag=false;addLinkStars=5;addLinkName='';cancelRemoveSupply()">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goRemoveSupply()">{{'100050' | translate}}</a>
+    </div>
+  </div>
+</div>
+<!-- 指定负责人弹框 -->
+<!-- ng-show="pointChargeManFlag" -->
+<div class="asj-common-tanwrap" ng-show="pointChargeManFlag">
+  <div ng-class="{'asj-common-tan': true, 'common-tan-sty1': true}">
+    <h5>{{'100427' | translate}}</h5>
+    <dl class="pro-info clearfix">
+      <dt><img ng-src="{{nowOpePro.bigImg}}" alt=""></dt>
+      <dd>
+        <p class="clearfix">
+          <span class="left-span">{{'100107' | translate}}：</span><span
+            class="right-span pro-name">{{nowOpePro.enName}}</span>
+        </p>
+        <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku">{{nowOpePro.sku}}</span>
+        </p>
+      </dd>
+    </dl>
+    <div class="assign-to clearfix">
+      <label for="">{{'101318' | translate}}：</label>
+      <div class="right-con right-more">
+        <input type="text" id="assign-cust-inp" name="" ng-focus="getSalemanList()" ng-change="getSalemanList()"
+          ng-model="salemanName" autocomplete="off">
+        <div class="search-res-wrap" ng-show="salemanList2 != null">
+          <ul class="search-res-ul" ng-show="salemanList2.length > 0">
+            <li ng-repeat="item in salemanList2" ng-click="assignOneSaleman(item)">{{item.num + '-' + item.name}}</li>
+          </ul>
+          <div class="search-res-box" ng-show="salemanList2.length == 0">{{'100415' | translate}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="chanVarToPrivFlag=false;nowOpePro=null;">{{'100051' | translate}}</a>
+      <a class="tan-btn1" ng-click="goPoineChargeMan()">{{'100050' | translate}}</a>
+    </div>
+  </div>
+</div>
+<!--视频弹窗-->
+<div class="asj-common-tanwrap" ng-show="isvideo">
+  <div class="asj-common-tan video-layer ">
+    <div class="tan-title">上传视频</div>
+    <p style="font-size: 14px;">
+      <!--<button style="width: 100px;display: inline-block;" class="addvideo" ng-click="addvideo()">选择视频</button>-->
+      <!-- multiple -->
+      <!--<input type="file" onchange="angular.element(this).scope().upLoadVideo(this.files)" id="upvideo" style="display: none;">-->
+      <!--<span class="tit">{{path}}</span>-->
+      <!--<br/>-->
+      <!-- <input placeholder="视频链接" ng-model="videoUrl" type="text" style="height: 30px;padding: 0 7px;"> -->
+      <input placeholder="视频名称" ng-model="videoName" type="text" style="height: 30px;padding: 0 7px;">
+      <input placeholder="有版权价格($)" ng-model="copyrightPrice" type="number" style="height: 30px;padding: 0 7px;">
+      <input placeholder="无版权价格($)" ng-model="notCopyrightPrice" type="number" style="height: 30px;padding: 0 7px;">
+      <br>
+      <span style="display: inline-block;margin-top: 15px;">
+        是否免费下载
+        <select ng-model="isFree" style="padding: 0 8px;height:27px;line-height: 27px;width: 100px;">
+          <option value="1">是</option>
+          <option value="0">否</option>
+        </select>
+      </span>
+      <span style="margin-left:15px;position: relative;">
+        <span id="uploadVideoBtn">上传视频</span>
+        <input style="width:74px;display:inline-block;" type="file" id="shangchuanVeido">
+        <span style="margin-left:5px;" id="uploadVideoText"></span>
+      </span>
+
+      <button class="addvideo" ng-click="uplodvideo2()">添加</button>
+    </p>
+    <ul class="videos">
+      <li ng-repeat="item in videoList" on-finish-render-filters>
+        <!-- <video id="my-video" class="video-js" controls preload="auto" width="300" height="200" data-setup="{techOrder: ['flash','html5']}">
+          <source ng-src="{{videosrc(item.watermarkViewUrl)}}" type="video/mp4">
+        </video>-->
+        <!-- <video id="my-video" src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15306336/338209605760.mp4" class="video-js zzz" controls preload="auto" width="300" height="200" data-setup="{techOrder: ['flash','html5']}">
+          <source class="vvv"
+                  src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15306336/338209605760.mp4"
+                  data-index="{{$index}}" data-url="{{videosrc(item.watermarkViewUrl)}}"
+                  type="video/mp4">
+        </video> -->
+        <div class="prism-player" id="{{'J_prismPlayer'+($index+1)}}"></div>
+        <div class="clearfix">
+          <!--<span>{{item.codeId}}</span>-->
+          <span ng-attr-title="{{item.videoName}}"
+            style="width: 300px;display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height: 20px;">
+            {{item.videoName}}</span>
+          <span>{{videoState(item.uploadState)}}</span>
+          <p ng-show="item.copyright == 1" style="float: right;">
+            <button ng-show="item.copyright == 1" style="background-color: #faa538;margin-left: 10px;"
+              ng-click="removeVideo(item)">删除</button>
+            <button ng-click="Shelves(item)"
+              ng-show="item.videoState == 'DOWN_STATE' && item.uploadState == 3">上架</button>
+            <button ng-click="Shelves(item)" ng-show="item.videoState == 'ON_STATE' && item.uploadState == 3"
+              style="background-color: red;">下架</button>
+          </p>
+          <span ng-show="item.copyright == 2" style="float: right;color: orange;"> 客户版权 </span>
+        </div>
+      </li>
+    </ul>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="isvideo = false;">关闭</a>
+      <!--<a class="tan-btn1" ng-click="convideo()">确定</a>-->
+    </div>
+  </div>
+</div>
+<!--组合sku弹窗-->
+<style type="text/css">
+  .comine-sku-layer .comine-sku {
+    height: 500px;
+    overflow: auto;
+    font-size: 14px;
+  }
+  .comine-sku-layer .comine-sku .top .zhu-title {
+    width: 200px;
+    text-align: center;
+  }
+  .comine-sku-layer .comine-sku .top .ci-title {
+  width: 200px;
+  text-align: center;
+  }
+  .comine-sku-layer .comine-sku .top .num-title {
+  width: 60px;
+  text-align: center;
+  }
+  .comine-sku-layer .comine-sku input {
+    width: 200px;
+  }
+
+  .comine-sku-layer .comine-sku .notice {
+    font-size: 13px;
+    color: #777;
+    line-height: 22px;
+    border-top: 1px solid #eee;
+    margin-top: 15px;
+    padding-top: 10px;
+  }
+
+  /* .comine-sku-layer .zhu {
+     margin-top: 5px;
+  } */
+
+  .comine-sku-layer .ci {
+    /* margin-top: 10px; */
+    margin-left: 15px;
+  }
+
+  .comine-sku-layer .ci p {
+    margin-bottom: 5px;
+  }
+
+  .sku-text {
+    width: 420px;
+    height: 140px;
+    border: 1px solid #ececec;
+    vertical-align: top;
+    text-indent: 12px;
+  }
+
+  .repeat-tab {
+    border: 1px solid #ececec;
+    width: 100%;
+    text-align: center;
+  }
+
+  .repeat-skuthead th {
+    height: 40px;
+    background-color: #f4f8fd;
+    text-align: center;
+  }
+
+  .repeat-tbody .sku-img {
+    height: 60px;
+    width: 60px;
+  }
+
+  .repeat-tbody .sel-sturadio {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .repeat-tbody tr {
+    border-top: 1px solid #ececec;
+    padding: 10px;
+  }
+
+  .dt-img-td {
+    overflow: visible;
+  }
+
+  .dt-img-td .blank-span {
+    position: relative;
+  }
+
+  .dt-img-td .blank-span:hover .hide-bigimg {
+    display: block;
+  }
+
+  .dt-img-td .sp-smallimg {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+  .dt-img-td .hide-bigimg {
+    /* max-width: 360px; */
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    left: 60px;
+    top: -60px;
+    background-color: #fff;
+    z-index: 9;
+    display: none;
+    cursor: pointer;
+    max-width: none;
+    max-height: none;
+  }
+
+  .dt-img-td .tk-ziimg {
+    height: 60px;
+  }
+
+  .green2 {
+    color: green;
+  }
+
+  .red2 {
+    color: red;
+  }
+</style>
+<div class="asj-common-tanwrap" ng-show="combineSkuFlag">
+  <div class="asj-common-tan comine-sku-layer" style="width: 800px; height: 632px;">
+    <div class="tan-title">组合SKU</div>
+    <div class="comine-sku" style="margin-bottom:15px;">
+      <div class="top flex">
+        <div class="zhu">
+          <!-- 主SKU： -->
+          <div class="zhu-title">主SKU</div>
+          <p><input ng-disabled="isDisabled" type="text" ng-model="zhuSKu"><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{zuWeight}} </span>
+          <span>&nbsp;&nbsp;x&nbsp;&nbsp;1&nbsp;&nbsp;=</span>
+          </p>
+        </div>
+        <div class="ci">
+          <!-- 次SKU： -->
+          <!-- 数量： -->
+          <div class="flex">
+            <span class="ci-title">次SKU</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="num-title">数量</span>
+          </div>
+          <p ng-repeat="item in ciSkuArr"><input ng-disabled="isDisabled" type="text" ng-model="item.sku">&nbsp;&nbsp;x&nbsp;&nbsp;<input style="width: 60px;" ng-model="item.num" ng-disabled="isDisabled" type="number">&nbsp;&nbsp;&nbsp;&nbsp;<img style="cursor: pointer;" ng-if="$index!=ciSkuArr.length-1" src="./static/image/public-img/reduce.png" ng-click="removeCisku($index)" alt=""><img style="cursor: pointer;" ng-if="$index==ciSkuArr.length-1" src="./static/image/public-img/small-plus.png" ng-click="addCisku()" alt=""><span ng-class="{'green2': istongguo=='1','red2': istongguo=='0'}" style="margin-left:15px;">{{item.isweight}}</span></p>
+        </div>
+      </div>
+      <p class="notice">
+        1、填写的sku均为变体sku <br>
+        2、设置关系如下 主sku*1=次sku*数量 <br>
+        3、设置关系成功之后,后续流入cj的订单里面的主sku会被替换为次sku,替换的比例为(主sku:次sku=1:数量) <br>
+        4、设置的关系直接影响整个订单的处理流程,请慎重 <br>
+        <b>例1:</b>
+        CJNSFSCF00190-7style和CJNSFSYJ00093-Pink是同一个商品,可以设置CJNSFSCF00190-7style为主sku,CJNSFSYJ00093-Pink为次sku,数量填写1,那么后续流入cj的订单中包含的CJNSFSCF00190-7style会被按1:1的比例替换为CJNSFSYJ00093-Pink;
+        <br>
+        <b>例2:</b>
+        CJQCMTMT00020-S3是CJQCMTMT00020-S的组合,一个CJQCMTMT00020-S3实际是3个CJQCMTMT00020-S打包一起卖,那么需要设置CJQCMTMT00020-S3为主sku,CJQCMTMT00020-S为次sku,数量填写3,那么后续流入cj的订单中包含的CJQCMTMT00020-S3会被按1:3(原订单中1个S3变体,替换后S变体的数量为3;原订单中2个S3变体,替换后S变体的数量为6)的比例替换为CJQCMTMT00020-S;
+        <br>
+        <b>例3:</b> CJBJPFTX00033-Set 2是CJBJPFTX00033-Gold和CJBJPFTX00033-Black的组合,一个CJBJPFTX00033-Set
+        2实际是2个CJBJPFTX00033-Gold和4个CJBJPFTX00033-Black打包一起卖,那么需要设置CJBJPFTX00033-Set
+        2为主sku,CJBJPFTX00033-Gold为次sku,数量为2,CJBJPFTX00033-Black为次sku,数量为4,那么后续流入cj的订单中包含的CJBJPFTX00033-Set2按照比例替换为2个CJBJPFTX00033-Gold以及4个CJBJPFTX00033-Black;<br>
+        如有疑问,请QQ或电话联系
+      </p>
+    </div>
+    
+    <div class="tan-btns" style="height:60px;">
+      <p style="margin-bottom:10px;">{{errMsg}}</p>
+      <a class="tan-btn0" ng-click="combineSkuFlag = false;">关闭</a>
+      <a ng-show="isYanzheng" class="tan-btn1 yanzhengBtn1" ng-click="goCombineSku()">验证</a>
+      <a ng-show="!isYanzheng" class="tan-btn1 yanzhengBtn2" ng-click="gotoSureSKU()">提交</a>
+      <a ng-show="!isYanzheng" class="tan-btn1 yanzhengBtn2" ng-click="gotoBackYanzheng()">退回</a>
+    </div>
+  </div>
+</div>
+<div class="asj-common-tanwrap" ng-show="repeatSkuFlag">
+  <div class="asj-common-tan comine-sku-layer" style="width: 500px; height: 260px;">
+    <div class="tan-title">重复SKU</div>
+    <div class="comine-sku">
+      <div class="ci">
+        <p>SKU：<textarea class="sku-text" ng-model="skuStr" placeholder="至少输入两个变体Sku,Sku之间用逗号隔开"></textarea></p>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="repeatSkuFlag = false;">关闭</a>
+      <a class="tan-btn1" ng-click="goRepeatSku()">确定</a>
+    </div>
+  </div>
+</div>
+<!-- 重复的sku -->
+<div class="asj-common-tanwrap" ng-show="repeatSkuListFlag">
+  <div class="asj-common-tan comine-sku-layer" style="width: 800px; height: 680px;">
+    <div class="tan-title">请选择主SKU</div>
+    <div class="comine-sku">
+      <div class="ci">
+        <table class="repeat-tab">
+          <thead class="repeat-skuthead">
+            <th>选择</th>
+            <th>SKU</th>
+            <th>图片</th>
+            <th>指派关系</th>
+            <th>关联关系</th>
+            <th>订单数量</th>
+            <th>商品状态</th>
+            <th>可见性</th>
+          </thead>
+          <tbody class="repeat-tbody">
+            <tr ng-repeat="item in repeatSkuList track by $index">
+              <td>
+                <input class="sel-sturadio" type="radio" name="zhuSkuCal" ng-click="selZhuSkuFun(item)"></input>
+              </td>
+              <td>{{item.sku}}</td>
+              <td>
+                <img class="sku-img" ng-src="{{item.img}}">
+              </td>
+              <!-- <td class="dt-img-td" ng-cloak>
+                <span class="blank-span">
+                  <img class="sp-smallimg" ng-src="{{item.img}}">
+                  <img class="hide-bigimg" ng-src="{{item.img}}">
+                </span>
+              </td> -->
+              <td>
+                <p ng-if="item.zhiPaiCount">{{item.zhiPaiCount}}</p>
+                <p ng-if="!item.zhiPaiCount">0</p>
+              </td>
+              <td>
+                <p ng-if="item.guanLianCount">{{item.guanLianCount}}</p>
+                <p ng-if="!item.guanLianCount">0</p>
+              </td>
+              <td>
+                <p ng-if="item.orderCount">{{item.orderCount}}</p>
+                <p ng-if="!item.orderCount">0</p>
+              </td>
+              <td>
+                <p ng-if="item.saleStatus==0">已删除</p>
+                <p ng-if="item.saleStatus==1">待提交</p>
+                <p ng-if="item.saleStatus==2">待审核</p>
+                <p ng-if="item.saleStatus==3">已上架</p>
+                <p ng-if="item.saleStatus>3">其它</p>
+              </td>
+              <td>
+                <p ng-if="item.authorityStatus==0">部分</p>
+                <p ng-if="item.authorityStatus==1">全部</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="repeatSkuListFlag = false;">关闭</a>
+      <a class="tan-btn1" ng-click="resoveRepeatSku()">确定</a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="erp-common-tan-v2-wrap" ng-show="similarGoodsShow">
+  <div class="erp-common-tan-v2" style="width: 750px; height: auto;">
+    <!-- 关闭按钮 -->
+    <a class="tan-v2-close" href="javascript:void(0);" ng-click="similarGoodsShow=false"><img
+        src="static/image/public-img/close-img.png" ng-show="!uploadImgs.length>0"></a>
+    <!-- title -->
+    <div class="tan-v2-top" ng-show="!uploadImgs.length>0">
+      <p style="line-height: 60px;padding-left: 15px;">请先上传一张你要新增商品的图片，系统将自动检测确保商品不会重复录入</p>
+    </div>
+    <!-- 内容 -->
+    <div class="tan-v2-con" style="height: 475px;">
+      <div class="res-upload-div" ng-show="!uploadImgs.length>0">
+        <form class="pull-left" action="" method="post" enctype="multipart/form-data">
+          <input type="file" class="upimg-inp" ng-model="documentupload2" id="file" accept="image/*" multiple
+            onchange="angular.element(this).scope().upLoadImg4(this.files)" style="display: none;">
+        </form>
+        <label class="up-bg-div" for="file">
+          <div class="up-bg-img">
+            <img src="static/image/public-img/plus.png">
+          </div>
+          <p>Upload Image</p>
+        </label>
+        <p class="allowed-img">Allowed File Extensions: .jpg, .png</p>
+      </div>
+
+
+
+      <div class="product-box" ng-repeat="item in uploadImgs track by $index" ng-cloak>
+        <div class="product-img">
+          <img ng-src="{{item.url}}?x-oss-process=image/resize,m_fill,w_351,h_351">
+        </div>
+        <!-- <img ng-click="deleteImgFun($index)"
+          style="position: absolute;width: 22px;height: 22px;top: -11px;right: -11px;"
+          src="static/image/public-img/close-circle.png"> -->
+
+        <!--相似商品内容-->
+        <div class="like-box" ng-show="item.likes.length > 0">
+          <p class="like-title">Related Products ({{item.likes.length}})</p>
+          <div class="likes-container">
+            <span ng-click="prev($index, item.likes.length)">&lt;</span>
+            <div class="likes-window">
+              <ol class="like-products">
+                <a class="like-href" ng-href="product-detail.html?id={{like.id}}" class="view-detail-a" target="_blank"
+                  class="like-product" ng-repeat="like in item.likes">
+                  <li ng-click="likeDetail(like)">
+                    <img class="product-img" ng-src="{{like.bigImg}}?x-oss-process=image/resize,m_fill,w_100,h_100"
+                      err-src="static/image/public-img/default.jpg" ng-cloak>
+                      <!-- window.open('manage.html#/merchandise/show-detail/' + item.id + '/' + (item.isCopy || '0') + '/' + $scope.merchanStatus + '/' + (item.productType || 0), '_blank', ''); -->
+                    <div class="detail-box">
+                      <div>
+                        <p>{{like.nameEn}}</p>
+                        <p>${{like.sellPrice}}</p>
+                      </div>
+                    </div>
+                  </li>
+                </a>
+              </ol>
+            </div>
+            <span ng-click="next($index, item.likes.length)">&gt;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 底部 -->
+    <div class="tan-v2-bot" ng-show="uploadImgs.length>0">
+      <!-- 取消按钮（灰色） -->
+      <a href="javascript:void(0);" ng-click="similarGoodsShow=false; uploadImgs=[]" class="qu-xiao-btn">取消添加</a>
+      <!-- 确认按钮（彩色） -->
+      <a href="{{'#/merchandise/addSKU1///'+(dropFlag=='service'?'1':(optType=='personality'?'2':'0'))}}" class="que-ding-btn">继续添加商品</a>
+    </div>
+  </div>
+</div>
+<style>
+  .res-upload-div {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .allowed-img {
+    width: 230px;
+    position: absolute;
+    left: -57px;
+    bottom: -31px;
+  }
+/*
+=====================
+==== 带搜图的卡片 ====
+=====================
+*/
+.product-box{
+width: 100%;
+height: 100%;
+}
+
+.product-box>.product-img {
+width: 100%;
+height: 300px;
+text-align: center;
+}
+.product-box>.product-img img {
+width: auto;
+height: 100%;
+max-width: 100%;
+display: block;
+margin: auto;
+}
+
+.product-box .product-title {
+color: #333333;
+}
+.product-box .product-price {
+margin-top: 5px;
+font-size:16px;
+font-weight:500;
+color:rgba(51,51,51,1);
+line-height:22px;
+}
+
+.like-title{
+margin: 5px;
+text-align: center;
+font-size: 18px;
+font-weight:500;;
+line-height:25px;
+color:rgba(255,119,0,1);
+}
+
+.likes-container {
+display: flex;
+justify-content: space-between;
+}
+.likes-container span {
+color:rgba(255,119,0,1);
+line-height: 100px;
+cursor: pointer;
+}
+.likes-container .likes-window {
+width: 525px;
+overflow: hidden;
+}
+
+.like-box .like-products{
+width: 9999px;
+transition: all 1s;
+}
+
+
+.like-box .like-products > li{
+width: 100px;
+height: 100px;
+margin: 0 5px 0 0;
+}
+
+.like-products .like-href {
+display: inline-block;
+width: 100px;
+margin-right: 5px;
+}
+
+.like-href .detail-box {
+
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 20px;
+transition: all .5s;
+overflow: hidden;
+}
+.detail-box div {
+position: absolute;
+bottom: 0;
+background:rgba(0,0,0,0.75);
+width: 100px;
+height: 100px;
+}
+.detail-box p {
+position: absolute;
+}
+.detail-box p:nth-child(1) {
+top: 0;
+height: 42px;
+width: 84px;
+padding: 8px;
+box-sizing: content-box;
+text-align: left;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+word-break: break-all;
+
+font-size: 12px;
+color: rgba(255,255,255,1);
+font-weight:400;
+line-height:17px;
+}
+.detail-box p:nth-child(2) {
+bottom: 0;
+padding: 0 0 0 8px;
+text-align: left;
+width:100%;
+height:20px;
+font-size:12px;
+font-weight:500;
+color:rgba(255,255,255,1);
+line-height:20px;
+}
+.like-href li:hover .detail-box{
+height: 100%;
+}
+.like-href li {
+position: relative;
+}
+</style>

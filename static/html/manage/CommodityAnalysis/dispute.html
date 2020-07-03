@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dispute</title>
+</head>
+<style>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    body {
+        background-color: #F2F7FA;
+        padding: 0 20px;
+    }
+
+    .content {
+        background-color: #fff;
+        padding: 20px;
+    }
+
+    .count {
+
+    }
+
+    table {
+        width: 100%;
+        text-align: center;
+    }
+
+    table thead {
+        height: 44px;
+        background: rgba(252, 244, 217, 1);
+        border-radius: 4px 4px 0px 0px;
+        line-height: 44px;
+
+    }
+
+    table thead th {
+        text-align: center;
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(139, 87, 42, 1);
+    }
+
+    .count tr {
+        border: 1px solid #F3F3F3;
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .count tr td {
+        border-right: 1px solid #F3F3F3;
+    }
+
+    .ranking-left {
+        width: 49%;
+        margin-right: 1%;
+        height: 338px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 4px;
+        border: 1px solid rgba(236, 236, 236, 1);
+        float: left;
+        margin-top: 16px;
+        padding: 18px;
+    }
+
+    .ranking-right {
+        width: 49%;
+        margin-left: 1%;
+        height: 338px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 4px;
+        border: 1px solid rgba(236, 236, 236, 1);
+        float: left;
+        margin-top: 16px;
+        padding: 18px;
+    }
+
+    .title {
+        border-bottom: 1px solid rgba(243, 243, 243, 1);
+        height: 40px;
+    }
+
+    .title h3 {
+        float: left;
+        font-size: 16px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+        line-height: 22px;
+        margin-bottom: 19px;
+        margin-top: 0;
+    }
+
+    .title ul {
+        float: right;
+    }
+
+    .title ul li {
+        margin: 0 5px;
+        display: inline-block;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+        line-height: 17px;
+        cursor: pointer;
+    }
+
+    .title ul .Act {
+        color: #F9AE08;
+    }
+
+    .cont {
+        width: 100%;
+        display: table;
+    }
+
+    .cont .theads {
+        height: 40px;
+    }
+
+    .cont li {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .cont span {
+        float: left;
+        text-align: center;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .cont .theads span {
+        float: left;
+        text-align: center;
+        line-height: 40px;
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .cont li .index {
+        width: 20px !important;
+        height: 20px;
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+        line-height: 20px;
+        background: rgba(255, 119, 0, 1);
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .echarts {
+        position: relative;
+    }
+
+    .echarts h3 {
+        font-size: 16px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+        line-height: 22px;
+        margin-top: 15px;
+    }
+
+    .echarts .right {
+        position: absolute;
+        right: 160px;
+        top: 0;
+    }
+
+    .echarts .right select {
+        width: 80px;
+        height: 32px;
+        border-radius: 4px;
+        border: 1px solid rgba(217, 217, 217, 1);
+        margin-right: 15px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .echarts .right span {
+        font-size: 16px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(74, 144, 226, 1);
+        line-height: 22px;
+    }
+
+    .Product td {
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .Product tr {
+        line-height: 38px;
+        border-bottom: 1px solid #F3F3F3;
+    }
+
+    .Product tbody {
+        border-left: 1px solid #F3F3F3;
+        border-right: 1px solid #F3F3F3;
+    }
+
+    .Product tbody tr:hover {
+        background-color: #FFFDF8;
+    }
+
+    .Product {
+        padding: 20px;
+        width: calc(100% - 220px);
+        margin-left: 220px;
+        background-color: #fff;
+        margin-top: 10px;
+    }
+
+    .Product .filter {
+        margin-bottom: 16px;
+    }
+
+    .Product .filter input {
+        width: 280px;
+        height: 40px;
+        border-radius: 6px 0px 0px 6px;
+        border: 1px solid rgba(228, 228, 228, 1);
+        float: left;
+        padding: 0 8px;
+    }
+
+    .Product .filter button {
+        width: 90px;
+        height: 40px;
+        background: rgba(249, 174, 8, 1);
+        border-radius: 0px 6px 6px 0px;
+        float: left;
+        background-size: 30px 30px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(static/image/manage/btn@2x.png);
+    }
+
+    .Product tbody tr .lookPro {
+        border-radius: 14px;
+        border: 1px solid rgba(238, 238, 238, 1);
+        width: 69px;
+        height: 28px;
+        display: inline-block;
+        line-height: 28px;
+    }
+
+    .Product tbody tr .lookPro:hover {
+        color: #F9AE08;
+    }
+
+    .Product tbody tr .lookPro:focus {
+        color: #F9AE08;
+        border-color: #F9AE08;
+    }
+
+    /*查看商品*/
+    .lookProduct {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        z-index: 10000;
+    }
+
+    .lookProduct .content {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+        width: 523px;
+        min-height: 330px;
+        margin: initial;
+        border-radius: 4px;
+        padding: initial;
+    }
+
+    .lookProduct .content h3 {
+        padding: 15px;
+        margin: initial;
+        text-align: left;
+        border-bottom: 1px solid #F0F0F0;
+    }
+
+    .lookProduct .content h3 .close {
+        font-size: 25px;
+        font-weight: initial;
+        opacity: .4;
+    }
+
+    .lookProduct .content .table {
+        padding: 16px;
+    }
+
+    .lookProduct .content thead {
+        height: 44px;
+        background: rgba(250, 250, 250, 1);
+        border-radius: 4px 4px 0px 0px;
+        line-height: 44px;
+    }
+
+    .lookProduct .content table {
+        border: 1px solid rgba(243, 243, 243, 1);
+        border-radius: 4px;
+    }
+
+    .lookProduct .content thead th {
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .lookProduct .content tbody tr {
+        border-bottom: 1px solid rgba(243, 243, 243, 1);
+        height: 40px;
+    }
+
+    .lookProduct .content tbody tr td {
+        font-size: 12px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .lookProduct .content .price1 {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+        margin-top: 10px;
+
+    }
+
+    .lookProduct .content .price2 {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: #4A90E2;
+        margin-top: 10px;
+    }
+
+    .forever-icon {
+        height: 20px;
+        line-height: 20px;
+        border-radius: 4px;
+        padding: 0 5px;
+        margin-left: 3px;
+        display: inline-block;
+        color: #04a452;
+        border: 1px solid #04a452;
+    }
+
+    .tab {
+        position: fixed;
+        width: calc(100% - 300px);
+        margin-left: 220px;
+        background-color: #fff;
+        padding: 0 20px;
+        margin-bottom: 10px;
+        height: 58px;
+        line-height: 58px;
+        box-shadow: 2px 2px 14px 2px rgba(232, 244, 251, 1);
+        /*box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18), 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 6px 0px rgba(0, 0, 0, 0.04);*/
+        z-index: 100;
+    }
+
+    .tab li {
+        float: left;
+        padding: 0 10px;
+        margin: 0 15px;
+        line-height: 54px;
+    }
+
+    .tab .Act {
+        color: #F9AE08;
+        border-bottom: 4px solid #F9AE08;
+    }
+
+    .tab .Act a {
+        color: #F9AE08;
+    }
+
+    .page-box {
+        margin: initial;
+    }
+
+    .page-box .total-num {
+        margin-right: initial;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(static/image/manage/sort@2x.png);
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    .Act{
+        color: #F9AE08!important;
+    }
+    .Act .icon{
+        background-image: url(static/image/manage/sort_select@2x.png);
+    }
+    .page-box .page-index{
+        width: initial;
+    }
+    .Product .filter select{
+        float: left;
+        line-height: 40px;
+        height: 40px;
+        width: 90px;
+        margin-right: 5px;
+    }
+    .page-box .to-idx{
+        float: left;
+    }
+    .page-box .to-idx input{
+        text-align: center;
+        width: 50px;
+        height: 25px;
+        margin: 0 5px;
+    }
+    .page-box .to-idx button{
+        border: 1px solid #dddee1;
+        height: 25px;
+        line-height: 25px;
+        width: 50px;
+        border-radius: 3px;
+    }
+</style>
+<body>
+<div class="tab">
+    <ul class="clearfix">
+        <!--<li><a href="#/CommodityAnalysis/Visitor">访客</a></li>-->
+        <li><a href="#/CommodityAnalysis/Turnover">成交</a></li>
+        <li class="Act"><a href="#/CommodityAnalysis/dispute">纠纷</a></li>
+        <li><a href="#/CommodityAnalysis/NewProduct">新品</a></li>
+        <li><a href="#/CommodityAnalysis/cusStore">客户店铺</a></li>
+        <!-- <li><a href="#/CommodityAnalysis/ranking">操作统计</a></li> -->
+        <li><a href="#/CommodityAnalysis/quanzhong">猜你喜欢</a></li>
+        <!--<li><a href="#/CommodityAnalysis/Purchase">采购</a></li>-->
+        <!--<li>访客(待开发)</li>-->
+        <li><a href="#/CommodityAnalysis/LinkageAndPublication">刊登与关联</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics">活动统计</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics-new">新-活动统计</a></li>
+    </ul>
+</div>
+<div style="height: 68px;"></div>
+<div class="content clearfix">
+    <div class="count">
+        <table>
+            <thead>
+            <tr>
+                <th>总纠纷</th>
+                <th>已取消纠纷</th>
+                <th>已完成纠纷</th>
+                <th>近三日新增纠纷</th>
+                <th>本周新增纠纷</th>
+                <th>本月新增纠纷</th>
+                <th>待客户回复</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{allCun}}</td>
+                <td>{{cancelCun}}</td>
+                <td>{{finishCun}}</td>
+                <td>{{dayCount}}</td>
+                <td>{{weekCount}}</td>
+                <td>{{monthCount}}</td>
+                <td>{{customer}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clearfix">
+        <div class="ranking-left">
+            <div class="title clearfix">
+                <h3>纠纷商品排行</h3>
+                <ul>
+                    <li ng-class="{Act:item.flag}" ng-repeat="item in ProfilterDate" ng-click="Profilter(item)">
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+            <ul class="cont">
+                <li class="theads clearfix">
+                    <span style="width: 10%;">排名</span>
+                    <span style="width: 22.5%;">商品名称</span>
+                    <span style="width: 22.5%;">SKU</span>
+                    <span style="width: 22.5%;">纠纷次数</span>
+                    <span style="width: 22.5%;">主要原因</span>
+                </li>
+                <li class="clearfix" ng-repeat="item in ProRankingData" ng-show="ProRankingData.length > 0">
+                    <span style="width: 10%;">
+                        <b class="index">{{$index+1+(pageNum1-1)*pageSize1}}</b>
+                    </span>
+                    <span style="width: 22.5%;" ng-attr-title="{{item.cjproductnamecn}}"><a style="color: #0d8efb;" ng-click="lookPro(item.cjProductId)">{{item.cjproductnamecn}}</a></span>
+                    <span style="width: 22.5%;" ng-attr-title="{{item.sku}}">{{item.sku}}</span>
+                    <span style="width: 22.5%;">{{item.cun}}</span>
+                    <span style="width: 22.5%;" ng-attr-title="{{item.type}}">{{item.type}}</span>
+                </li>
+                <li ng-show="ProRankingData.length == 0" style="text-align: center;font-size: 12px;">暂无数据。</li>
+            </ul>
+            <!--分页-->
+            <div class="page-box" ng-show="TotalNum1 > 0">
+                <div class="total-num">
+                    共&nbsp;&nbsp;{{ TotalNum1 }}&nbsp;&nbsp;条
+                </div>
+                <div class="page-index">
+                    <div class="pagegroup1"></div>
+                </div>
+                <div class="to-idx">
+                    到第<input type="number" ng-model="pageNum1">页
+                    <button ng-click="toPage1()">确定</button>
+                </div>
+            </div>
+        </div>
+        <div class="ranking-right">
+            <div class="title clearfix">
+                <h3>纠纷客户排行</h3>
+                <ul>
+                    <li ng-class="{Act:item.flag}" ng-repeat="item in ClientfilterDate" ng-click="Clientfilter(item)">
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+            <ul class="cont">
+                <li class="theads clearfix">
+                    <span style="width: 10%;">排名</span>
+                    <span style="width: 22.5%;">客户姓名</span>
+                    <span style="width: 22.5%;cursor: pointer;" ng-class="{Act:isAct == '2'}" ng-click="Sort('2')">纠纷次数<b class="icon"></b></span>
+                    <span style="width: 22.5%;cursor: pointer;" ng-class="{Act:isAct == '1'}" ng-click="Sort('1')">纠纷率<b class="icon"></b></span>
+                    <span style="width: 22.5%;">主要原因</span>
+                </li>
+                <li class="clearfix" ng-repeat="item in ClientRankingData" ng-show="ClientRankingData.length > 0">
+                    <span style="width: 10%;">
+                        <b class="index" style="background-color: #4A90E2;">{{$index+1+(pageNum2-1)*pageSize2}}</b>
+                    </span>
+                    <span style="width: 22.5%;">{{item.userName}}</span>
+                    <span style="width: 22.5%;">{{item.cun}}</span>
+                    <span style="width: 22.5%;">{{item.disputeRate ? item.disputeRate.toFixed(2)+'%' : '0.00%'}}</span>
+                    <span style="width: 22.5%;" ng-attr-title="{{item.type}}">{{item.type}}</span>
+                </li>
+                <li ng-show="ClientRankingData.length == 0" style="text-align: center;font-size: 12px;">暂无数据。</li>
+            </ul>
+            <!--分页-->
+            <div class="page-box" ng-show="TotalNum2 > 0">
+                <div class="total-num">
+                    共&nbsp;&nbsp;{{ TotalNum2 }}&nbsp;&nbsp;条
+                </div>
+                <div class="page-index">
+                    <div class="pagegroup2"></div>
+                </div>
+                <div class="to-idx">
+                    到第<input type="number" ng-model="pageNum2">页
+                    <button ng-click="toPage2()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="echarts">
+        <div style="position: relative;">
+            <div class="right">
+                <select ng-change="PolylineFilter(PolylineDate)" ng-model="PolylineDate">
+                    <option value="1">日</option>
+                    <option value="2">月</option>
+                    <option value="3">年</option>
+                </select>
+            </div>
+            <h3>纠纷数量统计</h3>
+            <div id="main1" style="min-height: 350px;"></div>
+        </div>
+        <div style="position: relative;">
+            <div class="right">
+                <select ng-change="EchartsFilter(EchartsDate)" ng-model="EchartsDate">
+                    <option value="1">近三日</option>
+                    <option value="2">本周</option>
+                    <option value="3">本月</option>
+                </select>
+                <span>纠纷率：{{disputeRate+'%'}}</span>
+            </div>
+            <h3>纠纷类型统计</h3>
+            <div id="main2" style="min-height: 350px;"></div>
+        </div>
+    </div>
+</div>
+<div class="Product">
+    <div class="filter clearfix">
+        <select ng-model="SearchType">
+            <option value="SKU">SKU</option>
+            <option value="CH">中文</option>
+            <option value="EN">英文</option>
+        </select>
+        <input type="text" ng-model="SearchTxt" placeholder="按条件查询" ng-keypress="EnterSearch($event)">
+        <button ng-click="Search()"></button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>图片</th>
+            <th>商品名称</th>
+            <th>SKU</th>
+            <th>商品类目</th>
+            <th>商品单价</th>
+            <th>可见性</th>
+            <th>详情</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in ProData" ng-show="ProData.length>0">
+            <td style="position: relative;">
+                <img ng-mouseenter="item.over = true;" ng-mouseleave="item.over = false;" width="30" height="30px"
+                     ng-src="{{item.bigImg | IMG_SIZE : 30}}" alt="">
+                <img style="position: absolute;bottom: 0;" ng-if="item.over" src="" alt="" width="200" height="200"
+                     ng-src="{{item.bigImg | IMG_SIZE : 200}}">
+            </td>
+            <td ng-attr-title="{{item.nameEn}}">
+                <span style="max-width: 200px;display: inline-block;line-height: 20px;">{{item.nameEn}}</span>
+            </td>
+            <td>{{item.sku}}</td>
+            <td ng-attr-title="{{item.category}}">
+                <span style="max-width: 200px;display: inline-block;line-height: 20px;">{{item.category}}</span>
+            </td>
+            <td>{{item.sellPrice ? item.sellPrice.replace(' -- ', '-') : 0}}</td>
+            <td>
+                {{ item.authorityStatus == 1 ? ('全部') : ('部分') }}
+                <span class="forever-icon" ng-if="item.isAut == '1'">永久</span>
+            </td>
+            <td>
+                <a class="lookPro" href="javascript:void(0);" ng-click="lookPro(item.id)">查看商品</a>
+            </td>
+        </tr>
+        <tr ng-show="ProData.length == 0">
+            <td colspan="7">暂无数据。</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="static/js/public/echarts.common.min.js"></script>

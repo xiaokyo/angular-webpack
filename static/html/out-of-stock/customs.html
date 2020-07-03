@@ -1,0 +1,75 @@
+<style>
+  .btn {
+    padding: 5px 12px;
+  }
+  h3 {
+    margin: 5px 0;
+  }
+</style>
+<div class="custom-orders-wrap">
+	<div class="c-ord-mid">
+		<!-- 右边的内容部分 -->
+		<div class="ord-right-con">
+			<div class="content">
+				<!-- 订单的导航按钮 -->
+				<div class="c-ord-conall">
+					<div class="c-ord-con">
+						<!-- 订单动能 时间等的部分 -->
+						<div class="c-ord-fun fiexd-box">
+							<!-- 订单搜索部分 -->
+							<div class="c-seach-fun">
+                <div class="btn" onclick="window.history.back()">返回</div>
+								<h3>
+                  <label>当前缺货SKU：</label>
+                  <span>{{sku}}</span>
+								</h3>
+							</div>
+						</div>
+						<!-- 变动展示的内容部分 查看子订单-->
+						<div class="toogle-ord-stu" id="c-zi-ord">
+							<!-- 订单列表部分 -->
+							<div class="c-ord-list">
+								<table class="orders-table checkbox-table">
+									<thead class="c-ord-thead">
+										<tr>
+											<th style="width: 80px">客户姓名</th>
+											<th style="width: 70px">群主/业务员</th>
+											<th style="width: 70px;">因该SKU缺货的子订单数</th>
+											<th style="width: 105px">缺少该SKU数量</th>
+											<th style="width: 70px;">最早进入缺货的子订单下单付款时间</th>
+										</tr>
+									</thead>
+									<tbody class="c-ord-tbody" ng-repeat="zddlist in erporderList" ng-class="{'active':zddlist.clickcontrl||zddlist.ishover}" ng-mouseover="zddlist.ishover = true" ng-mouseout="zddlist.ishover = false">
+										<tr class="erporder-detail">
+											<td class="id-td moshow-sp-td">
+												<p ng-cloak>{{zddlist.name}}</p>
+											</td>
+											<td class="ordlist-imgtd moshow-sp-td">
+												<p ng-cloak>{{zddlist.caigouyuan}}</p>
+											</td>
+											<td class="moshow-sp-td mac-w60px">
+												<a href="#/out-of-stock/orders?sku={{sku}}&customId={{zddlist.costomId}}&customName={{zddlist.name}}" style="color: cornflowerblue;" ng-cloak >{{zddlist.orders}}</p>
+											</td>
+											<td class="store-name-td moshow-sp-td">
+												<p ng-cloak>{{zddlist.skunum}}</p>
+											</td>
+											<td class="moshow-sp-td mac-w60px">
+												<p ng-cloak>{{zddlist.time}}</p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+						<div ng-show="erpordTnum<1" style="text-align: center;">暂无数据</div>
+						<!-- 分页 -->
+						<!-- <page></page> -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

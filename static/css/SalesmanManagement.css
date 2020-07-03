@@ -1,0 +1,263 @@
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+body {
+    background-color: #F2F7FA;
+    padding: 0 20px;
+}
+
+.content {
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+    margin-left: 220px;
+}
+
+.tab {
+    position: fixed;
+    width: calc(100% - 300px);
+    margin-left: 220px;
+    background-color: #fff;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    height: 58px;
+    line-height: 58px;
+    box-shadow: 2px 2px 14px 2px rgba(232, 244, 251, 1);
+    /*box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.18), 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 2px 6px 0px rgba(0, 0, 0, 0.04);*/
+    z-index: 100;
+}
+
+.tab li {
+    float: left;
+    padding: 0 10px;
+    margin: 0 15px;
+    line-height: 54px;
+}
+
+.tab .Act {
+    color: #F9AE08;
+    border-bottom: 4px solid #F9AE08;
+}
+
+.tab .Act a {
+    color: #F9AE08;
+}
+
+.filter {
+    margin-bottom: 16px;
+    line-height: 40px;
+}
+
+.filter input {
+    width: 280px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(228, 228, 228, 1);
+    float: left;
+    padding: 0 8px;
+    margin-right: 10px;
+}
+
+.filter .search {
+    width: 90px;
+    height: 40px;
+    background: rgba(249, 174, 8, 1);
+    border-radius: 6px;
+    float: left;
+    background-size: 30px 30px;
+    margin-left: 10px;
+    color: #fff;
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-image: url(../../static/image/manage/btn@2x.png);*/
+}
+.filter select{
+    float: left;
+    line-height: 40px;
+    height: 40px;
+    width: 90px;
+    margin:0 5px;
+}
+.filter .addSalesman{
+    width: 90px;
+    height: 40px;
+    background: rgba(249, 174, 8, 1);
+    border-radius: 6px;
+    float: right;
+    font-size: 14px;
+    color: #fff;
+}
+table {
+    width: 100%;
+    text-align: center;
+}
+
+table thead {
+    height: 44px;
+    background: rgba(252, 244, 217, 1);
+    border-radius: 4px 4px 0px 0px;
+    line-height: 44px;
+
+}
+
+table thead th {
+    text-align: center;
+    font-size: 14px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: rgba(139, 87, 42, 1);
+}
+
+table td {
+    font-size: 12px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+}
+
+table tr {
+    line-height: 38px;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+table tbody {
+    border-left: 1px solid #F3F3F3;
+    border-right: 1px solid #F3F3F3;
+}
+
+table tbody tr:hover {
+    background-color: #FFFDF8;
+}
+table tbody tr a{
+    border: 1px solid #F3F3F3;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(249, 174, 8, 1);
+    color: #fff;
+}
+.dialog{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+.dialog .content{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+    /*min-width: 400px;*/
+    min-height: 250px;
+    margin: initial;
+    border-radius: 4px;
+    padding: initial;
+}
+.dialog .content h3{
+    padding: 15px;
+    margin: initial;
+    text-align: left;
+    border-bottom: 1px solid #F0F0F0;
+}
+.dialog .content h3 .close{
+    font-size: 25px;
+    font-weight: initial;
+    opacity: .4;
+}
+
+.dialog .content ul{
+    padding:0 15px;
+    text-align: center;
+}
+.dialog .content ul li{
+    margin: 10px 0 ;
+}
+.dialog .content ul li input{
+    width: 170px;
+    height: 30px;
+    padding: 0 8px;
+}
+.dialog .content ul li select{
+    width: 170px;
+    height: 30px;
+    padding: 0 8px;
+}
+.dialog .content .btns{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+.dialog .content .btns button{
+    width: 80px;
+    height: 30px;
+    border-radius: 4px;
+    background: rgba(249, 174, 8, 1);
+    color: #fff;
+    margin-left: 15px;
+}
+.content .nav{
+    margin-bottom: 10px;
+}
+.content .nav span{
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    text-align: center;
+    margin-right: 15px;
+    background-color: #c1c1c1;
+    cursor: pointer;
+}
+.content .nav .act{
+    background: rgba(249, 174, 8, 1);
+}
+.filter #date1,.filter #date2{
+    width: 150px;
+    border-radius: 6px;
+}
+.dialog ul li span{
+    width: 60px;
+    display: inline-block;
+    text-align: right;
+}
+.dataFilter{
+    position: absolute;
+    right: 100px;
+    top: 15px;
+    z-index: 1;
+}
+
+.dataFilter select{
+    width: 100px;
+    height: 30px;
+    padding: 0 8px;
+    margin-left: 15px;
+}
+#main1 div:nth-child(1),#main2 div:nth-child(1),#main3 div:nth-child(1),#main4 div:nth-child(1){
+    width: 100%!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

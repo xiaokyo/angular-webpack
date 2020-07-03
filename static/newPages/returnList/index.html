@@ -1,0 +1,275 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+
+		<!-- filter -->
+		<div class="filter flex fwp">
+			<div class="item">
+				<wui-date format="yyyy-mm-dd" placeholder="开始时间" btns="{'ok':'确定','now':'今天'}" ng-model="getParams.begainDate">
+				</wui-date>
+				-
+				<wui-date format="yyyy-mm-dd" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}" ng-model="getParams.endDate">
+				</wui-date>
+			</div>
+
+			<div class="item flex aic jcc">
+				<select ng-model="productNameOrSKU" ng-change="setProductNameOrSKU()">
+					<!-- <option value="productName">商品名称</option> -->
+					<option value="sku">变体SKU</option>
+				</select>
+				<input type="text" ng-model="searchVal" ng-change="setProductNameOrSKU()" />
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="getList()">搜索</a>
+			</div>
+
+			<div class="item">
+				<select ng-model="getParams.store" ng-change="getList()">
+					<option value="">选择仓库</option>
+					<option ng-repeat="(key,value) in storage" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+			<div class="item">
+				<select ng-model="getParams.caigouType" ng-change="getList()">
+					<!-- <option value="">选择采购类型</option> -->
+					<option ng-repeat="(key,value) in caigouTypeObj" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+		</div>
+
+		<table class="k-table" style="width:100%;margin-top:20px;">
+			<thead>
+				<th>序号</th>
+				<th>SKU</th>
+				<th>图片</th>
+				<!-- <th width="180">商品名称</th> -->
+				<th>供货公司</th>
+				<th>搜品价格（￥）</th>
+				<th>数量</th>
+				<th>仓库</th>
+				<th>订单号</th>
+				<th>付款时间</th>
+				<th>采购方式</th>
+				<th>状态</th>
+				<th>退货倒计时（天）</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="i in returnList">
+					<td>
+						<div class="td">{{ $index+1 }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.sku }}</div>
+					</td>
+					<td>
+						<div class="td">
+							<img src="{{ i.img }}" width="45" height="45" />
+						</div>
+					</td>
+					<!-- <td>
+						<div class="td">
+							{{ i.productName }}
+						</div>
+					</td> -->
+					<td>
+						<div class="td">
+							{{ i.gongHuoGongSi || '未知' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.costPrice || '--' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.shuliang || 0 }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ storage[i.store] || '--' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.orderId || '--' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.fuKuanDate || '--' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ caigouTypeObj[i.caigouType] || '--' }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.payStatus==1?"已付款":"未付款" }}
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.returndaytask || '--' }}
+						</div>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 分页 -->
+		<page></page>
+
+	</div>
+</div>
+
+<style>
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* tools */
+	.tools {
+		margin-top: 15px;
+	}
+
+	.tools a {
+		margin-left: 15px;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+</style>

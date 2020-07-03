@@ -1,0 +1,463 @@
+<style>
+  .right-bar-wrap {
+    min-width: 1310px;
+  }
+
+  .right-bar {
+    padding: 0 20px 0;
+
+  }
+
+  .flexcom-thead {
+    display: flex;
+  }
+
+  .input-group {
+    display: flex;
+  }
+
+  .input-group input {
+    width: 250px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 0;
+  }
+
+  .input-group button {
+    padding: 0 15px;
+    background: rgba(255, 185, 0, 1);
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .search-group {
+    padding-bottom: 20px;
+  }
+
+  .sku-th {
+    width: 10%;
+    background: rgba(252, 244, 217, 1);
+    text-align: center;
+    color: rgba(139, 87, 42, 1);
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .seach-thead-group {
+    /* position: fixed;
+        width: calc(100% - 280px); */
+    background: #fff;
+    padding: 15px 20px 0 20px;
+    z-index: 9999;
+    margin-top: 80px;
+  }
+
+  .sku-group-tr {
+    display: flex;
+    border-left: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .sku-group-tr span.overhideSpan {
+    display: block;
+    width: 100%;
+    /* white-space: nowrap; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*padding: 8px ;*/
+    text-align: center;
+  }
+
+  .sku-group-td {
+    width: 10%;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .oneRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .twoRow:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .productImgWrap>span {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .sku-group-tr span.productImgWrap2 {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .productImgWrap3>span {
+    height: 60px;
+  }
+
+  .sku-group-row {
+    display: flex;
+  }
+
+  .sku-group-row:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .sku-group-row:not(:last-child) {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .sku-group-row-td {
+    border-right: 1px solid #f0f0f0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .sku-group-row-td:not(:first-child)>span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+  }
+
+  .moreActionBtn {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .moreActionWrap {
+    display: none;
+    position: absolute;
+    width: 100px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0px 8px 20px;
+    top: 29px;
+    left: -10px;
+    z-index: 2;
+  }
+
+  .moreActionWrap li>span {
+    display: block;
+    padding: 5px 8px;
+    cursor: pointer;
+  }
+
+  .moreActionWrap li>span:hover {
+    background: #e6e6e6;
+  }
+
+  .moreActionBtn:hover .moreActionWrap {
+    display: block;
+  }
+
+  .groupZzc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99999;
+  }
+
+  .groupWrap {
+    background: #fff;
+    border-radius: 4px;
+    width: 710px;
+    min-height: 200px;
+    padding: 20px;
+    margin: 150px auto;
+  }
+
+  .groupWrap>h1 {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .groupWrap .input-group {
+    align-items: center;
+  }
+
+  .groupWrap .input-group input {
+    width: 200px;
+  }
+
+  .groupWrap .input-group label {
+    width: 80px;
+  }
+
+  .groupInput-tr {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .groupInput-tr .input-group {
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .groupInput-tr .thead {
+    background-color: #FCF4D9;
+    /* height: 40px; */
+    align-items: center;
+
+  }
+
+  .groupInput-tr li {
+    width: 20%;
+    padding: 10px 0;
+    font-size: 14px;
+    word-break: break-all;
+  }
+
+  .del-btn {
+    height: 30px;
+    padding: 0 15px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .input-group>img {
+    margin-left: 10px;
+  }
+
+  .groupBtnWrap {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .groupBtnWrap button {
+    padding: 5px 15px;
+    border-radius: 4px;
+  }
+
+  .sureBtn {
+    background: rgba(255, 185, 0, 1);
+    color: #fff;
+    border: 1px solid rgba(255, 185, 0, 1);
+  }
+
+  .canceleBtn {
+    border: 1px solid rgba(217, 217, 217, 1);
+    background: #fff;
+  }
+
+  .bigImg {
+    display: none;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #f0f0f0;
+    top: -115px;
+    left: 85px;
+    z-index: 99999;
+  }
+
+  .bigImgHover:hover .bigImg {
+    display: block;
+  }
+
+  .green2 {
+    color: green;
+  }
+
+  .red2 {
+    color: red;
+  }
+
+  .input-group .data-inp {
+    border: 1px solid #dddee1;
+    width: 160px;
+  }
+
+  #cdatatime2 {
+    margin-right: 20px;
+  }
+
+  .margin-left20px {
+    margin-left: 20px;
+  }
+
+  .break-all {
+    word-break: break-all;
+  }
+  .page-box{
+    padding-bottom: 50px;
+  }
+  .page-box a.active {
+    color: #08aceb;
+  }
+  .not-found{
+    text-align: center;
+    padding: 20px;
+  }
+
+  .sel-shuxing {
+    width: 200px;
+  }
+
+  .excel-link {
+    color: #08ACE9;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .min-width60 {
+    min-width: 60px;
+  }
+
+  .min-width88 {
+    min-width: 88px;
+  }
+
+  .w90per {
+    width: 90%;
+    text-align: center;
+  }
+
+  .print-btn {
+    height: 30px;
+    width: 60px;
+    background-color: rgba(255, 185, 0, 1);
+    color: #fff;
+    margin: 5px;
+  }
+
+  .gray-btn {
+    background-color: #e6e6e6;
+    cursor: inherit;
+  }
+
+  .track-inp {
+    width: 100%;
+  }
+  .copysku-box{
+    width: 100%;
+    text-align: center;
+  }
+  .copysku-box img{
+    height: 20px;
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+  }
+</style>
+<div class="ea-content">
+  <div class="right-bar-wrap" style="padding-left: 230px">
+    <div id="top-tab" class="top-tab position-fixed">
+      <!-- tab -->
+      <div class="top-tab-nav d-flex">
+        <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':pdStu=='0'}" ng-click="stuFun('0')">未盘点</span>
+        <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':pdStu=='1'}" ng-click="stuFun('1')">已盘点</span>
+      </div>
+    </div>
+    <div class="seach-thead-group">
+      <div class="search-group">
+        <div class="input-group">
+          <input class="search-inp" ng-keyup="keyEnterFun($event)" ng-model="searchVal" placeholder="请输入SKU" type="text" />
+          <button class="margin-left20px min-width60" ng-click="searchFun()">搜索</button>
+        </div>
+      </div>
+    </div>
+    <div class="right-bar">
+
+      <div ng-show="pdStu == '0'">
+        <div class="flexcom-thead">
+          <div class="sku-th" style="width:50%;">SKU</div>
+          <div class="sku-th" style="width: 50%;">操作</div>
+        </div>
+        <div class="sku-group-tr" ng-repeat="group in groupList">
+          <div class="sku-group-td oneRow" style="width:50%;">
+            <div class="copysku-box">
+              <span class="break-all">{{group.stanSku}}</span>
+              <img ng-click="copyPiCiFun(group.stanSku)" src="./static/image/public-img/copy.png" alt="">
+            </div>
+          </div>
+          <div class="sku-group-td oneRow" style="width: 50%">
+            <button ng-if="group.isPrint!=2" class="print-btn" ng-click="pandianFun(group)">盘点</button>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="pdStu == '1'">
+        <div class="flexcom-thead">
+          <div class="sku-th" style="width:20%;">SKU</div>
+          <div class="sku-th" style="width:20%;">盘点时间</div>
+          <div class="sku-th" style="width:20%;">盘点状态</div>
+          <div class="sku-th" style="width:20%;">盘点人</div>
+          <div class="sku-th" style="width: 20%;">操作</div>
+        </div>
+        <div class="sku-group-tr" ng-repeat="group in groupList">
+          <div class="sku-group-td oneRow" style="width:20%;">
+            <div class="copysku-box">
+              <span class="break-all">{{group.stanSku}}</span>
+              <img ng-click="copyPiCiFun(group.stanSku)" src="./static/image/public-img/copy.png" alt="">
+            </div>
+          </div>
+          <div class="sku-group-td oneRow" style="width:20%;">
+            <span class="break-all">{{group.updateDate}}</span>
+          </div>
+          <div class="sku-group-td oneRow" style="width:20%;">
+            <span class="break-all">{{group.checkStatus=='1'?'已盘点':'未盘点'}}</span>
+          </div>
+          <div class="sku-group-td oneRow" style="width:20%;">
+            <span class="break-all">{{group.createUserName}}</span>
+          </div>
+          <div class="sku-group-td oneRow" style="width: 20%">
+            <button ng-if="group.isPrint!=2" class="print-btn" ng-click="pandianFun(group)">取消盘点</button>
+          </div>
+        </div>
+      </div>
+      <div class="not-found" ng-show="erpordTnum<1">暂无数据</div>
+      <div class="page-box" ng-show="erpordTnum>0">
+        <div class="select-page-num">
+          <select class="form-control" ng-model="pageSize" ng-change="pagesizechange(pageSize)">
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>每页</span>
+        </div>
+        <div class="total-num">
+          共&nbsp;&nbsp;{{erpordTnum}}&nbsp;&nbsp;条
+        </div>
+        <div class="page-index">
+          <div class="pagegroup">
+          </div>
+        </div>
+        <div class="to-go">
+          <span>跳转：</span>
+          <input type="text" class="form-control" placeholder="" ng-model="pageNum">
+          <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="groupZzc" ng-show="addTrackFlag">
+  <div class="groupWrap" style="width: 400px;min-height: 100px;max-height: 500px;overflow-y: auto;">
+    <div>
+      <p>{{pdTipsText}}</p>
+    </div>
+    <div class="groupBtnWrap">
+      <button class="canceleBtn" ng-click="addTrackFlag=false;">取消</button>
+      <button class="sureBtn" style="margin-left: 25px" ng-click="sureFun()">确定</button>
+    </div>
+  </div>
+</div>

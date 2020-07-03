@@ -1,0 +1,123 @@
+<div class="content ruzhu-wrap ruzhu-detail-wrap">
+    <div class="filter-box">
+        <a ng-show="detailType=='tongGuo'" href="#/erpcustomer/ruzhucusList">< 返回</a> 
+        <a ng-show="detailType=='check'" href="#/erpcustomer/ruzhucuschecklist">< 返回</a> 
+        <a ng-show="detailType=='wtg'" href="#/erpcustomer/ruzhucuswtglist">< 返回</a> 
+    </div> 
+    <div class="table-box">
+                <div>
+                    <span class="title-name">账号类型:</span>
+                    <span ng-show="userDetailObj.accountType==0">企业</span>
+                    <span ng-show="userDetailObj.accountType==1">个人</span>
+                </div>
+                <div>
+                    <span class="title-name">所在国家:</span>
+                    <span>{{userDetailObj.countryName}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==0">
+                    <span class="title-name">公司名称:</span>
+                    <span>{{userDetailObj.companyName}}</span>
+                </div>
+                <div>
+                    <span class="title-name">用户名:</span>
+                    <span>{{userDetailObj.userName}}</span>
+                </div>
+                <div>
+                    <span class="title-name">邮箱名:</span>
+                    <span>{{userDetailObj.email}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==1">
+                    <span class="title-name">姓名:</span>
+                    <span>{{userDetailObj.legalPerson}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==1">
+                    <span class="title-name">手机号:</span>
+                    <span>{{userDetailObj.legalPhone}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==0">
+                    <span class="title-name">法人代表:</span>
+                    <span>{{userDetailObj.legalPerson}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==0">
+                    <span class="title-name">当前套餐:</span>
+                    <span>{{userDetailObj.planName}}</span>
+                </div>
+                <div ng-show="userDetailObj.accountType==0">
+                    <span class="title-name">仓租到期:</span>
+                    <span>{{userDetailObj.legalPerson}}</span>
+                </div>
+                <div class="margin-top20px">
+                    <div class="inline-box">
+                        <p>法人身份证正面</p>
+                        <img class="cur-pointer" ng-click="showBigImg(userDetailObj.legalIdcardFront)" src="{{userDetailObj.legalIdcardFront}}" alt="">
+                    </div>
+                    <div class="inline-box">
+                        <p>法人身份证反面</p>
+                        <img class="cur-pointer" ng-click="showBigImg(userDetailObj.legalIdcardRear)" src="{{userDetailObj.legalIdcardRear}}" alt="">
+                    </div>
+                </div>
+                <div class="margin-top20px">
+                    <div class="inline-box">
+                        <p>营业执照</p>
+                        <img class="cur-pointer" ng-click="showBigImg(userDetailObj.businessLicense)" src="{{userDetailObj.businessLicense}}" alt="">
+                    </div>
+                </div>
+                <div class="margin-top20px" ng-show="detailType=='tongGuo'">
+                    <span class="title-name">平台店铺名称:</span>
+                    <a href="{{storeLink}}" class="target-link" target="_blank">{{userDetailObj.shopName}}</a>
+                </div>
+                <div class="padding-top20px" ng-show="userDetailObj.auditLogs&&userDetailObj.auditLogs.length>0" ng-repeat="item in userDetailObj.auditLogs">
+                    <span class="title-name w70px">审核日期:</span>
+                    <span class="margin-right50px">{{item.auditAt | date:'yyyy-MM-dd hh:mm'}}</span>
+                    <span class="title-name w70px">审核状态:</span>
+                    <span class="margin-right50px" ng-show="item.status==0">待审核</span>
+                    <span class="margin-right50px" ng-show="item.status==1">审核通过</span>
+                    <span class="margin-right50px" ng-show="item.status==9">未通过</span>
+                    <span class="title-name w70px">备注:</span>
+                    <span class="margin-right50px">{{item.reason}}</span>
+                    <span class="title-name w70px">审核人:</span>
+                    <span class="margin-right50px">{{item.auditBy}}</span>
+                </div>
+                <!-- <div ng-show="detailType=='wtg'">
+                    <span class="title-name">拒绝原因:</span>
+                    <span>企业</span>
+                </div> -->
+                <div ng-show="detailType=='check'" class="margin-top20px textalign-center">
+                    <button ng-click="checkCusFun(1)" class="fault-option-btn margin-right50px">通过</button>
+                    <button ng-click="checkCusFun(0)" class="fault-option-btn">拒绝</button>
+                </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show='refuseFlag'>
+    <div class="tk-con">
+        <div class="d-flex">
+            <span>拒绝原因</span>
+            <img ng-click="refuseFlag = false;" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <p>
+            <textarea placeholder="请填写拒绝原因" ng-model="reasonVal" class="text-area"></textarea>
+        </p>
+        <div class="isaddyfh-btns">
+            <button ng-click="refuseFlag = false;" class="ispc-can-btn">取消</button>
+            <button ng-click="sureJuJueFun()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show='passFlag'>
+    <div class="tk-con">
+        <div class="d-flex">
+            <span>提示</span>
+            <img ng-click="passFlag = false;" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <p>
+            是否确定审核通过?
+        </p>
+        <div class="isaddyfh-btns">
+            <button ng-click="passFlag = false;" class="ispc-can-btn">取消</button>
+            <button ng-click="surePassCheckFun()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show='bigImgFlag' ng-click="bigImgFlag = false;" style="cursor: pointer;">
+    <img class="big-img" src="{{bigImgLink}}" alt="">
+</div>

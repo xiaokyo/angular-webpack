@@ -1,0 +1,61 @@
+<!-- 调拨单-已确认 -->
+<div class="right-bar-wrap">
+	<div class="pre-scheduling">
+		<div class="tab-box">
+			<a href="manage.html#/preScheduling/isConfirmation">待确认</a>
+			<a href="manage.html#/preScheduling/confirmed" class="active">已确认</a>
+		</div>
+		<div class="content-box">
+			<div class="filter-box">
+				<div>
+					<select ng-model="processStore">
+						<option value="">请选择原始仓</option>
+						<option value="1">深圳</option>
+						<option value="0">义乌</option>
+					</select>
+					<select ng-model="demandStore">
+						<option value="">请选择到达仓</option>
+						<option value="4">泰国</option>
+						<option value="2">美西仓</option>
+						<option value="3">美东仓</option>
+						<option value="5">印尼仓</option>
+					</select>
+					<button ng-click="hadelSearch()">查询</button>
+				</div>
+			</div>
+			<table>
+				<thead>
+				<tr>
+					<th>调度编号</th>
+					<th>原始仓</th>
+					<th>到达仓</th>
+					<th>追踪号</th>
+					<th>转单号</th>
+					<th>备注</th>
+					<th>确认时间</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="item in tableData">
+					<td>{{item.dispatcherTaskName}}</td>
+					<td>{{warehouseEnums[item.processStore]}}</td>
+					<td>{{warehouseEnums[item.demandStore]}}</td>
+					<td>{{item.trackingNumber}}</td>
+					<td>{{item.transferNumber}}</td>
+					<td>{{item.remark}}</td>
+					<td>{{item.createDate}}</td>
+					<td>
+						<a ng-click="handleTodetail(item.id)">查看</a>
+						<a ng-click="handleExprot(item.id,item.dispatcherTaskName)">导出</a>
+					</td>
+				</tr>
+				<tr class="no-data" ng-show="tableData.length === 0">
+					<td colspan="8">暂无数据.</td>
+				</tr>
+				</tbody>
+			</table>
+			<page ng-show="tableData.length > 0"></page>
+		</div>
+	</div>
+</div>

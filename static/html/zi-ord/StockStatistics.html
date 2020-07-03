@@ -1,0 +1,815 @@
+                                    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户-客户分销-ERP系统</title>
+    <link rel="stylesheet" type="text/css" href="erp_otweb/css/erp-wa-KeHu-style.css"/>
+    <style>
+        body {
+            position: relative;
+        }
+        .clearfix:after{
+            content: "";
+            visibility: hidden;
+            display: block;
+            clear: both;
+            height: 0;
+        }
+        .clearfix{
+            zoom: 1;
+        }
+        body .guanlianshangpin {
+            width: 1111px;
+            height: 725px;
+            transform: translateX(0px);
+            transform: translateZ(0px);
+            background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(#ff8241, #ff8241);
+            background-blend-mode: normal,
+            normal;
+            box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+            border: solid 1px #efefef;
+            position: absolute;
+            left: 10%;
+            top: 10%;
+        }
+        body .guanlianshangpin .guanlianshangpinhead {
+            font-family: ﻿MicrosoftYaHei;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 56px;
+            letter-spacing: 0px;
+            color: #030303;
+            font-weight: 700;
+            padding: 20px 0;
+            text-align: center;
+            margin-left: 50%;
+        }
+
+        body .guanlianshangpin table {
+            margin: 0 auto;
+        }
+
+        body .guanlianshangpin table tbody .guanlianinp {
+            width: 30px;
+            display: inline;
+            border-radius: 2px 2px 2px 2px;
+            border: solid 1px #d3d3d3;
+        }
+
+        body .guanlianshangpin table tbody .guanliansec {
+            width: 90px;
+            display: inline;
+            border-radius: 2px 2px 2px 2px;
+            border: solid 1px #d3d3d3;
+        }
+
+        body .excelshangpin {
+            margin: 0 auto;
+            width: 1011px;
+            height: 725px;
+            z-index: 100;
+            background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(#ff8241, #ff8241);
+            background-blend-mode: normal,
+            normal;
+            box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+            border: solid 1px #efefef;
+            position: absolute;
+            right: 1%;
+            bottom: -600px;
+        }
+
+        body .excelshangpin .guanlianshangpinhead {
+            font-family: ﻿MicrosoftYaHei;
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 56px;
+            letter-spacing: 0px;
+            color: #030303;
+            width: 1000px;
+            font-weight: 700;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        body .excelshangpin table {
+            margin: 0 auto;
+        }
+
+        body .excelshangpin table tbody .guanlianinp {
+            width: 30px;
+            display: inline;
+            border-radius: 2px 2px 2px 2px;
+            border: solid 1px #d3d3d3;
+        }
+
+        body .excelshangpin table tbody .guanliansec {
+            width: 90px;
+            display: inline;
+            border-radius: 2px 2px 2px 2px;
+            border: solid 1px #d3d3d3;
+        }
+
+        .wllSort1 {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 7px solid lightslategray;
+            position: absolute;
+            right: 25px;
+            top: 23px;
+            cursor: pointer;
+        }
+
+        .wllSort2 {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 7px solid lightslategray;
+            position: absolute;
+            right: 25px;
+            bottom: 23px;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        .accreditSelect {
+            width: 100px;
+            border: 1px solid #ccc;
+            height: 35px;
+            text-align: center;
+            padding-left: 10px;
+            outline: none;
+            float: right;
+            margin-right: 20px;
+            margin-top: 8px;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .dianpuDialog{
+            z-index: 10003;
+        }
+        .dianpuDialog .guanlianshangpin{
+            width: 1000px;
+            height: 600px;
+        }
+        .no-data{
+            text-align: center;
+            padding: 10px;
+            color: #999;
+            border: solid #e1e1e1 1px;
+            border-top: none;
+        }
+        .table-con-box img{
+            width: 12px;
+            display: inline-block;
+            margin-left: 2px;
+            cursor: pointer;
+        }
+        .table-con-box .username{
+            cursor: pointer;
+        }
+        .table-con-box .username:hover{
+            color: #dc8a23;
+        }
+        .table-con-box tr:hover{
+            background-color: #e8f4ff;
+        }
+        .ea-list-table .focus{
+            background-color: #e8f4ff;
+        }
+        .table-con-box span{
+            color: #000;
+            font-size: 14px;
+        }
+        .guanlianshangpin-wrap .left{
+            position: absolute;
+            left: -70px;
+            width: 40px;
+            height: 120px;
+            top: 300px;
+            cursor: pointer;
+            display: block;
+        }
+        .guanlianshangpin-wrap .right{
+            position: absolute;
+            right: -70px;
+            width: 40px;
+            height: 120px;
+            top: 300px;
+            cursor: pointer;
+            display: block;
+        }
+        .guanlianshangpin-wrap .closeimg{
+            width: 48px;
+            display: block;
+            position: absolute;
+            right: -24px;
+            top: -24px;
+            cursor: pointer;
+        }
+        .guanlianshangpin-wrap .one{
+            /*display: none;*/
+        }
+        .guanlianshangpin-wrap .one ul{
+            width: 100%;
+            padding: 20px;
+        }
+        .guanlianshangpin-wrap .one li {
+            width: 45%;
+            float: left;
+            margin: 15px 25px;
+        }
+        .guanlianshangpin-wrap .one li span{
+            color: #000;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        .guanlianshangpin-wrap .one li p{
+            color: #333;
+            font-size: 14px;
+            line-height: 40px;
+            height: 40px;
+            border-bottom: 2px solid #EEEEEE;
+        }
+        .guanlianshangpin-wrap .two ul{
+            width: 48%;
+            float: left;
+            margin: 20px 0;
+            padding: 0 85px;
+            overflow-y: auto;
+            height: 620px
+        }
+        .guanlianshangpin-wrap .two ul li{
+            word-wrap: break-word;
+        }
+        .guanlianshangpin-wrap .two ul:nth-child(1){
+            border-right: 2px solid #666666;
+        }
+        .guanlianshangpin-wrap .two ul span{
+            font-size:14px;
+            font-family:PingFangSC-Medium;
+            color:rgba(176,86,9,1);
+            line-height:17px;
+            display: block;
+            margin: 10px 0;
+        }
+        .guanlianshangpin-wrap .two ul p{
+            font-size:12px;
+            font-family:PingFangSC-Regular;
+            color:rgba(0,0,0,1);
+            line-height:25px;
+            min-height: 25px;
+       /*     display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;*/
+        }
+        .table-con-box .wa-SpColor{
+            color: #047aa7;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .table-con-box tr button {
+            background-color: orange;
+            font-size: 12px;
+            color: #fff;
+            padding: 3px 8px;
+            margin: 0;
+            border-radius: 6px;
+        }
+        .layui-layer-btn .layui-layer-btn0{
+            border: none;
+            background-color: #ccc;
+            width: 70px;
+            color: #000;
+        }
+        .layui-layer-btn .layui-layer-btn1{
+            border: none;
+            width: 80px;
+        }
+        .table-con-box .proName{
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            /*width: 200px;*/
+        }
+        .table-con-box .proimg>img{
+            width: 50px!important;
+        }
+        .table-con-box span.xcg{
+            color: red;
+        }
+        .ea-list-table td>span.flag{
+            color:	#04a452;
+        }
+        .thead{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 952px;
+            border-top: 1px solid #e1e1e1;
+            z-index: 100;
+        }
+        .thead-th{
+            background: #F4F8FB;
+            text-align: center;
+            /*border-bottom: solid #e1e1e1 1px;*/
+            /*border-right: solid #e1e1e1 1px;*/
+            padding: 10px 0;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .thead-th>span{
+            display: block;
+            font-weight: bold;
+        }
+        .table-con-box tr button.gray{
+            background: #e0e0e0;
+        }
+        .table-con-box .proimg{
+            position: relative;
+        }
+        .bigimg>img{
+            width: 340px!important;
+        }
+        .table-con-box .proimg .bigimg{
+            position: absolute;
+            top: -60px;
+            left: 100%;
+            background: #fff;
+            padding:8px 5px;
+            border:1px solid #e0e0e0;
+            /*display: block;*/
+            width: 360px;
+        }
+        .table-con-box .proimg:hover .bigimg{
+            display: block;
+        }
+        .ea-right-search{
+            display: flex;
+            justify-content: space-between;
+        }
+        .pldkBtn{
+            background: #08aceb;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+        /* 18-11-19 add ****************************************************************/
+        .btn-batch-deduction { display: inline-block; padding: 0 10px; border: 1px solid #5dbdf2; height: 30px; line-height: 30px; font-size: 12px; margin-left: 15px; text-align: center; border-radius: 4px; cursor: pointer; }
+        .select-box { margin-left: 7px; border-radius: 4px; font-size: 12px; }
+        .pick-all-box { padding: 7px; }
+        .ea-list-table .pick-item-box { display: inline-block; padding: 3px; }
+        /*******************************************************************************/
+    </style>
+</head>
+<body>
+<div class="ea-content">
+    <!-- right con -->
+    <div class="right-bar-wrap ea-right-content">
+        <div class="bg-geduan"></div>
+        <!-- tab -->
+        <div class="top-tab-nav d-flex">
+            <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':orderType==0}" ng-click="changeOrderType(0)">代发单</span>
+            <span class="tab-span tab-border-bt cursor-pointer" ng-class="{'tab-active':orderType==1}" ng-click="changeOrderType(1)">直发单</span>
+        </div>
+        <div class="right-bar" style="min-height: 850px;">
+            <div class="ea-right-search">
+                <div class="input-group search-box">
+                    <input type="text" class="form-control top-search-inp" placeholder="请输入用户名/SKU查询" ng-model="search" ng-keyup="enterSearch($event)">
+                    <a role="button" class="btn btn-default top-search-btn" type="button" ng-click="searchcustomer()">{{'100025' | translate}}</a>
+                </div>
+            </div>
+            <!-- right list -->
+            <div class="table-con-box">
+                <div class="thead">
+                    <div style="width:5%;border-left: solid #e1e1e1 1px; " class="thead-th">
+                        <!-- -------------------------------------------------- 18-11-19 add 全选标记 -->
+                        <!-- <span class="pick-all-box" ng-click="pick_order_all()">
+                            <img ng-if="!tick_all_flag" ng-src="static/image/order-img/multiple1.png">
+                            <img ng-if="tick_all_flag" ng-src="static/image/order-img/multiple2.png">
+                        </span> -->
+                        <!-- -------------------------------------------------- -->
+                        <span>{{'100174' | translate}}</span>
+                    </div>
+                    <div style="width:20% " class="thead-th"><span>商品名称</span></div>
+
+                    <div style="width:7% " class="thead-th"><span>商品图片</span></div>
+                    <div style="width:22% " class="thead-th"><span>SKU</span></div>
+
+                    <div style="width:18% " class="thead-th"><span>缺货用户</span></div>
+                    <div style="width: 5%" class="thead-th"><span>现有库存数量</span></div>
+                    <div style="width:5% " class="thead-th"><span>需采购数量</span></div>
+                    <div style="width:5% " class="thead-th"><span>订单需要数量</span></div>
+                    <div style="width:5% " class="thead-th"><span>缺货订单数量</span></div>
+                    <div style="width:8%;border-right: solid #e1e1e1 1px; " class="thead-th">
+                        <!-- --------------------------------------- 18-11-19 add 勾选标记 -->
+                        <span>操作</span>
+                        <!-- <select
+                            class="select-box"
+                            ng-model="deduction_type"
+                            ng-options="opt.tag for opt in deduction_types"
+                            ng-change="select_deduction_type()">
+                        </select> -->
+                        <!-- --------------------------------------- -->
+                    </div>
+                </div>
+                <table class="ea-list-table ea-erp-cs" style="table-layout: fixed;min-width: 952px" cellpadding="0" cellspacing="0">
+
+                    <tbody ng-repeat="(index,item) in Datalist">
+                        <tr class="TR" ng-click="TrClick($index)" ng-class='{focus: $index == focus}'>
+                            <td style="width: 5%">
+                                <!-- -------------------------------------------------- 18-11-19 add 勾选标记 -->
+                                <!-- <span class="pick-item-box" ng-click="pick_order_item(item, index)">
+                                    <img ng-if="!item.tick" ng-src="static/image/order-img/multiple1.png">
+                                    <img ng-if="item.tick" ng-src="static/image/order-img/multiple2.png">
+                                </span> -->
+                                <!-- -------------------------------------------------- -->
+                                <span style="display: inline-block;">{{index+1}}</span>
+                                <span style="display: inline-block;">
+                                    <img ng-if="item.flag" ng-click="item.flag = false;" src="static/image/public-img/down.png" alt="">
+                                    <img ng-if="!item.flag" ng-click="expendsorders(item)" src="static/image/public-img/up.png" alt="">
+                                </span>
+                            </td>
+                            <td style="width: 20%;">
+                                <span class="proName" ng-attr-title="{{item.cjProductName}}">
+                                    {{item.cjProductName}}
+                                </span>
+                            </td>
+
+                            <td style="width: 7%">
+                                <span class="proimg">
+                                    <img width="50" height="50" ng-src="{{item.cjImage}}" alt="">
+                                    <div class="bigimg">
+                                        <img width="200"  ng-src="{{item.cjImage}}" alt="">
+                                    </div>
+                                </span>
+                            </td>
+                            <td style="width: 22%;">
+                                <span>{{item.sku}}</span>
+                            </td>
+
+                            <td style="width: 18%">--</td>
+                            <td style="width: 5%"><span>{{item.kucun-0}}</span></td>
+                            <td style="width: 5%;">
+                                <span ng-bind-html="getNeedPurchaseNum(item)"></span>
+                            </td>
+                            <td style="width: 5%"><span>{{item.quantity}}</span></td>
+                            <td style="width: 5%"><span>{{item.orderNum}}</span></td>
+                            <td style="width: 8%">
+                                <button style="font-size: 10px;" class="gray" type="button">提交采购</button>
+                            </td>
+                        </tr>
+                        <tr style="background: #f6f6f6;" ng-repeat="(index1,item1) in item.proInfo" ng-show="item.flag">
+                            <td style="width: 5%"><span> {{index+1}} - {{index1+1}}</span></td>
+                            <td style="width: 20%;">
+                                <span class="proName">
+                                    --
+                                    <!--{{item.cjProductName}}-->
+                                </span>
+                            </td>
+
+                            <td style="width: 7%">
+                                <span class="proimg">
+                                    <img width="50" height="50" ng-src="{{item1.cjImage}}" alt="">
+                                    <div class="bigimg">
+                                        <img width="200"  ng-src="{{item1.cjImage}}" alt="">
+                                    </div>
+                                </span>
+                            </td>
+                            <td style="width: 22%"><span>{{item1.sku}}</span></td>
+
+                            <td style="width: 18%" title="{{item1.user}}"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;">{{item1.consumerName}}</span></td>
+                            
+                            <td style="width: 5%"><span>{{item1.kucun}}</span></td>
+
+                            <td style="width: 5%">
+                                <span ng-bind-html="getNeedPurchaseNum(item1)"></span>
+                            </td>
+                            
+                            <td style="width: 5%"><span>{{item1.quantity}}</span></td>
+
+
+                            <td style="width: 5%"><span>{{item1.orderNum}}</span></td>
+                            <td style="width: 8%">
+                                <button style="font-size: 10px;" type="button" ng-click="submitPurchase(item1)">提交采购</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 分页 -->
+                <div class="no-data" ng-show="Datalist.length == 0">暂无数据。</div>
+                <div class="page-box" ng-show="totalCounts>0">
+                    <div class="select-page-num">
+                        <select class="form-control" ng-model="pagesize" ng-change="pagesizechange(pagesize)">
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                        </select>
+                        <span>每页</span>
+                    </div>
+                    <div class="total-num">
+                        共&nbsp;&nbsp;{{ totalCounts }}&nbsp;&nbsp;条
+                    </div>
+                    <div class="page-index">
+                        <div class="pagegroup">
+                            <a href="#">&lt;&lt;</a>
+                            <a href="#">&lt;</a>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a class="current" href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">···</a>
+                            <a href="#">&gt;</a>
+                            <a href="#">&gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="to-go">
+                        <span>跳转：</span>
+                        <input type="text" class="form-control" placeholder="" ng-model="pagenum">
+                        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--客户信息-->
+<div class="guanlianshangpin-wrap" ng-show="information">
+    <div class="guanlianshangpin c-ord-con clearfix" style="margin: auto;right: 0;top: 0;left: 0;bottom: 0;">
+        <img class="left" src="static/image/public-img/aff_left.png" alt="" ng-click="leftClick()">
+        <img class="right" src="static/image/public-img/aff_right.png" alt="" ng-click="rightClick()">
+        <img src="static/image/public-img/download.png" alt="" class="closeimg" ng-click="informationClose()">
+        <div class="one" ng-show="isoneshow">
+            <ul>
+                <li>
+                    <span>Company / Name:</span>
+                    <p>{{UserData.username}}</p>
+                </li>
+                <li>
+                    <span>Nick Name:</span>
+                    <p>{{UserData.nickname}}</p>
+                </li>
+                <li>
+                    <span>Last Name:</span>
+                    <p>{{UserData.lastname}}</p>
+                </li>
+                <li>
+                    <span>Country:  {{UserData.country1}}</span>
+                    <p>{{Country[UserData.country1]}}</p>
+                </li>
+                <li>
+                    <span>First Name:</span>
+                    <p>{{UserData.firstname}}</p>
+                </li>
+                <li>
+                    <span>State:</span>
+                    <p>{{UserData.state}}</p>
+                </li>
+                <li>
+                    <span>Phone:</span>
+                    <p>{{UserData.phone}}</p>
+                </li>
+                <li>
+                    <span>City:</span>
+                    <p>{{UserData.city}}</p>
+                </li>
+                <li>
+                    <span>E-mail Address:</span>
+                    <p>{{UserData.email}}</p>
+                </li>
+                <li>
+                    <span>Address 1:</span>
+                    <p>{{UserData.address1}}</p>
+                </li>
+                <li>
+                    <span>Zip Code:</span>
+                    <p>{{UserData.zipcode}}</p>
+                </li>
+                <li>
+                    <span>Address 2:</span>
+                    <p>{{UserData.address2}}</p>
+                </li>
+                <li>
+                    <span>Receipt Type:</span>
+                    <p>{{UserData.billingFlag }}</p>
+                </li>
+                <li>
+                    <span>Receiving Account:</span>
+                    <p>{{UserData.billingAccount }}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="two" ng-show="istwoshow">
+            <ul>
+                <li>
+                    <span>What is your website url?</span>
+                    <p>{{UserData.website}}</p>
+                </li>
+                <li>
+                    <span>What traffic source are you currently using?</span>
+                    <p>{{UserData.source}}</p>
+                </li>
+                <li>
+                    <span>What verticals work best for you?</span>
+                    <p>{{UserData.verticalswork}}</p>
+                </li>
+                <li>
+                    <span>What Geo’s do you currently work in?</span>
+                    <p>{{UserData.work}}</p>
+                </li>
+                <li>
+                    <span>Are you looking for Incent or Non-incent offers?</span>
+                    <p>{{UserData.offers}}</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <span>How long have you worked in the industry?</span>
+                    <p>{{UserData.worktime}}</p>
+                </li>
+                <li>
+                    <span>How did you hear about us?</span>
+                    <p>{{UserData.aboutus}}</p>
+                </li>
+                <li>
+                    <span>Other networks you currently work with?</span>
+                    <p>{{UserData.othernetwork}}</p>
+                </li>
+                <li>
+                    <span>What is the best way to contact you?</span>
+                    <p>{{UserData.contact}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--收款记录弹框-->
+<div class="guanlianshangpin-wrap dianpuDialog" ng-show="SkNumDialog">
+    <div class="guanlianshangpin c-ord-con" style="margin: auto;right: 0;top: 0;left: 0;bottom: 0;">
+        <button style="position: absolute;right: 5px;top: 5px;width: 50px;height: 20px;background: #f99429;color: #FFFEFE;font-size: 12px;border-radius: 4px;" ng-click="SKNumDialogClose()">{{'100066' | translate}}</button>
+        <h3>{{'100974' | translate}}</h3>
+        <div class="input-group search-box">
+            <input type="text" class="form-control top-search-inp" placeholder="{{'100975' | translate}}" ng-model="Dpsearch" ng-keyup="enterDPsearch($event)">
+            <a role="button" class="btn btn-default top-search-btn" type="button" ng-click="SKsearchClick()">{{'100025' | translate}}</a>
+        </div>
+        <table>
+            <thead class="c-ord-thead">
+            <tr>
+                <th style="width: 40px">
+                    <span>{{'100174' | translate}}</span>
+                </th>
+                <th style="width: 70px">{{'100225' | translate}}</th>
+
+                <th style="width: 90px;">{{'100976' | translate}}</th>
+                <th style="width: 90px;">{{'100343' | translate}}</th>
+                <th style="width: 90px;">{{'100338' | translate}}</th>
+                <th style="width: 90px;">{{'100043' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody class="c-ord-tbody" >
+            <tr ng-repeat="item in DpList">
+                <td>
+                    <p>{{$index+1}}</p>
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.NAME}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.orderNum}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.orderMoney}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.createDate}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <div class="no-data" ng-show="SkNumTotal == 0">暂无数据。</div>
+        <div class="page-box" ng-show="SKNumTotal > 0">
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ SKNumTotal }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="Dppagegroup">
+                    <a href="#">&lt;&lt;</a>
+                    <a href="#">&lt;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a class="current" href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">···</a>
+                    <a href="#">&gt;</a>
+                    <a href="#">&gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--店铺数量弹框-->
+<div class="guanlianshangpin-wrap dianpuDialog" ng-show="DpNumDialog">
+    <div class="guanlianshangpin c-ord-con" style="margin: auto;right: 0;top: 0;left: 0;bottom: 0;">
+        <button style="position: absolute;right: 5px;top: 5px;width: 50px;height: 20px;background: #f99429;color: #FFFEFE;font-size: 12px;border-radius: 4px;" ng-click="DpNumDialogClose()">{{'100066' | translate}}</button>
+        <h3>{{'100977' | translate}}</h3>
+        <div class="input-group search-box">
+            <input type="text" class="form-control top-search-inp" placeholder="{{'100975' | translate}}" ng-model="Dpsearch" ng-keyup="enterDPsearch($event)">
+            <a role="button" class="btn btn-default top-search-btn" type="button" ng-click="DpsearchClick()">{{'100025' | translate}}</a>
+        </div>
+        <table>
+            <thead class="c-ord-thead">
+            <tr>
+                <th style="width: 40px">
+                    <span>{{'100174' | translate}}</span>
+                </th>
+                <th style="width: 70px">{{'100877' | translate}}</th>
+
+                <th style="width: 90px;">{{'100978' | translate}}</th>
+                <th style="width: 90px;">{{'100033' | translate}}</th>
+                <th style="width: 90px;">{{'100225' | translate}}</th>
+            </tr>
+            </thead>
+            <tbody class="c-ord-tbody" >
+            <tr ng-repeat="item in DpList">
+                <td>
+                    <p>{{$index+1}}</p>
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.NAME}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.orderNum}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.orderMoney}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+                <td>
+                    {{item.createDate}}
+                    <!-- td 右边的边框 -->
+                    <span class="border-span"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+        <div class="no-data" ng-show="DpNumTotal == 0">暂无数据。</div>
+        <div class="page-box" ng-show="DpNumTotal > 0">
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ DpNumTotal }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="Dppagegroup">
+                    <a href="#">&lt;&lt;</a>
+                    <a href="#">&lt;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a class="current" href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">···</a>
+                    <a href="#">&gt;</a>
+                    <a href="#">&gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

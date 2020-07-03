@@ -1,0 +1,896 @@
+<style type="text/css">
+  .bigimg,
+  .bigimg1,
+  .bigimg2,
+  .bigimg3,
+  .bigimg4 {
+    position: absolute;
+    top: -70px;
+    left: 106%;
+    z-index: 999;
+    max-width: 360px;
+    width: 360px;
+    height: auto;
+    display: none;
+  }
+
+  /*.proimg:hover .bigimg {
+	  display: block;
+	}*/
+  .proimg ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .proimg:hover .bigimg {
+    display: none;
+  }
+
+  .proimg ul li {
+    /*float: left;*/
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    position: relative;
+  }
+
+  .proimg ul li:hover .bigimg {
+    display: block;
+  }
+
+  .proimg ul li:nth-of-type(1):hover .bigimg {
+    display: block;
+  }
+
+  .proimg ul li:nth-of-type(2):hover .bigimg1 {
+    display: block;
+  }
+
+  .proimg ul li:nth-of-type(3):hover .bigimg2 {
+    display: block;
+  }
+
+
+  .proimg ul li:nth-of-type(4):hover .bigimg3 {
+    display: block;
+  }
+
+  .proimg ul li:nth-of-type(5):hover .bigimg4 {
+    display: block;
+  }
+
+  .descripte-tankuang,
+  .action-tankuang {
+    width: 500px;
+    height: 300px;
+    padding: 10px 25px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 30px lightgray;
+    border-radius: 5px;
+  }
+
+  .descripte-tankuang .title {
+    width: 98%;
+    height: 30px;
+    color: #000;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .descripte-tankuang .word {
+    width: 100%;
+    height: 160px;
+    border: 1px solid lightgrey;
+    color: gray;
+    margin-top: 5px;
+  }
+
+  .descripte-tankuang .clos {
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    background: #a3a1a1;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .action-tankuang div {
+    width: 50%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .action-tankuang div button {
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .date-box input {
+    height: 30px;
+    border-right: none;
+    border: 1px solid #ececec;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .date-box .erp-seachInp {
+    height: 30px;
+    background-color: #fff;
+    width: 50px;
+    vertical-align: top;
+
+  }
+
+  .existing-tankuang {
+    width: 800px;
+    height: 500px;
+    /*min-height: 300px;*/
+    padding: 10px 15px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 30px #ccc;
+    border-radius: 5px;
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+
+  .existing-tankuang .existing-content ul li {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+
+  }
+
+  .existing-tankuang .existing-content ul li span {
+    text-align: center;
+  }
+
+  .existing-tankuang .existing-content ul li p {
+    font-size: 13px;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .existing-tankuang .existing-btns button {
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .sbyy-wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .sbyy-con {
+    width: 450px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -46%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+
+  .sbyy-con button {
+    color: #6b6b6b;
+    height: 30px;
+    width: 76px;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+
+  .boreder_red {
+    border-bottom: 2px solid red !important;
+    border: 2px solid red;
+  }
+
+  #batchSupplierQuote {
+    margin-top: 5px;
+    height: 30px;
+    line-height: 30px;
+    width: 100px;
+    margin-left: 24px;
+    float: left;
+    text-align: center;
+  }
+
+  .xzlm-tankuang {
+    width: 800px;
+    height: 400px;
+    /*min-height: 300px;*/
+    padding: 24px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 30px #ccc;
+    border-radius: 5px;
+  }
+
+  .plxz-tankuang {
+    width: 500px;
+    height: 200px;
+    /*min-height: 300px;*/
+    padding: 24px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 30px #ccc;
+    border-radius: 5px;
+  }
+
+  .plxz-tankuang .btn-container {
+    text-align: center;
+  }
+
+  .plxz-tankuang .btn-container button:nth-child(1) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  .plxz-tankuang .btn-container button:nth-child(2) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+    background: #faa538;
+    color: #fff;
+  }
+
+
+  .category-container {
+    overflow: hidden;
+  }
+
+  .categoryItem {
+    border: 1px solid #999;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    padding: 0 6px;
+    cursor: pointer;
+  }
+
+  .categoryItem-active {
+    border: 1px solid #faa538;
+    color: #faa538;
+  }
+
+  .xzlm-tankuang .btn-container {
+    text-align: center;
+  }
+
+  .xzlm-tankuang .btn-container button:nth-child(1) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  .xzlm-tankuang .btn-container button:nth-child(2) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+    background: #faa538;
+    color: #fff;
+  }
+
+  .batchWaitSoupin {
+    background: rgb(255, 185, 35);
+    height: 30px;
+    color: #fff;
+    padding: 0 10px;
+    position: absolute;
+    right: 60px;
+  }
+
+  .batchWaitSoupin:hover {
+    background: rgb(255, 196, 0);
+  }
+</style>
+
+
+<div class="e-sourcing-wrap">
+
+  <!-- <div class="e-sour-blank"> -->
+  <!-- <div class="e-sou-left">
+			<ul>
+				<li><a href="#/sourcing">客户店铺</a></li>
+				<li class="active"><a href="#/individualsourcing">独有商品</a></li>
+				<li><a href="#/cjsourcing">平台搜品</a></li>
+			</ul>
+		</div> -->
+  <div class="left-bar">
+    <ul class="left-bar-tabs">
+      <li><a href="#/sourcing">{{'100864' | translate}}<span></span></a></li>
+      <li class="active"><a href="#/individualsourcing">{{'100865' | translate}}<span></span></a></li>
+      <li><a href="#/cjsourcing">{{'100866' | translate}}<span></span></a></li>
+    </ul>
+  </div>
+  <div class="right-bar-wrap e-sou-con">
+    <div class="asj-h10"></div>
+    <!--<div class="top-taps clearfix">-->
+    <!--<ul>-->
+    <!--&lt;!&ndash;<li class="tab active"><a>{{'100867' | translate}}({{autAll}})</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class="tab"><a>{{'100868' | translate}}({{autWait}})</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class=" tab"><a >{{'100869' | translate}}({{autFail}})</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class="tab"><a>{{'100870' | translate}}({{autSucc}})</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class="tab"><a>{{'100871' | translate}}({{autOn}})</a></li>&ndash;&gt;-->
+    <!--&lt;!&ndash;<li class=" tab"><a >{{'100252' | translate}}({{autDel}})</a></li>&ndash;&gt;-->
+
+    <!--<li class="tab active"><a href="#/individualsourcing">{{'100867' | translate}}({{autAll}})</a></li>-->
+    <!--<li class="tab"><a href="#/individualsourcing/1">{{'100868' | translate}}({{autWait}})</a></li>-->
+    <!--<li class=" tab"><a href="#/individualsourcing/2" >{{'100869' | translate}}({{autFail}})</a></li>-->
+    <!--<li class="tab"><a href="#/individualsourcing/3">{{'100870' | translate}}({{autSucc}})</a></li>-->
+    <!--<li class="tab"><a href="#/individualsourcing/4">{{'100871' | translate}}({{autOn}})</a></li>-->
+    <!--<li class=" tab"><a href="#/individualsourcing/5" >{{'100252' | translate}}({{autDel}})</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <div class="right-bar e-sou-content" style="min-height: 1000px;background-color: #fff;">
+      <!-- <div class="hnj-h10"></div> -->
+
+      <!-- right nav -->
+      <!-- <div class="ea-right-nav">
+					<ul>
+
+						<li class="tab active"><a>所有状态({{autAll}})</a></li>
+						<li class="tab"><a>等待搜品({{autWait}})</a></li>
+						<li class=" tab"><a >搜品失败({{autFail}})</a></li>
+						<li class="tab"><a>搜品成功({{autSucc}})</a></li>
+						<li class="tab"><a>搜品中({{autOn}})</a></li>
+						<li class=" tab"><a >已删除({{autDel}})</a></li>
+					</ul>
+				</div> -->
+
+
+
+      <!-- 搜索 订单状态 导出 -->
+
+      <div class="es-search-status">
+        <select name="" id="" ng-model="soupinType" ng-change="selectSoupinType()">
+          <option value="1">全部</option>
+          <option value="2">现有相似</option>
+          <option value="3" ng-show="whichPage === '1'">搜品超时</option>
+        </select>
+        <div class="date-box" style="color: #888;padding-bottom: 5px;float: left;margin: 7px 5px 0;">
+          <input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text" onclick="var cdatatime2=$dp.$('cdatatime2');WdatePicker({onpicked:function(){cdatatime2.click();},maxDate:'#F{$dp.$D(\'cdatatime2\')}'})"></input><input placeholder="Now" id="cdatatime2" class="Wdate data-inp" style="text-indent: 12px;" type="text" onclick="WdatePicker({minDate:'#F{$dp.$D(\'c-data-time\')}'})" />
+          <!-- <input class="erp-seachInp" type="button" value="{{'100025' | translate}}" ng-click="dateSearchFun()"></input> -->
+        </div>
+        <div class="es-seach-div" style=" background-color: #f2f3f5;margin-top: 5px;float: left;margin-right: 20px;">
+          <input class="es-seach-inp" type="text" ng-model="searchinfo" placeholder="{{'100872' | translate}}" style="height: 30px;width: 320px">
+          <a class="es-seach-btn" href="javascript:void(0)" ng-click="dateSearchFun()" id="search" style="height: 30px;line-height: 30px;width: 50px;">{{'100025' | translate}}</a>
+        </div>
+
+        <div class="es-search-div" style="margin-left: 20px;">
+          <div class="check-box">
+            <!-- <input type="checkbox" name="" ng-click=""> -->
+            <input type="checkbox" name="" id="" ng-model="item.checked" ng-click="checkMerch(item, $index, $event)" style="top: 10px;">
+            <label for="" style="height: 40px;line-height: 40px;">付费客户</label>
+          </div>
+        </div>
+        <select name="" id="" ng-show="whichPage == '1'" ng-model="sortType" ng-change="dateSearchFun()">
+          <option value="2">按客户等级排序</option>
+          <option value="1">按提交时间排序</option>
+        </select>
+        <button ng-if="statue =='6'" class="batchWaitSoupin" ng-click="batchWaitSoupin()">批量等待搜品</button>
+        <div id="batchSupplierQuote" class="es-seach-div" ng-if="whichPage=='1'||whichPage=='2'">
+          <a class="es-view-detail" ng-click="hanldeBatchSupplierQuote()">转供应商报价</a>
+        </div>
+      </div>
+
+
+      <!-- 订单的列表部分 -->
+      <div class="es-ord-list">
+        <table id="sourcelist-table" style="width: 100%;">
+          <thead class="es-ord-thead">
+            <tr>
+              <th style="width: 50px" ng-if="statue =='6'||whichPage=='1'||whichPage=='2'"><span>
+                  <img class="" ng-src="{{checkAllFlag?'static/image/order-img/multiple2.png':'static/image/order-img/multiple1.png'}}" ng-click="checkAll()">
+                </span></th>
+              <th class="ordlist-fir-th" style="width: 100px">
+                <!-- <img class="esou-chekall" src="static/image/order-img/multiple1.png"> -->
+                <span style="margin-left: 0px;">{{'100873' | translate}}</span>
+              </th>
+              <th class="ordlist-fir-th" style="width: 100px">
+                <span style="margin-left: 0px;">截至日期</span>
+              </th>
+              <th style="width: 70px">
+                <!-- <select name="" id="" ng-change="changeSaleman()" ng-model="salemanName">
+									<option value="">{{'100383' | translate}}</option>
+									<option value="{{item.LOGIN_NAME}}" ng-repeat="item in salemanList">{{item.LOGIN_NAME}}</option>
+								</select> -->
+                <select style="width: 100px; margin-bottom: 5px;" name="" id="" ng-show="loginJob !== '销售'" ng-model='ownerName' ng-change="changeOwnerName()">
+                  <option value="">群主</option>
+                  <option value="{{owner.relate_salesman}}" ng-repeat="owner in ownerList">{{owner.relate_salesman}}</option>
+                </select>
+                <select style="width: 100px;" name="" id="" ng-change="changeSaleman()" ng-model="salemanName" ng-show="loginJob!='销售'">
+                  <option value="">{{'100383' | translate}}</option>
+                  <option value="{{item.LOGIN_NAME}}" ng-repeat="item in salemanList">{{item.LOGIN_NAME}}</option>
+                </select>
+                <p ng-show="loginJob=='销售'">负责人/群主</p>
+              </th>
+              <th style="width: 80px">{{'100874' | translate}}</th>
+              <th style="width: 80px" ng-if="erpflag">{{'100875' | translate}}</th>
+              <th style="width: 70px">{{'100008' | translate}}</th>
+              <th style="width: 100px">{{'100876' | translate}}</th>
+              <th style="width: 75px">{{'100107' | translate}}</th>
+              <th style="width: 175px">{{'100382' | translate}}</th>
+              <th style="width: 150px">{{'100878' | translate}}</th>
+              <th style="width: 150px">标签</th>
+              <th style="width: 84px">搜品来源</th>
+              <th style="width: 150px">类型</th>
+              <th style="width: 100px" ng-if="erpflag||erpstuflag">ERP URL</th>
+              <th style="min-width: 60px; width: 60px;" ng-if="whichPage == '1'">相似商品</th>
+              <th style="width: 120px">{{'100888' | translate}}</th>
+              <th style="width: 100px">{{'100444' | translate}}</th>
+              <th ng-if="spsbFlag" style="width: 100px;">{{'100393' | translate}}</th>
+              <th ng-if="spsbFlag" style="width: 150px;">相似商品链接</th>
+              <th style="width: 115px">{{'100043' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody class="es-ord-tbody">
+            <tr ng-class="{boreder_red:sourcelist.isAct && (ordStatus == '1' || ordStatus == '4')}" ng-repeat="sourcelist in sourceDataList">
+              <td ng-if="statue =='6'||whichPage=='1'||whichPage=='2'"><span>
+                  <img class="" ng-src="{{sourcelist.checked?'static/image/order-img/multiple2.png':'static/image/order-img/multiple1.png'}}" ng-click="checkOne(sourcelist)">
+                </span></td>
+              <td class="allord-fir-td">
+                <!-- <img class="esou-chekbox" src="static/image/order-img/multiple1.png"> -->
+                <p style="margin-left: 0px;">{{sourcelist.createDate.year+1900}}-{{sourcelist.createDate.month+1}}-{{sourcelist.createDate.date}} {{sourcelist.createDate.hours}}:{{sourcelist.createDate.minutes}}:{{sourcelist.createDate.seconds}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+
+                {{sourcelist.jieZhiShiJianStr}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <span ng-show="sourcelist.ownerName" title="群主">{{sourcelist.ownerName}}</span>
+                <div title="没有群主显示业务员" ng-show="!sourcelist.ownerName && sourcelist.empName">{{sourcelist.empName}}</div>
+                <div style="font-size: 12px; color: #999" ng-show="!sourcelist.ownerName && sourcelist.empName">业务员</div>
+                <span ng-show="!sourcelist.ownerName && !sourcelist.empName">--</span>
+                <!-- {{sourcelist.empName==''?'--':sourcelist.empName?sourcelist.empName:'--'}} -->
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <p class="cj-source-status" ng-if="sourcelist.status =='1'" style="color: #e55264;">{{'100868' | translate}}</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='2'" style="color: #08aceb;">{{'100869' | translate}}</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='3'" style="color: #04a452;">{{'100870' | translate}}</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='8'" style="color: #f1ca16;">{{'100871' | translate}}</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='-1'" style="color: #909090;">{{'100252' | translate}}</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='5'" style="color: #903908;">搜品超时</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='6'" style="color: #684ad8;">待现有</p>
+                <p class="cj-source-status" ng-if="sourcelist.status =='7'" style="color: #f765a2;">初审失败</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td ng-if="erpflag">
+                <span ng-if="sourcelist.saleStatus == '1'">{{'100358' | translate}}</span>
+                <span ng-if="sourcelist.saleStatus == '2'">{{'100880' | translate}}</span>
+                <span ng-if="sourcelist.saleStatus == '4'">
+                  {{'100360' | translate}} <br>
+                  {{sourcelist.auditFailExplain}}
+                </span>
+                <span ng-if="sourcelist.saleStatus == '0'">{{'100881' | translate}}</span>
+                <span ng-if="sourcelist.saleStatus == '6'">{{'审核价格'}}</span>
+                <span class="border-span"></span>
+              </td>
+              <td class="cus-lvtd">
+                <p>{{sourcelist.name}}</p>
+                <!-- <i class="ea-gard-star ea-gard1"></i> -->
+                <b ng-if="sourcelist.userLevel==3" class="yzkehu-flag">优</b>
+                <b ng-if="sourcelist.isFuFei==true" class="yzkehu-flag">付</b>
+                <b ng-if="sourcelist.userLevel==2" class="ptkehu-flag">普</b>
+                <b ng-if="sourcelist.userLevel==1" class="qzkehu-flag">潜</b>
+                <img src="static/image/public-img/order.png">
+                <b class="cus-dengji">LV{{sourcelist.cunLevel}}</b>
+                <img src="static/image/public-img/money.png">
+                <b class="cus-dengji">LV{{sourcelist.moneyLevel}}</b>
+                <img width="20" src="static/image/public-img/dy.png">
+                <b class="cus-dengji">LV{{sourcelist.sourceDingYue}}</b>
+                <!-- <p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p> -->
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <p>{{sourcelist.number}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <p style="text-overflow: ellipsis;width: 75px;white-space: nowrap;overflow: hidden;cursor: pointer;" ng-click="showProName(sourcelist)">{{sourcelist.productName}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+
+              <td style="position: relative;cursor: pointer;padding-left: 5px;" class="proimg">
+                <ul ng-if="sourcelist.imageUrl !=''">
+                  <li ng-mouseenter="imgObj.hover = true" ng-mouseleave="imgObj.hover = false" ng-repeat="imgObj in sourcelist.calcImg">
+                    <img class="es-list-img" ng-src={{imgObj.calcImg}}>
+                    <img class="bigimg" ng-src={{imgObj.img}} ng-if="imgObj.hover">
+                  </li>
+
+                  <!-- <li>
+										<img class="es-list-img" ng-src={{sourcelist.imageUrl[0]}}>
+										<img class="bigimg" ng-src={{sourcelist.imageUrl[0]}}>
+									</li>
+									<li ng-if="sourcelist.imageUrl.length>=2">
+										<img class="es-list-img" ng-src={{sourcelist.imageUrl[1]}}>
+										<img class="bigimg1" ng-src={{sourcelist.imageUrl[1]}}>
+									</li>
+									<li ng-if="sourcelist.imageUrl.length>=3">
+										<img class="es-list-img" ng-src={{sourcelist.imageUrl[2]}}>
+										<img class="bigimg2" ng-src={{sourcelist.imageUrl[2]}}>
+									</li>
+									<li ng-if="sourcelist.imageUrl.length>=4">
+										<img class="es-list-img" ng-src={{sourcelist.imageUrl[3]}}>
+										<img class="bigimg3" ng-src={{sourcelist.imageUrl[3]}}>
+									</li>
+									<li ng-if="sourcelist.imageUrl.length>=5">
+										<img class="es-list-img" ng-src={{sourcelist.imageUrl[4]}}>
+										<img class="bigimg4" ng-src={{sourcelist.imageUrl[4]}}>
+									</li> -->
+
+                </ul>
+
+                <!-- <img class="es-list-img" ng-if="sourcelist.imageUrl !=''" ng-src={{sourcelist.imageUrl}} > -->
+                <!-- <img class="bigimg" ng-src={{sourcelist.imageUrl}}> -->
+                <p ng-if="sourcelist.imageUrl ==''">--</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <a class="es-url-p" ng-if="sourcelist.sourceUrl!=''" ng-href="{{sourcelist.sourceUrl}}" target="_blank">{{sourcelist.sourceUrl}}</a>
+                <p ng-if="sourcelist.sourceUrl ==''">--</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>
+                {{sourcelist.category_name || '--'}}
+              </td>
+              <td>
+                {{sourcelist.search_source}}
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <p>{{sourcelist.purchasingType?(sourcelist.purchasingType=="1"?'直发':'代发'):'--'}}</p>
+                <p>意向数量：{{sourcelist.estimatedQuntity}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td ng-if="erpflag||erpstuflag">
+                <a ng-show="sourcelist.sourceUrlErp" class="es-url-p" ng-href="{{sourcelist.sourceUrlErp + '/0'}}" target="_blank">{{sourcelist.sourceUrlErp + '/0'}}</a>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td ng-if="whichPage == '1'">
+                <p class="cp" style="word-break: break-all;" ng-click="showSimilarGoods(sourcelist)">{{ sourcelist.pids ? sourcelist.pids.split(',').length : 0 }}</p>
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <p ng-if="sourcelist.country">{{sourcelist.country}}{{'100882' | translate}}</p>
+                <p>${{sourcelist.price}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+
+              <td>
+                <!-- {{}} -->
+                <!-- <p ng-bind-html="sourcelist.description"></p> -->
+                <p ng-click="descripteFun(item)" style="width: 100px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">{{sourcelist.description==""?'--':sourcelist.description}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td ng-if="spsbFlag">
+                <p ng-click="ckFun(sourcelist)" title="{{sourcelist.failExplain}}" style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;cursor: pointer;">{{sourcelist.failExplain}}</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td ng-if="spsbFlag">
+                <a class="es-url-p" ng-href="{{sourcelist.xiangSiLianJie ? sourcelist.xiangSiLianJie : 'javascript:;'}}" target="{{sourcelist.xiangSiLianJie ? '_blank' : '_self'}}">{{sourcelist.xiangSiLianJie ? sourcelist.xiangSiLianJie : '-'}}</a>
+                <!-- <p style="word-break: break-all;">{{sourcelist.xiangSiLianJie ? sourcelist.xiangSiLianJie : '-'}}</p> -->
+                <span class="border-span"></span>
+              </td>
+              <td style="display: flex;justify-content: space-around;align-items: center">
+                <!-- <p  ng-if="sourcelist.status =='2'">失败</p> -->
+                <!-- <p  ng-if="sourcelist.status =='3'">搜品成功</p> -->
+                <!-- <p class="cj-source-status" ng-if="sourcelist.status =='1'">等待搜品</p> -->
+                <!-- <p class="cj-source-status" ng-if="sourcelist.status =='2'">搜品失败</p> -->
+                <a class="es-view-detail" ng-if="sourcelist.status =='2'" ng-click="enter(sourcelist)" style="width: 60px;">{{'100883' | translate}}</a>
+                <!-- <p class="cj-source-status" ng-if="sourcelist.status =='3'">搜品成功</p> -->
+                <a class="es-view-detail" ng-if="sourcelist.status =='3'" ng-click="enter(sourcelist)" style="width: 60px;">{{'100883' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='3'" ng-click="defeated(sourcelist)" style="width: 60px;">{{'100863' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='3'" ng-click="toFrontDetail(sourcelist.CjproductId)" style="width: 60px;">查看商品</a>
+                <!-- <p class="cj-source-status" ng-if="sourcelist.status =='8'">搜品中</p> -->
+                <a class="es-view-detail" ng-if="sourcelist.status =='8'" ng-click="enter(sourcelist)" style="width: 60px;">{{'100883' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='8'" ng-click="existingProFun(sourcelist)" style="width: 60px;">{{'100884' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='8'" ng-click="defeated(sourcelist)" style="width: 60px;">{{'100863' | translate}}</a>
+                <!-- <p class="cj-source-status" ng-if="sourcelist.status =='-1'">已删除</p> -->
+                <a class="es-view-detail" ng-if="sourcelist.status =='-1'" ng-click="enter(sourcelist)" style="width: 60px;">{{'100119' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='1'||sourcelist.status =='5'||sourcelist.status =='7'" ng-click="enter(sourcelist)" style="width: 60px;">{{'100119' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='5' || sourcelist.status =='7'" ng-click="defeated(sourcelist)" style="width: 60px;">{{'100863' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='1'" ng-click="chushenFall(sourcelist)" style="width: 60px;">初审失败</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='1'||sourcelist.status =='2'||sourcelist.status =='5'" ng-click="existingProFun(sourcelist)" style="width: 60px;">{{'100884' | translate}}</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='6'" ng-click="waitSoupin(sourcelist)" style="width: 60px;">等待搜品</a>
+                <a class="es-view-detail" ng-if="sourcelist.status =='6' || sourcelist.status =='7'" ng-click="existingProFun(sourcelist)" style="width: 60px;">{{'100884' | translate}}</a>
+                <a class="es-view-detail" ng-if="whichPage=='1'||whichPage=='2'" ng-click="SupplierQuote(sourcelist)">转供应商报价</a>
+                <p style="display: none;" class="sourcId">{{sourcelist.ID}}</p>
+              </td>
+
+            </tr>
+            <!-- 第二行 -->
+          </tbody>
+        </table>
+      </div>
+      <div ng-show="countNum<1" style="text-align: center;">暂无数据</div>
+      <!-- 分页 -->
+      <!-- ng-show="hasMerch" -->
+      <div class="page-box" ng-show="countNum>0">
+        <div class="select-page-num">
+          <select class="form-control" ng-model="pagesize" ng-change="pagesizechange(pagesize)">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <!-- <option value="50">50</option> -->
+          </select>
+          <span>每页</span>
+        </div>
+        <div class="total-num" id="demo3-text">
+          共&nbsp;&nbsp;{{ countNum }}&nbsp;&nbsp;条
+        </div>
+        <div class="page-index">
+          <div id="c-pages-fun" class="pagination2"></div>
+        </div>
+        <div class="to-go">
+          <span>跳转：</span>
+          <input type="text" class="form-control" placeholder="" ng-model="num">
+          <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagechange(num)">go</a>
+        </div>
+      </div>
+
+      <!-- <div class="pages-fun">
+					<select class="c-select-page-num e-sou-select" ng-model="pagesize" ng-change="pagesizechange()" >
+						<option value="2" selected="selected">2</option>
+						<option value="20" >20</option>
+					</select>
+					<span class="every-page">每页</span>
+					<span class="every-page gong">共</span>
+					<span class="c-all-num-line">{{countNum}}</span>
+					<span class="every-page">条</span>
+					<span id="demo3-text"></span>
+					<div id="c-pages-fun"></div>
+					<span class="every-page">跳转:</span>
+					<input class="c-inp-num-go e-sou-inp" ng-model="num">
+					<span class="jump-btn" ng-click="pagechange()">go</span>
+				</div> -->
+
+
+    </div>
+  </div>
+  <!-- 弹框 -->
+  <div class="descripte-tankuang">
+    <p class="title">
+      {{name}}{{'100444' | translate}}
+      &nbsp; &nbsp;{{'100254' | translate}}：{{number}}
+    </p>
+    <div class="word" style="overflow: auto;">
+      <p style="word-wrap: break-word;">{{word}}</p>
+    </div>
+    <p class="clos center-block" ng-click="closeDescripte()">{{'100066' | translate}}</p>
+
+  </div>
+  <!-- <div class="action-tankuang" style="width: 300px;height: 150px;">
+			<p style="text-align: center;margin-top: 35px;">确定搜品失败？</p>
+			<div class="center-block" style="margin-top: 30px;">
+				<button style="background-color: #666;" ng-click="noFun()">取消</button>
+				<button style="background-color: #f88f29;" ng-click="yesFun()">确定</button>
+			</div>
+			
+		</div> -->
+  <!-- 失败操作的弹框 -->
+  <div class="action-tankuang" style="width: 300px;height: 150px;">
+    <p style="text-align: center;margin-top: 10px;">{{'100885' | translate}}？</p>
+    <span style="vertical-align: top;">{{'100886' | translate}}:</span>
+    <textarea class="fail-text" style="border:1px solid #ececec;"></textarea>
+    <div class="center-block" style="margin-top: 15px;">
+      <button style="background-color: #666;" ng-click="noFun()">{{'100051' | translate}}</button>
+      <button style="background-color: #f88f29;" ng-click="yesFun()">{{'100050' | translate}}</button>
+    </div>
+
+  </div>
+  <!-- 查看失败原因的弹框 -->
+  <div ng-show="sbtcFlag" class="sbyy-wrap">
+    <div class="sbyy-con">
+      <p>{{showText}}</p>
+      <button ng-click="gbckFun()">{{'100066' | translate}}</button>
+    </div>
+  </div>
+
+  <!-- 现有商品操作的弹框 -->
+  <div class="existing-tankuang">
+    <div class="center-block" style="width: 200px; background-color: #CBCBCB;margin-top: 10px;font-size: 13px;">
+      <input class="es-seach-inp" type="text" ng-model="existinginfo" placeholder="{{'100887' | translate}}" style="height: 31px;color: 12px;padding-left: 3px;">
+      <a class="es-seach-btn" href="javascript:void(0)" ng-click="existingSearch(existinginfo)" style="height: 30px;color:#767575;line-height: 30px;width: 50px;">{{'100025' | translate}}</a>
+    </div>
+    <div class="existing-content" style="width: 100%;margin-top: 5px;min-height: 175px;">
+      <ul>
+        <li style="background-color: #f4f8fd;padding: 3px 2px;">
+          <span style="width: 100px;">{{'100382' | translate}}</span>
+          <span style="width: 120px;">{{'100107' | translate}}</span>
+          <span style="width: 100px;">SKU</span>
+          <span style="width: 120px;">{{'100350' | translate}}</span>
+          <span style="width: 115px;">{{'100718' | translate}}</span>
+        </li>
+      </ul>
+      <ul style="margin-top: 8px;height: 350px;overflow-y: auto;">
+        <li style="border-bottom: 1px solid #ccc;padding-bottom: 2px;" ng-repeat="item in existingPro">
+          <div>
+            <img style="width: 16px;height: 16px;cursor: pointer;" class="esou-cheked" ng-click="selectedExisting($event,item)" src="static/image/public-img/radiobutton1.png">
+            <img style="width: 50px;height: 50px;margin-left: 10px;" ng-src={{item.bigImg}}>
+          </div>
+          <p style="width: 170px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">{{item.name}}</p>
+          <p style="width: 100px;">{{item.sku}}</p>
+          <p style="width: 135px;">USD {{item.sellPrice}}</p>
+          <div ng-click="choseCurWuliu(item,$index)" class="asj-chose-wuliu" href="javascript:void(0);" style="width: 100px;height: 30px; padding-left: 5px; font-size: 12px; margin-top: 8px; border: 1px solid #E0E0E0; background: rgb(248, 248, 248); border-radius: 4px; cursor: pointer;" ng-show="item.existingWuliu.length == 0">
+            <span style="line-height: 30px;">{{'100693' | translate}}</span>
+            <span class="caret" style="position: absolute; top: 21px; right: 5px;"></span>
+          </div>
+          <select style="width: 100px;height: 30px;font-size: 12px; margin-top: 8px;" ng-model="item.mylogistics" ng-change="wuliuRequire(mylogistics)" ng-options="item2.enName as item2.enName for ($index,item2) in item.existingWuliu" ng-show="item.existingWuliu.length > 0">
+            <!-- <option value="">请选择</option> -->
+          </select>
+          <!-- <select style="width: 100px;height: 30px;font-size: 14px; margin-top: 8px;" ng-model="mylogistics" ng-change="wuliuRequire(mylogistics)" ng-options="item2.id as item2.enName for ($index,item2) in existingWuliu">
+							<option value="">请选择</option>
+						</select> -->
+        </li>
+      </ul>
+    </div>
+    <div class="existing-btns center-block" style="width: 180px;display: flex;justify-content: space-between;margin-top: 15px;">
+      <button style="background-color: #666;" ng-click="quxiaoFun()">{{'100051' | translate}}</button>
+      <button style="background-color: #f88f29;" ng-click="quedingFun()">{{'100050' | translate}}</button>
+    </div>
+
+  </div>
+
+  <!-- 选择类目的弹框 -->
+  <div ng-show="xzlmFlag" class="erp-common-tan-v2-wrap">
+    <div class="xzlm-tankuang">
+      <div class="category-container">
+        <div ng-repeat="category in categoryList">
+          <div class="categoryItem" ng-class="{'categoryItem-active': chooseCateGoryId===category.id}" ng-click="chooseCateGory(category.id)">{{category.name}}</div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button ng-click="closeCategory()">取消</button>
+        <button ng-click="categoryConfirm()">确定</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 选择供应商的弹窗 -->
+  <div ng-show="dgzspFlag" class="erp-common-tan-v2-wrap">
+    <div class="xzlm-tankuang">
+      <div style="margin-bottom: 24px;">
+        单个转搜品
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="margin-bottom: 12px">
+          <img ng-src={{chooseSource.calcImg[0].calcImg}} alt="" style="width:50px;height: 50px;">
+        </div>
+
+        <div>
+          <p style="margin-bottom: 12px;">搜品ID：{{chooseSource.ID}}</p>
+          <p>商品名称：{{chooseSource.productName}}</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        转指定供应商：
+        <select ng-model="supplierId" ng-options='supplierItem.supplierId as supplierItem.companyName for supplierItem in supplierList' style="width: 210px">
+        </select>
+      </div>
+
+      <div class="btn-container">
+        <button ng-click="closeSingleSearch()">取消</button>
+        <button ng-click="handleSingleConform()">确定</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 批量选择供应商的弹窗 -->
+  <div ng-show="plzspFlag" class="erp-common-tan-v2-wrap">
+    <div class="plxz-tankuang">
+      <div style="margin-bottom: 24px">
+        批量转搜品
+      </div>
+
+      <div style="margin-bottom: 12px">
+        转搜品数量：{{batchChooseSource.length}}
+      </div>
+
+      <div style="margin-bottom: 12px">
+        转指定供应商：
+        <select ng-model="supplierId" ng-options='supplierItem.supplierId as supplierItem.companyName for supplierItem in supplierList' style="width: 210px">
+        </select>
+      </div>
+
+      <div class="btn-container">
+        <button ng-click="closeBatchSearch()">取消</button>
+        <button ng-click="handleBatchConform()">确定</button>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+<!-- 搜品失败 -->
+<source-error ng-if="isSetSourceError" no="ctrl.no"></source-error>

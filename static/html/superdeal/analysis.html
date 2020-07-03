@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>滞留商品</title>
+</head>
+<body>
+    <!-- content -->
+    <div class="ea-content">
+        <!-- right con -->
+        <div class="right-bar-wrap ea-right-content">
+            <!-- right nav -->
+            <div class="asj-h10"></div>
+            <!-- right search -->
+            <div class="right-bar">
+                <!-- <div class="filter-tab">
+                    <span class="filter-tab-item" ng-repeat="item in storeList" 
+                    ng-class="{active:item.store===listParam.store}" 
+                    ng-click="storeChange(item)">{{item.storeName}}</span>
+                </div> -->
+                <div class="cj-btn-box space-between" ng-show="type==1">
+                    <div class="cj-serach-box">
+                        <input type="text" class="cj-serach-input" ng-model="listParam.sku" placeholder="请输入商品名称/SKU" ><span class="cj-serach-btn" ng-click="getList()">{{'100025'|translate}}</span>
+                    </div>
+                </div>
+                <div class="cj-btn-box" ng-show="type==2">
+                    <span class="cj-btn" ng-click="type=1">返回</span>
+                    <p class="ml-15">当前SKU：{{productSKU}}</p>
+                </div>
+                <div class="cj-table-box">
+                    <table class="cj-table" ng-show="type==1">
+                        <thead class="cj-table-thead">
+                            <th>图片</th>
+                            <th>商品SKU</th>
+                            <th>采购成本（$）</th>
+                            <th>原售价（$）</th>
+                            <th>现售价（$）</th>
+                            <th>原公有库存</th>
+                            <th>当前公有库存</th>
+                            <th>进入滞销商品时间</th>
+                            <th>设置折扣人</th>
+                            <th>设置折扣时间</th>
+                            <th>进入CJ Super Deal时间</th>
+                            <th>结束CJ Super Deal时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody class="cj-table-tbody">
+                            <tr class="cj-table-tr" ng-repeat="item in superList">
+                                <td class="imgbox">
+                                    <img ng-src="{{item.imgUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{item.imgUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td>{{item.sku}}</td>
+                                <td>{{item.procurementCost}}</td>
+                                <td>{{item.originalPrice}}</td>
+                                <td>{{item.nowPrice}}</td>
+                                <td>{{item.oldInventory}}</td>
+                                <td>{{item.nowInventory}}</td>
+                                <td>{{item.createDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td>{{item.updateBy}}</td>
+                                <td>{{item.updateDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td>{{item.createDate.time | date:"yyyy-MM-dd HH:ss:mm"}}</td>
+                                <td>{{(item.closeDate.time | date:"yyyy-MM-dd HH:ss:mm") || '未结束'}}</td>
+                                <td>
+                                    <span class="opera-btn" ng-click="viewDetailFun(item)">分析</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="cj-table" ng-show="type==2">
+                        <thead class="cj-table-thead">
+                            <th>图片</th>
+                            <th>商品SKU</th>
+                            <th>采购成本（$）</th>
+                            <th>原售价（$）</th>
+                            <th>现售价（$）</th>
+                            <th>滞留公有库存</th>
+                            <th>当前公有库存</th>
+                            <th>设置折扣人</th>
+                            <th>设置折扣时间</th>
+                            <th>进入CJ Super Deal时间</th>
+                            <th>结束CJ Super Deal时间</th>
+                        </thead>
+                        <tbody class="cj-table-tbody">
+                            <tr class="cj-table-tr" ng-repeat="item in superSKUList">
+                                <td class="imgbox">
+                                    <img ng-src="{{item.imgUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{item.imgUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td>{{item.sku}}</td>
+                                <td>{{item.procurementCost}}</td>
+                                <td>{{item.originalPrice}}</td>
+                                <td>{{item.nowPrice||'未编辑'}}</td>
+                                <td>{{item.oldInventory}}</td>
+                                <td>{{item.nowInventory}}</td>
+                                <td>{{item.updateBy}}</td>
+                                <td>{{item.updateDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td>{{item.createDate.time | date:"yyyy-MM-dd HH:ss:mm"}}</td>
+                                <td>{{item.closeDate?(item.closeDate.time | date:"yyyy-MM-dd HH:ss:mm"):'未结束'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="totalNum<1" style="text-align: center;">暂无数据</div>
+                    <!-- 分页 -->
+                    <page ng-show="totalNum>1 && type==1"></page>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

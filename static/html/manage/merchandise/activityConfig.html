@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="static/css/activity.css">
+<div class="merchandise-box">
+  <div class="right-bar-wrap">
+    <div class="asj-h10"></div>
+    <div class="right-bar">
+      <div class="title-row">
+        <label for="">显示状态：</label>
+        <select style="margin-right: 20px;height: 30px;" ng-model="showStatus" ng-change="statusChange()">
+          <option value="0">全部</option>
+          <option value="1">未开始</option>
+          <option value="2">进行中</option>
+          <option value="3">已结束</option>
+        </select>
+        <label for="">搜索：</label>
+        <input type="search" ng-model="searchKey">
+        <button class="btn-confirm" ng-click="searchRun()">查询</button>
+        <div class="right-btn">
+          <button class="btn-confirm" ng-click="newAdd()">新增</button>
+        </div>
+      </div>
+
+      <div class="table-con-box">
+        <table class="ea-list-table ea-erp-cs" id="ea-list-table">
+          <tr>
+            <!-- <th><span>
+                <img class="cg-checkall" ng-src="{{checkAllFlag?'static/image/order-img/multiple2.png':'static/image/order-img/multiple1.png'}}" ng-click="checkAll()">
+            </span></th> -->
+            <th><span>活动名称(一级)</span></th>
+            <th><span>页面title(二级)</span></th>
+            <th><span>子活动名称(三级)</span></th>
+            <th><span>活动ID</span></th>
+            <th><span>活动状态</span></th>
+            <th><span>开始时间</span></th>
+            <th><span>结束时间</span></th>
+            <th><span>商品数量</span></th>
+            <th><span>{{'100043' | translate}}</span></th>
+          </tr>
+          <tr class="la_tr la_tr01" ng-repeat="item in activityList">
+            <!-- <td><span>
+                <img class="cg-checkbox" ng-src="{{item.checked?'static/image/order-img/multiple2.png':'static/image/order-img/multiple1.png'}}" ng-click="checkOne(item)">
+            </span></td> -->
+            <td><span>{{item.v1}}</span></td>
+            <td><span>{{item.category}}</span></td>
+            <td><span>{{item.title}}</span></td>
+            <td><span>{{item.id}}</span></td>
+            <td><span ng-style="stateFilStyle[item.state-1]">{{item.state | stateFil}}</span></td>
+            <td><span>{{item.startTime | date:"yyyy-MM-dd HH:mm:ss"}}</span></td>
+            <td><span>{{item.stopTime | date:"yyyy-MM-dd HH:mm:ss"}}</span></td>
+            <td><span>{{item.productCount}}个</span></td>
+            <td><span>
+                <button class="btn" ng-click="activityEdit(item.id)" ng-show="item.state==1||item.state==2">编辑</button>
+                <button class="btn" ng-click="activityGoodsManage(item.id)" ng-show="item.state==1||item.state==2">商品管理</button>
+                <button class="btn" ng-click="unshelve(item)" ng-show="item.state == 2">下架</button>
+                <button class="btn" ng-click="delete(item)">删除</button>
+	              <button class="btn" ng-click="handlePreview(item)">预览</button>
+            </span></td>
+          </tr>
+        </table>
+
+        <!-- 分页 -->
+        <div class="page-box">
+          <div class="select-page-num">
+            <select class="form-control" ng-model="pageSize" ng-change="changePageSize()">
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+            </select>
+            <span>每页</span>
+          </div>
+          <div class="total-num">
+            共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+          </div>
+          <div class="page-index">
+            <div id="pagination"></div>
+          </div>
+          <div class="to-go">
+            <span>跳转：</span>
+            <input type="text" class="form-control" placeholder="" ng-model="pageNum">
+            <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="toSpecifiedPage()">go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 弹框 -->
+<div class="erp-common-tan-v2-wrap" ng-show="confirmBox.hasShow">
+  <div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: 160px;">
+    <p>{{confirmBox.title}}</p>
+    <div class="tan-v2-bot">
+      <a href="javascript:void(0)" class="qu-xiao-btn" ng-click="confirmBox.cancel()">取消</a>
+      <a href="javascript:void(0)" class="que-ding-btn" ng-click="confirmBox.ok()">确定</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>采购成本-记录</title>
+</head>
+<body>
+    <!-- content -->
+    <div class="ea-content">
+        <!-- right con -->
+        <div class="right-bar-wrap ea-right-content">
+            <!-- right nav -->
+            <div class="asj-h10"></div>
+            <!-- right search -->
+            <div class="right-bar">
+                <div class="cj-btn-box">
+                    <div class="cj-serach-box" ng-show="type==1">
+                        <input type="text" class="cj-serach-input" ng-model="listParam.data.sku" placeholder="请输入商品名称/SKU" ><span class="cj-serach-btn" ng-click="getList()">{{'100025'|translate}}</span>
+                    </div>
+                    
+                    <span class="cj-btn mr-15" ng-show="type==2" ng-click="goBack()">返回</span>
+                    <p ng-show="type==2">当前SKU：{{productObj.sku}}</span>  </p>
+                </div>
+                <div class="cj-table-box">
+                    <table class="cj-table" ng-show="type==1">
+                        <thead class="cj-table-thead">
+                            <th>图片</th>
+                            <th>商品SKU</th>
+                            <th class="cj-td-name">商品名称</th>
+                            <th>商品类目</th>
+                            <th>采购员</th>
+                            <th>采购实际成本（￥）</th>
+                            <th>最近一次采购时间</th>
+                        </thead>
+                        <tbody class="cj-table-tbody" ng-repeat="item in dataList" ng-mouseleave="item.hoverShow=false" ng-mouseenter="item.hoverShow=true" >
+                            <tr class="cj-table-tr" ng-class="{'active':(item.showItemDetail || item.hoverShow)}"ng-click="showSkuList(item)">
+                                <td class="imgbox">
+                                    <img ng-src="{{item.imageUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{item.imageUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td>{{item.sku}}</td>
+                                <td class="cj-td-name">{{item.productName}}</td>
+                                <td>{{item.itemName}}</td>
+                                <td>{{item.buyerName}}</td>
+                                <td>￥{{item.actualPurchaseCost}}</td>
+                                <td><span class="show-more-icon" ng-class="{up:item.showItemDetail}">{{item.lastPurchaseTime}}</span></td>
+                            </tr>
+                            <tr class="cj-table-tr" ng-repeat="skuitem in item.rocurementCostVariantList" ng-show="item.showItemDetail || item.hoverShow">
+                                <td class="imgbox">
+                                    <img ng-src="{{skuitem.vImageUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{skuitem.vImageUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td colspan="4" class="link-status" ng-click="listParam.pageNum='1';goRecord(skuitem);">{{skuitem.vSku}}</td>
+                                <td>{{skuitem.actualPurchaseCost}}</td>
+                                <td>{{skuitem.lastPurchaseTime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table class="cj-table" ng-show="type==2">
+                        <thead class="cj-table-thead">
+                            <th>采购订单号</th>
+                            <th>供货公司</th>
+                            <th>搜品单价（￥）</th>
+                            <th>采购方式</th>
+                            <th>采购数量</th>
+                            <th>采购实际单价（￥）</th>
+                            <th>采购员</th>
+                            <th>采购时间</th>
+                        </thead>
+                        <tbody class="cj-table-tbody">
+                            <tr class="cj-table-tr" ng-repeat="item in recordSKUList">
+                                <td>{{item.orderId}}</td>
+                                <td>{{item.gongHuoGongSi}}</td>
+                                <td>￥{{item.sourcePrice}}</td>
+                                <td>{{item.procurementType | procurementType}}</td>
+                                <td>{{item.shuLiang}}</td>
+                                <td>{{item.danJia}}</td>
+                                <td>{{item.buyerName}}</td>
+                                <td>{{item.purchasingTime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="pageData.totalCounts<1" style="text-align: center;">暂无数据</div>
+                    <!-- 分页 -->
+                    <page ng-show="pageData.totalCounts>0" page-data="pageData"></page>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

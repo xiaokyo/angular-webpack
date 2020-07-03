@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户分值</title>
+    <link rel="stylesheet" type="text/css" href="static/css/SalesmanManagement.css">
+    <script src="erp_otweb/js/video.min.js"></script>
+</head>
+<style>
+    .filter {
+        line-height: 30px !important;
+    }
+
+    .filter .datetab {
+        width:50px;
+        height:24px;
+        border-radius:15px;
+        border:1px solid #E4E4E4;
+        color: #666666;
+        font-size: 12px;
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .filter .dateact {
+        color: #fff;
+        background-color: #F9AE08;
+        border: none;
+        line-height: 24px;
+    }
+
+    .search-by-con {
+        height: 30px;
+        position: relative;
+        float: left;
+    }
+
+    .default-con {
+        width: 240px;
+        height: 30px;
+        padding-left: 10px;
+        line-height: 30px;
+        border: 1px solid #e5e5e5;
+        position: relative;
+    }
+
+    .has-list-cate {
+        float: left;
+        margin-right: 15px;
+    }
+
+    .serch-by-name {
+        height: 30px;
+        line-height: 30px;
+        float: left;
+    }
+
+    input, select {
+        height: 30px !important;
+    }
+
+    .three-grade-list {
+        position: absolute;
+        left: 0;
+        top: 0px;
+        margin-top: 0;
+        padding-left: 0;
+        background: #fff;
+        z-index: 99;
+        display: none;
+    }
+
+    .caret {
+        position: absolute;
+        right: 10px;
+        top: 13px;
+    }
+
+    .filter .search {
+        height: 30px;
+    }
+    .filter select{
+        float: none;
+    }
+    .samlimg {
+        position: absolute;
+        top: -160px;
+        left: 72px;
+    }
+
+    .lookProduct {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        z-index: 10000;
+    }
+
+    .lookProduct .content {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+        width: 523px;
+        min-height: 330px;
+        margin: initial;
+        border-radius: 4px;
+        padding: initial;
+    }
+
+    .lookProduct .content h3 {
+        padding: 15px;
+        margin: initial;
+        text-align: left;
+        border-bottom: 1px solid #F0F0F0;
+    }
+
+    .lookProduct .content h3 .close {
+        font-size: 25px;
+        font-weight: initial;
+        opacity: .4;
+    }
+
+    .my-video-dimensions {
+        width: 100%;
+        height: 273px;
+    }
+
+    .lookProduct .content {
+        top: 35%;
+    }
+
+    .filter input {
+        margin: 0 5px;
+    }
+    .icon {
+        display: inline-block;
+        width: 15px;
+        height: 11px;
+        vertical-align: middle;
+        /* background-size: cover; */
+        /* background-position: center; */
+        background-repeat: no-repeat;
+        background-image: url(static/image/manage/sort@2x.svg);
+        cursor: pointer;
+    }
+    .sort-act .icon{
+        background-image: url(static/image/manage/sort_select@2x.svg);
+    }
+    .sort-act{
+        color: #FFB900;
+    }
+    .filter .seach-inp{
+        float: none;
+        border-radius: 0;
+        margin: 0;
+        margin-left: 30px;
+        vertical-align: top;
+        width: 200px;
+    }
+    .page-box .page-input{
+        width: 50px;
+    }
+    .link-tip{
+        color: #337ab7;
+        cursor: pointer;
+    }
+    .cursor-pointer{
+        cursor: pointer;
+    }
+    .jump-btn{
+        font-size: 12px;
+        color: #757575;
+        width: 40px;
+        height: 30px;
+        display: inline-block;
+        line-height: 25px;
+        background-color: #f8f8f8;
+        border: 1px solid #e5e1da;
+        border-radius: 4px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .like-navbtn {
+        height: 30px;
+        padding: 0 12px;
+        background-color: #C1C1C1;
+        color: #fff;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 14px;
+        display: inline-block;
+    }
+    .like-navbtn:hover{
+        color: #fff;
+    }
+    .act-btn{
+        background-color: #FFB900;
+    }
+</style>
+<body>
+<div class="tab">
+    <ul class="clearfix">
+        <li><a href="#/CommodityAnalysis/Turnover">成交</a></li>
+        <li><a href="#/CommodityAnalysis/dispute">纠纷</a></li>
+        <li><a href="#/CommodityAnalysis/NewProduct">新品</a></li>
+        <li><a href="#/CommodityAnalysis/cusStore">店铺分析</a></li>
+        <!-- <li><a href="#/CommodityAnalysis/ranking">操作统计</a></li> -->
+        <li class="Act"><a href="#/CommodityAnalysis/quanzhong">猜你喜欢</a></li>
+        <li><a href="#/CommodityAnalysis/LinkageAndPublication">刊登与关联</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics">活动统计</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics-new">新-活动统计</a></li>
+    </ul>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+    <div class="filter clearfix">
+       <a class="like-navbtn" href="#/CommodityAnalysis/quanzhong" style="margin-left: 5px;">权重设置</a>
+       <a class="like-navbtn" href="#/CommodityAnalysis/profenzhi">商品分值</a>
+       <a class="like-navbtn act-btn" href="#/CommodityAnalysis/customerfenzhi">客户分值</a>
+    </div>
+    <div class="filter clearfix">
+        <!-- <div class="has-list has-list-cate clearfix">
+            <div class="serch-by-name">{{'100386' | translate}}：</div>
+            <div class="search-by-con">
+                <div class="default-con search-cate-name" ng-mouseenter="showCategory()"><span class="text cate-name">{{'100187' | translate}}</span><span
+                        class="caret"></span></div>
+                <div class="three-grade-list cate-list-box" ng-mouseleave="hideCategory()">
+                    <ul class="grade-one-ul">
+                        <li class="first-menu"><a href="javacsript: void(0);" ng-click="selectCategory($event)">{{'100187'
+                            | translate}}</a></li>
+                        <li class="first-menu" ng-repeat="itemOne in categoryListOne"
+                            ng-mouseenter="getCateSecondList(itemOne.id)">
+                            <a class="first-menu-a" href="javacsript: void(0);"
+                               ng-click="selectCategory($event, itemOne.id)">{{ itemOne.name }}</a>
+                            <ul class="grade-two-ul second-menu-ul">
+                                <li class="second-menu" ng-repeat="itemTwo in itemOne.children"
+                                    ng-mouseenter="getCateThirdList(itemTwo.id)">
+                                    <a class="second-menu-a" href="javacsript: void(0);"
+                                       ng-click="selectCategory($event, itemTwo.id)">{{ itemTwo.name }}</a>
+                                    <ul class="grade-three-ul thid-menu-ul">
+                                        <li class="third-menu" ng-repeat="itemThree in itemTwo.children">
+                                            <a class="third-menu-a" href="javacsript: void(0);"
+                                               ng-click="selectCategory($event, itemThree.id)">{{ itemThree.name }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+        <input id="date1" class="Wdate data-inp" ng-focus="dateFocus()"
+               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'%y-%M-%d'})" placeholder="" readonly="">
+        <span class="line" style="float: left;">-</span>
+        <input id="date2" class="Wdate data-inp" ng-focus="dateFocus()"
+               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true,maxDate:'%y-%M-%d'})" placeholder="Now" readonly="">
+        <a class="datetab margin-left-10px" ng-class="{dateact:item.flag,'margin-left-30px':$index==0}" href="javascript:void(0)" ng-repeat="item in dateArr"
+           ng-click="dateClick(item)">{{item.name}}</a>
+       <!-- <span class="font-size-14px margin-left-30px">商品名称：</span> -->
+       <!-- <select class="font-size-14px" style="vertical-align: top;" ng-model="seaType">
+           <option value="productName">商品名称</option>
+           <option value="SKU">SKU</option>
+           <option value="loginName">登陆名</option>
+           <option value="customerName">客户姓名</option>
+           <option value="salesMan">业务员</option>
+       </select> -->
+       <input class="seach-inp" placeholder="请输入用户名/客户名" ng-keyup="keyUpFun($event)" ng-model="seachVal"></input>
+       <!-- <span class="font-size-14px margin-left-30px">商品状态：</span>
+       <select class="font-size-14px" ng-model="authoritystatus" ng-change="stuChange()">
+           <option value="">全部</option>
+           <option value="0">已关联</option>
+           <option value="1">已刊登</option>
+           <option value="2">未同步</option>
+       </select> -->
+       <button class="search" style="float: none;" ng-click="searchInput()">查询</button>
+    </div>
+    <div class="filter clearfix">
+    </div>
+    <div class="parent-order">
+        <table>
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>用户名</th>
+                <th>客户姓名</th>
+                <th>注册时间</th>
+                <th>最近一次登陆时间</th>
+                <th>主要经营类目</th>
+                <th>商品操作统计</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in dataList">
+                <td>{{item.index}}</td>
+                <td>{{item.loginName}}</td>
+                <td>{{item.NAME}}</td>
+                <td>{{item.createDate}}</td>
+                <td>{{item.onlineLastDate}}</td>
+                <td>{{item.survey.markets[0]}}</td>
+                <td>
+                    <span ng-click="detailFun(item)" class="link-tip">查看</span>
+                </td>
+            </tr>
+            <tr ng-show="dataList.length == 0">
+                <td colspan="13">暂无数据。</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="page-box" ng-show="TotalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <!-- <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option> -->
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ TotalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

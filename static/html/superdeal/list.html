@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>滞留商品</title>
+</head>
+<body>
+    <!-- content -->
+    <div class="ea-content">
+        <!-- right con -->
+        <div class="right-bar-wrap ea-right-content">
+            <!-- right nav -->
+            <div class="asj-h10"></div>
+            <!-- right search -->
+            <div class="right-bar">
+                <!-- <div class="filter-tab">
+                    <span class="filter-tab-item" ng-repeat="item in storeList" 
+                    ng-class="{active:item.store===listParam.store}" 
+                    ng-click="storeChange(item)">{{item.storeName}}</span>
+                </div> -->
+                <div class="cj-btn-box space-between" ng-show="!isStore">
+                    <div class="cj-serach-box" ng-show="type==1">
+                        <input type="text" class="cj-serach-input" ng-model="listParam.sku" placeholder="请输入商品名称/SKU" ><span class="cj-serach-btn" ng-click="getList()">{{'100025'|translate}}</span>
+                    </div>
+                    <p ng-show="type==2">当前SKU：{{productObj.sku}} <span class="ml-15">商品类目：{{productObj.category}}</span>  </p>
+                    <span class="cj-btn" ng-show="type==2" ng-click="editEasy()">批量编辑现售价</span>
+                </div>
+                <div class="cj-table-box">
+                    <table class="cj-table" ng-show="type==1">
+                        <thead class="cj-table-thead">
+                            <th>图片</th>
+                            <th>商品SKU</th>
+                            <th>商品类目</th>
+                            <th>采购成本</th>
+                            <th>原售价（$）</th>
+                            <th ng-if="listParam.discountStatus==1">现售价（$）</th>
+                            <th>当前公有库存</th>
+                            <th>最近采购员</th>
+                            <th>最近采购数量</th>
+                            <th>最近采购时间</th>
+                            <th>最近下单时间</th>
+                            <th ng-show="!listParam.store">操作</th>
+                        </thead>
+                        <tbody class="cj-table-tbody" ng-repeat="item in superList">
+                            <tr class="cj-table-tr" ng-class="{'active':item.showItemDetail}">
+                                <td class="imgbox">
+                                    <img ng-src="{{item.imgUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{item.imgUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td>{{item.sku}}</td>
+                                <td>{{item.productCategory}}</td>
+                                <td><span ng-show="skuitem.procurementCost">￥{{item.procurementCost}}</span></td>
+                                <td>{{item.originalPrice}}</td>
+                                <td ng-if="listParam.discountStatus==1">{{item.nowPrice}}</td>
+                                <td class="cursor-point" ng-click="viewInverntory(item)"><span class="f-blue">{{item.nowInventory}}</span></td>
+                                <td>{{item.procurementPerson}}</td>
+                                <td>{{item.procurementQuantity}}</td>
+                                <td>{{item.procurementDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td><span class="show-more-icon" ng-class="{up:item.showItemDetail}" ng-click="showSkuList(item)">{{item.lastSellDate.time | date:"yyyy-MM-dd HH:ss:mm"}}</span></td>
+                                <td ng-show="!listParam.store">
+                                    <span class="opera-btn" ng-click="editFun(item)">{{listParam.discountStatus==1?'修改价格':'编辑'}}</span>
+                                </td>
+                            </tr>
+                            <tr class="cj-table-tr child" ng-repeat="skuitem in item.detailList" ng-show="item.showItemDetail">
+                                <td class="imgbox">
+                                    <img ng-src="{{skuitem.imgUrl | IMG_SIZE: 30}}" alt="">
+                                    <img class="bigimg" ng-src="{{skuitem.imgUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td colspan="2">{{skuitem.sku}}</td>
+                                <td><span ng-show="skuitem.procurementCost">￥{{skuitem.procurementCost}}</span></td>
+                                <td>{{skuitem.originalPrice}}</td>
+                                <td ng-if="listParam.discountStatus==1">{{skuitem.nowPrice}}</td>
+                                <td class="cursor-point" ng-click="viewInverntory(skuitem)"><span class="f-blue">{{skuitem.nowInventory}}</span></td>
+                                <td>{{skuitem.procurementPerson}}</td>
+                                <td>{{skuitem.procurementQuantity}}</td>
+                                <td>{{skuitem.procurementDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td colspan="2">{{skuitem.lastSellDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="cj-table" ng-show="type==2">
+                        <thead class="cj-table-thead">
+                            <th>图片</th>
+                            <th>商品SKU</th>
+                            <th>采购成本</th>
+                            <th>原售价（$）</th>
+                            <th>当前公有库存</th>
+                            <th>最近采购员</th>
+                            <th>最近采购数量</th>
+                            <th>最近采购时间</th>
+                            <th>最近下单时间</th>
+                            <th>现售价（$）</th>
+                        </thead>
+                        <tbody class="cj-table-tbody">
+                            <tr class="cj-table-tr" ng-repeat="item in superSKUList">
+                                <td class="imgbox">
+                                    <img ng-src="{{item.imgUrl | IMG_SIZE: 50}}" alt="">
+                                    <img class="bigimg" ng-src="{{item.imgUrl | IMG_SIZE: 280}}" alt="">
+                                </td>
+                                <td>{{item.sku}}</td>
+                                <td><span ng-show="skuitem.procurementCost">￥{{item.procurementCost}}</span></td>
+                                <td>{{item.originalPrice}}</td>
+                                <td>{{item.nowInventory}}</td>
+                                <td>{{item.procurementPerson}}</td>
+                                <td>{{item.procurementQuantity}}</td>
+                                <td>{{item.procurementDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td>{{item.lastSellDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                                <td><input type="text" class="table-input" ng-class="{blur:item.blur}" ng-keyup="numberInput(item,1)" ng-model="item.nowPrice"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-show="totalNum<1" style="text-align: center;">暂无数据</div>
+                    <!-- 分页 -->
+                    <page ng-show="totalNum>1 && type==1"></page>
+                    <div class="cj-btn-box right" ng-show="type==2">
+                        <span class="cj-btn" ng-click="type=1">取消</span>
+                        <span class="cj-btn fill-btn" ng-click="showSKUPrice()">提交</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="confirm-box" ng-show="showWareDetail">
+        <div class="confirm-main">
+            <div class="confirm-content">
+                <p>当前SKU：{{productSKU}}</p>
+                <table class="cj-table">
+                    <thead class="cj-table-thead">
+                        <th>仓库</th>
+                        <th>当前公有库存数量</th>
+                    </thead>
+                    <tbody class="cj-table-tbody">
+                        <tr class="cj-table-tr" ng-repeat="item in inverntoryList">
+                            <td>{{storeHouseFilter(item.storageDoId)}}</td>
+                            <td>{{item.goodsNum}}</td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+            <div class="confirm-btn-box">
+                <span ng-click="showWareDetail=false" class="no-btn">关闭</span>
+            </div>
+        </div>
+    </div>
+    <div class="confirm-box" ng-show="showSetPrice">
+        <div class="confirm-main">
+            <div class="confirm-title">
+                批量设置
+            </div>
+            <div class="confirm-content">
+                <div class="supear-setprice-box">
+                    现售价批量设置为原售价的：<input type="text" ng-model="priceParam.val" ng-keyup="numberInput(priceParam.val,2)"> 倍
+                    <p class="tips"><small>（注：只能设置0到1之前数字，包括1不包括0）</small></p>
+                </div>
+            </div>
+            <div class="confirm-btn-box">
+                <span ng-click="showSetPrice=false" class="no-btn">取消</span>
+                <span ng-click="editEasyFun()" class="sure-btn">确认</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="confirm-box" ng-show="showSkuListConfirm">
+        <div class="confirm-main">
+            <div class="confirm-content">
+                <p>当前SKU：{{productSKU}}</p>
+                <table class="cj-table">
+                    <thead class="cj-table-thead">
+                        <th>图片</th>
+                        <th>商品SKU</th>
+                        <th>商品类目</th>
+                        <th>采购成本（$）</th>
+                        <th>原售价（$）</th>
+                        <th>当前公有库存</th>
+                        <th>最近采购员</th>
+                        <th>最近采购数量</th>
+                        <th>最近采购时间</th>
+                        <th>最近下单时间</th>
+                        <th>现售价（$）</th>
+                    </thead>
+                    <tbody class="cj-table-tbody">
+                        <tr class="cj-table-tr" ng-repeat="item in superSKUList">
+                            <td class="imgbox">
+                                <img ng-src="{{item.imgUrl | IMG_SIZE: 50}}" alt="">
+                            </td>
+                            <td>{{item.sku}}</td>
+                            <td>{{item.productCategory}}</td>
+                            <td>{{item.procurementCost}}</td>
+                            <td>{{item.originalPrice}}</td>
+                            <td>{{item.nowInventory}}</td>
+                            <td>{{item.procurementPerson}}</td>
+                            <td>{{item.procurementQuantity}}</td>
+                            <td>{{item.procurementDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                            <td>{{item.lastSellDate.time|date:'yyyy-MM-dd HH:ss:mm'}}</td>
+                            <td>{{item.nowPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="confirm-btn-box">
+                <span ng-click="showSkuListConfirm=false" class="no-btn">取消</span>
+                <span ng-click="skuEditPriceFun()" class="sure-btn">确认</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+<style type="text/css">
+    .bigimg {
+        position: absolute;
+        top: -70px;
+        left: 100%;
+        z-index: 999;
+        max-width: 360px;
+        width: 360px;
+        height: auto;
+        display: none;
+    }
+
+    .proimg:hover .bigimg {
+        display: block;
+    }
+
+    .descripte-tankuang,
+    .action-tankuang {
+        width: 500px;
+        height: 300px;
+        padding: 10px 25px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+        border: 1px solid lightgray;
+        box-shadow: 0 0 30px lightgray;
+        border-radius: 5px;
+
+    }
+
+    .descripte-tankuang .title {
+        width: 98%;
+        height: 30px;
+        color: #000;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .descripte-tankuang .word {
+        width: 100%;
+        height: 160px;
+        border: 1px solid lightgrey;
+        color: gray;
+        margin-top: 5px;
+    }
+
+    .descripte-tankuang .clos {
+        width: 80px;
+        height: 30px;
+        color: #fff;
+        background: #a3a1a1;
+        margin: auto;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .action-tankuang div {
+        width: 50%;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .action-tankuang div button {
+        color: #fff;
+        padding: 3px 7px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .date-box input {
+        height: 30px;
+        border-right: none;
+        border: 1px solid #ececec;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .date-box .erp-seachInp {
+        height: 30px;
+        background-color: #fff;
+        width: 50px;
+        vertical-align: top;
+
+    }
+
+    .existing-tankuang {
+        width: 800px;
+        height: 500px;
+        /*min-height: 300px;*/
+        padding: 10px 15px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 30px #ccc;
+        border-radius: 5px;
+    }
+
+    input::-webkit-input-placeholder {
+        font-size: 12px;
+    }
+
+    .existing-tankuang .existing-content ul li {
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+
+    }
+
+    .existing-tankuang .existing-content ul li span {
+        text-align: center;
+    }
+
+    .existing-tankuang .existing-content ul li p {
+        font-size: 13px;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .existing-tankuang .existing-btns button {
+        padding: 3px 5px;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .sbyy-wrap {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .sbyy-con {
+        width: 450px;
+        height: 200px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -46%);
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+
+    .sbyy-con button {
+        color: #6b6b6b;
+        height: 30px;
+        width: 76px;
+        border: 1px solid #cfcfcf;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #f6f6f6;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 20px;
+    }
+
+    .boreder_red {
+        border-bottom: 2px solid red !important;
+        border: 2px solid red;
+    }
+    .border-span {
+        height: 100% !important;
+    }
+</style>
+
+
+<div class="e-sourcing-wrap">
+    <div class="left-bar">
+        <ul class="left-bar-tabs">
+            <li><a href="#/sourcing">{{'100864' | translate}}<span></span></a></li>
+            <li><a href="#/individualsourcing">{{'100865' | translate}}<span></span></a></li>
+            <li class="active"><a href="#/cjsourcing">{{'100866' | translate}}<span></span></a></li>
+        </ul>
+    </div>
+    <div class="right-bar-wrap e-sou-con">
+        <div class="asj-h10"></div>
+        <div class="right-bar e-sou-content" style="min-height: 1000px;background-color: #fff;">
+
+            <div class="es-search-status">
+                <div class="date-box"
+                     style="color: #888;padding-bottom: 5px;float: left;margin: 7px 5px 0;">
+                    <input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text"
+                           onclick="var cdatatime2=$dp.$('cdatatime2');WdatePicker({onpicked:function(){cdatatime2.click();},maxDate:'#F{$dp.$D(\'cdatatime2\')}'})"></input><input
+                        placeholder="Now" id="cdatatime2" class="Wdate data-inp" style="text-indent: 12px;" type="text"
+                        onclick="WdatePicker({minDate:'#F{$dp.$D(\'c-data-time\')}'})"/>
+                    <!-- <input class="erp-seachInp" type="button" value="{{'100025' | translate}}" ng-click="dateSearchFun()"></input> -->
+                </div>
+                <div class="es-seach-div" style=" background-color: #f2f3f5;margin-top: 5px;float: left;">
+                    <input class="es-seach-inp" ng-model="searchinfo" placeholder="{{'100872' | translate}}"
+                           style="height: 30px;">
+                    <a class="es-seach-btn" href="javascript:void(0)" id="search" ng-click="dateSearchFun()"
+                       style="height: 30px;line-height: 30px;width: 50px;">{{'100025' | translate}}</a>
+                </div>
+
+            </div>
+            <!-- 订单的列表部分 -->
+            <div class="es-ord-list">
+                <table id="sourcelist-table" style="width: 100%;">
+                    <thead class="es-ord-thead">
+                        <tr>
+                            <th style="width: 100px">分配时间</th>
+                            <th style="width: 100px">搜品ID</th>
+                            <th style="width: 100px">供应商名称</th>
+                            <th style="width: 100px">搜品状态</th>
+                            <th style="width: 100px">客户名称</th>
+                            <th style="width: 100px">邮箱</th>
+                            <th style="width: 100px">商品名称</th>
+                            <th style="width: 100px">店铺名称</th>
+                            <th style="width: 100px">图片</th>
+                            <th style="width: 100px">客户url</th>
+                            <th style="width: 100px">标签</th>
+                            <th style="width: 100px">目标价格</th>
+                            <th style="width: 100px">搜品来源</th>
+                            <th style="width: 100px">描述</th>
+                        </tr>
+                    </thead>
+                    <tbody class="es-ord-tbody"  ng-repeat="i in list">
+                    <tr>
+                        <td>{{i.allocationDate}}<span class="border-span"></span></td>
+                        <td>{{i.number}}<span class="border-span"></span></td>
+                        <td>{{i.companyName}}<span class="border-span"></span></td>
+                        <td>
+                            <p class="cj-source-status" ng-if="i.status =='1'" style="color: #e55264;">
+                                {{'100868' | translate}}</p>
+                            <p class="cj-source-status" ng-if="i.status =='0'" style="color: #08aceb;">
+                                {{'100869' | translate}}</p>
+                            <p class="cj-source-status" ng-if="i.status =='2'" style="color: #04a452;">
+                                {{'100870' | translate}}</p>
+                            <p class="cj-source-status" ng-if="i.status =='8'" style="color: #f1ca16;">
+                                {{'100871' | translate}}</p>
+                            <p class="cj-source-status" ng-if="i.status =='-1'" style="color: #909090;">
+                                {{'100252' | translate}}</p>
+                            <p class="cj-source-status" ng-if="i.status =='5'" style="color: #903908;">搜品超时</p>
+                            <p class="cj-source-status" ng-if="i.status =='6'" style="color: #684ad8;">待现有</p>
+                            <p class="cj-source-status" ng-if="i.status =='7'" style="color: #f765a2;">初审失败</p>
+                            <!-- td 右边的边框 -->
+                            <span class="border-span"></span>
+                        </td>
+                        <td>{{i.customerName}}<span class="border-span"></span></td>
+                        <td>{{i.email}}<span class="border-span"></span></td>
+                        <td>{{i.productName}}<span class="border-span"></span></td>
+                        <td>{{i.shopName}}<span class="border-span"></span>
+                        </td>
+                        <td style="position: relative;cursor: pointer;" class="proimg">
+                            <ul ng-if="i.imageUrl.length>0 && i.imageUrl[0]">
+                                <li ng-mouseenter="imgObj.hover = true" ng-mouseleave="imgObj.hover = false" ng-repeat="imgObj in i.calcImg">
+                                    <img class="es-list-img" ng-src={{imgObj.calcImg}}>
+                                    <img class="bigimg" ng-src={{imgObj.img}} ng-if="imgObj.hover">
+                                </li>
+                            </ul>
+                            <span class="border-span"></span>
+                        </td>
+                        <td>
+                            <a class="es-url-p" ng-if="i.sourceUrl!=''" ng-href="{{i.sourceUrl}}" target="_blank">{{i.sourceUrl}}</a>
+                            <p ng-if="i.sourceUrl ==''">--</p>
+                            <!-- td 右边的边框 -->
+                            <span class="border-span"></span>
+                        </td>
+                        <td>{{i.categoryName || '--'}}</td>
+                        <td>{{i.price | currency}}<span class="border-span"></span></td>
+                        <td>{{i.sourceType | sourceType}}<span class="border-span"></span></td>
+                        <td>{{i.description || '--'}}<span class="border-span"></span></td>
+                    </tr>
+                    <!-- 第二行 -->
+                    </tbody>
+                </table>
+            </div>
+            <page></page>
+        </div>
+    </div>
+</div>

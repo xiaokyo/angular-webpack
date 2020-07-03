@@ -1,0 +1,136 @@
+<label class="ant-checkbox-wrapper">
+  <span class="ant-checkbox" ng-class="{'ant-checkbox-checked':vm.checked}">
+    <input type="checkbox" name="{{ vm.name }}" class="ant-checkbox-input" ng-checked="vm.allChecked" ng-model="vm.checked" ng-change="onchange()">
+    <span class="ant-checkbox-inner"></span>
+  </span>
+  <span ng-show="!!vm.label">{{ vm.label }}</span>
+</label>
+
+<style>
+  .ant-checkbox-wrapper {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, .65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    display: inline-block;
+    line-height: unset;
+    cursor: pointer;
+  }
+
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox:hover .ant-checkbox-inner,
+  .ant-checkbox-input:focus+.ant-checkbox-inner {
+    border-color: #F8A636;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #F8A636;
+    border-color: #F8A636;
+  }
+
+  .ant-checkbox {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, .65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    position: relative;
+    top: -.09em;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .ant-checkbox-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .ant-checkbox-inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    direction: ltr;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    border-collapse: separate;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner::after {
+    position: absolute;
+    display: table;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+    -webkit-transform: rotate(45deg) scale(1) translate(-50%, -50%);
+    transform: rotate(45deg) scale(1) translate(-50%, -50%);
+    opacity: 1;
+    -webkit-transition: all .2s cubic-bezier(.12, .4, .29, 1.46) .1s;
+    transition: all .2s cubic-bezier(.12, .4, .29, 1.46) .1s;
+    content: ' ';
+  }
+
+  .ant-checkbox-inner::after {
+    position: absolute;
+    top: 50%;
+    left: 22%;
+    display: table;
+    width: 5.71428571px;
+    height: 9.14285714px;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+    -webkit-transform: rotate(45deg) scale(0) translate(-50%, -50%);
+    transform: rotate(45deg) scale(0) translate(-50%, -50%);
+    opacity: 0;
+    -webkit-transition: all .1s cubic-bezier(.71, -.46, .88, .6), opacity .1s;
+    transition: all .1s cubic-bezier(.71, -.46, .88, .6), opacity .1s;
+    content: ' ';
+  }
+
+  .ant-checkbox+span {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+  }
+
+  input[type=checkbox],
+  input[type=radio] {
+    margin: 0;
+    margin-top: 0;
+    line-height: normal;
+  }
+</style>

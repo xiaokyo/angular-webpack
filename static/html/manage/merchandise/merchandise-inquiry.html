@@ -1,0 +1,228 @@
+<div class="merchandise-box merchandise-inquiry-box">
+    <div class="right-bar-wrap inquiry-and-drop inquiry-box">
+        <div class="asj-h10"></div>
+        <!--<div class="top-taps clearfix">-->
+
+        <div class="right-bar">
+            <div class="asj-h15"></div>
+            <!-- 上面功能条 -->
+            <div class="function-bar">
+                <div class="top-search clearfix">
+                    <!-- 商品类目start -->
+                    <div class="asj-cate-list has-list clearfix">
+                        <div class="serch-by-name">{{'100386' | translate}}：</div>
+                        <div class="search-by-con">
+                            <div class="default-con search-cate-name" ng-mouseenter="showCategory()"><span
+                                    class="text cate-name">{{'100187' | translate}}</span><span class="caret"></span>
+                            </div>
+                            <div class="three-grade-list cate-list-box">
+                                <ul class="grade-one-ul">
+                                    <li class="first-menu"><a href="javacsript: void(0);"
+                                                              ng-click="selectCategory($event)">{{'100187' |
+                                        translate}}</a></li>
+                                    <li class="first-menu" ng-repeat="itemOne in categoryListOne"
+                                        ng-mouseenter="getCateSecondList(itemOne.id)">
+                                        <a class="first-menu-a" href="javacsript: void(0);"
+                                           ng-click="selectCategory($event, itemOne.id)">{{ itemOne.nameEn }}</a>
+                                        <ul class="grade-two-ul">
+                                            <li class="second-menu" ng-repeat="itemTwo in itemOne.children"
+                                                ng-mouseenter="getCateThirdList(itemTwo.id)">
+                                                <a class="second-menu-a" href="javacsript: void(0);"
+                                                   ng-click="selectCategory($event, itemTwo.id)">{{ itemTwo.nameEn
+                                                    }}</a>
+                                                <ul class="grade-three-ul">
+                                                    <li class="third-menu" ng-repeat="itemThree in itemTwo.children">
+                                                        <a class="third-menu-a" href="javacsript: void(0);"
+                                                           ng-click="selectCategory($event, itemThree.id)">{{
+                                                            itemThree.nameEn }}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search-by-con" ng-if="isInquiry">
+                            <div class="default-con search-type-name" ng-mouseenter="showType()">
+                                <span class="text type-name">{{'100107' | translate}}</span><span class="caret"></span>
+                            </div>
+                            <div class="three-grade-list type-list-box">
+                                <ul class="grade-one-ul">
+                                    <li class="first-menu">
+                                        <a class="first-menu-a" href="javacsript: void(0);" ng-click="selectType($event, 'title')">{{'100107' | translate}}</a>
+                                    </li>
+                                    <li class="first-menu">
+                                        <a class="first-menu-a" href="javacsript: void(0);" ng-click="selectType($event, 'id')">{{'100174' | translate}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 商品类目end -->
+                    <div class="input-group search-box">
+                        <!-- <select class="form-control top-search-sel" ng-model="topSearchKey">
+                          <option value="chinese">中文</option>
+                        </select> -->
+                        <input type="text" class="form-control top-search-inp" placeholder="" ng-model="searchVal"
+                               ng-keyup="enterSearch($event)">
+                        <a role="button" class="btn btn-default top-search-btn" type="button"
+                           ng-click="getSearchList()">{{'100025' | translate}}</a>
+                    </div>
+                    <div class="right-btns">
+                        <!-- <a role="button" type="button" class="btn btn-default export-btn">导出</a> -->
+                        <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-click="deleteOpe()"
+                           ng-if="isInquiry || isOffSheInquiry">{{'100370' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-offShe-btn"
+                           ng-click="offShelveOpe()" ng-if="isInquiry">{{'100372' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-changecate-btn"
+                           ng-click="banchChangeCate()" ng-if="isInquiry">{{'100373' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-onshelve-btn"
+                           ng-if="isOffSheInquiry" ng-click="shelveOpe()">{{'100375' | translate}}</a>
+                        <!-- <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-if="isOffSheInquiry">批量删除</a> -->
+                        <a role="button" type="button" class="btn btn-default banch-clear-btn" ng-if="isRecyInquiry"
+                           ng-click="clearOpe('deleteall')">{{'100377' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-clear-btn" ng-if="isRecyInquiry"
+                           ng-click="clearOpe()">{{'100371' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-reback-btn" ng-if="isRecyInquiry"
+                           ng-click="shelveOpe()">{{'100376' | translate}}</a>
+                        <!--off-Category-->
+                        <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-click="deleteOpe()"
+                           ng-if="isoffCategory">{{'100370' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-onshelve-btn"
+                           ng-if="isoffCategory" ng-click="shelveOpe()">{{'100375' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-changecate-btn"
+                           ng-click="banchChangeCate()" ng-if="isoffCategory">{{'100373' | translate}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 列表 -->
+            <div class="merchan-list">
+                <!-- 列表top -->
+                <ul class="merchan-list-top">
+                    <li class="li-num">
+                        <div class="check-box">
+                            <input type="checkbox" name="" id="" ng-model="checkAllMark"
+                                   ng-change="checkAllMerch(checkAllMark)">
+                            <label for=""></label>
+                        </div>
+                        <span>{{'100174' | translate}}</span>
+                    </li>
+                    <li class="li-img">{{'100382' | translate}}</li>
+                    <li class="li-chin-name">{{'100543' | translate}}</li>
+                    <li class="li-eng-name">{{'100544' | translate}}</li>
+                    <li class="li-category">{{'100386' | translate}}</li>
+                    <li class="li-store-link">{{'100545' | translate}}</li>
+                    <li class="li-price">{{'100350' | translate}}</li>
+                    <li class="li-operate">{{'100043' | translate}}</li>
+                </ul>
+                <!-- 列表body -->
+                <!-- merchList -->
+                <div class="erp-load-box">
+                    <div class="merchan-list-con-wrap" ng-repeat='item in alibabaProducts'>
+                        <ul class="merchan-list-con clearfix">
+                            <li class="li-num">
+                                <div class="check-box">
+                                    <input type="checkbox" name="" id="" ng-model="item.checked"
+                                           ng-change="checkMerch(item.sku, item.checked)">
+                                    <label for=""></label>
+                                </div>
+                                <span>{{item.id}}</span>
+                            </li>
+                            <li class="li-img"
+                            ng-mouseover="item.showBigimg = 1"
+                            >
+                                <img class="small-img" ng-src="{{(item.bigImg |httpPrefix | IMG_SIZE : 100)}}" />
+                                <img ng-if="item.showBigimg" class="big-img" ng-src="{{(item.bigImg |httpPrefix | IMG_SIZE : 360)}}"/>
+                            </li>
+                            <li class="li-chin-name">
+                                <a ng-if="item.status == 1"
+                                   href="{{appHref+'/reptail-detail.html?id='+item.id}}"
+                                   target="_blank" title="{{item.nameEn}}">{{item.title}}</a>
+                                <a ng-if="item.status != 1" href="javascript:void(0);" target="_blank"
+                                   title="{{item.nameEn}}">{{item.title}}</a>
+                            </li>
+                            <li class="li-eng-name" ng-click="btn_updata107()">{{item.english}}</li>
+                            <li class="li-category">{{ item.categoryName.split(',')[2] }}</li>
+                            <li class="li-store-link"><a href={{item.href}} target="_blank">{{'100417' | translate}}</a>
+                            </li>
+                            <li class="li-price">${{item.price}}</li>
+                            <li class="li-operate">
+                                <a role="button" class="btn btn-primary offer-btn" href="javascript:void(0)"
+                                   ng-click="offShelveOpe(item.id)" ng-if="isInquiry">{{'100395' | translate}}</a>
+                                <a role="button" class="btn btn-default writein-btn" ng-if="isInquiry"
+                                   ng-click="writeInOpe(item)">{{'100119' | translate}}</a>
+                                <!-- <a class="btn delete-btn" href="javascript:void(0)" ng-click="deleteOpe(item.id)"  ng-if="isInquiry">删除</a> -->
+                                <!-- <a class="btn delete-btn" href="javascript:void(0)" ng-if="isOther">不可用</a> -->
+                                <a role="button" class="btn btn-primary onshelve-btn" ng-if="isOffSheInquiry"
+                                   ng-click="shelveOpe(item.id)">{{'100403' | translate}}</a>
+                                <a role="button" class="btn btn-default delete-btn" href="javascript: void(0);"
+                                   ng-if="isOffSheInquiry" ng-click="deleteOpe(item.id)">{{'100227' | translate}}</a>
+                                <a role="button" class="btn btn-primary recover-btn" href="javascript: void(0);"
+                                   ng-if="isRecyInquiry" ng-click="shelveOpe(item.id)">{{'100404' | translate}}</a>
+                                <a role="button" class="btn btn-default delete-btn" href="javascript: void(0);"
+                                   ng-if="isRecyInquiry" ng-click="clearOpe(item.id)">{{'100405' | translate}}</a>
+                                <div class="more-operate" ng-click="stopPropagation($event)" ng-if="isInquiry">
+                                    <a href="javascript:void(0);" class="more-btn">{{'100094' | translate}}</a><span
+                                        class="caret"></span>
+                                    <ol class="drop-down">
+                                        <!-- <li ng-click="deleteOpe(item.id)">删除</li> -->
+                                        <li ng-click="changeCate(item)">{{'100397' | translate}}</li>
+                                    </ol>
+                                </div>
+                                <!---->
+                                <button class="btn btn-primary onshelve-btn" ng-if="isoffCategory && item.categoryName"
+                                   ng-click="shelveOpe(item.id)">{{'100403' | translate}}</button>
+                                <a role="button" class="btn btn-default delete-btn" href="javascript: void(0);"
+                                   ng-if="isoffCategory" ng-click="deleteOpe(item.id)">{{'100227' | translate}}</a>
+                                <div class="more-operate" ng-click="stopPropagation($event)" ng-if="isoffCategory">
+                                    <a href="javascript:void(0);" class="more-btn">{{'100094' | translate}}</a><span
+                                        class="caret"></span>
+                                    <ol class="drop-down">
+                                        <!-- <li ng-click="deleteOpe(item.id)">删除</li> -->
+                                        <li ng-click="changeCate(item)">{{'100397' | translate}}</li>
+                                    </ol>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 分页 -->
+            <page></page>
+            <!-- <div ng-hide="hasMerch">没有找到数据</div> -->
+        </div>
+    </div>
+</div>
+<!-- 修改类目弹框 -->
+<script type="text/template" id="change-cate">
+    <h5>修改类目</h5>
+    <dl class="pro-info clearfix">
+        <dt><img src="#" alt="" class="pro-img"></dt>
+        <dd>
+            <p class="clearfix">
+                <span class="left-span">产品名称：</span><span class="right-span pro-name"></span>
+            </p>
+            <!-- <p class="clearfix"><span class="left-span">SKU:</span><span class="right-span pro-sku"></span></p> -->
+        </dd>
+    </dl>
+    <div class="assign-to">
+        <label for="">一级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele1">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="assign-to">
+        <label for="">二级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele2">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="assign-to">
+        <label for="">三级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele3">
+            <option value="">请选择</option>
+        </select>
+    </div>
+</script>

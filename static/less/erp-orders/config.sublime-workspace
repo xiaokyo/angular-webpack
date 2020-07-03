@@ -1,0 +1,632 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"icondi",
+				"icondianchi.png	w:10 h:16"
+			],
+			[
+				"customer",
+				"customer-store-order.css"
+			],
+			[
+				"ec",
+				"excel-orders/"
+			],
+			[
+				"java",
+				"javascript:void"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"se",
+				"select	Tag"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"ja",
+				"javascript:void"
+			],
+			[
+				"dire",
+				"direct-orders.html"
+			],
+			[
+				"drop",
+				"dropshipping-orders/"
+			],
+			[
+				"static",
+				"static/"
+			],
+			[
+				"le",
+				"left-bar.js"
+			],
+			[
+				"left",
+				"left-bar/"
+			],
+			[
+				"l",
+				"left-bar.css"
+			],
+			[
+				"consol",
+				"console_log"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"CON",
+				"console"
+			],
+			[
+				"s",
+				"sqrt"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"li",
+				"line-height"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"b",
+				"block"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"fl-l",
+				"fl-l	float: left;"
+			],
+			[
+				"no",
+				"no"
+			],
+			[
+				"img",
+				"images"
+			],
+			[
+				"pa",
+				"padding-right"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"onmo",
+				"onmousedown：按住要拖拽的对象"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"sc",
+				"scrollTop"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"str",
+				"str3"
+			],
+			[
+				"e",
+				"everyResule"
+			],
+			[
+				"i",
+				"inum2"
+			],
+			[
+				"tans",
+				"transform"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"border-r",
+				"border-right"
+			],
+			[
+				"fl",
+				"fl	float: ${1:left};"
+			],
+			[
+				"list",
+				"list-style"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 127.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"co",
+				"Color Picker"
+			],
+			[
+				"j",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"emm",
+				"Set Syntax: Emmet"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Add Channel"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 528.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/dsp-web/webapp",
+		"/D/dsp-web/webapp/static",
+		"/D/dsp-web/webapp/static/js",
+		"/D/dsp-web/webapp/static/js/home",
+		"/D/dsp-web/webapp/static/js/public",
+		"/D/dsp-web/webapp/static/less"
+	],
+	"file_history":
+	[
+		"/D/dsp-web/webapp/static/js/home/home.js",
+		"/D/dsp-web/webapp/static/js/public/common.js",
+		"/D/erp_web/webapp/static/less/customer-store-order/customer-store-order.less",
+		"/D/erp_web/webapp/static/less/erp-orders/customer-store-order.less",
+		"/D/erp_web/webapp/static/js/home/home.js",
+		"/D/erp_web/config.sublime-project",
+		"/D/dsp-web/webapp/myCJ.html",
+		"/D/dsp-web/webapp/static/less/myCJ/myCJ.less",
+		"/D/dsp-web/webapp/static/css/myCJ-home.css",
+		"/D/dsp-web/webapp/static/less/myCJ/myCJ-home.less",
+		"/D/dsp-web/webapp/static/js/myCJ/mycj-home/myCJ-home.js",
+		"/D/dsp-web/webapp/static/js/direct-orders/direct-orders.js",
+		"/D/dsp-web/webapp/myCJ-home.html",
+		"/D/dsp-web/config.sublime-project",
+		"/D/dsp-web/webapp/static/less/1122.less",
+		"/C/Users/Administrator/Desktop/dsp.sublime-project",
+		"/C/Users/Administrator/Desktop/dsp.sublime-workspace",
+		"/D/erp_web/webapp/static/less/2333.less",
+		"/D/erp_web/webapp/config.sublime-project",
+		"/D/dsp-web/webapp/common-footer.html",
+		"/D/dsp-web/webapp/static/less/common-footer/common-footer.less",
+		"/D/dsp-web/webapp/static/less/left-bar/left-bar.less",
+		"/D/dsp-web/webapp/static/css/left-bar.css",
+		"/D/dsp-web/webapp/static/less/left-bar/1234.less",
+		"/D/dsp-web/webapp/static/less/common-footer/1111111111111111111111111111111.less",
+		"/D/erp_web/webapp/static/less/manage/1111erp-wen.less",
+		"/D/erp_web/webapp/static/less/manage/erp-web222222.less",
+		"/D/dsp-web/webapp/static/less/common-footer/1111111111.less",
+		"/D/dsp-web/config.sublime-workspace",
+		"/D/erp_web/webapp/static/less/manage/11111111.less",
+		"/D/dsp-web/webapp/static/html/order-center/direct-orders.html",
+		"/D/dsp-web/webapp/static/less/direct-orders/direct-orders.less",
+		"/D/dsp-web/webapp/static/js/dropshipping-orders/dropshipping-orders.js",
+		"/D/dsp-web/webapp/static/html/order-center/dropshipping-orders.html",
+		"/D/erp_web/webapp/static/less/home/1111111.less",
+		"/D/dsp-web/webapp/static/less/dropshipping-orders/dropshipping-orders.less",
+		"/D/dsp-web/webapp/static/js/myCJ/myCJ.js",
+		"/D/dsp-web/webapp/home.html",
+		"/D/dsp-web/webapp/static/less/home/home.less",
+		"/D/dsp-web/webapp/left-bar.html",
+		"/D/dsp-web/webapp/static/js/searchgoods-detail/searchgoods-detail.js",
+		"/D/dsp-web/webapp/static/js/search-goods/search-goods.js",
+		"/D/dsp-web/webapp/static/html/sourcing/searchgoods-detail.html",
+		"/D/dsp-web/webapp/static/html/sourcing/search-goods.html",
+		"/D/dsp-web/webapp/static/js/left-bar/left-bar.js",
+		"/D/dsp-web/config.properties",
+		"/D/dsp-web/webapp/static/less/searchgoods-detail/22222222222223333.less",
+		"/D/dsp-web/dsp.sublime-workspace",
+		"/D/dsp-web/dsp.sublime-project",
+		"/D/dsp-web-before/webapp/static/less/search-goods/1111111111.less",
+		"/C/Users/Administrator/Desktop/config.sublime-project",
+		"/D/dsp-web-before/dsp.sublime-project",
+		"/D/dsp-web-before/config.properties",
+		"/D/dsp-web/webapp/static/css/direct-orders.css",
+		"/D/dsp-web/webapp/dropshipping-orders.html",
+		"/D/dsp-web/webapp/direct-orders.html",
+		"/D/dsp-web/webapp/static/less/dropshipping-orders/11111111111.less",
+		"/D/dsp-web/webapp/searchgoods-detail.html",
+		"/D/dsp-web/webapp/search-goods.html",
+		"/D/dsp-web/webapp/common-header.html",
+		"/C/Users/Administrator/Desktop/ezsocket-master/app.js",
+		"/C/Users/Administrator/Desktop/ezsocket-master/public/javascripts/apps.js",
+		"/C/Users/Administrator/Desktop/mychatroom-master/chat.html",
+		"/C/Users/Administrator/Desktop/ezsocket-master/public/stylesheets/mychat.css",
+		"/C/Users/Administrator/Desktop/ezsocket-master/views/index.jade",
+		"/C/Users/Administrator/Desktop/ezsocket-master/views/frchatroom.jade",
+		"/C/Users/Administrator/Desktop/ezsocket-master/views/layout.jade",
+		"/C/Users/Administrator/Desktop/ezsocket-master/public/stylesheets/style.css",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/communication/service.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/checkbox/service.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/checkbox/controller.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/passParams/detail.html",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/scroll/directive.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/tree/controller.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/checkbox/template.html",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/passParams/list.html",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/passParams/controllers.js",
+		"/C/Users/Administrator/Desktop/bootstrap-table-141124161539/index.html",
+		"/D/Sublime Text/Data/Packages/ColorPicker/ColorPicker.sublime-settings",
+		"/C/Users/Administrator/Desktop/iAngularJS/app/controller/voteControllers.js",
+		"/C/Users/Administrator/Desktop/angular-demo/demos/communication/controller.js",
+		"/D/cucheng/angular",
+		"/D/cucheng/css/angular-css",
+		"/C/Users/Administrator/Desktop/bootstrap-3.3.7/table",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/index.html",
+		"/C/Users/Administrator/Desktop/asset-check.js",
+		"/C/Users/Administrator/Desktop/release/webapp/index.html",
+		"/C/Users/Administrator/Desktop/release/webapp/aaa.html",
+		"/C/Users/Administrator/Desktop/ng2-datetime-master/index.html",
+		"/C/Users/Administrator/Desktop/bootstrap-master/src/pager/docs/demo.html",
+		"/C/Users/Administrator/Desktop/angular-bootstrap-slider-master/test.html",
+		"/C/Users/Administrator/Desktop/angular-bootstrap-calendar-master/index.html",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/app/controller/voteControllers.js",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/app/app.js",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/tmpl/player/list.html",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/tmpl/player/add.html",
+		"/D/cucheng/test.html",
+		"/C/Users/Administrator/Desktop/release/config.properties",
+		"/C/Users/Administrator/Desktop/release/web.xml",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/static/css/app.css",
+		"/C/Users/Administrator/Desktop/release/webapp/login.html",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/Sublime Text/Data/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/D/Sublime Text/Data/Packages/User/ColorPicker.sublime-settings",
+		"/C/Users/Administrator/Desktop/index.html",
+		"/C/Users/Administrator/Desktop/iAngularJS-master/filter.html",
+		"/D/Sublime Text/Data/Packages/User/SublimeServer.sublime-settings",
+		"/C/Users/彭佳明/Desktop/index.html",
+		"/C/Users/Administrator/Desktop/bootstrap-3.3.7/dist/js/bootstrap.min.js",
+		"/C/E开发/execise/1/index.html",
+		"/E/资料/我的文件/teacher js2/js/02 封装ajax/getajax.js",
+		"/C/Users/Administrator/Desktop/bootstrap-3.3.7/test.html",
+		"/D/Sublime Text/Data/Packages/User/Preferences.sublime-settings",
+		"/E/excise/1/index.css",
+		"/E/excise/1/index.scss",
+		"/E/excise/1/css/commen.css",
+		"/E/excise/1/index.html",
+		"/F/a ：资料/项目/zhgd/zhgd-view/zhgd-view-pc/src/main/webapp/admin/js/asset-check-lifeCycle.js",
+		"/E/新建文件夹 (2)/李满/day7/index1.html",
+		"/D/A/TestVue/musiccloudWebapp/src/components/Hello.vue",
+		"/D/A/TestVue/musiccloudWebapp/src/main.js",
+		"/D/a ：资料/项目/zhgd/zhgd-view/zhgd-view-pc/src/main/webapp/admin/js/asset-check.js",
+		"/D/a ：资料/项目/zhgd/zhgd-view/zhgd-view-pc/src/main/webapp/admin/js/commen.js",
+		"/D/A/TestVue/musiccloudWebapp/src/App.vue",
+		"/E/资料/我的文件/课堂 My html js 法萨芬/1-12 汇总/1-4题目小汇总/index.html",
+		"/D/a ：资料/项目/zhgd/zhgd-view/zhgd-view-pc/src/main/webapp/admin/js/asset-check-lifeCycle.js",
+		"/E/资料/我的文件/teacher js2/js/03 瀑布流/index.html",
+		"/D/A/TestVue/musiccloudWebapp/src/components/Musictitle/Musictitle.vue"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 105.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"toogle-ord-stu",
+			"height: 30px;\n			display: inline-block;\n			line-height: 30px;\n			text-align: center;\n			color: #fff;\n			border-radius: 4px;",
+			"e-",
+			"e",
+			"excel",
+			"Excel",
+			"excel",
+			"all-ord-num",
+			"searchcus-btn",
+			"search-cusname",
+			"e-excel-ord",
+			"all-order-span",
+			".border1;",
+			"prient-ord",
+			"333",
+			".border2;",
+			".border1;",
+			".border;",
+			"border-bottom",
+			"./",
+			".border;",
+			"second-ele",
+			"active",
+			"List",
+			"list",
+			"List",
+			"<div class=\"listing\">\n									  			<a href=\"javascript:void(0)\">List</a>\n									  			<img src=\"static/image/home/collect-.png\">\n									  		</div>",
+			"<p class=\"product-price\">$ 3.8</p>",
+			"listing",
+			"Listing<",
+			"pull-left settle-con",
+			"<div class=\"pull-right shipping-type\">\n							    		<label for=\"\">Select Shipping</label>\n							    		<select>\n							    			<option value=\"\">国际E邮宝</option>\n							    			<option value=\"\">4px</option>\n							    		</select>\n							    	</div>",
+			"label",
+			"img",
+			"login/",
+			"orders-table",
+			"login/",
+			"sub-orders",
+			"orders-ta",
+			"border",
+			"bOrder",
+			"border",
+			"deal-orders",
+			"dropshippingStatus-nav",
+			"deal-orders",
+			"display: none",
+			"direct-deal-order",
+			"display: none",
+			"deal-orders",
+			"direct-deal-order",
+			"deal-orders",
+			"(",
+			"deal-orders",
+			"display: none;",
+			"direct",
+			"display:none;",
+			"display:none",
+			"order-center",
+			"deal-orders",
+			"dropshipping-orders",
+			"orderstatus-nav",
+			"display",
+			"dropshippingStatus-nav",
+			"direct-orders-ctrl",
+			"dropshipping-ctrl",
+			"direct-orderstatus-nav",
+			".when('/direct-orders',{//left-bar对应的自动订单\n    //   templateUrl:'./static/html/order-center/direct-orders.html',\n    //   controller:'direct-orders'\n    // })",
+			"direct-orders",
+			"direct-orders.js",
+			"ditect-searchmore",
+			"product-checked",
+			"direct-orders.js",
+			"direct-orders",
+			"orderstatus-nav",
+			"display: none",
+			"dropshippingStatus-nav",
+			"orderstatus-nav",
+			"dropshippingStatus-nav",
+			"viewSub-orders",
+			"orderstatus-nav",
+			"more-search",
+			"orderstatus-nav",
+			"toggle-moresearch",
+			"left-nava",
+			"direct-orders",
+			"dropshipping",
+			"dropShippingCenter",
+			"0",
+			"direct-app",
+			"content",
+			"factory",
+			">\n",
+			"playerThumb",
+			"// console.log($scope.players)\n		// console.log(data[i])\n		// var dataObj = $scope.players.parse(data,filter);\n		console.log(id)",
+			"thumb",
+			"removePlayer",
+			"if",
+			"ev",
+			"preventDefault",
+			"isExisted",
+			"queryVal",
+			"	\n",
+			"link",
+			"array",
+			"console",
+			"class=\"l\"",
+			"a",
+			"class",
+			"=\"\"></",
+			"=\"\">"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"!"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "config.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\Administrator.PC-20160415LUMO\\Desktop\\js代码\\script01.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 286.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

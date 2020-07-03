@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .input-group{
+            display: flex;
+            justify-content: center;
+        }
+        .input-group>input{
+            height: 35px;
+            width: 250px;
+            padding: 2px 5px;
+        }
+        .input-group>button{
+            background: #F8A636;
+            color: #fff;
+            position: relative;
+            left: -1px;
+            /*top: 1px;*/
+            height: 35px;
+            padding: 0 15px;
+        }
+        .searchGroup{
+            margin-left: 15px;
+        }
+        .searchGroup input{
+            height: 35px;
+            width: 150px;
+            padding: 2px 5px;
+            border: 1px solid #e0e0e0;
+        }
+        .searchGroup input:nth-child(2){
+            position: relative;
+            left: -5px;
+        }
+        .searchGroup button{
+            background: #F8A636;
+            color: #fff;
+            position: relative;
+            left: -10px;
+            /*top: 1px;*/
+            height: 35px;
+            padding: 0 15px;
+        }
+        .ea-right-search{
+            display: flex;
+            justify-content: space-between;
+        }
+        .search-box>input{
+            height: 35px;
+            width: 280px;
+            padding: 2px 5px;
+        }
+        .search-box>button{
+            background: #F8A636;
+            color: #fff;
+            position: relative;
+            left: -1px;
+            top: 1px;
+            height: 35px;
+            padding: 0 15px;
+        }
+        .ea-right-search{
+            display: flex;
+            justify-content: space-between;
+        }
+        .ea-list-table tbody tr>td>span{
+            cursor: pointer;
+            text-decoration: underline;
+            color: #3A5FCD;
+        }
+
+        textarea { border: 1px solid #eee; width: 100%; height: 100%; }
+        .max-width-70 { max-width: 70px; }
+        .min-width-180 { min-width: 180px; }
+        .margin-t-10 { margin-top: 10px; }
+        .right-bar { padding: 15px 20px; overflow: hidden; }
+        .page-wrap { margin-top: 15px; height: 100%; }
+        .page-wrap table .main-btn { display: inline-block; margin: 0 auto; background: #F8A636; color: #fff; text-decoration: none; font-size: 12px; padding: 4px 9px; border-radius: 2px; user-select: none; }
+        .page-wrap table .main-btn.disable { pointer-events: none; cursor: no-drop; background: #ccc; }
+        .page-wrap table td.font-color { color: #fa6470; }
+        .priority-operate-panel { position: absolute; top: 75px; bottom: 0; left: 100%; width: 70%; padding-right: 20px; transform: translateX(0%); transition: 300ms; }
+        .priority-operate-panel .content-box { height: 100%; transition: 300ms; text-align: center; font-size: 14px; }
+        .priority-operate-panel .content-box .title { display: flex; }
+        .priority-operate-panel .content-box span { flex: 1; padding: 5px 3px; border: solid #eee 1px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .priority-operate-panel .content-box .title span { background: #f4f8fb; }
+        .priority-operate-panel .content-box ul li { display: flex; }
+        .priority-operate-panel .content-box ul li.bg-color { background: aliceblue; }
+        .priority-operate-panel .content-box ul li span { margin-top: -1px; }
+        .priority-operate-panel .content-box span.del-btn { color: #fa6470; cursor: pointer; }
+        .priority-operate-panel .panel-close-btn { position: absolute; top: 0; left: 0; padding: 5px 15px; opacity: 0; background: #F8A636; color: #fff; font-size: 14px; transform: translateX(0%); transition: 300ms 300ms; box-shadow: 0 0 1px #ccc; cursor: pointer; }
+        .priority-operate-panel.show { transform: translateX(-100%); }
+        .priority-operate-panel.show .content-box { border: 1px solid #e1e1e1; background: #fff; }
+        .priority-operate-panel.show .panel-close-btn { opacity: 1; transform: translateX(-110%); }
+        .button-group button { margin-left: 15px; }
+        .vip-check-box input { position: relative; visibility: hidden; }
+        .vip-check-box input::after { content: ''; position: absolute; border: 2px solid #eee; top: -2px; right: -2px; bottom: -2px; left: -2px; visibility: visible; }
+        .vip-check-box input:checked::after { background: #F8A636; }
+        .vip-check-box span { vertical-align: -webkit-baseline-middle; margin-left: 5px; }
+    </style>
+</head>
+
+<body>
+    <div class="ea-content">
+        <div class="left-bar">
+            <ul>
+                <li><a href="#/erpservice/sc">{{'100157' | translate}}</a></li>
+                <li><a href="#/erpservice/document">{{'Document'}}</a></li>
+                <li><a href="#/erpservice/csdisputePendingm">{{'100158' | translate}}</a></li>
+                <li class="active"><a href="#/erpservice/tz">{{'100159' | translate}}</a></li>
+                <li><a href="#/erpservice/gd">{{'100160' | translate}}</a></li>
+                <li><a href="#/erpservice/video">{{'100161' | translate}}</a></li>
+                <li><a href="#/erpservice/khbz">{{'100162' | translate}}</a></li>
+            </ul>
+        </div>
+        <div class="right-bar-wrap ea-right-content">
+            <div class="asj-h10"></div>
+            <div class="right-bar relative">
+                <div class="ea-right-search">
+                    <div class="input-group">
+                        <input placeholder="滞留天数" value="{{stranded_days}}" oninput="angular.element(this).scope().inputStrandedDays(this)"
+                            type="text" />
+                        <input placeholder="客户名称" ng-model="customer_name" type="text" />
+                        <input placeholder="业务员名称" ng-model="salesman" type="text" />
+                        <button ng-click="search()">{{'100025' | translate}}</button>
+                    </div>
+                    <div class="vip-check-box">
+                        <input type="checkbox" ng-change="search()" ng-model="is_vip">
+                        <span>VIP</span>
+                    </div>
+                    <div class="input-group button-group">
+                        <button ng-click="addOrder($event)">{{'添加优先处理的订单'}}</button>
+                        <button ng-click="togglePriorityPanel($event)">{{'优先级列表'}}</button>
+                    </div>
+                </div>
+                <div class="page-wrap">
+                    <table class="ea-list-table ea-erp-cs">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>登陆名</th>
+                                <th>客户名</th>
+                                <th>创建时间</th>
+                                <th>订单数</th>
+                                <th>过期数</th>
+                                <th>邮箱</th>
+                                <th>业务员</th>
+                                <!-- <th>添加备注</th> -->
+                                <th style="width:120px">添加优先处理</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in orderList">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.loginName}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.createdate}}</td>
+                                <td>{{item.allcount}}</td>
+                                <td ng-class="{'font-color': +item.oldcount > 0}">{{item.oldcount || 0}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.yewuyuan}}</td>
+                                <!-- <td>
+                                    <span class="main-btn remark" ng-click="addRemark(item)">备注</span>
+                                </td> -->
+                                <td>
+                                    <span class="main-btn add" ng-class="{disable: item.checkReplace}" ng-click="addRemark(item)">
+                                        {{item.checkReplace ? '已添加' : '添加'}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="priority-operate-panel" ng-class="{show: is_show_priority}">
+                    <div class="content-box">
+                        <div class="title">
+                            <span class="max-width-70">序号</span>
+                            <!-- <span>id</span> -->
+                            <span class="min-width-180">创建时间</span>
+                            <span>订单号或客户名称</span>
+                            <span>业务员</span>
+                            <span>创建人</span>
+                            <span>备注</span>
+                            <span class="max-width-70">操作</span>
+                        </div>
+                        <ul>
+                            <li ng-repeat="item in priorityList" ng-class="{'bg-color': $index%2}">
+                                <span class="max-width-70">{{$index+1}}</span>
+                                <!-- <span>{{item.id}}</span> -->
+                                <span class="min-width-180">{{item._createdate}}</span>
+                                <span>{{item.ordername}}</span>
+                                <span>{{item.yewuyuan}}</span>
+                                <span>{{item.createUser}}</span>
+                                <span title="{{item.remark}}">{{item.remark}}</span>
+                                <span class="del-btn max-width-70" ng-click="deletePriorityList(item, $index)">删除</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-close-btn" ng-click="is_show_priority=false">关闭</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

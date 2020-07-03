@@ -1,0 +1,155 @@
+<style type="text/css">
+    body .personalizeinquiry-box .merchan-list .li-pro-num{
+        width: 8%;
+    }
+    body .personalizeinquiry-box .merchan-list .li-eng-name {
+        width: 22%;
+    }
+    body .personalizeinquiry-box .merchan-list .li-store-link {
+        width: 16%;
+    }
+    body .personalizeinquiry-box .merchan-list .li-img .big-img {
+        background: #fff;
+        z-index: 1;
+    }
+</style>
+<div class="merchandise-box merchandise-inquiry-box">
+    <div class="right-bar-wrap inquiry-and-drop inquiry-box personalizeinquiry-box">
+        <div class="asj-h10"></div>
+        <div class="right-bar">
+            <div class="asj-h15"></div>
+            <!-- 上面功能条 -->
+            <div class="function-bar">
+                <div class="top-search clearfix">
+                    <!-- 商品类目end -->
+                    <div class="input-group search-box">
+                        <input type="text" class="form-control top-search-inp" placeholder="" ng-model="searchVal"
+                               ng-keyup="enterSearch($event)">
+                        <a role="button" class="btn btn-default top-search-btn" type="button"
+                           ng-click="getSearchList()">{{'100025' | translate}}</a>
+                    </div>
+                    <div class="right-btns">
+                        <!-- <a role="button" type="button" class="btn btn-default export-btn">导出</a> -->
+                        <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-click="deleteOpe()"
+                           ng-if="isInquiry || isOffSheInquiry">{{'100370' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-offShe-btn"
+                           ng-click="offShelveOpe()" ng-if="isInquiry">{{'100372' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-changecate-btn"
+                           ng-click="banchChangeCate()" ng-if="isInquiry">{{'100373' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-onshelve-btn"
+                           ng-if="isOffSheInquiry" ng-click="shelveOpe()">{{'100375' | translate}}</a>
+                        <!-- <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-if="isOffSheInquiry">批量删除</a> -->
+                        <a role="button" type="button" class="btn btn-default banch-clear-btn" ng-if="isRecyInquiry"
+                           ng-click="clearOpe('deleteall')">{{'100377' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-clear-btn" ng-if="isRecyInquiry"
+                           ng-click="clearOpe()">{{'100371' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-reback-btn" ng-if="isRecyInquiry"
+                           ng-click="shelveOpe()">{{'100376' | translate}}</a>
+                        <!--off-Category-->
+                        <a role="button" type="button" class="btn btn-default banch-remove-btn" ng-click="deleteOpe()"
+                           ng-if="isoffCategory">{{'100370' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-onshelve-btn"
+                           ng-if="isoffCategory" ng-click="shelveOpe()">{{'100375' | translate}}</a>
+                        <a role="button" type="button" class="btn btn-default banch-changecate-btn"
+                           ng-click="banchChangeCate()" ng-if="isoffCategory">{{'100373' | translate}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 列表 -->
+            <div class="merchan-list">
+                <!-- 列表top -->
+                <ul class="merchan-list-top">
+                    <li class="li-num">
+                        <div class="check-box">
+                            <input type="checkbox" name="" id="" ng-model="checkAllMark"
+                                   ng-change="checkAllMerch(checkAllMark)">
+                            <label for=""></label>
+                        </div>
+                        <span>{{'100174' | translate}}</span>
+                    </li>
+                    <li class="li-img">{{'100382' | translate}}</li>
+                    <li class="li-img">定制图片</li>
+                    <!-- <li class="li-chin-name">{{'100543' | translate}}</li> -->
+                    <li class="li-eng-name">{{'100544' | translate}}</li>
+                    <!-- <li class="li-category">{{'100386' | translate}}</li> -->
+                    <li class="li-pro-num">商品编码</li>
+                    <li class="li-store-link">{{'100545' | translate}}</li>
+                    <li class="li-price">{{'100350' | translate}}</li>
+                    <li class="li-operate">{{'100043' | translate}}</li>
+                </ul>
+                <!-- 列表body -->
+                <!-- merchList -->
+                <div class="erp-load-box">
+                    <div class="merchan-list-con-wrap" ng-repeat='item in alibabaProducts'>
+                        <ul class="merchan-list-con clearfix">
+                            <li class="li-num">
+                                <div class="check-box">
+                                    <input type="checkbox" name="" id="" ng-model="item.checked"
+                                           ng-change="checkMerch(item.sku, item.checked)">
+                                    <label for=""></label>
+                                </div>
+                                <span>{{item.id}}</span>
+                            </li>
+                            <li class="li-img"
+                            >
+                                <img class="small-img" src="{{item.defaultImg}}"/>
+                                <img
+                                    class="big-img" src="{{item.defaultImg}}"/>
+                            </li>
+                            <li class="li-img"
+                            >
+                                <img class="small-img" src="{{item.png}}"/>
+                                <img
+                                    class="big-img" src="{{item.png}}"/>
+                            </li>
+                            <li class="li-eng-name" ng-click="btn_updata107()">{{item.title || item.sku}}</li>
+                            <li class="li-pro-num">{{item.sku}}</li>
+                            <li class="li-store-link"><a href={{item.detailLink}} target="_blank">{{item.detailLink}}</a>
+                            </li>
+                            <li class="li-price">${{item.oldPrice}}</li>
+                            <li class="li-operate">
+                                <a role="button" class="btn btn-default writein-btn"
+                                   ng-click="writeInOpe(item)">{{'100119' | translate}}</a>
+                                <a role="button" class="btn btn-default delete-btn" href="javascript: void(0);"
+                                 ng-click="deleteOpe(item.id)">{{'100227' | translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <page></page>
+            <!-- <div ng-hide="hasMerch">没有找到数据</div> -->
+        </div>
+    </div>
+</div>
+<!-- 修改类目弹框 -->
+<script type="text/template" id="change-cate">
+    <h5>修改类目</h5>
+    <dl class="pro-info clearfix">
+        <dt><img src="#" alt="" class="pro-img"></dt>
+        <dd>
+            <p class="clearfix">
+                <span class="left-span">产品名称：</span><span class="right-span pro-name"></span>
+            </p>
+        </dd>
+    </dl>
+    <div class="assign-to">
+        <label for="">一级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele1">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="assign-to">
+        <label for="">二级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele2">
+            <option value="">请选择</option>
+        </select>
+    </div>
+    <div class="assign-to">
+        <label for="">三级类目：</label>
+        <select class="change-cate-sele" name="" id="change-cate-sele3">
+            <option value="">请选择</option>
+        </select>
+    </div>
+</script>

@@ -1,0 +1,262 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+
+		<!-- filter -->
+		<div class="filter flex fwp">
+
+			<div class="item flex aic jcc">
+				<span class="labela">物流名称</span>
+				<input type="text" ng-model="getParams.logisticsCompanyName" />
+			</div>
+
+			<div class="item flex aic jcc">
+				<span class="labela">所属国家</span>
+				<input type="text" ng-model="getParams.countryName" />
+			</div>
+
+			<!-- <div class="item flex aic jcc">
+				<span class="labela">供应商</span>
+				<input type="text" ng-model="searchVal" />
+			</div> -->
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="getList()">查询</a>
+			</div>
+
+		</div>
+
+		<ul class="k-tab flex fdr aic">
+			<li ng-class="{'active':getParams.status=='0'}" ng-click="changeTab('')"><span>待审核</span></li>
+			<li ng-class="{'active':getParams.status=='1'}" ng-click="changeTab('1')"><span>审核通过</span></li>
+			<li ng-class="{'active':getParams.status=='2'}" ng-click="changeTab('2')"><span>审核未通过</span></li>
+		</ul>
+
+		<table class="k-table" style="width:100%;margin-top:20px;">
+			<thead>
+				<th>物流编号</th>
+				<th>物流名称</th>
+				<th>物流代码</th>
+				<th>所属国家</th>
+				<th>面单获取方式</th>
+				<th>物流公司查询网址</th>
+				<!-- <th>供应商</th> -->
+				<th>状态</th>
+				<th ng-show="getParams.status!=2">操作</th>
+				<th ng-show="getParams.status==2">原因</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="i in list">
+					<td>
+						<div class="td">{{ $index+1 }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.logisticsCompanyName }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.logisticsCompanyCode }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.countryName }}</div>
+					</td>
+					<td>
+						<div class="td">{{ faceDownObj[i.faceDownloadType] || '--' }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.companyUrl || '--' }}</div>
+					</td>
+					<!-- <td>
+						<div class="td">{{ i.countryName }}</div>
+					</td> -->
+					<td>
+						<div class="td">{{ statusObj[i.status]}}</div>
+					</td>
+					<td ng-show="getParams.status==2">
+						<div class="td">{{ i.refuseComment }}</div>
+					</td>
+					<td ng-show="getParams.status!=2">
+						<div class="td tools">
+							<a href="javascript:void(0)" ng-click="openRejectBubble(i)" ng-show="getParams.status!=2">拒绝</a>
+							<a href="javascript:void(0)" ng-click="updateStatus(i,1)" ng-show="getParams.status==0">通过</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 分页 -->
+		<page></page>
+
+	</div>
+</div>
+
+<div class="erp-common-tan-v2-wrap" ng-show="rejectBubble">
+	<div class="erp-common-tan-v2" style="width: 400px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="rejectBubble=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>拒绝提示语</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<p>拒绝理由:</p>
+			<textarea style="padding:10px;border:1px solid #e6e6e6;margin-top: 15px;width:100%;height:120px;" ng-model="rejectReason"></textarea>
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="rejectBubble=false;" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="updateStatus(null,2)" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+
+	/* tab */
+	.k-tab{width:100%;font-size:14px;border-bottom:1px solid #e6e6e6;margin-bottom:15px;}
+	.k-tab li{padding:10px 20px;position: relative;cursor: pointer;}
+	.k-tab li span{font-size:14px;}
+	.k-tab li::after{position:absolute;content:'';opacity:0;display: block;width:100%;height:2px;background-color:#F8A636;left:0;bottom:-1px;}
+	.k-tab li:hover span,.k-tab li.active span{color:#F8A636;}
+	.k-tab li:hover::after,.k-tab li.active::after{opacity: 1;}
+
+	/* tools */
+	.tools a{color:#F8A636;margin:0 4px;}
+	.tools a:hover{opacity: 0.6;}
+</style>

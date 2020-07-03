@@ -1,0 +1,271 @@
+<div class="my-wrap">
+  <div class="submitBubble">
+
+    <!-- tools -->
+    <div class="tools flex fdrr">
+      <a href="javascript:void(0)" class="btn primary" ng-click="newItem()">新增</a>
+    </div>
+
+    <table class="k-table" style="width:100%;margin-top:20px;">
+      <thead>
+        <th>模板名称</th>
+        <th>提示语</th>
+        <th>生效日期</th>
+        <th>操作</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in list">
+          <td>
+            <div class="td">{{ i.name }}</div>
+          </td>
+          <td>
+            <div class="td">{{ i.content }}</div>
+          </td>
+          <td>
+            <div class="td">{{ i.startTime | date:'yyyy-mm-dd hh:mm:ss' }} - {{ i.endTime | date:'yyyy-mm-dd hh:mm:ss'}}</div>
+          </td>
+          <td>
+            <div class="td">
+              <a href="javascript:void(0);" class="btn primary" ng-click="editItem(i)">编辑</a>
+              <a href="javascript:void(0);" class="btn primary" ng-click="changeStatus(i)">{{ i.status == 1 ? '禁用' : '启用' }}</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 分页 -->
+    <page></page>
+
+  </div>
+</div>
+
+<modal tit="{{ !addParams.id ? '新增模板' : '编辑模板' }}" visible="popupFlag" on-ok="onSubmit()">
+  <div class="filter flex fwp">
+    <div class="item">
+      <span class="labela">模板名称:</span>
+      <input type="text" ng-model="addParams.name" ng-keyup="checkName($event)" />
+      <div ng-if="existsName == 1" class="existsName">该名称已经被使用</div>
+      <div ng-if="existsName == 2" class="existsName" style="color:gray">校验中...</div>
+      <div ng-if="existsName == 0" class="existsName" style="color:green;">该名称可以使用</div>
+    </div>
+    <div class="item" style="width:100%;">
+      <span class="labela">提示语:</span>
+      <textarea rows="5" ng-model="addParams.content" style="padding:10px;"></textarea>
+    </div>
+    <div class="item iptDate">
+      <span class="labela">有效期限：</span>
+      <wui-date format="yyyy-mm-dd HH:mm:ss" placeholder="起始时间" btns="{'ok':'确定','now':'今天'}" ng-model="addParams.startTime">
+      </wui-date>
+      &nbsp;&nbsp;-&nbsp;&nbsp;
+      <wui-date format="yyyy-mm-dd HH:mm:ss" placeholder="截止时间" btns="{'ok':'确定','now':'今天'}" ng-model="addParams.endTime">
+      </wui-date>
+    </div>
+
+    <div class="item">
+      <table class="k-table" style="width:100%;margin-top:20px;">
+        <thead>
+          <th>客户等级</th>
+          <th>搜品增加额度</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="td">LV1</div>
+            </td>
+            <td>
+              <div class="td"><input type="number" ng-model="addParams.oneSourceNum" />&nbsp;&nbsp;个</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td">LV2</div>
+            </td>
+            <td>
+              <div class="td"><input type="number" ng-model="addParams.twoSourceNum" />&nbsp;&nbsp;个</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td">LV3</div>
+            </td>
+            <td>
+              <div class="td"><input type="number" ng-model="addParams.threeSourceNum" />&nbsp;&nbsp;个</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td">LV4</div>
+            </td>
+            <td>
+              <div class="td"><input type="number" ng-model="addParams.fourSourceNum" />&nbsp;&nbsp;个</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="td">LV5或VIP</div>
+            </td>
+            <td>
+              <div class="td"><input type="number" ng-model="addParams.fiveSourceNum" />&nbsp;&nbsp;个</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</modal>
+
+<style>
+  .my-wrap {
+    margin-left: 215px;
+    background: #fff;
+    padding: 15px;
+    min-height: 100vh;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex.fdc {
+    flex-direction: column;
+  }
+
+  .flex.jcc {
+    justify-content: center;
+  }
+
+  .flex.fdrr {
+    flex-direction: row-reverse;
+  }
+
+  .flex.fdcr {
+    flex-direction: column-reverse;
+  }
+
+  .flex.aic {
+    align-items: center;
+  }
+
+  .flex.fwp {
+    flex-wrap: wrap;
+  }
+
+  /* tablist */
+  .tablist {
+    height: 45px;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  .tablist .item {
+    padding: 0 15px;
+    position: relative;
+  }
+
+  .tablist .item.active a::after,
+  .tablist .item:hover a::after {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #F9AE08;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+  }
+
+  .tablist .item.active a,
+  .tablist .item:hover a {
+    color: #F9AE08;
+  }
+
+  /* filter */
+  .filter input {
+    width: 150px;
+  }
+
+  .iptDate input {
+    width: 180px;
+  }
+
+  .filter select {
+    height: 30px;
+    border-radius: 4px;
+  }
+
+  .filter textarea {
+    border: 1px solid #e6e6e6;
+    flex: 1;
+  }
+
+  .filter span.labela {
+    margin-right: 15px;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .filter .item {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .existsName {
+    margin-left: 10px;
+    font-size: 12px;
+    color: red;
+  }
+
+  /* tools */
+  .tools {
+    margin-top: 15px;
+  }
+
+  .tools a {
+    margin-left: 15px;
+  }
+
+  /* btn */
+  a.btn {
+    padding: 5px 10px;
+  }
+
+  a.btn.primary {
+    background-color: #F8A636;
+    color: #fff;
+  }
+
+  a.btn.primary:hover {
+    opacity: 0.6;
+  }
+
+  a.batch {
+    color: #F8A636;
+  }
+
+  a.batch:hover {
+    opacity: 0.6;
+  }
+
+  span.red {
+    color: red;
+  }
+
+  /* bottom_operator */
+  .bottom_operator {
+    margin-top: 20px;
+  }
+
+  /* submitBubble */
+  .submitBubble .filter .item {
+    margin-right: 20px;
+  }
+
+  .submitBubble .filter .item .con {
+    color: #999;
+  }
+</style>

@@ -1,0 +1,186 @@
+<div class="excel-orders-wrap" ng-app="ecxel-app">
+	<div class="e-ord-mid">
+		<!-- 左侧导航 -->
+		<div class="left-bar-nav">
+			<ul>
+				<li><a class="ord-left-nav" href="#/custom-ord">客户店铺订单</a></li>
+				<li><a class="ord-left-nav" style="background: #fff;border-left: solid #08ACE9 4px;color: #08ACE9;" href="#/excel-ord">Excel订单</a></li>
+			</ul>
+		</div>
+		<!-- 右边的内容部分 -->
+		<div class="eorder-right-mid">
+			<div class="econtent">
+				<!-- 订单的导航按钮 -->
+				<div class="erp-ord-nav">
+					<ul class="et-nav-ul">
+						<!-- <li class="et-nav-li1"><a class="e-customer-ord" href="#/custom-ord">客户店铺订单</a></li>
+						<li><a class="e-customer-ord e-excel-ord" style="color: #000;background: #fff;" href="#/excel-ord">Excel订单</a></li> -->
+						<li class="et-nav-li1">
+							<a class="all-view-ord order-view" style="color: #333;background: #fff;" href="#/excel-ord">订单总览</a>
+						</li>
+						<li>
+							<a class="ord-deal-a order-view" style="color: #646464;background: #d5d5d5;" href="#/ecl-ord">订单处理</a>
+						</li>
+						
+					</ul>
+				</div>
+				<div class="e-ord-conall">
+					<div class="e-ord-con">
+						<!-- 订单处理 订单总览 -->
+						<!-- <div class="e-ord-dealway">
+							<a class="all-view-ord order-view" href="javascript:void(0)">订单总览</a>
+							<a class="ord-deal-a order-view" href="javascript:void(0)">订单处理</a>
+						</div> -->
+						<!-- 订单总览的内容部分 -->
+						<div class="toggle-delord-div">
+							<!-- 订单的时间 总数 -->
+							<!-- <div class="all-ord-time">
+								
+								<span>总订单:</span>
+								<span class="all-ord-num">2333</span>
+							</div> -->
+							<!-- 搜索部分 -->
+							<div class="all-search-div">
+								<!-- <input class="Wdate data-inp" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" style="text-indent: 12px;" id="all-time-data" type="text"></input> -->
+								<input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text" onclick="var cdatatime2=$dp.$('cdatatime2');WdatePicker({onpicked:function(){cdatatime2.click();},maxDate:'#F{$dp.$D(\'cdatatime2\')}'})"></input><input id="cdatatime2" class="Wdate data-inp" style="text-indent: 12px;" type="text" onclick="WdatePicker({minDate:'#F{$dp.$D(\'c-data-time\')}'})"/><input class="erp-seachInp" type="button" value="搜索"></input>
+								<p>
+									<input class="all-seach-inp"></input>
+									<a class="all-seach-btn" href="javascript:void(0)">搜索</a>
+								</p>
+								<span>总订单:</span>
+								<span class="all-ord-num">2333</span>
+							</div>
+							<!-- 订单总览列表部分 -->                  
+							<div class="all-ord-list">
+								<table id="e-allo-table">
+									<thead class="e-ord-thead">
+										<tr>
+											<th class="ordlist-fir-th" style="width: 120px">
+												<img class="e-check-all" src="static/image/order-img/multiple1.png">
+												<span>日期</span>
+											</th>
+											<th style="width: 95px">系统订单号</th>
+											<th style="width: 80px">总金额</th>
+											<th style="width: 105px">下单日期</th>
+											<th style="width: 170px">客户姓名</th>
+											<th style="width: 140px">付款状态</th>
+											<th style="width: 130px">业务员</th>
+											<th style="width: 130px">运单生成状态</th>
+											<th style="width: 145px">发货状态</th>
+										</tr>
+									</thead>
+									<tbody class="all-ord-tbody">
+										<tr>
+											<td class="allord-fir-td">
+												<img class="eo-check-box" src="static/image/order-img/multiple1.png">
+												<p>9-12 12:00</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												A000001
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												100个
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												$224.81
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>Chompa-rangsey Chan</p>
+												<p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												未付款
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												lucy chan
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="percent-span">
+												<span class="per-span1">80</span>
+												<span>%</span>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="percent-span">
+												<span class="per-span1">80</span>
+												<span>%</span>
+											</td>
+											
+										</tr>
+										<!-- 第二行 -->
+										<tr>
+											<td class="allord-fir-td">
+												<img class="eo-check-box" src="static/image/order-img/multiple1.png">
+												<p>9-12 12:00</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												A000001
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												100个
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												$224.81
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>Chompa-rangsey Chan</p>
+												<p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												未付款
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												lucy chan
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="percent-span">
+												<span class="per-span1">80</span>
+												<span>%</span>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="percent-span">
+												<span class="per-span1">80</span>
+												<span>%</span>
+											</td>
+											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

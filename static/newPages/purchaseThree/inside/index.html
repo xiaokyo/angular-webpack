@@ -1,0 +1,566 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+		<a href="javascript:history.back(-1)" class="btn ghost">返回</a>
+		<h3 style="margin:20px 0;">增加内部采购单</h3>
+		<!-- filter -->
+		<form ng-submit="submit(params)" class="filter flex fwp">
+			<div class="item">
+				<span>申请人：</span>
+				<input type="text" placeholder="请输入申请人姓名" ng-model="params.applicantName" />
+			</div>
+
+			<div class="item">
+				<span>申请原因：</span>
+				<input type="text" placeholder="请输入申请原因" ng-model="params.pursueReason" />
+			</div>
+
+			<div class="item">
+				<span>采购方式：</span>
+				<select placeholder="请选择采购方式" ng-model="params.type">
+					<option ng-repeat="(key,value) in CAIGOU_TYPE" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+			<div class="item">
+				<span>收货地址：</span>
+				<input type="text" placeholder="请输入收货地址" ng-model="params.shippingAddress" />
+			</div>
+
+			<div class="item">
+				<span>收货联系人：</span>
+				<input type="text" placeholder="请输入收货联系人" ng-model="params.shippingName" />
+			</div>
+
+			<div class="item">
+				<span>收货人电话：</span>
+				<input type="text" placeholder="请输入收货人电话" ng-model="params.shippingPhone" />
+			</div>
+
+			<div class="item">
+				<span>卖家公司：</span>
+				<input type="text" placeholder="请输入卖家公司" ng-model="params.sellerCompany" />
+			</div>
+
+			<div class="item">
+				<span>卖家姓名：</span>
+				<input type="text" placeholder="请输入卖家姓名" ng-model="params.sellerName" />
+			</div>
+
+			<div class="item">
+				<span>卖家电话：</span>
+				<input type="text" placeholder="请输入卖家电话" ng-model="params.sellerPhone" />
+			</div>
+
+			<hr />
+			<div class="item">
+				<span>收款方式：</span>
+				<select ng-model="params.paymentTerm">
+					<option ng-repeat="(key,value) in ACCEPT_TYPE" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+			<!-- 收款银行方式 -->
+			<div class="flex aic" ng-show="bankShow()">
+				<div class="item">
+					<span>收款银行：</span>
+					<input type="text" placeholder="请输入收款银行" ng-model="params.bankName" />
+				</div>
+
+				<div class="item">
+					<span>收款银行支行：</span>
+					<input type="text" placeholder="请输入分行地址（选填）" ng-model="params.branchAddress" />
+				</div>
+
+				<div class="item">
+					<span>账户名称：</span>
+					<input type="text" placeholder="请输入收款银行账户名称" ng-model="params.accountName" />
+				</div>
+
+				<div class="item">
+					<span>银行账号：</span>
+					<input type="text" placeholder="请输入收款银行账号" ng-model="params.account" />
+				</div>
+
+
+			</div>
+			<!-- 收款银行方式 -->
+
+			<!-- 支付宝 -->
+			<div class="flex aic" ng-show="!bankShow()">
+				<div class="item">
+					<span>支付宝账号名称：</span>
+					<input type="text" placeholder="请输入支付宝账号名称" ng-model="params.accountName" />
+				</div>
+				<div class="item">
+					<span>支付宝账号：</span>
+					<input type="text" placeholder="请输入支付宝账号" ng-model="params.account" />
+				</div>
+			</div>
+			<!-- 支付宝 -->
+
+			<hr />
+			<!-- 物流 -->
+			<div class="flex ais" style="width:100%;" ng-repeat="i in logistics">
+				<div class="item">
+					<span>物流公司：</span>
+					<input type="text" placeholder="请输入物流公司" ng-model="i.logisticsName" />
+				</div>
+
+				<div class="item">
+					<span>物流单号：</span>
+					<input type="text" placeholder="请输入物流单号" ng-model="i.logisticsNum" />
+				</div>
+
+				<a href="javascript:void(0)" class="btn ghost" ng-click="addLogistic()">+</a>
+				<a href="javascript:void(0)" class="btn ghost" ng-show="logistics.length > 1"
+					ng-click="delLogistic($index)">-</a>
+			</div>
+			<!-- 物流 -->
+			<hr />
+
+			<!-- 商品列表 -->
+			<div class="flex ais" style="width:100%;" ng-repeat="i in products">
+				<div class="item">
+					<span>商品名称：</span>
+					<input type="text" placeholder="请输入商品名称" ng-model="i.productName" />
+				</div>
+
+				<div class="item">
+					<span>商品单价(￥)：</span>
+					<input type="number" step="0.01" placeholder="请输入商品单价" ng-model="i.productPrice" />
+				</div>
+
+				<div class="item">
+					<span>商品数量：</span>
+					<input type="number" step="0.01" placeholder="请输入商品数量" ng-model="i.num" />
+				</div>
+
+				<a href="javascript:void(0)" class="btn ghost" ng-click="addProducts()">+</a>
+				<a href="javascript:void(0)" class="btn ghost" ng-show="products.length > 1"
+					ng-click="delProducts($index)">-</a>
+
+			</div>
+
+			<hr />
+
+			<div class="item">
+				<span>CJ需付运费（￥）：</span>
+				<input type="number" step="0.01" placeholder="请输入CJ需承担的运费（选填）" ng-model="params.needPayFreight" />
+			</div>
+
+			<div class="item">
+				<span>付款方式：</span>
+				<select ng-model="params.payType">
+					<option ng-repeat="(key,value) in PAY_TYPE" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+			<div class="item" ng-show="!depositShow()">
+				<span>共需支付(￥)：</span>
+				<input type="number" step="0.01" placeholder="请输入共需支付" ng-model="params.totalPay" />
+			</div>
+
+			<!-- 预付订金 -->
+			<div class="flex aic" ng-show="depositShow()">
+				<div class="item">
+					<span>支付订金(￥)：</span>
+					<input type="number" step="0.01" placeholder="请输入订金" ng-model="params.deposit" />
+				</div>
+
+				<div class="item">
+					<span>尾款(￥)：</span>
+					<input type="number" step="0.01" placeholder="请输入尾款" ng-model="params.totalPay" />
+				</div>
+			</div>
+			<!-- 预付订金 -->
+
+			<hr />
+			<div class="item ais">
+				<div class="tit">采购凭证(jpg, gif, jpeg, png, pdf, excle)(可拖拽)：</div>
+				<div class="con flex fdc">
+					<uploadfiles id="'uploadFiles1'" callback="uploadFilesCallback" init-files="certPic"></uploadfiles>
+				</div>
+			</div>
+
+
+			<div style="width:100%;margin-top:20px;" class="flex fdrr aie">
+				<input type="submit" value="提交" />
+			</div>
+
+		</form>
+
+	</div>
+</div>
+
+<!-- 弹窗 -->
+<div class="erp-common-tan-v2-wrap" ng-show="showFlag">
+	<div class="erp-common-tan-v2" style="width: 1000px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="showFlag=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>确认信息</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<ul class="flex aic fwp insidePop">
+				<li>申请人：<span>{{ params.applicantName }}</span></li>
+				<li>申请原因：<span>{{ params.pursueReason }}</span></li>
+				<li>采购方式：<span>{{ CAIGOU_TYPE[params.type] }}</span></li>
+				<li>收货地址：<span>{{ params.shippingAddress }}</span></li>
+				<li>收货联系人：<span>{{ params.shippingName }}</span></li>
+				<li>收货人电话：<span>{{ params.shippingPhone }}</span></li>
+				<li>卖家公司：<span>{{ params.sellerCompany }}</span></li>
+				<li>卖家姓名：<span>{{ params.sellerName }}</span></li>
+				<li>卖家电话：<span>{{ params.sellerPhone }}</span></li>
+
+				<li>付款方式：<span>{{ PAY_TYPE[params.payType] }}</span></li>
+
+				<li>CJ需付运费（￥）：<span>{{ params.needPayFreight }}</span></li>
+
+				<li ng-show="!depositShow()">共需支付（￥）：<span>{{ params.totalPay }}</span></li>
+				<li ng-show="depositShow()">支付订金（￥）：<span>{{ params.deposit }}</span></li>
+				<li ng-show="depositShow()">尾款（￥）：<span>{{ params.totalPay }}</span></li>
+
+				<li>收款方式：<span>{{ ACCEPT_TYPE[params.paymentTerm] }}</span></li>
+				<li ng-show="bankShow()">收款银行：<span>{{ params.bankName }}</span></li>
+				<li ng-show="bankShow()">收款银行支行：<span>{{ params.branchAddress }}</span></li>
+				<li ng-show="bankShow()">账户名称：<span>{{ params.accountName }}</span></li>
+				<li ng-show="bankShow()">银行账号：<span>{{ params.account }}</span></li>
+
+				<li ng-show="!bankShow()">支付宝账号名称：<span>{{ params.accountName }}</span></li>
+				<li ng-show="!bankShow()">支付宝账号：<span>{{ params.account }}</span></li>
+
+			</ul>
+
+			<!-- 物流 -->
+			<div class="flex ais" style="width:100%;" ng-repeat="i in logistics">
+				<div class="item" style="margin-right:15px;">
+					<span>物流公司：</span>
+					{{ i.logisticsName }}
+				</div>
+
+				<div class="item">
+					<span>物流单号：</span>
+					{{ i.logisticsNum }}
+				</div>
+
+			</div>
+			<!-- 物流 -->
+
+			<div class="item ais" style="margin-top:20px;">
+				<div class="tit">采购凭证：</div>
+				<div class="con flex fdc">
+					<uploadfiles id="'uploadFiles2'" show-component="true" init-files="certPic"></uploadfiles>
+				</div>
+			</div>
+
+			<table class="k-table" style="width:100%;margin-top:20px;">
+				<thead>
+					<th>商品名称</th>
+					<th>商品单价(￥)</th>
+					<th>商品数量</th>
+				</thead>
+				<tbody style="max-height: 500px;">
+					<tr ng-repeat="i in products">
+						<td>
+							<div class="td">{{ i.productName || '--' }}</div>
+						</td>
+						<td>
+							<div class="td">{{ i.productPrice || '--' }}</div>
+						</td>
+						<td>
+							<div class="td">{{ i.num || '0' }}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="showFlag=false;" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="submitPurchase()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	hr {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	form input[type="submit"] {
+		background-color: #F8A636;
+		border-color: #F8A636;
+		color: #fff;
+	}
+
+	form input[type="submit"]:hover {
+		opacity: 0.5;
+	}
+
+	ul.insidePop li {
+		margin-bottom: 15px;
+		margin-right: 15px;
+	}
+
+	ul.insidePop li span {
+		color: #999;
+	}
+
+	.classification_tree .item {
+		margin-bottom: 10px;
+	}
+
+	.classification_tree .subClassification {
+		padding-left: 40px;
+		margin-top: 5px;
+	}
+
+	.classification_tree .subClassification .assignCon {
+		margin-left: 15px;
+	}
+
+	.classification_tree .subClassification .assignCon select {
+		min-width: 80px;
+	}
+
+	.toggle {
+		display: block;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		color: #ccc;
+		margin-right: 10px;
+		width: 15px;
+		height: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.ais {
+		align-items: flex-start;
+	}
+
+	.flex.aie {
+		align-items: flex-end;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* tools */
+	.tools a {
+		margin: 0 5px;
+		color: #F8A636;
+	}
+
+	.tools a:hover {
+		opacity: 0.4;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+
+	/* upload img */
+	.upload-img {
+		margin-right: 10px;
+		width: 100px;
+		height: 100px;
+		position: relative;
+	}
+
+	.upload-img.upBtn {
+		background: url('/static/image/public-img/plus.png') center no-repeat;
+	}
+
+	.upload-img img {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.upload-img input[type='file'] {
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+		display: block;
+		width: 100% !important;
+		height: 100% !important;
+		cursor: pointer;
+	}
+
+	.upload-img .edit-box-wrap {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		display: none;
+		background: rgba(0, 0, 0, 0.5);
+		transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-o-transition: all 0.5s;
+	}
+
+	.upload-img:hover .edit-box-wrap {
+		display: block;
+	}
+
+	.upload-img .edit-box-wrap .edit-box {
+		position: absolute;
+		width: 100%;
+		height: 30px;
+		bottom: 0;
+		left: 50%;
+		margin-left: -50px;
+		line-height: 30px;
+	}
+
+	.upload-img .edit-box-wrap .edit-box a {
+		color: #fff;
+		float: left;
+		width: 50%;
+		text-align: center;
+		font-size: 14px;
+		line-height: 24px;
+	}
+</style>

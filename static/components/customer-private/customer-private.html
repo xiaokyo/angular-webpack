@@ -1,0 +1,95 @@
+<!--指定可见商品数弹框-->
+<div class="guanlianshangpin-wrap" ng-show="private">
+  <div class="guanlianshangpin c-ord-con" style="margin: auto;right: 0;top: 0;bottom: 0;left: 0;">
+    <button style="position: absolute;right: 5px;top: 5px;width: 50px;height: 20px;background: #f99429;color: #FFFEFE;font-size: 12px;border-radius: 4px;" ng-click="closeTan()">{{'100051' | translate}}
+    </button>
+    <div class="top-info">
+      <span class="guest-num">{{'100815' | translate}}： {{curGuest.num}}</span>
+      <span class="guest-name">{{'100108' | translate}}：{{curGuest.NAME}}</span>
+      <span class="guest-saleman">{{'101318' | translate}}：{{curGuest.relate_salesman || curGuest.RELATE_SALESMAN}}</span>
+    </div>
+    <span class="guanlianshangpinhead" ng-if="isProvateList">{{'100922' | translate}}</span>
+    <span class="guanlianshangpinhead" ng-if="isLisedList">{{'100923' | translate}}</span>
+    <div class="input-group search-box">
+      <input type="text" class="form-control top-search-inp" placeholder="" ng-model="searchinfoTan" ng-keyup="enterSearchTan($event)">
+      <a role="button" class="btn btn-default top-search-btn" type="button" ng-click="searchtanlistTan()">{{'100025'
+                | translate}}</a>
+    </div>
+    <div style="width: 1100px;height: 628px;overflow: auto" class="erp-load-box">
+      <table>
+        <thead class="c-ord-thead">
+          <tr>
+            <th style="width: 40px">
+              <!--<img src="static/image/order-img/multiple1.png">-->
+              <span>{{'100174' | translate}}</span>
+            </th>
+            <th style="width: 65px">
+              {{'100924' | translate}}
+            </th>
+            <th style="width: 70px">{{'100382' | translate}}</th>
+            <th style="width: 90px;">
+              SKU
+            </th>
+
+            <!--<th colspan="2" style="width: 135px">产品折扣和价格</th>-->
+            <!--<th style="width: 95px">物流方式</th>-->
+            <th style="width: 65px">
+              {{'100107' | translate}}
+            </th>
+
+            <th style="width: 65px">
+              {{'100350' | translate}}
+            </th>
+            <th style="width: 65px" ng-if="isProvateList">
+              {{'100380' | translate}}
+            </th>
+            <th style="width: 65px" ng-if="isLisedList">
+              {{'100925' | translate}}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="c-ord-tbody">
+          <tr ng-repeat="item in excellist">
+            <td>
+              <!--<img src="static/image/order-img/multiple1.png">-->
+              <p>{{$index+1}}</p>
+            </td>
+            <td>
+              <span>{{item.CREATEDATE.time | date:"yyyy-MM-dd HH:mm:ss"}}</span>
+              <!-- <span>{{item.CREATEDATE.year+1900}}-{{item.CREATEDATE.month+1}}-{{item.CREATEDATE.date}}</span> -->
+            </td>
+
+            <td class="ordlist-imgtd">
+              <div class="img-box">
+                <img class="ordlist-goods-img" ng-src="{{item.BIGIMG}}">
+                <img ng-class="{'big-img': true, 'top-imgs' : $index <= 2}" ng-src="{{item.BIGIMG}}" alt="">
+              </div>
+            </td>
+            <td>
+              {{item.SKU}}
+            </td>
+            <td ng-click="privatedetal(item)" style="cursor: pointer">
+              {{item.NAMEEN}}
+            </td>
+
+            <td>
+              ${{item.SELLPRICE}}
+            </td>
+            <td ng-if="isProvateList">
+              {{item.PACKWEIGHT}}g
+            </td>
+            <td ng-if="isLisedList">
+              ${{item.accPrice}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="page-box" style="position: absolute;bottom: 0;">
+      <div class="total-items">{{tanTotalNum}} records found</div>
+      <div class="page-index tanchuang-page" ng-show="tanTotalNum>0">
+
+      </div>
+    </div>
+  </div>
+</div>

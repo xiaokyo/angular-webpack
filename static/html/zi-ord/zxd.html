@@ -1,0 +1,504 @@
+<style>
+    .right-bar-wrap{
+        min-width: 1310px;
+    }
+    .right-bar {
+        padding: 0 20px 0;
+    }
+
+    .flexcom-thead {
+        display: flex;
+    }
+
+    .input-group {
+        display: flex;
+    }
+
+    .input-group input {
+        width: 250px;
+        height: 30px;
+        padding: 0 10px;
+        border-radius: 0;
+    }
+
+    .input-group button {
+        padding: 0 15px;
+        background: rgba(255, 185, 0, 1);
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .search-group {
+        padding-bottom: 20px;
+    }
+
+    .sku-th {
+        width: 10%;
+        background: rgba(252, 244, 217, 1);
+        text-align: center;
+        color: rgba(139, 87, 42, 1);
+        padding: 10px;
+        font-weight: 600;
+    }
+
+    .seach-thead-group {
+        /* position: fixed;
+        width: calc(100% - 280px); */
+        background: #fff;
+        padding: 15px 20px 0 20px;
+        z-index: 9999;
+    }
+
+    .sku-group-tr {
+        display: flex;
+        border-left: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .sku-group-tr span.overhideSpan {
+        display: block;
+        width: 100%;
+        /* white-space: nowrap; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*padding: 8px ;*/
+        text-align: center;
+    }
+
+    .sku-group-td {
+        width: 10%;
+        border-right: 1px solid #f0f0f0;
+    }
+
+    .oneRow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .twoRow:not(:last-child) {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .productImgWrap>span {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #f0f0f0;
+    }
+
+    .sku-group-tr span.productImgWrap2 {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #f0f0f0;
+    }
+
+    .productImgWrap3>span {
+        height: 60px;
+    }
+
+    .sku-group-row {
+        display: flex;
+    }
+
+    .sku-group-row:not(:last-child) {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .sku-group-row:not(:last-child) {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .sku-group-row-td {
+        border-right: 1px solid #f0f0f0;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .sku-group-row-td:not(:first-child)>span {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+    }
+
+    .moreActionBtn {
+        position: relative;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .moreActionWrap {
+        display: none;
+        position: absolute;
+        width: 100px;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0px 8px 20px;
+        top: 29px;
+        left: -10px;
+        z-index: 2;
+    }
+
+    .moreActionWrap li>span {
+        display: block;
+        padding: 5px 8px;
+        cursor: pointer;
+    }
+
+    .moreActionWrap li>span:hover {
+        background: #e6e6e6;
+    }
+
+    .moreActionBtn:hover .moreActionWrap {
+        display: block;
+    }
+
+    .groupZzc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 99999;
+    }
+
+    .groupWrap {
+        background: #fff;
+        border-radius: 4px;
+        width: 710px;
+        min-height: 200px;
+        padding: 20px;
+        margin: 150px auto;
+    }
+
+    .groupWrap>h1 {
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .groupWrap .input-group {
+        align-items: center;
+    }
+
+    .groupWrap .input-group input {
+        width: 200px;
+    }
+    .groupWrap .input-group label{
+        width: 80px;
+    }
+    .groupInput-tr {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .groupInput-tr .input-group {
+        margin-top: 20px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .input-group>img {
+        margin-left: 10px;
+    }
+
+    .groupBtnWrap {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .groupBtnWrap button {
+        padding: 5px 15px;
+        border-radius: 4px;
+    }
+
+    .sureBtn {
+        background: rgba(255, 185, 0, 1);
+        color: #fff;
+        border: 1px solid rgba(255, 185, 0, 1);
+    }
+
+    .canceleBtn {
+        border: 1px solid rgba(217, 217, 217, 1);
+        background: #fff;
+    }
+
+    .bigImg {
+        display: none;
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #f0f0f0;
+        top: -115px;
+        left: 85px;
+        z-index: 99999;
+    }
+
+    .bigImgHover:hover .bigImg {
+        display: block;
+    }
+
+    .green2 {
+        color: green;
+    }
+
+    .red2 {
+        color: red;
+    }
+
+    .input-group .data-inp {
+        border: 1px solid #dddee1;
+        width: 160px;
+    }
+
+    #cdatatime2 {
+        margin-right: 20px;
+    }
+
+    .margin-left20px {
+        margin-left: 20px;
+    }
+
+    .break-all {
+        word-break: break-all;
+    }
+
+    .page-box a.active {
+        color: #08aceb;
+    }
+    .sel-shuxing{
+        width: 200px;
+    }
+    .excel-link{
+        color: #08ACE9;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .min-width60{
+        min-width: 60px;
+    }
+    .min-width88{
+        min-width: 88px;
+    }
+</style>
+<div class="ea-content">
+    <div class="right-bar-wrap" style="padding-left: 230px">
+        <div class="seach-thead-group">
+            <div class="search-group">
+                <div class="input-group">
+                    <input class="Wdate data-inp" id="c-data-time" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"></input>
+                    <input id="cdatatime2" class="Wdate data-inp" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" />
+                    <select ng-model="seaKey">
+                        <option value="orderId">追踪号/订单号</option>
+                        <option value="sku">SKU</option>
+                        <option value="createdBy">装箱人</option>
+                    </select>
+                    <input class="search-inp" ng-model="searchVal" type="text" />
+                    <button class="margin-left20px min-width60" ng-click="searchFun()">搜索</button>
+                    <button class="margin-left20px min-width88" ng-click="bulkExport()">批量导出</button>
+                    <button class="margin-left20px min-width88" ng-click="exportSeaFun()">导出查询</button>
+                    <button class="margin-left20px min-width88" ng-click="bulkPrintFun()">批量打印</button>
+                </div>
+            </div>
+        </div>
+        <div class="right-bar">
+
+            <div>
+                <div class="flexcom-thead">
+                    <div class="sku-th" style="width:5%;">
+                        <div class="check-box">
+                            <input type="checkbox" ng-model="checkAllMark" ng-click="checkAll(checkAllMark)">
+                            <label for=""></label>
+                        </div>
+                    </div>
+                    <div class="sku-th" style="width:15%;">订单号</div>
+                    <div class="sku-th" style="width: 15%;">箱号</div>
+                    <div class="sku-th" style="width:10%;">
+                        装箱时间
+                    </div>
+                    <div class="sku-th" style="width: 5%;">SKU</div>
+                    <div class="sku-th" style="width:10%;">图片</div>
+                    <div class="sku-th" style="width:10%;">
+                        商品属性
+                    </div>
+                    <div class="sku-th" style="width:5%;">数量</div>
+                    <div class="sku-th" style="width:5%;">实重</div>
+                    <div class="sku-th" style="width:5%;">箱规</div>
+                    <div class="sku-th" style="width:5%;">装箱人</div>
+                    <div class="sku-th" style="width: 10%;">操作</div>
+                </div>
+                <div class="sku-group-tr" ng-repeat="group in groupList">
+                    <div class="sku-group-td oneRow" style="width:5%;">
+                        <div class="check-box">
+                            <input type="checkbox" ng-model="group.checked" ng-click="checkItem(group,group.checked)">
+                            <label for=""></label>
+                        </div>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:15%;">
+                        <span class="break-all">{{group.orderId}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:15%;">
+                        <span class="break-all">{{group.boxNumber}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:10%;">
+                        <span class="break-all">{{group.createdTime | date:"yyyy-MM-dd HH:mm:ss"}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:10%;">
+                        <span class="break-all">{{group.cjsku}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow productImgWrap" style="width: 10%;">
+                        <span class="bigImgHover" style="position: relative;">
+                            <img width="78" height="78" src="{{group.cjImage | IMG_SIZE: 80}}" alt="" />
+                            <b class="bigImg">
+                                <img width="298" height="298" src="{{group.cjImage | IMG_SIZE: 298}}" alt="" />
+                            </b>
+                        </span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:10%;">
+                        <span class="break-all">{{group.shuxing[0].name}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:5%;">
+                        <span>{{group.shuLiang}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:5%;">
+                        <span>{{group.weight}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:5%;">
+                        <span class="break-all">{{group.chang + '*' + group.kuan + '*' + group.gao}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width:5%;">
+                        <span>{{group.createdBy}}</span>
+                    </div>
+                    <div class="sku-group-td oneRow" style="width: 10%">
+                        <div class="moreActionBtn">
+                            更多操作
+                            <ul class="moreActionWrap">
+                                <li><span ng-click="editFun(group)">编辑</span></li>
+                                <li><span ng-click="exportFun(group)">导出</span></li>
+                                <li><span ng-click="printFun(group)">打印</span></li>
+                                <li><span ng-click="delteSp(group)">删除</span></li>
+                                <li><span ng-click="editBoxNum(group)">修改箱号</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-box" style="margin-bottom: 70px;">
+                    <div class="select-page-num">
+                        <select class="form-control" ng-model="pageSize" ng-change="pagesizechange(pageSize)">
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span>每页</span>
+                    </div>
+                    <div class="total-num">
+                        共&nbsp;&nbsp;{{erpordTnum}}&nbsp;&nbsp;条
+                    </div>
+                    <div class="page-index">
+                        <div class="pagegroup">
+                        </div>
+                    </div>
+                    <div class="to-go">
+                        <span>跳转：</span>
+                        <input type="text" class="form-control" placeholder="" ng-model="pageNum">
+                        <a class="btn btn-default" href="javascript: void(0);" role="button"
+                            ng-click="pagenumchange()">go</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑组合sku-->
+<div class="groupZzc" ng-show="editZxFlag">
+    <div class="groupWrap" style="width: 400px;">
+        <h1>编辑装箱</h1>
+        <div>
+            <div class="groupInput-tr">
+                <div class="input-group">
+                    <label></label>
+                    <select ng-model="shuxing" class="sel-shuxing">
+                        <option value="">请选择属性</option>
+                        <option ng-repeat="item in shuXingArr" value="{{item.value}}">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>长(CM)：</label>
+                    <input ng-model="itemZxObj.chang" type="number" />
+                </div>
+                <div class="input-group">
+                    <label>宽(CM)：</label>
+                    <input ng-model="itemZxObj.kuan" type="number" />
+                </div>
+                <div class="input-group">
+                    <label>高(CM)：</label>
+                    <input ng-model="itemZxObj.gao" type="number" />
+                </div>
+                <div class="input-group">
+                    <label>重量(Kg)：</label>
+                    <input ng-model="itemZxObj.weight" type="number" />
+                </div>
+            </div>
+        </div>
+        <p style="margin-bottom:10px;text-align: center;margin-top:15px;">{{errMsg}}</p>
+        <div class="groupBtnWrap">
+            <button class="canceleBtn" ng-click="editZxFlag=false;" style="margin-right: 25px">取消</button>
+            <button class="sureBtn" style="margin-right: 25px"
+                ng-click="sureEditFun()">确定</button>
+        </div>
+    </div>
+</div>
+<div class="groupZzc" ng-show="resExcelLink">
+    <div class="groupWrap" style="width: 600px;min-height: 100px;">
+        <div>
+           <a class="excel-link" href="{{resExcelLink}}">{{resExcelLink}}</a>
+        </div>
+        <div class="groupBtnWrap">
+            <button class="canceleBtn" ng-click="resExcelLink=false;">关闭</button>
+        </div>
+    </div>
+</div>
+<div class="groupZzc" ng-show="resPrintFlag">
+    <div class="groupWrap" style="width: 600px;min-height: 100px;max-height: 500px;overflow-y: auto;">
+        <div>
+           <a ng-repeat="item in resPrintLink" target="_blank" class="excel-link" href="{{item}}">{{item}}</a>
+        </div>
+        <div class="groupBtnWrap">
+            <button class="canceleBtn" ng-click="resPrintFlag=false;">关闭</button>
+        </div>
+    </div>
+</div>
+<div class="groupZzc" ng-show="inquiryFlag">
+    <div class="groupWrap" style="width: 400px;min-height: 100px;max-height: 500px;overflow-y: auto;">
+        <div>
+           确定删除该商品吗？
+        </div>
+        <div class="groupBtnWrap">
+            <button class="canceleBtn" ng-click="inquiryFlag=false;">关闭</button>
+            <button class="sureBtn" style="margin-left: 25px"
+                ng-click="sureDeleteFun()">确定</button>
+        </div>
+    </div>
+</div>
+<div class="groupZzc" ng-show="editBoxNumFlag">
+    <div class="groupWrap" style="width: 400px;min-height: 100px;max-height: 500px;overflow-y: auto;">
+        <div style="text-align: center;">
+           <input type="text" ng-model="newBoxNum" style="width: 300px;">
+        </div>
+        <div class="groupBtnWrap">
+            <button class="canceleBtn" ng-click="editBoxNumFlag=false;">关闭</button>
+            <button class="sureBtn" style="margin-left: 25px"
+                ng-click="sureEditBoxNumFun()">确定</button>
+        </div>
+    </div>
+</div>

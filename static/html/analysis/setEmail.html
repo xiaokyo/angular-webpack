@@ -1,0 +1,174 @@
+	<div class="setmail-wrap">
+    <!-- 顶部tab -->
+    <div class="tab mb-15">
+      <a href="#/analysis/personal">邮件营销</a>
+      <a class="active" href="2">邮件发送设置</a class="active">
+      <a href="#/analysis/emailmodel">邮件模板设置</a>
+    </div>
+		<div class="setmail-content">
+      <!-- 搜索区域 & 表头 -->
+      <div class="d-flex justify-content-end" style="padding: 5px 0 15px 0;">
+        <button type="button" class="asj-btn-s asj-btn-s2 width80" ng-click="addAttribute()">新增</button>
+      </div>
+
+      <!-- 表头 -->
+      <div class="tb-thead d-flex">
+        <div style="width: 5%" class="tb-thead-th d-flex-center">ID</div>
+        <div style="width: 10%" class="tb-thead-th d-flex-center">属性名称</div>
+        <div style="width: 15%" class="tb-thead-th d-flex-center">Attribute</div>
+        <div style="width: 20%" class="tb-thead-th d-flex-center">属性说明</div>
+        <div style="width: 20%" class="tb-thead-th d-flex-center">Description</div>
+        <div style="width: 5%" class="tb-thead-th d-flex-center">分值</div>
+        <div style="width: 5%" class="tb-thead-th d-flex-center">优先级</div>
+        <div style="width: 10%" class="tb-thead-th d-flex-center">状态</div>
+        <div style="width: 10%" class="tb-thead-th d-flex-center">操作</div>
+      </div>
+    
+			<!-- 内容区 -->
+			<div class="content-wrap bg-white" style="min-height: 600px;">
+				<!-- 表格 -->
+				<div class="tb-tbody">
+					<div class="tb-tbody-tr" ng-repeat="(key,list) in dataList">
+            <div style="width: 5%" class="tb-tbody-td border-r-td d-flex-center">
+              <span>{{list.id}}</span>
+						</div>
+            <div style="width: 10%" class="tb-tbody-td border-r-td d-flex-center">
+              <span>{{list.name_cn}}</span>
+						</div>
+						<div style="width: 15%" class="tb-tbody-td border-r-td d-flex-center">
+              <span class="hidden-three">{{list.name_en}}</span>
+            </div>
+						<div style="width: 20%" class="tb-tbody-td border-r-td d-flex-center">
+              <span>{{list.desc_cn}}</span>
+            </div>
+            <div style="width: 20%" class="tb-tbody-td border-r-td d-flex-center">
+              <span class="hidden-three">{{list.desc_en}}</span>
+            </div>
+            <div style="width: 5%" class="tb-tbody-td border-r-td d-flex-center">
+              <span>{{list.score}}</span>
+            </div>
+            <div style="width: 5%" class="tb-tbody-td border-r-td d-flex-center">
+              <span>{{list.i1}}</span>
+            </div>
+						<div style="width: 10%" class="tb-tbody-td border-r-td d-flex-center">
+							<div class="btnGroup" ng-class="{closeact:!list.enabled}" ng-click="setStatus(list)">
+								<span>{{list.enabled ? 'On' : 'Off'}}</span>
+								<div class="circle"></div>
+							</div>
+            </div>
+            <div style="width: 10%" class="tb-tbody-td d-flex-center">
+							<span class="tb-btn-default" ng-click="addAttribute(key,list)">编辑</span>
+						</div>
+					</div>
+				</div>
+				<!-- 没有数据 -->
+				<div class="d-flex-center" style="padding: 10px" ng-show="dataList.length == 0">
+					<span>暂无数据</span>
+        </div>
+        <!-- 分页 -->
+        <div ng-show="dataList.length != 0">
+          <page></page>
+        </div>
+      </div>
+		</div>
+	</div>
+
+	<!-- 新增弹窗 -->
+	<div class="erp-common-tan-v2-wrap" ng-show="showFLag">
+		<div class="erp-common-tan-v2" style="width: 600px; height: initial;">
+			<!-- title -->
+			<div class="tan-v2-top">
+				<h6 class="text-align-center">新增/编辑属性配置</h6>
+			</div>
+			<!-- content -->
+			<div class="tan-v2-con">
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>属性名称：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.name_cn}" ng-model="currenRow.name_cn">
+            <span class="formverifymessage" ng-show="!formVerify.name_cn">属性名是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>Attribute：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.name_en}" ng-model="currenRow.name_en">
+            <span class="formverifymessage" ng-show="!formVerify.name_en">Attribute是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>属性说明：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.desc_cn}" ng-model="currenRow.desc_cn">
+            <span class="formverifymessage" ng-show="!formVerify.desc_cn">属性说明是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>Description：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.desc_en}" ng-model="currenRow.desc_en">
+            <span class="formverifymessage" ng-show="!formVerify.desc_en">Description是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>分值：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.score}" ng-model="currenRow.score" ng-change="scoreFormat(currenRow)">
+            <span class="formverifymessage" ng-show="!formVerify.score">分值是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>优先级：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.i1}" ng-model="currenRow.i1" ng-change="priorityFormat(currenRow)">
+            <span class="formverifymessage" ng-show="!formVerify.i1">优先级是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>显示顺序(升序)：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.sort}" ng-model="currenRow.sort" ng-change="sortFormat(currenRow)">
+            <span class="formverifymessage" ng-show="!formVerify.sort">显示顺序是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label>跳转url：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-model="currenRow.v1">
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>条件选项：</label>
+          <div class="right-con positRelat">
+            <textarea class="setmail-modal-config" ng-class="{formverifytips:!formVerify.items}" placeholder="请填条件选项（json字符串）" ng-model="currenRow.items"></textarea>
+            <span class="formverifymessage" ng-show="!formVerify.items">条件选项是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-0">
+          <label>查询数据sql：</label>
+          <div class="right-con positRelat">
+            <textarea class="setmail-modal-config" placeholder="查询数据的sql" ng-model="currenRow.v3"></textarea>
+          </div>
+        </div>    
+			</div>
+			<!-- 底部 -->
+			<div class="tan-v2-bot">
+				<!-- 取消按钮（灰色） -->
+				<a href="javascript:void(0);" ng-click="showFLag=false;" class="qu-xiao-btn">取消</a>
+				<!-- 确认按钮（彩色） -->
+				<a href="javascript:void(0);" class="que-ding-btn" ng-click="addAttributeOk()">确定</a>
+			</div>
+		</div>
+  </div>
+  
+	<!-- 确认弹窗 -->
+	<div class="erp-common-tan-v2-wrap" ng-show="showFLagTips">
+		<div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: initial;">
+			<p style="margin-top: 25px; margin-bottom: 38px;">确认删除本条记录？</p>
+			<div class="tan-v2-bot">
+				<a href="javascript:void(0)" class="qu-xiao-btn" ng-click="delLine()">取消</a>
+				<a href="javascript:void(0)" class="que-ding-btn" ng-click="delLineOk()">确定</a>
+			</div>
+		</div>
+  </div>
+  

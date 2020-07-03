@@ -1,0 +1,287 @@
+<style type="text/css">
+  .bigimg {
+    position: absolute;
+    top: -70px;
+    left: 100%;
+    z-index: 999;
+    max-width: 360px;
+    width: 360px;
+    height: auto;
+    display: none;
+  }
+
+  .proimg:hover .bigimg {
+    display: block;
+  }
+
+  .date-box input {
+    height: 30px;
+    border-right: none;
+    border: 1px solid #ececec;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .date-box .erp-seachInp {
+    height: 30px;
+    background-color: #fff;
+    width: 50px;
+    vertical-align: top;
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+
+  .border-span {
+    height: 100% !important;
+  }
+
+  .option>span {
+    color: #F99429;
+    cursor: pointer;
+  }
+
+  .sourceTrans-tankuang {
+    width: 400px;
+    height: 360px;
+    padding: 24px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .btn-container {
+    text-align: center;
+  }
+
+  .btn-container button:nth-child(1) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  .btn-container button:nth-child(2) {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 0 10px;
+    background: #faa538;
+    color: #fff;
+  }
+
+  .sourceFail-tankuang {
+    width: 300px;
+    height: 120px;
+    padding: 24px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .my-search-btn {
+    height: 28px;
+    width: 50px;
+    border: 1px solid #dddee1;
+    background: #888888;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 3px;
+    position: relative;
+    top: 2px;
+  }
+
+  .two-line{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+</style>
+
+
+<div class="e-sourcing-wrap">
+  <div class="left-bar">
+    <ul class="left-bar-tabs">
+      <li><a href="#/sourcing">{{'100864' | translate}}<span></span></a></li>
+      <li><a href="#/individualsourcing">{{'100865' | translate}}<span></span></a></li>
+      <li class="active"><a href="#/cjsourcing">{{'100866' | translate}}<span></span></a></li>
+    </ul>
+  </div>
+  <div class="right-bar-wrap e-sou-con">
+    <div class="asj-h10"></div>
+    <div class="right-bar e-sou-content" style="min-height: 1000px;background-color: #fff;">
+
+      <div class="es-search-status">
+        <div class="date-box" style="color: #888;padding-bottom: 5px;float: left;margin: 7px 5px 0;">
+          <input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text" onclick="var cdatatime2=$dp.$('cdatatime2');WdatePicker({onpicked:function(){cdatatime2.click();},maxDate:'#F{$dp.$D(\'cdatatime2\')}'})"></input><input placeholder="Now" id="cdatatime2" class="Wdate data-inp" style="text-indent: 12px;" type="text" onclick="WdatePicker({minDate:'#F{$dp.$D(\'c-data-time\')}'})" />
+          <!-- <input class="erp-seachInp" type="button" value="{{'100025' | translate}}" ng-click="dateSearchFun()"></input> -->
+        </div>
+        <div style="margin-top: 5px;float: left;">
+          <input ng-model="queryId" placeholder="请输入搜品ID" style="height: 30px;margin-right: 24px;">
+          <input ng-model="queryName" placeholder="请输入客户名称" style="height: 30px;margin-right: 24px;">
+          <span class="my-search-btn" href="javascript:void(0)" id="search" ng-click="handleSearch()" style="height: 30px;line-height: 30px;width: 50px;">搜索</span>
+        </div>
+
+
+      </div>
+      <!-- 订单的列表部分 -->
+      <div class="es-ord-list">
+        <table id="sourcelist-table" style="width: 100%;">
+          <thead class="es-ord-thead">
+            <tr>
+              <th style="width: 100px">分配时间</th>
+              <th style="width: 100px">搜品ID</th>
+              <th style="width: 100px">供应商名称</th>
+              <th style="width: 100px">搜品状态</th>
+              <th style="width: 100px">客户名称</th>
+              <th style="width: 100px">邮箱</th>
+              <th style="width: 100px">商品名称</th>
+              <th style="width: 100px">店铺名称</th>
+              <th style="width: 100px">图片</th>
+              <th style="width: 100px">客户url</th>
+              <th style="width: 100px">标签</th>
+              <th style="width: 100px">目标价格</th>
+              <th style="width: 100px">搜品来源</th>
+              <th style="width: 100px">描述</th>
+              <th style="width: 100px">操作</th>
+            </tr>
+          </thead>
+          <tbody class="es-ord-tbody" ng-repeat="i in list">
+            <tr>
+              <td>{{i.allocationDate}}<span class="border-span"></span></td>
+              <td>{{i.number}}<span class="border-span"></span></td>
+              <td>{{i.companyName}}<span class="border-span"></span></td>
+              <td>
+                <p class="cj-source-status" ng-if="i.timeoutType =='0'" style="color: #903908;">失败超时</p>
+                <p class="cj-source-status" ng-if="i.timeoutType =='1'" style="color: #903908;">等待超时</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>{{i.customerName}}<span class="border-span"></span></td>
+              <td>{{i.email}}<span class="border-span"></span></td>
+              <td>{{i.productName}}<span class="border-span"></span></td>
+              <td>{{i.shopName}}<span class="border-span"></span>
+              </td>
+              <td style="position: relative;cursor: pointer;" class="proimg">
+                <ul ng-if="i.imageUrl.length>0 && i.imageUrl[0]">
+                  <li ng-mouseenter="imgObj.hover = true" ng-mouseleave="imgObj.hover = false" ng-repeat="imgObj in i.calcImg">
+                    <img class="es-list-img" ng-src={{imgObj.calcImg}}>
+                    <img class="bigimg" ng-src={{imgObj.img}} ng-if="imgObj.hover">
+                  </li>
+                </ul>
+                <span class="border-span"></span>
+              </td>
+              <td>
+                <a class="es-url-p" ng-if="i.sourceUrl!=''" ng-href="{{i.sourceUrl}}" target="_blank">{{i.sourceUrl}}</a>
+                <p ng-if="i.sourceUrl ==''">--</p>
+                <!-- td 右边的边框 -->
+                <span class="border-span"></span>
+              </td>
+              <td>{{i.categoryName || '--'}}</td>
+              <td>{{i.price | currency}}<span class="border-span"></span></td>
+              <td>{{i.sourceType | sourceType}}<span class="border-span"></span></td>
+              <td>{{i.description || '--'}}<span class="border-span"></span></td>
+
+              <!-- 搜品失败时的操作 -->
+              <td class="option">
+                <span ng-click="handleOption('fail',i)" ng-show="i.status!='9'">失败</span>
+                <span ng-click="handleOption('recycle',i)">回收</span>
+                <span ng-click="handleOption('tranSupplier',i)" ng-show="i.status!='9'">转供应商</span>
+              </td>
+            </tr>
+            <!-- 第二行 -->
+          </tbody>
+        </table>
+      </div>
+      <page></page>
+    </div>
+
+    <!-- 选择供应商的弹窗 -->
+    <div ng-show="chooseSupplierFlag" class="erp-common-tan-v2-wrap">
+      <div class="sourceTrans-tankuang">
+        <div style="margin-bottom: 24px;">
+          单个转搜品
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <div style="margin-bottom: 12px">
+            <img src={{chooseItem.imageUrl}} alt="" style="width:50px;height: 50px;">
+          </div>
+
+          <div>
+            <p style="margin-bottom: 12px;">搜品ID：{{chooseItem.id}}</p>
+            <p class="two-line">商品名称：{{chooseItem.productName}}</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          转指定供应商：
+          <select ng-model="supplierId" ng-options='supplierItem.supplierId as supplierItem.companyName for supplierItem in supplierList' style="width: 210px">
+          </select>
+        </div>
+
+        <div class="btn-container">
+          <button ng-click="chooseSupplierFlag=false">取消</button>
+          <button ng-click="handleChooseSupplier()">确定</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 搜品失败 -->
+    <div ng-show="sourceFailedFlag" class="erp-common-tan-v2-wrap">
+      <div class="sourceFail-tankuang">
+
+        <div>
+          是否确认搜品失败?
+        </div>
+
+        <div class="btn-container" style="margin-top: 24px;">
+          <button ng-click="sourceFailedFlag=false">取消</button>
+          <button ng-click="handleFail()">确定</button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- 搜品回收 -->
+    <div ng-show="sourceRecycleFlag" class="erp-common-tan-v2-wrap">
+      <div class="sourceFail-tankuang">
+
+        <div>
+          是否确认回收此搜品
+        </div>
+
+        <div class="btn-container" style="margin-top: 24px;">
+          <button ng-click="sourceRecycleFlag=false">取消</button>
+          <button ng-click="handleRecycle()">确定</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

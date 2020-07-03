@@ -1,0 +1,82 @@
+<!-- 调拨单-待确认 -->
+<div class="right-bar-wrap">
+	<div class="pre-scheduling">
+		<div class="tab-box">
+			<a href="manage.html#/preScheduling/isConfirmation" class="active">待确认</a>
+			<a href="manage.html#/preScheduling/confirmed">已确认</a>
+		</div>
+		<div class="content-box">
+			<div class="filter-box">
+				<div>
+					<input type="text" ng-model="sku" placeholder="请输入SKU">
+					<select ng-model="demandStore">
+						<option value="">请选择到达仓</option>
+						<option value="4">泰国</option>
+						<option value="2">美西仓</option>
+						<option value="3">美东仓</option>
+						<option value="5">印尼仓</option>
+					</select>
+				<!--	<select ng-model="isInventy">
+						<option value="">义乌/深圳仓库是否有可用库存</option>
+						<option value="">是</option>
+						<option value="">否</option>
+					</select>-->
+					<button ng-click="hadelSearch()">查询</button>
+				</div>
+				<button ng-click="handleBatchScheduling()">批量调度</button>
+			</div>
+			<table>
+				<thead>
+				<tr>
+					<th>-</th>
+					<th>图片</th>
+					<th>SKU</th>
+					<th>到达仓</th>
+					<th>可用库存</th>
+					<th>
+						<div style="display:flex;justify-content: center;">
+							推荐调度数量
+<!--							<span ng-class="{active:sortActive === 'qtyDesc'}" class="sort" ng-click="handleSort('qtyDesc')">⇃</span>-->
+<!--							<span ng-class="{active:sortActive === 'qtyAsc'}" class="sort" ng-click="handleSort('qtyAsc')">↾</span>-->
+						</div>
+					</th>
+					<th>义乌仓可用库存</th>
+					<th>深圳仓可用库存</th>
+					<th>
+						<div style="display:flex;justify-content: center;">
+							进入预调度时间
+							<span ng-class="{active:sortActive === 'asc'}" class="sort" ng-click="handleSort('asc')">⇃</span>
+							<span ng-class="{active:sortActive === 'desc'}" class="sort" ng-click="handleSort('desc')">↾</span>
+						</div>
+					</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="item in tableData">
+					<td>
+						<i ng-class="item.checked ? 'checked' :'unchecked'" ng-click="handleChecked(item)"></i>
+					</td>
+					<td>
+						<img ng-src="{{item.img}}" alt="" width="50" height="50">
+					</td>
+					<td>{{item.sku}}</td>
+					<td>{{warehouseEnums[item.demandStore]}}</td>
+					<td>{{item.availableNum}}</td>
+					<td>{{item.demandQuantity}}</td>
+					<td>{{item.yiWuGoodsNum}}</td>
+					<td>{{item.shenZhenGoodsNum}}</td>
+					<td>{{item.demandDate}}</td>
+					<td>
+						<a ng-click="handleScheduling(item)">调度</a>
+					</td>
+				</tr>
+				<tr class="no-data" ng-show="tableData.length === 0">
+					<td colspan="11">暂无数据.</td>
+				</tr>
+				</tbody>
+			</table>
+			<page ng-show="tableData.length > 0"></page>
+		</div>
+	</div>
+</div>

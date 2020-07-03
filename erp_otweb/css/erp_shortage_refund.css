@@ -1,0 +1,183 @@
+.shortage-refund .shortage-search{
+  padding: 24px 0;
+}
+.shortage-search-item{
+	margin-right: 16px;
+}
+.shortage-search-item label{
+	margin-right: 10px;
+}
+.shortage-search-item input{
+	height: 38px;
+}
+.shortage-search-item .search-btn {
+	height: 38px;
+	line-height: 38px;
+	padding: 0 16px;
+	border-radius: 4px;
+	margin-right: 16px;
+}
+.shortage-refund .content-wrap{
+	padding: 0 10px;
+	margin-top: 180px;
+}
+.shortage-refund .content-wrap.noMarginTop{
+	margin-top: 20px;
+}
+.shortage-content{
+	padding: 24px;
+}
+.shortage-content table th{
+	background: rgba(252, 244, 217, 1);
+	color: rgba(139, 87, 42, 1);
+	font-size: 14px;
+	padding: 10px 6px;
+	text-align: center;
+	border-bottom: 1px solid #e1e1e1;
+}
+.shortage-content table td{
+	font-size: 12px;
+	color: #333;
+	text-align: center;
+	border-bottom: 1px solid #e1e1e1;
+	border-right: 1px solid #e1e1e1;
+	padding: 8px 5px;
+}
+.shortage-content table td:first-child{
+	border-left: 1px solid #e1e1e1;
+}
+.stortge-table-btn{
+	padding: 3px 10px;
+	border-radius: 4px;
+}
+.stortage-drop-btn{
+	display: inline-block;
+	width: 20px;
+	height: 13px;
+	background: url('../../static/image/public-img/to-down.png') no-repeat;
+	background-size: 20px;
+	margin-left: 12px;
+}
+.stortage-drop-btn.btn-active{
+	background: url('../../static/image/public-img/to-up.png') no-repeat;
+	background-size: 20px;
+}
+.shortage-content .table-active{
+	background: rgba(252, 244, 217, 0.5);
+}
+.shortage-content .stortage-drop-box td{
+	border-left: none !important;
+}
+.shortage-content .stortage-drop-box tr:last-child td{
+	border-bottom: none !important;
+}
+.shortage-content .stortage-drop-box td:last-child{
+	border-right: none !important;
+}
+.shortage-content .stortage-drop-box td img{
+	width: 60px;
+}
+.refund-modal .refund-modal-item{
+	margin-bottom: 10px;
+}
+.refund-modal .refund-modal-item input{
+	height: 38px;
+	width: 250px;
+	margin-left: 16px;
+}
+.shortage-refund .display-table{
+	display: table-row !important;
+}
+.shortage-refund .display-none{
+	display: none !important;
+}
+.shortage-refund .text-color-cj{
+	color: #F9AE08;
+}
+.shortage-refund .modal-textArea{
+	border: 1px solid #e1e1e1;
+	border-radius: 6px;
+	padding: 16px;
+}
+.shortage-content .back-btn{
+	padding: 5px 15px;
+	border-radius: 6px;
+}
+.shortage-content .options-item{
+	padding: 0 10px;
+	margin-top: 24px;
+}
+.shortage-content .options-item span{
+	color: #999
+}
+.shortage-content .options-product-info{
+	margin-top: 24px;
+}
+.shortage-content .options-proof{
+	max-width: 300px;
+}
+.shortage-content .options-proof-icon {
+	width: 60px;
+}
+.shortage-content .options-upload-btn{
+	margin-top: 12px;
+	margin-right: 16px;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #e1e1e1;
+	background: rgba(0,0,0,0.02);
+	border-radius: 6px;
+	color: #999;
+}
+.shortage-content .options-upload-file{
+	width: 100px;
+	height: 100px;
+	border-radius: 6px;
+	top: 0;
+	opacity: 0;
+}
+.shortage-content .options-bottom{
+	margin-top: 24px;
+	border-top: 1px solid #e1e1e1;
+	padding: 16px 0;
+}
+.shortage-content .options-bottom button{
+	padding: 5px 15px;
+	border-radius: 4px;
+	margin-left: 16px;
+}
+.shortage-content .options-upload-img {
+	width: 100px;
+	height: 100px;
+	border-radius: 6px;
+	border: 1px solid #e1e1e1;
+	margin-top: 12px;
+	margin-right: 16px;
+}
+.shortage-content .options-upload-img img{
+	max-width: 80%;
+	max-height: 80%;
+}
+.shortage-content .options-upload-img b{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url('../../static/image/public-img/close.png') no-repeat;
+	background-size: 20px;
+	top: -10px;
+	right: -10px;
+}
+.shortage-content .no-data-wrap{
+	padding: 30px 0;
+}
+.shortage-content .upload-wrap {
+	margin-top: 16px;
+}
+.shortage-content .bottom-label{
+	width: 130px;
+}
+.refund-modal-tip{
+	color: #aaa;
+	font-size: 14px;
+	margin-bottom: 10px;
+}

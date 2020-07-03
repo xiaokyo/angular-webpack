@@ -1,0 +1,337 @@
+//代发首页
+.home-wrap{
+	width: 100%;
+	height: 100%;
+}
+.wh{
+	width: 100%;
+	height: 100%;
+}
+.border{
+	border: 1px solid red;
+}
+@radius: 4px;
+.home-header{
+	width: 100%;
+	height: 597px;
+	min-width: 1200px;
+	position: relative;
+	.swiper-wrapper{
+		.swiper-slide{
+			.wh;
+			height: 597px;
+		}
+	}
+	.logo-header{
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
+		height: 91px;
+		width: 100%;
+		.logo-main{
+			width: 1200px;
+			// margin: 16px auto 0;
+			.border;
+			.logo-img{
+				margin-top: 4px;
+			img{
+				height: 58px;
+			}
+			}
+			ul{
+				.border1;
+				li{
+					float: right;
+					a{
+						color: #fff;
+						display: inline-block;
+						line-height: 58px;
+					}
+					.contact-us{
+						margin-right: 28px;
+					}
+					.help{
+						margin-right: 30px;
+					}
+				}
+				.login-register{
+					height: 32px;
+					background-color: #ff8d31;
+					margin-top: 13px;
+					width: 86px;
+					border-radius: @radius;
+					text-align: center;
+					margin-right: 11px;
+					a{
+						font-size: 18px;
+						margin-top: -13px;
+					}
+				}
+			}
+		}
+	}
+	.nav-header{
+		position: absolute;
+		top: 91px;
+		left: 0;
+		z-index: 2;
+		height: 44px;
+		background-color: rgba(175,175,175,0.6);
+		width: 100%;
+		.border1;
+		.nav-content{
+			width: 1200px;
+			margin: 0 auto;
+			display: table;
+			height: 44px;
+			padding-left: 115px;
+			padding-right: 140px;
+			.search{
+				display: table-cell;
+				vertical-align: middle;
+				.search-inp{
+					display: inline-block;
+					input{
+						width: 400px;
+						height: 32px;
+						text-indent: 12px;
+					}
+				}
+				.search-img{
+					display: inline-block;
+					width: 34px;
+					margin-left: -5px;
+					padding: 4px 0;
+					background-color: #ff8d31;
+					text-align: center;
+					cursor: pointer;
+				}
+			}
+			.main-nav{
+				display: table-cell;
+				vertical-align: middle;
+				margin-right: 300px;
+				li{
+					float: right;
+					margin-right: 28px;
+					a{
+						color: #fff;
+					}
+				}
+			}
+		}
+		
+	}
+}
+//中间内容
+.home-mid{
+	.wh;
+	padding-top: 40px;
+	padding-bottom: 128px;
+	min-width: 1200px;
+	background-color: #f8f8f8;
+	.homemid-content{
+		width: 1200px;
+		margin: 0 auto;
+		.left-list{
+			width: 256px;
+			display: inline-block;
+			//一级菜单
+			ul{
+				.first-menu{
+					background-color: #878787;
+					height: 40px;
+					padding-left: 12px;
+					padding-right: 6px;
+					position: relative;
+					.first-menu-a{
+						color: #fff;
+						display: inline-block;
+						line-height: 40px;
+					}
+					img{
+						float: right;
+						margin-top: 10px;
+					}
+					//二级菜单
+					ul{
+						width: 256px;
+						position: absolute;
+						left: 256px;
+						top:-42px;
+						display: none;
+						padding-left: 20px;
+						z-index: 2;
+						background-color: #878787;
+						.second-menu{
+							padding: 0;
+							.second-menu-a{
+								display: inline-block;
+								padding-top:18px; 
+								padding-bottom: 0;
+								color: #fff;
+							}
+						}
+						:hover{
+							background-color: #878787;
+							.second-menu-a{
+								color: #282828;
+							}
+						}
+						:first-child{
+							.second-menu-a{
+								width: 200px;
+								padding-top: 16px;
+								padding-bottom: 6px;
+								font-weight: bold;
+								border-bottom: 1px solid #b5b5b5;
+							}
+						}
+						:last-child{
+							.second-menu-a{
+								padding-bottom: 54px;
+							}
+						}
+					}
+				}
+				:hover{
+					background-color: #4a4a4a;
+					img{
+						display: none;
+					}
+					ul{
+						display: block;
+					}
+				}
+			}
+			
+		}
+		//展示内容部分
+		.commodity-show{
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 20px;
+			.container{
+				width: 100%;
+				.product-title{
+					height: 80px;
+				}
+				.row{
+					margin-bottom: 22px;
+					.col-xs-3{
+						padding: 10px 8px 14px 10px;
+						width: 210px;
+						height: 220px;
+						margin-right: 18px;
+						background-color: #fff;
+						.listing-show{
+							width: 100%;
+							height: 166px;
+							position: relative;
+							.listing{
+								position: absolute;
+								z-index: 1;
+								width: 100%;
+								display: none;
+								a{
+									display: inline-block;
+									background-color: #fe5858;
+									height: 30px;
+									width: 66px;
+									line-height: 30px;
+									text-align: center;
+									border-radius: @radius;
+									color: #fff;
+								}
+								img{
+									position: absolute;
+									right: 0;
+									top: 0;
+									cursor: pointer;
+								}
+							}
+							.product-img{
+								position: absolute;
+								top: 6px;
+								left: 21px;
+							}
+						}
+						.product-detail{
+							.detail-text{
+								font-size: 12px;
+								color: #636363;
+								overflow: hidden; 
+								white-space: nowrap;
+								text-overflow:ellipsis;
+								margin-bottom: 6px;
+								height: 12px; 
+								line-height: 12px;
+							}
+							.product-price{
+								font-size: 18px;
+								color: #2e2e2e;
+							}
+						}
+						:hover{
+							.listing{
+								display: block;
+							}
+						}
+					}
+				}
+				// 展示更多商品
+				.more-product{
+					text-align: right;
+					a{
+						color: #535353;
+						font-size: 12px;
+					}
+					:hover{
+						color: #ff8d31;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+.border1{
+	border: 1px solid blue;
+}
+.border2{
+	border: 1px solid black;
+}
+@color:#c1c1c1;
+@background:#262626;
+@footer-size:14px;
+.footer{
+  height: 91px;
+  width: 100%;
+  background-color: @background;
+  display: table;
+  .forfoo-con{
+    min-width: 1200px;
+    width: 1200px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    span{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      .copyright-logo{
+        padding: 0 5px 0 0;
+        font-size: 22px;
+        vertical-align: middle;
+      }
+    }
+    a{
+      padding: 0 16px;
+      font-size: @footer-size;
+      color: @color;
+      border-left: 1px solid @color;
+      border-right: 1px solid @color;
+    }
+  }
+}

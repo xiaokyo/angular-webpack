@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排行榜</title>
+    <link rel="stylesheet" type="text/css" href="static/css/SalesmanManagement.css">
+</head>
+<style>
+    .filter {
+        line-height: 30px !important;
+    }
+
+    .filter .datetab {
+        margin-left: 15px;
+    }
+
+    .filter .dateact {
+        color: #0d8efb;
+    }
+
+    .search-by-con {
+        height: 30px;
+        position: relative;
+        float: left;
+    }
+
+    .default-con {
+        width: 240px;
+        height: 30px;
+        padding-left: 10px;
+        line-height: 30px;
+        border: 1px solid #e5e5e5;
+        position: relative;
+    }
+
+    .has-list-cate {
+        float: left;
+        margin-right: 15px;
+    }
+
+    .serch-by-name {
+        height: 30px;
+        line-height: 30px;
+        float: left;
+    }
+
+    input, select {
+        height: 30px !important;
+    }
+
+    .three-grade-list {
+        position: absolute;
+        left: 0;
+        top: 0px;
+        margin-top: 0;
+        padding-left: 0;
+        background: #fff;
+        z-index: 99;
+        display: none;
+    }
+
+    .caret {
+        position: absolute;
+        right: 10px;
+        top: 13px;
+    }
+
+    .filter .search {
+        height: 30px;
+    }
+
+    .samlimg {
+        position: absolute;
+        top: 0px;
+        left: 72px;
+    }
+
+    .lookProduct {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        z-index: 10000;
+    }
+
+    .lookProduct .content {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+        width: 523px;
+        min-height: 330px;
+        margin: initial;
+        border-radius: 4px;
+        padding: initial;
+    }
+
+    .lookProduct .content h3 {
+        padding: 15px;
+        margin: initial;
+        text-align: left;
+        border-bottom: 1px solid #F0F0F0;
+    }
+
+    .lookProduct .content h3 .close {
+        font-size: 25px;
+        font-weight: initial;
+        opacity: .4;
+    }
+
+    .my-video-dimensions {
+        width: 100%;
+        height: 273px;
+    }
+
+    .lookProduct .content {
+        top: 35%;
+    }
+
+    .filter input {
+        width: 230px;
+        margin: 0 5px;
+    }
+
+    .filter .time {
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .filter span:nth-child(7) {
+        margin-left: 5px;
+    }
+
+    .filter .timeActive {
+        color: #F9AE08;
+    }
+
+    .productName span {
+        display: inline-block;
+        max-width: 200px;
+        line-height: 20px;
+        color: #337ab7;
+        cursor: pointer;
+    }
+
+    .asc {
+        background-image: url("static/image/public-img/asc.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 15px;
+        height: 17px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 3px 5px 3px;
+        cursor: pointer;
+    }
+
+    .desc {
+        background-image: url("static/image/public-img/desc.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 15px;
+        height: 17px;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-bottom: 4px;
+    }
+
+    .asc:hover, .desc:hover {
+        background-color: #CCCCCC;
+    }
+
+    .active {
+        background-color: #CCCCCC;
+    }
+
+    .parent-order .icon {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        /* margin-left: 10px; */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url(static/image/manage/sort@2x.png);
+        cursor: pointer;
+    }
+
+    .parent-order .act{
+        background-image: url(static/image/manage/sort_select@2x.png);
+    }
+</style>
+<body>
+<div class="tab">
+    <ul class="clearfix">
+        <li><a href="#/CommodityAnalysis/Turnover">成交</a></li>
+        <li><a href="#/CommodityAnalysis/dispute">纠纷</a></li>
+        <li><a href="#/CommodityAnalysis/NewProduct">新品</a></li>
+        <li><a href="#/CommodityAnalysis/cusStore">客户店铺</a></li>
+        <!-- <li class="Act"><a href="#/CommodityAnalysis/ranking">操作统计</a></li> -->
+        <li><a href="#/CommodityAnalysis/quanzhong">猜你喜欢</a></li>
+        <li><a href="#/CommodityAnalysis/LinkageAndPublication">刊登与关联</a></li>
+    </ul>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+    <div class="filter clearfix">
+        <span style="float: left;">CJ排行榜展示：</span>
+        <select ng-model="topPage">
+            <option value="">全部</option>
+            <option value="1">是</option>
+            <option value="2">否</option>
+        </select>
+        <input type="text" placeholder="输入商品名称/SKU" ng-model="nameCn">
+        <!-- < type="text" placeholder="输入商品sku" ng-model="sku"> -->
+        <input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text"
+               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"/>
+        <input id="cdatatime2"
+               placeholder="Now" class="Wdate data-inp" style="text-indent: 12px;" type="text"
+               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"/>
+        <button class="search" ng-click="searchInput()">查询</button>
+        <span class="time" ng-class="timeNum == 2 ? 'timeActive': ''" ng-click="timeFilter(2)">近三天</span>
+        <span class="time" ng-class="timeNum == 6 ? 'timeActive': ''" ng-click="timeFilter(6)">近七天</span>
+    </div>
+    <div class="parent-order">
+        <table>
+            <thead>
+            <tr>
+                <th style="width: 3%;">序号</th>
+                <th style="width: 4%;">图片</th>
+                <th style="width: 6%;">商品名称</th>
+                <th style="width: 8%;">SKU</th>
+                <th style="width: 18%;">类目</th>
+                <th style="width: 9%;">是否在CJ排行榜展示过</th>
+                <th style="width: 5%;">
+                    点击量
+                    <i class="icon" ng-class="{act:sortType == 'clickCount DESC'}" ng-click="sort('clickCount')"></i>
+                </th>
+                <th style="width: 6%;">
+                    收藏次数
+                    <i class="icon" ng-class="{act:sortType == 'collectCount DESC'}" ng-click="sort('collectCount')"></i>
+                </th>
+                <th style="width: 7%;">
+                    添加购物车
+                    <i class="icon" ng-class="{act:sortType == 'cartCount DESC'}" ng-click="sort('cartCount')"></i>
+                </th>
+                <th style="width: 6%;">
+                    添加skuList
+                    <i class="icon" ng-class="{act:sortType == 'skuCount DESC'}" ng-click="sort('skuCount')"></i>
+                </th>
+                <th style="width: 6%;">
+                    刊登次数
+                    <i class="icon" ng-class="{act:sortType == 'publishCount DESC'}" ng-click="sort('publishCount')"></i>
+                </th>
+                <th style="width: 5%;">
+                    成交量
+                    <i class="icon" ng-class="{act:sortType == 'buyCount DESC'}" ng-click="sort('buyCount')"></i>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in dataList">
+                <td>{{$index+1}}</td>
+                <td style="position: relative;">
+                    <img ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;" width="40"
+                         ng-src="{{item.imgUrl | httpPrefix | IMG_SIZE: 40}}" alt="">
+                    <img class="samlimg" ng-show="item.isOver" width="200"
+                         ng-src="{{item.imgUrl | httpPrefix | IMG_SIZE: 40}}" alt="">
+                </td>
+                <td class="productName">
+                    <span ng-click="lookPro(item.dbProductId)">{{item.productName}}</span>
+                </td>
+                <td>{{item.dbSku}}</td>
+                <td>{{item.cateGory}}</td>
+                <td>
+                    <!-- <span ng-show="item.topPage == 0"></span> -->
+                    <span ng-show="item.topPage == 1">是</span>
+                    <span ng-show="item.topPage == 2">否</span>
+                </td>
+                <td>{{item.clickCount}}</td>
+                <td>{{item.collectCount}}</td>
+                <td>{{item.cartCount}}</td>
+                <td>{{item.skuCount}}</td>
+                <td>{{item.publishCount}}</td>
+                <td>{{item.buyCount}}</td>
+            </tr>
+            <tr ng-show="dataList.length == 0">
+                <td colspan="11">暂无数据。</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="page-box">
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ TotalNum1 }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--查看视频-->
+<div class="lookProduct" ng-show="isLook">
+    <div class="content">
+        <h3>查看视频<span class="close" ng-click="close()">×</span></h3>
+        <!--      <video id="my-video" class="video-js" controls preload="auto" width="100%" height="100%"
+                     data-setup="{techOrder: ['flash','html5']}">
+                  <source id="video" src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15306336/338209605760.mp4"
+                          type="video/mp4"/>
+              </video>-->
+    </div>
+</div>
+</html>

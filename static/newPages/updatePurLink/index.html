@@ -1,0 +1,278 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+		<h2>SKU：{{ detail.sku }}</h2>
+
+		<div class="inputs-supply">
+			<!-- 采购链接  -->
+			<div class="input-item buy-link clearfix">
+				<label class=""><span class="asj-must-require">* </span>采购链接</label>
+				<div class="right-con">
+					<div class="add-buylink-box">
+						<input type="text" placeholder="采购链接" ng-model="merchBuyLink">
+						<input type="text" placeholder="备注" ng-model="merchBuyLinkBeizhu">
+						<a href="javascript: void(0);" class="add-buylink-btn" ng-click="addBuylink()">
+							<img src="./static/image/public-img/iconplus.png" alt="" title="新增采购链接">
+						</a>
+					</div>
+					<div class="show-buylink-box">
+						<table class="table table-bordered merch-buylink-table">
+							<tr class="tr-head">
+								<td width="300">采购链接</td>
+								<td width="200">星级</td>
+								<td width="300">备注</td>
+								<td width="100">操作</td>
+							</tr>
+							<tr ng-repeat="item in merchBuyLinks track by $index">
+								<td class="td-link"><a href="{{ item.name }}" target="_blank">{{ item.name }}</a></td>
+								<td class="td-star">
+									<span ng-class="{star: item.star * 1 >= 1 }" ng-click="changeBuyLinkStar(item.name, $event)"
+										ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="1"></span>
+									<span ng-class="{star: item.star * 1 >= 2 }" ng-click="changeBuyLinkStar(item.name, $event)"
+										ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="2"></span>
+									<span ng-class="{star: item.star * 1 >= 3 }" ng-click="changeBuyLinkStar(item.name, $event)"
+										ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="3"></span>
+									<span ng-class="{star: item.star * 1 >= 4 }" ng-click="changeBuyLinkStar(item.name, $event)"
+										ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="4"></span>
+									<span ng-class="{star: item.star * 1 >= 5 }" ng-click="changeBuyLinkStar(item.name, $event)"
+										ng-mouseenter="showYellStar($event)" ng-mouseleave="hideYellStar($event)" data="5"
+										index="10"></span>
+								</td>
+								<td><input type="text" ng-model="item.beiZhu"></td>
+								<td><a href="javascript:void(0);" ng-click="deleteBuyLink(item.name)">{{'100227' | translate}}</a></td>
+							</tr>
+						</table>
+					</div>
+					<div class="error-message" ng-show="verifyBuylink">{{'100525' | translate}}</div>
+				</div>
+			</div>
+
+			<!-- 对手链接  -->
+			<div class="input-item buy-link clearfix">
+				<label class="">
+					{{'对手链接'}}
+				</label>
+				<div class="right-con">
+					<div class="add-buylink-box">
+						<input type="text" id="rival-link-inp" placeholder="链接" ng-model="addRivalVal">
+						<input style="height: 40px; padding-left: 10px;" type="number" placeholder="价格" ng-model="addRivalPrice">
+						<a href="javascript: void(0);" class="add-buylink-btn" ng-click="addRivalLink()"><img
+								src="./static/image/public-img/iconplus.png" alt="" title="新增对手链接"></a>
+					</div>
+					<div class="show-buylink-box">
+						<table class="table table-bordered merch-buylink-table">
+							<tr class="tr-head">
+								<td width="300">{{'对手链接'}}</td>
+								<td width="200">{{'对手价格'}}</td>
+								<td width="100">{{'100043' | translate}}</td>
+							</tr>
+							<tr ng-repeat="item in rivalLink">
+								<td class="td-link"><a href="{{ item.name }}" target="_blank">{{ item.name }}</a></td>
+								<td class="td-star">
+									{{item.price}}
+								</td>
+								<td><a href="javascript:void(0);" ng-click="deleteRivalLink($index)">{{'100227' | translate}}</a></td>
+							</tr>
+						</table>
+					</div>
+					<div class="error-message" ng-show="verifyRivallink">{{'请填写对手链接'}}</div>
+				</div>
+			</div>
+
+			<!-- tools -->
+			<div class="tools">
+				<a href="javascript:void(0)" class="btn primary" ng-click="updateLink()">保存</a>
+				<a href="javascript:void(0)" class="btn ghost">关闭</a>
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+<style>
+	.inputs-supply {
+		padding-top: 36px;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table {
+		margin-top: 10px;
+		width: 675px;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table td {
+		font-size: 14px;
+		text-align: center;
+		vertical-align: middle;
+		padding: 10px 0;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table td a {
+		word-break: break-all;
+		white-space: normal;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table input {
+		margin: 0 10px;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table .tr-head {
+		color: #868686;
+		height: 40px;
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table .td-star span {
+		display: inline-block;
+		width: 21px;
+		height: 21px;
+		cursor: pointer;
+		background: url('./static/image/public-img/iconstar_g.png');
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table .td-star span.star {
+		background: url('./static/image/public-img/iconstar_y.png');
+	}
+
+	.inputs-supply .buy-link .merch-buylink-table .td-link {
+		padding: 0 10px;
+		line-height: 20px;
+	}
+
+	.tools {
+		margin-top: 20px;
+		padding-left: 270px;
+	}
+
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+</style>

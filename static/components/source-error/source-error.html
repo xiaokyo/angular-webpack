@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="static/components/source-error/source-error.css">
+<div class="erp-common-tan-v2-wrap" ng-click="closeSelect($event)">
+	<div class="erp-common-tan-v2" style="width: 838px; height: initial">
+		<!-- 关闭按钮 -->
+		<!-- <a class="tan-v2-close" href="javascript:void(0);" ng-click="showFlag=false;"><img
+				src="static/image/public-img/close-img.png"></a> -->
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6 class="text-align-center">确认搜品失败</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="source-item">
+				<label style="width: 130px;" for="">请选择失败原因：</label>
+			</div>
+			<div class="source-item">
+				<div class="position-relative">
+					<span id="error-select" ng-click="openSelect()"
+						class="error-select d-block cursor-pointer position-relative">{{reason.cn}} <b class="drop"></b></span>
+					<ul ng-show="dropFlag" class="select-drop position-absolute">
+						<li ng-click="clickReason(error)" ng-repeat="error in errorList" class="cursor-pointer">{{error.cn}}</li>
+					</ul>
+				</div>
+			</div>
+			<div class="source-item">
+				<label style="width: 130px;" for="">对应英文:</label>
+			</div>
+			<div class="source-item">
+				<textarea readonly style="height: 80px;" ng-model="reason.en" placeholder="" class="error-textarea" name="" id=""></textarea>
+			</div>
+			<div class="source-item">
+				<label style="width: 130px;" for="">相似商品链接:</label>
+			</div>
+			<div class="source-item">
+				<textarea ng-model="productLink" placeholder="请输入相似商品链接(非必填)" class="error-textarea" name="" id=""></textarea>
+			</div>
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot position-initial">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="closeFun()" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="sureError()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>

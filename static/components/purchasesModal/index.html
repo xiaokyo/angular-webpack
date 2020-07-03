@@ -1,0 +1,47 @@
+<!-- 查看采购员 -->
+<modal visible="isPurchaseFlag" tit="采购员列表" cancel-text="关闭">
+    <table class="k-table">
+        <thead>
+            <th>采购员</th>
+            <th>采购时间</th>
+            <th>采购订单号</th>
+        </thead>
+        <tbody style="max-height: 350px;overflow: auto;">
+            <tr ng-repeat="item in currentPurList">
+                <td>
+                    <div class="td">{{item.buyerName}}</div>
+                </td>
+                <td>
+                    <div class="td">{{item.buyerDate}}</div>
+                </td>
+                <td>
+                    <div class="td">{{item.procurementOrderId}}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</modal>
+
+<!-- 采购订单查询弹窗 -->
+<modal visible="popPurchaseOrderLog" tit="操作日志" cancel-text="关闭">
+    <table class="k-table">
+        <thead>
+            <th>操作人</th>
+            <th>操作</th>
+            <th>操作时间</th>
+        </thead>
+        <tbody style="max-height: 350px;overflow: auto;">
+            <tr ng-repeat="item in purchaseOrderOperationLog">
+                <td>
+                    <div class="td">{{item.operatorName}}</div>
+                </td>
+                <td>
+                    <div class="td">{{item.description}}</div>
+                </td>
+                <td>
+                    <div class="td">{{item.operatorTime}}</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</modal>

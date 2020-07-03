@@ -1,0 +1,183 @@
+  <div class="ea-content analysis-wrap">
+    <div class="tab mb-20">
+      <a href="#/analysis/personal">邮件营销</a>
+      <a href="#/analysis/setemail">邮件发送设置</a>
+      <a class="active">邮件模板设置</a>
+    </div>
+		<div class="analysis-right-content">
+			<!-- right nav -->
+			<div class="right-bar">
+				<div class="ea-right-search">
+					<span>
+						属性筛选:
+						<select ng-model="attribute_id">
+							<option value="">全选</option>
+							<option value="{{item.id}}" ng-repeat="item in menuList">{{item.desc_cn}}</option>
+						</select>
+					</span>
+					<span>
+						模板主题:
+						<input type="text" ng-model="v1">
+					</span>
+					<span>
+						发送次数:
+						<input type="number" ng-model="send_no" />
+					</span>
+					<button ng-click="searchFun()">查询</button>
+          <button class="linkbtn" style="right: 160px;" ng-click="editFun()">新增模板</button>
+          <button class="linkbtn" ng-click="batchEditFun()">批量编辑模版内容</button>
+				</div>
+				<div class="mail-content">
+					<table class="ea-list-table ea-erp-cs">
+						<thead>
+							<tr>
+								<th class="li-checkall">
+									<input type="checkbox" id="check-all" class="check-all" ng-model="check_All" ng-change="checkAll()">
+								</th>
+                <th>属性名称ID</th>
+                <th>属性名称</th>
+								<th>发送次数</th>
+								<th>条件序号</th>
+								<th>条件类型</th>
+								<th>邮件主题</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="(index,model) in templateList">
+								<td class="li-checkone">
+									<input type="checkbox" class="check-one" ng-model="model.check" ng-change="checkOne(model,index)">
+								</td>
+                <td>{{model.attribute_id}}</td>
+                <td>{{model.attribute_name}}</td>
+								<td>{{model.send_no}}</td>
+								<td>{{model.condition_no}}</td>
+								<td>{{model.conditionType}}</td>
+								<td>{{model.v1}}</td>
+								<td>
+									<button ng-click="editFun(index,model)">编辑</button>
+									<button ng-click="delFun(model)">删除</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+          <div class="no-data d-flex-center" ng-show="templateList.length == 0">暂无数据。</div>
+          <!-- 分页 -->
+          <div ng-show="templateList.length != 0">
+            <page></page>
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--邮件模板-->
+	<div class="erp-common-tan-v2-wrap modelcss" ng-show="showFLag">
+		<div class="erp-common-tan-v2" style="width: 700px; height: 100%; overflow: auto;">
+			<!-- title -->
+			<div class="tan-v2-top">
+				<h6 class="text-align-center">新增/编辑</h6>
+			</div>
+			<!-- content -->
+			<div class="tan-v2-con">
+        <div class="item-group d-flex align-items-center">
+          <label><span style="color: #f5222d;">* </span>选择名称：</label>
+          <div class="right-con">
+            <select ng-model="currenRow.attribute_id">
+              <option value="">请选择名称</option>
+							<option value="{{item.id}}" ng-repeat="item in menuList">{{item.desc_cn}}</option>
+						</select>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>发送次数：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.send_no}" ng-model="currenRow.send_no" ng-change="sendnoFormat(currenRow)">
+            <span class="formverifymessage" ng-show="!formVerify.send_no">发送次数是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>条件序号：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.condition_no}" ng-model="currenRow.condition_no" ng-change="conditionnoFormat(currenRow)">
+            <span class="formverifymessage" ng-show="!formVerify.condition_no">条件序号是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center">
+          <label><span style="color: #f5222d;">* </span>条件：</label>
+          <div class="right-con">
+            <input id="condition_type1" type="radio" value="0" ng-model="currenRow.condition_type"><label class="em-modal-label" for="condition_type1">没有条件</label>
+						<input id="condition_type2" type="radio" value="1" ng-model="currenRow.condition_type"><label class="em-modal-label" for="condition_type2">包含</label>
+						<input id="condition_type3" type="radio" value="2" ng-model="currenRow.condition_type"><label class="em-modal-label" for="condition_type3">不包含</label>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center">
+          <label>条件值：</label>
+          <div class="right-con" style="width: 560px;">
+            <div class="em-modal-checkbox" ng-repeat="(key, item) in menuList">
+              <input id="condition_id{{key}}" type="checkbox" name="condition" value="item.id" ng-model="item.curSelected">
+              <label class="em-modal-label" for="condition_id{{key}}">{{item.desc_cn}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="item-group d-flex align-items-center marbtomm-25">
+          <label><span style="color: #f5222d;">* </span>模板主题：</label>
+          <div class="right-con positRelat">
+            <input type="text" class="width400" ng-class="{formverifytips:!formVerify.v1}" ng-model="currenRow.v1">
+            <span class="formverifymessage" ng-show="!formVerify.v1">模板主题是必填项。</span>
+          </div>
+        </div>
+        <div class="item-group">
+          <p style="margin-bottom: 10px;">模板内容：<code ng-non-bindable>可替换参数：用户姓名请用{{userName}}，用户邮件账号请用{{userEmail}}</code></p>
+					<div id="wang"></div>
+        </div>
+         
+			</div>
+			<!-- 底部 -->
+			<div class="tan-v2-bot">
+				<a href="javascript:void(0);" ng-click="showFLag=false;" class="qu-xiao-btn">取消</a>
+				<a href="javascript:void(0);" class="que-ding-btn" ng-click="editFunOk()">确定</a>
+			</div>
+		</div>
+  </div>
+  
+  <!--邮件模板 批量-->
+  <div class="erp-common-tan-v2-wrap modelcss" ng-show="batchshowFLag">
+    <div class="erp-common-tan-v2" style="width: 700px; height: initial;">
+      <!-- title -->
+      <div class="tan-v2-top">
+        <h6 class="text-align-center">批量编辑模版内容</h6>
+      </div>
+      <!-- content -->
+      <div class="tan-v2-con">
+        <div class="item-group d-flex align-items-center">
+          <label><span style="color: #f5222d;">* </span>模板主题：</label>
+          <div class="right-con">
+            <input type="text" class="width400" ng-model="batchData.v1">
+          </div>
+        </div>
+        <div class="item-group">
+          <p style="margin-bottom: 10px;">模板内容：<code ng-non-bindable>可替换参数：用户姓名请用{{userName}}，用户邮件账号请用{{userEmail}}</code></p>
+          <div id="wangBatch"></div>
+        </div>
+        
+      </div>
+      <!-- 底部 -->
+      <div class="tan-v2-bot">
+        <a href="javascript:void(0);" ng-click="batchshowFLag=false;" class="qu-xiao-btn">取消</a>
+        <a href="javascript:void(0);" class="que-ding-btn" ng-click="batchEditFunOk()">确定</a>
+      </div>
+    </div>
+  </div>
+
+	<!-- 确认弹窗 -->
+	<div class="erp-common-tan-v2-wrap" ng-show="delshowFLag">
+		<div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: initial;">
+			<p style="margin-top: 25px; margin-bottom: 38px;">确认删除本条记录？</p>
+			<div class="tan-v2-bot">
+				<a href="javascript:void(0)" class="qu-xiao-btn" ng-click="delshowFLag=false;">取消</a>
+				<a href="javascript:void(0)" class="que-ding-btn" ng-click="delFunOk()">确定</a>
+			</div>
+		</div>
+  </div>
+  

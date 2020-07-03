@@ -1,0 +1,41 @@
+.tab-container {border-bottom: 1px solid #eee; padding-bottom: 10px;}
+    .main {padding: 20px; min-height: 100vh;}
+    .header {padding: 0 20px; height: 60px;}
+    
+    .option>li {margin-right: 30px; font-size: 16; }
+    .option>li>input {border: 1px solid #ddd; line-height: 25px; text-indent: 5px;}
+
+    .edit-area>input { width: 100%; border-bottom: 1px solid rgb(10, 181, 248); text-align: center;}
+
+    .batch-number>input {border: 1px solid #ddd; text-indent: 5px; line-height: 25px;}
+    .no-data {height: 500px;}
+    .btn-area>button {width: 60px; height: 30px; border-radius: 4px; color: #fff; cursor: pointer;}
+    .btn-area>button:nth-of-type(1) {background: rgb(245, 45, 10); margin-right: 10px;}
+    .btn-area>button:nth-of-type(2) {background:  rgb(10, 159, 245);}
+    .err-box {width: 600px; height: 400px; background: #fff; padding: 20px;}
+    
+    
+    .common-btn {background:  rgb(10, 159, 245); color: #fff; padding: 4px 10px; border-radius: 4px; cursor: pointer;}
+    /* 独立打印区域设置 合格 次品 多出 */
+    .table .print-area>input{padding-top: 17px; }
+    .table .print-area>button{padding: 0; min-height: 17px; color: red; width: 100%; }
+
+    .distribute-area {width: 600px; height: 400px; background: #fff; padding: 20px; }
+    .distribute-area input {border: 1px solid #eee; line-height: 20px;}
+    .selected-name { height: 220px; overflow: auto; padding: 5px; box-shadow: 0 0 1px 1px #eee;}
+
+    #main .table-item { min-height: 80px; }
+    .table-head {min-height: 60px;}
+    .upload-area .hover-img {right: auto; left: -5px; transform: translateX(-100%);}
+
+    input[type=number] { -moz-appearance:textfield; }  
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    #main .my-tab li {font-size: 20px; padding-bottom: 6px;}
+    
+/* tab选择栏 */
+.tab-status{ margin: 10px; font-size: 14px; display: flex; align-items: center; justify-content: flex-start; }
+.tab-status-item{ margin-right: 15px; display: flex; justify-content: flex-start; align-items: center; }
+.tab-status-select{ border-radius: 4px; border: solid #ccc 1px; height: 25px; max-width: 150px; display: inline-block; }
+.table-head>li{
+    text-align: center;
+}

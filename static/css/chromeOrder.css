@@ -1,0 +1,162 @@
+/*订单tab*/
+.ordertab{
+    line-height: 30px;
+    padding: 15px 30px;
+}
+.ordertab a{
+    padding: 0 8px;
+    display: inline-block;
+    margin-right: 15px;
+    color: #666;
+}
+.ordertab a:hover{
+    color: #F9962E;
+}
+.ordertab .act{
+    color: #F9962E;
+    border-bottom: 2px solid #F9962E;
+}
+.chorme-order .c-ord-conall{
+    padding: 0 30px 30px 30px;
+}
+.chorme-order .ordertab{
+    padding: 15px 0;
+}
+.chorme-order .table-con-box .asj-top-head li{
+    float: left;
+    height: 40px;
+    background: rgba(252, 244, 217, 1);
+    line-height: 40px;
+    padding: initial;
+    font-size: 14px;
+    color: rgba(176, 86, 9, 1);
+    text-align: center;
+}
+.chorme-order .asj-order-title ul{
+    margin-top: 10px;
+    height: 40px;
+    line-height: 40px;
+    background: #f3f3f3;
+}
+.chorme-order .asj-order-title ul li{
+    float: left;
+    margin-right: 20px;
+    padding-left: 10px;
+    font-size: 12px;
+    color: #333333;
+}
+.chorme-order .li-pro-info{
+    width: 65%;
+}
+.chorme-order .li-pro-info td{
+    font-size: 12px;
+    color: #333333;
+    border-right: none;
+}
+.chorme-order .br{
+    border-right: 1px solid #e1e1e1;
+}
+.chorme-order .bott{
+    border-bottom: 1px solid #e1e1e1;
+}
+.chorme-order .asj-order-con td{
+    text-align: center;
+    font-size: 12px;
+    color: #333333;
+}
+.chorme-order .asj-order-con .idx{
+    width: 5%;
+    border-left: 1px solid #e1e1e1;
+}
+.chorme-order .asj-order-con .url a{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: #337ab7;
+}
+.chorme-order .pro-info .li-img{
+    width: 20%;
+    position: relative;
+}
+.chorme-order .pro-info .li-img .small-img{
+    width: 80px;
+    height: 80px;
+    /*height: 70px;*/
+    float: left;
+    margin-left: initial;
+    margin-right: 10px;
+}
+.chorme-order .pro-info .li-img .big-img{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 80px;
+    top: 0;
+    z-index: 10;
+}
+.chorme-order .pro-info .li-img .merch-name{
+    width: 50%;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+}
+.chorme-order .pro-info .li-img .merch-size{
+    float: left;
+    color: #7b7b7b;
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 3px;
+    width: 100%;
+}
+/*  .pro-info .li-pro-name{
+      width: 10%;
+  }*/
+.chorme-order .pro-info .li-pro-price{
+    width: 5%;
+}
+.chorme-order .pro-info .li-pro-quan{
+    width: 5%;
+}
+.chorme-order .pro-info .weight1{
+    width: 5%;
+}
+.chorme-order .pro-info .weight2{
+    width: 5%;
+}
+.chorme-order .li-status li{
+    font-size: 12px;
+    color: #333333;
+}
+.chorme-order .pro-info:nth-last-child(1){
+    border-bottom: none;
+}
+.chorme-order .li-opera a{
+    padding: 2px 4px;
+}
+.chorme-order .asj-order-total{
+    text-align: right;
+    font-size: 12px;
+    color: #333333;
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+}
+.chorme-order .ea-right-search{
+    padding: initial;
+    margin-left: 0;
+    margin-bottom: 15px;
+}
+.chorme-order .acct{
+    border: 1px solid #faa538;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+

@@ -1,0 +1,117 @@
+<div class="my-wrap">
+  <!-- tablist -->
+  <div class="tablist flex">
+    <div class="item flex jcc aic"><a href="#/erppurchase/confirm/10">1688关联</a></div>
+    <div class="item flex jcc aic active"><a href="javascript:void(0)">线下采购</a></div>
+  </div>
+
+  <!-- filter -->
+  <div class="filter flex fwp">
+    <div class="item">
+      <input type="text" placeholder="请输入供货公司" ng-model="sendParams.gongHuoGongSi" />
+    </div>
+    <div class="item">
+      <wui-date format="yyyy-mm-dd" placeholder="开始时间" btns="{'ok':'确定','now':'今天'}" ng-model="sendParams.begainDate"></wui-date>
+      -
+      <wui-date format="yyyy-mm-dd" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}" ng-model="sendParams.endDate"></wui-date>
+    </div>
+    <div class="item">
+      <input type="text" placeholder="请输入订单号" ng-model="sendParams.orderId" />
+    </div>
+    <div class="item">
+      <!-- <input type="text" placeholder="请输入创建人" ng-model="sendParams.caigouRen" /> -->
+      <purchaseselect callback="purchasePersonCallback"></purchaseselect>
+    </div>
+    <div class="item">
+      <a href="javascript:void(0)" class="btn primary" ng-click="getList()">搜索</a>
+    </div>
+  </div>
+
+  <!-- tools -->
+  <div class="tools flex fdrr">
+    <a href="/query-parcel.html" target="_blank" class="btn primary">查询包裹</a>
+    <a href="javascript:void(0)" class="btn primary" ng-click="batchDel()">批量删除</a>
+    <a href="javascript:void(0)" class="btn primary" ng-click="batchReject()">驳回采购出单</a>
+  </div>
+
+  <!-- table -->
+  <table class="k-table" style="width:100%;margin-top:20px;">
+    <thead>
+      <th width="45">
+        <div class="check-box ">
+          <input type="checkbox" name="" ng-model="allChecked" ng-click="changeChecked()">
+          <label for=""></label>
+        </div>
+      </th>
+      <!-- <th>序号</th> -->
+      <th>入仓编号</th>
+      <th>订单号</th>
+      <th>供货公司</th>
+      <!-- <th>原总价(￥)</th> -->
+      <th>创建人</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in list track by $index">
+        <td width="45">
+          <div class="td">
+            <div class="check-box ">
+              <input type="checkbox" name="" ng-model="i.checked" ng-click="isAllChecked()">
+              <label for=""></label>
+            </div>
+          </div>
+        </td>
+        <!-- <td><div class="td">{{ $index + 1 }}</div></td> -->
+        <td><div class="td">{{ i.storageNumber }}</div></td>
+        <td><div class="td">{{ i.orderId }}</div></td>
+        <td><div class="td" style="word-break: break-all;">{{ i.gongHuoGongSi }}</div></td>
+        <!-- <td><div class="td">{{ i.huoWuZongJia }}</div></td> -->
+        <td><div class="td">{{ i.caigouRen }}</div></td>
+        <td><div class="td">{{ i.createDate.time | date:'yyyy-MM-dd HH:mm:ss' }}</div></td>
+        <td>
+          <div class="td">
+            <div class="operator">
+              <a href="#/erppurchase/offlinePurchase/submit/{{i.orderId}}/{{i.onlineType}}" class="btn">提交</a>
+              <a href="javascript:void(0)" class="btn" ng-click="export2word(i)">导出</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- page -->
+  <page></page>
+</div>
+
+<style>
+  .my-wrap { margin-left:215px;background: #fff; padding:15px;min-height:100vh; }
+  .flex{display: flex;}
+  .flex.fdc{flex-direction: column;}
+  .flex.jcc{justify-content: center;}
+  .flex.fdrr{flex-direction: row-reverse;}
+  .flex.fdcr{flex-direction: column-reverse;}
+  .flex.aic{align-items: center;}
+  .flex.fwp{flex-wrap: wrap;}
+  input,select{height:34px;line-height: 34px;}
+  
+  /* tablist */
+  .tablist{height:45px;width:100%;border-bottom:1px solid #e6e6e6;}
+  .tablist .item{padding:0 15px;position: relative;}
+  .tablist .item.active a::after,.tablist .item:hover a::after{display:block;width:100%;height:2px;background-color:#F9AE08;content:' ';position:absolute;left:0;bottom:-1px;}
+  .tablist .item.active a,.tablist .item:hover a{color:#F9AE08;}
+
+  /* filter */
+  .filter{margin-top:10px;height:50px;}
+  .filter .item{margin-right:10px;display: flex;justify-content: center;align-items: center;}
+
+  /* tools */
+  .tools{margin-top:15px;}
+  .tools a{margin-left:15px;}
+
+  /* btn */
+  a.btn{padding:5px 10px;}
+  a.btn.primary{background-color:#F8A636;color:#fff;}
+  a.btn.primary:hover{opacity: 0.6;}
+</style>

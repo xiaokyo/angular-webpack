@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务商品-客户拒签已取消</title>
+    <link rel="stylesheet" type="text/css" href="static/css/fuwusp.css">
+    <style>
+        .fw-qscon {
+            display: flex;
+            justify-content: space-between;
+        }
+        .fw-qscon .w30ul{
+            width: 30%;
+        }
+        .fw-qscon .w10ul{
+            width: 12%;
+        }
+        .fw-qscon .w56{
+            width: 56%;
+        }
+        .qs-mesul li{
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .qs-mesul li .w30{
+            width: 30%;
+            text-align: right;
+        }
+        .qs-mesul li .w65{
+            width: 65%;
+            text-align: left;
+        }
+        .small-img{
+            width: 40px;
+        }
+        .show-big-img {
+            width: 200px;
+            position: absolute;
+            left: -200px;
+            top: -50px;
+        }
+        .top-150px{
+            top: -150px;
+        }
+    </style>
+</head>
+<body>
+<div class="tab d-flex justify-content-between align-items-center">
+    <ul class="clearfix">
+        <li><a href="#/merchandise/fuwuDqs">待签收</a></li>
+        <li><a href="#/merchandise/fuwuYiQianShou">已签收</a></li>
+        <li><a href="#/merchandise/fuwuYiJujue">已拒签 </a></li>
+        <li class="Act"><a href="#/merchandise/fuwuYiQuXiao">客户拒签</a></li>
+    </ul>
+    <div class="search-group d-flex">
+    	<input class="search-inp" ng-model="searchVal" placeholder="请输入SKU/客户名称/审核人"></input>
+    	<button ng-click="searchFun()" class="search-btn"></button>
+    </div>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+    <div class="filter clearfix">
+    </div>
+    <div class="parent-order">
+        <table>
+            <thead id="table-header">
+            <tr>
+                <th>商品名称</th>
+                <th>图片</th>
+                <th>SKU</th>
+                <th>仓库</th>
+                <th>运单号</th>
+                <th>数量</th>
+                <th>发货时间</th>
+                <th>客户</th>
+                <th>业务员</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in listArr">
+                <td>
+                    <p class="reason-text pro-namecolor">{{item.dbProductName}}</p>
+                </td>
+                <td style="position: relative;" ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;">
+                    <img class="padding-tb-10px" 
+                         ng-src="{{item.dbImages | IMG_SIZE:40}}" alt="">
+                    <img class="samlimg" ng-show="item.isOver"
+                         ng-src="{{item.dbImages | IMG_SIZE:200}}" alt="">
+                </td>
+                <td>{{item.dbSku}}</td>
+                <td>{{item.storagedoName}}</td>
+                <td>{{item.trackingNumber}}</td>
+                <td>{{item.num}}</td>
+                <td>{{item.deliveryTime | date:'yyyy-MM-dd'}}</td>
+                <td>{{item.createName}}</td>
+                <td>{{item.salemanName}}</td>
+                <td>
+                    <button ng-click="bianJiFun(item)" class="dbopter-btn font-size-14px">编辑</button>
+                    <button ng-click="bianTiFun(item)" class="dbopter-btn font-size-14px">查看</button>
+                </td>
+            </tr>
+            <tr ng-show="totalNum < 1">
+                <td colspan="19">暂无数据。</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum > 0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <!-- <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option> -->
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+</body>
+<!--是否同意签收-->
+<div class="lookProduct z-index10" ng-show="isQianShouFlag">
+    <div class="content paddinglrt20px" style="width: 450px;min-height: inherit;">
+        <div class="tk-mid-con">
+            <p class="margin-bt20px">确定签收吗?</p>
+        </div>
+        <div class="tk-btns">
+            <button ng-click="isQianShouFlag=false" class="tk-qx-btn">取消</button>
+            <button ng-click="tongYiQsFun()" class="tk-qd-btn">确定</button>
+        </div>
+    </div>
+</div>
+<div class="lookProduct" ng-show="bianTiFlag">
+    <div class="content media-content paddinglrt20px" style="width: 810px;min-height: inherit;top:50%;">
+        <div class="tk-top-tit" style="background-color: #fff;">
+            <p>变体 <span class="close-icon" ng-click="bianTiFlag = false">×</span></p>
+        </div>
+        <div class="tk-mid-con margin-bt20px" style="height: 460px;overflow-y:auto;">
+            <table style="width: 99%;">
+                <thead>
+                    <th>SKU</th>
+                    <th>图片</th>
+                    <th>实收</th>
+                    <th>损坏数量</th>
+                    <th>入库数量</th>
+                    <th>剩余数量</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in btList">
+                        <td>{{item.stan_sku}}</td>
+                        <td style="position: relative;" ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;">
+                            <img class="padding-tb-10px" 
+                                    ng-src="{{item.stan_img | IMG_SIZE:40}}" alt="">
+                            <img class="samlimg" ng-class="{'top-160px':$index>4}" ng-show="item.isOver"
+                                    ng-src="{{item.stan_img | IMG_SIZE:200}}" alt="">
+                        </td>
+                        <td>{{item.actual_num}}</td>
+                        <td>{{item.damage_num}}</td>
+                        <td>{{item.put_num}}</td>
+                        <td>{{item.residual_num}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="tk-btns">
+            <button ng-click="baoCunEditFun()" class="tk-qx-btn">保存修改</button>
+            <button ng-click="isTongYiQsFun()" class="tk-qd-btn">同意签收</button>
+        </div> -->
+    </div>
+</div>
+<!-- 编辑拒收 -->
+<!-- <div class="lookProduct" ng-show="bianJiFlag">
+    <div class="content media-content paddinglrt20px" style="width: 810px;min-height: inherit;">
+        <div class="tk-top-tit" style="background-color: #fff;">
+            <p>拒绝原因 <span class="close-icon" ng-click="closeFun()">×</span></p>
+        </div>
+        <div class="tk-mid-con margin-bt20px">
+            <table>
+                <thead>
+                    <th>商品名称</th>
+                    <th>图片</th>
+                    <th>运单号</th>
+                    <th>批次号</th>
+                    <th>数量</th>
+                    <th>损坏</th>
+                    <th>实收</th>
+                    <th>可入库</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in proList">
+                        <td>{{item.dbProductName}}</td>
+                        <td style="position: relative;" ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;">
+                            <img class="padding-tb-10px" 
+                                 ng-src="{{item.dbImages | IMG_SIZE:40}}" alt="">
+                            <img class="samlimg" ng-show="item.isOver"
+                                 ng-src="{{item.dbImages | IMG_SIZE:200}}" alt="">
+                        </td>
+                        <td>{{item.trackingNumber}}</td>
+                        <td>{{item.batchNumber}}</td>
+                        <td>{{item.num}}</td>
+                        <td>
+                            <input class="w60px" ng-keyup="isNumFun(item,'damageNum',item.actualNum)" ng-model="item.damageNum"></input>
+                        </td>
+                        <td>
+                            <input class="w60px" ng-keyup="isNumFun(item,'actualNum',item.actualNum)" ng-model="item.actualNum"></input>
+                        </td>
+                        <td>{{item.actualNum - item.damageNum}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tk-btns">
+            <button ng-click="baoCunEditFun()" class="tk-qx-btn">保存修改</button>
+            <button ng-click="isTongYiQsFun()" class="tk-qd-btn">同意签收</button>
+        </div>
+    </div>
+</div> -->
+<div class="lookProduct" ng-show="bianJiFlag">
+    <div class="content media-content paddinglrt20px" style="width: 810px;min-height: inherit;top: 50%;">
+        <div class="tk-top-tit" style="background-color: #fff;">
+            <p>编辑 <span class="close-icon" ng-click="closeFun()">×</span></p>
+        </div>
+        <div class="tk-mid-con margin-bt20px" style="overflow-y: auto;">
+            <div class="rksp-detailcon ydhrk-detailcon fw-qscon" style="height: 460px;">
+                <ul class="qs-mesul w30ul">
+                    <li>
+                        <span class="w30">名称:</span>
+                        <span class="w65">{{proList[0].orderName}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">仓库:</span>
+                        <span class="w65">{{proList[0].storagedoName}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">批次号:</span>
+                        <span class="w65">{{proList[0].batchNumber}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">运单号:</span>
+                        <span class="w65">{{proList[0].trackingNumber}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">数量:</span>
+                        <span class="w65">{{proList[0].num}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">发货时间:</span>
+                        <span class="w65">{{proList[0].deliveryTime.time | date:'yyyy-MM-dd'}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">客户名称:</span>
+                        <span class="w65">{{proList[0].createName}}</span>
+                    </li>
+                    <li>
+                        <span class="w30">业务员名称:</span>
+                        <span class="w65">{{proList[0].salemanName}}</span>
+                    </li>
+                </ul>
+                <ul class="qs-mesul w10ul" ng-if="proList[0].serveMoenyList.length>0">
+                    <li ng-repeat="item in proList[0].serveMoenyList">
+                        <span class="w65">{{item.item_name}}:</span>
+                        <span class="w30">{{item.status=='1'?'是':'否'}}</span>
+                    </li>
+                </ul>
+                <div class="bt-list w56">
+                    <p>商品名称: {{proList[0].dbProductName}}</p>
+                    <table class="table table-bordered ydh-table fw-table">
+                        <thead>
+                        <tr style="background-color: #F0EDE7">
+                            <th>SKU</th>
+                            <th>图片</th>
+                            <th>实收</th>
+                            <th>损坏</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in proList[0].productStanList">
+                            <td>
+                                <span class="max-width230px">{{item.SKU}}</span>
+                            </td>
+                            <td style="position: relative;" ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;" class="img-td">
+                                <img class="small-img" 
+                                     ng-src="{{item.IMG}}" alt="">
+                                <img class="show-big-img" ng-class="{'top-150px':$index>2}" ng-show="item.isOver"
+                                     ng-src="{{item.IMG}}" alt="">
+                            </td>
+                            <td>
+                                <input class="w60px" ng-keyup="isNumFun(item,'actualNum',item.actualNum)" ng-model="item.actualNum"></input>
+                            </td>
+                            <td>
+                                <input class="w60px" ng-keyup="isNumFun(item,'damageNum',item.actualNum)" ng-model="item.damageNum"></input>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tk-btns">
+            <button ng-click="baoCunEditFun()" class="tk-qx-btn">保存修改</button>
+            <button ng-click="isTongYiQsFun()" class="tk-qd-btn">同意签收</button>
+        </div>
+    </div>
+</div>
+</html>

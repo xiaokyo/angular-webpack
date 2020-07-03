@@ -1,0 +1,345 @@
+.ruzhu-wrap {
+  padding: 20px;
+  background-color: #fff;
+}
+.ruzhu-wrap .seach-inp {
+  border-radius: 4px 0 0 4px;
+}
+.ruzhu-wrap .data-inp {
+  width: 120px;
+  height: 30px;
+  font-size: 14px;
+}
+.ruzhu-wrap .border-radiusnone {
+  border-radius: 0;
+}
+.ruzhu-wrap .filter-box .search {
+  height: 30px;
+  padding: 0 10px;
+  margin-left: -6px;
+  color: #fff;
+  background-color: #FFB900;
+}
+.ruzhu-wrap .table {
+  border-right: 1px solid #F3F3F3;
+  width: 100%;
+  text-align: center;
+}
+.ruzhu-wrap .table thead {
+  height: 44px;
+  background: #fcf4d9;
+  line-height: 44px;
+}
+.ruzhu-wrap .table-box {
+  margin-top: 20px;
+}
+.ruzhu-wrap .link-tip {
+  border-radius: 4px;
+  background-color: #FFB900;
+  color: #fff;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  min-width: 50px;
+}
+.ruzhu-wrap .title-name {
+  display: inline-block;
+  width: 120px;
+}
+.ruzhu-wrap .inline-box {
+  display: inline-block;
+  width: 300px;
+}
+.ruzhu-wrap .inline-box p {
+  margin-bottom: 10px;
+}
+.ruzhu-wrap .inline-box img {
+  width: 240px;
+  height: 151px;
+}
+.ruzhu-wrap .margin-top20px {
+  margin-top: 20px;
+}
+.ruzhu-wrap .textalign-center {
+  text-align: center;
+}
+.ruzhu-wrap .sel-store {
+  width: 120px;
+  float: right;
+}
+.ruzhu-wrap .like-navbtn {
+  padding: 0 20px 20px;
+  display: inline-block;
+}
+.ruzhu-wrap .tab-act {
+  color: #F9AE08;
+  border-bottom: 4px solid #F9AE08;
+}
+.ruzhu-wrap .width200 {
+  width: 200px;
+  height: 30px;
+  vertical-align: top;
+  font-size: 14px;
+}
+.ruzhu-wrap .width90 {
+  width: 90px;
+  height: 30px;
+  vertical-align: top;
+  font-size: 14px;
+}
+.ruzhu-wrap .width136 {
+  width: 136px;
+  height: 30px;
+  vertical-align: top;
+}
+.ruzhu-wrap .w20per {
+  width: 300px;
+}
+.ruzhu-wrap .bulk-btn {
+  height: 30px;
+  padding: 0 15px;
+  border: 1px solid #F9AE08;
+  color: #F9AE08;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.ruzhu-wrap .bulk-btn:hover {
+  background-color: #F9AE08;
+  color: #fff;
+}
+.ruzhu-wrap .abtn-style {
+  line-height: 28px;
+  display: inline-block;
+}
+.ruzhu-wrap .d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ruzhu-wrap .no-data-box {
+  text-align: center;
+  font-size: 14px;
+  padding: 10px 0;
+}
+.ruzhu-wrap .fault-option-btn {
+  height: 30px;
+  border: 1px solid #5dbdf2;
+  padding: 0 20px;
+  background-color: #fff;
+  color: #5dbdf2;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.ruzhu-wrap .fault-option-btn:hover {
+  background-color: #5dbdf2;
+  color: #fff;
+}
+.ruzhu-wrap .filter-btnact {
+  background-color: #5dbdf2;
+  color: #fff;
+}
+.ruzhu-wrap .margin-right50px {
+  margin-right: 50px;
+}
+.ruzhu-wrap .margin-right20px {
+  margin-right: 20px;
+}
+.ruzhu-wrap .w60h60-img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+.ruzhu-wrap .page-input {
+  width: 50px;
+}
+.ruzhu-wrap .selpage {
+  height: 30px;
+  margin-right: 20px;
+}
+.ruzhu-wrap .jump-btn {
+  font-size: 12px;
+  color: #757575;
+  width: 40px;
+  height: 30px;
+  display: inline-block;
+  line-height: 25px;
+  background-color: #f8f8f8;
+  border: 1px solid #e5e1da;
+  border-radius: 4px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.ruzhu-wrap .w200px {
+  width: 200px;
+}
+.ruzhu-wrap .w70px {
+  width: 70px;
+}
+.ruzhu-wrap .padding-top20px {
+  padding-top: 20px;
+}
+.ruzhu-wrap .bt-tr {
+  display: none;
+}
+.ruzhu-wrap .bt-tr p {
+  font-size: 12px;
+}
+.ruzhu-wrap .sptr-act {
+  background-color: #faa538;
+}
+.ruzhu-wrap .sptr-clickact {
+  background-color: #faa538;
+}
+.ruzhu-wrap .timenum-act {
+  color: #F9AE08;
+}
+.ruzhu-wrap .target-link {
+  text-decoration: underline;
+  color: #08ACE9;
+}
+.ruzhu-wrap .cur-pointer {
+  cursor: pointer;
+}
+.ruzhu-wrap .yc-style {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 10px;
+  color: #fff;
+  background-color: red;
+  cursor: pointer;
+}
+.ruzhu-wrap .blank-span:hover .hide-bigimg {
+  display: block;
+}
+.ruzhu-wrap .blank-span {
+  position: relative;
+}
+.ruzhu-wrap .hide-bigimg {
+  width: 360px;
+  height: 360px;
+  position: absolute;
+  left: 60px;
+  top: -60px;
+  background-color: #fff;
+  z-index: 9;
+  display: none;
+  cursor: pointer;
+  max-width: none;
+  max-height: none;
+}
+.ruzhu-wrap .hide-bigimg-act {
+  top: -300px;
+}
+.ruzhu-wrap .min-width98 {
+  min-width: 98px;
+}
+.ruzhu-detail-wrap p {
+  font-size: 14px;
+}
+.ruzhu-detail-wrap span {
+  font-size: 14px;
+}
+.tkbg-wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.tkbg-wrap .tk-con {
+  width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.tkbg-wrap .d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.tkbg-wrap .close-tkimg {
+  height: 16px;
+  cursor: pointer;
+}
+.tkbg-wrap .text-area {
+  margin-top: 20px;
+  border: 1px solid #ececec;
+  resize: none;
+  width: 100%;
+  height: 120px;
+  font-size: 14px;
+  text-indent: 12px;
+}
+.tkbg-wrap .perw20 {
+  width: 20%;
+  text-align: center;
+  display: inline-block;
+}
+.tkbg-wrap .perw80 {
+  width: 70%;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+.tkbg-wrap .w210px {
+  width: 210px;
+  margin-top: 0;
+  vertical-align: top;
+}
+.tkbg-wrap .h30px {
+  height: 30px;
+}
+.tkbg-wrap .isaddyfh-btns {
+  text-align: center;
+  margin-top: 20px;
+}
+.tkbg-wrap button {
+  height: 30px;
+  padding: 0 15px;
+  border: 1px solid #cfcfcf;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.tkbg-wrap .ispc-can-btn {
+  color: #6b6b6b;
+  background-color: #f6f6f6;
+  margin-right: 15px;
+}
+.tkbg-wrap .ispc-con-btn {
+  color: #fff;
+  background-color: #ff8d31;
+}
+.tkbg-wrap .feiyong-input {
+  border-radius: 4px 0 0 4px;
+}
+.tkbg-wrap .feiyong-select {
+  height: 30px;
+  vertical-align: top;
+  border-left: none;
+}
+.tkbg-wrap .w100px {
+  display: inline-block;
+  width: 100px;
+}
+.tkbg-wrap .margin-top20px {
+  margin-top: 20px;
+}
+.tkbg-wrap .big-img {
+  position: absolute;
+  left: 300px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 680px;
+}

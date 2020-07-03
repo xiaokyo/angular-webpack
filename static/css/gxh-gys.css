@@ -1,0 +1,219 @@
+.gxh-gys-wrap {
+  margin-left: 220px;
+  margin-right: 20px;
+}
+.gxh-gys-top {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 23px 20px 0 30px;
+}
+.gxh-sealabel .w20h40inp {
+  width: 280px;
+  height: 40px;
+  border: 1px solid #E4E4E4;
+  border-radius: 6px 0 0 6px;
+}
+.gxh-sealabel .w90h40btn {
+  background-color: #F9AE08;
+  width: 90px;
+  height: 40px;
+  border-radius: 0 6px 6px 0;
+  background-image: url('../image/public-img/btn-back-sea.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.gxh-nav {
+  margin-top: 25px;
+}
+.gxh-nav a {
+  margin-right: 25px;
+  padding: 0 10px 16px;
+  display: inline-block;
+  color: #666666;
+}
+.gxh-nav .nav-a-act {
+  color: #F9AE08;
+  border-bottom: 4px solid #F9AE08;
+}
+.gxh-nav button {
+  width: 60px;
+  height: 32px;
+  background-color: #FFB900;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  float: right;
+}
+.gxh-gys-mid {
+  margin-top: 10px;
+  padding: 18px 20px 50px;
+  background-color: #fff;
+}
+.table-box-tan {
+  width: 884px;
+}
+.table-box table,
+.table-box-tan table {
+  width: 100%;
+  text-align: center;
+  border: 1px solid #F3F3F3;
+}
+.table-box table .check-box,
+.table-box-tan table .check-box {
+  float: none;
+  display: inline-block;
+  margin-right: 0;
+}
+.table-box thead,
+.table-box-tan thead {
+  background-color: #FCF4D9;
+}
+.table-box thead th,
+.table-box-tan thead th {
+  color: #8B572A;
+  font-size: 14px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+}
+.table-box thead .th-detail,
+.table-box-tan thead .th-detail {
+  width: 30%;
+}
+.table-box thead .th-time,
+.table-box-tan thead .th-time {
+  width: 10%;
+}
+.table-box tbody tr,
+.table-box-tan tbody tr {
+  height: 68px;
+  border-bottom: 1px solid #F3F3F3;
+}
+.table-box tbody td,
+.table-box-tan tbody td {
+  border-right: 1px solid #F3F3F3;
+  font-size: 12px;
+}
+.table-box tbody td .small-img,
+.table-box-tan tbody td .small-img {
+  width: 60px;
+  height: 60px;
+}
+.table-box tbody td .detail-item,
+.table-box-tan tbody td .detail-item {
+  display: flex;
+  align-items: center;
+}
+.table-box tbody td .detail-item .asj-listimg-span,
+.table-box-tan tbody td .detail-item .asj-listimg-span {
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
+}
+.table-box tbody td .detail-item .asj-listimg-span .hidden-bigimg,
+.table-box-tan tbody td .detail-item .asj-listimg-span .hidden-bigimg {
+  top: 0;
+  left: 60px;
+}
+.table-box tbody td .detail-item .name,
+.table-box-tan tbody td .detail-item .name {
+  flex: 1;
+}
+.table-box tbody td .detail-item .num,
+.table-box-tan tbody td .detail-item .num {
+  margin: 0 5px;
+}
+.table-box tbody .ope-td button,
+.table-box-tan tbody .ope-td button {
+  height: 32px;
+  border: 1px solid #E6E6E6;
+  padding: 0 15px;
+  color: #666666;
+  border-radius: 4px;
+}
+.table-box tbody .ope-td .active,
+.table-box-tan tbody .ope-td .active {
+  background: #FFB900;
+  color: #fff;
+  border: 0;
+}
+.pod-fj-tan .ord-num {
+  font-size: 14px;
+}
+.pod-fj-tan .load-item {
+  height: 72px;
+  display: flex;
+  border-bottom: 1px solid #F0F0F0;
+  align-items: center;
+  font-size: 14px;
+}
+.pod-fj-tan .load-item img {
+  width: 40px;
+  margin: 0 8px;
+}
+.pod-fj-tan .load-item .name {
+  flex: 1;
+}
+.pod-fj-tan .load-item button {
+  width: 60px;
+  height: 32px;
+  border: 1px solid #E6E6E6;
+  color: #666666;
+  margin: 0 8px;
+  font-size: 14px;
+}
+.pdo-print-sheet-wrap .gxh-gys-mid {
+  margin-top: 0;
+}
+.pod-supplier-list-wrap .gxh-gys-mid {
+  margin-top: 0;
+}
+.pod-supplier-list-wrap .table-box tbody tr {
+  height: 42px;
+}
+.pod-supplier-list-wrap .gxh-table .ope-td a {
+  color: #4A90E2;
+}
+.pod-supplier-tan .tan-v2-con {
+  width: 100%;
+}
+.pod-supplier-tan .table-box tbody tr {
+  height: 72px;
+}
+.pod-supplier-tan td input,
+.pod-supplier-tan td select {
+  width: 54px;
+  height: 24px;
+  border-color: #D9D9D9;
+  border-radius: 4px;
+}
+.pod-supplier-tan .ope-td a {
+  color: #4A90E2;
+}
+.pod-abnormal-list-wrap .gxh-gys-mid {
+  margin-top: 0;
+}
+.pod-abnormal-list-wrap .table-box tbody tr {
+  height: 72px;
+}
+.pod-abnormal-list-wrap td input,
+.pod-abnormal-list-wrap td select {
+  width: 94px;
+  height: 24px;
+  border-color: #D9D9D9;
+  border-radius: 4px;
+}
+.pod-supplier-review-list .shenheyijian0 {
+  border: 1px solid #D9D9D9;
+  width: 156px;
+  height: 46px;
+  display: inline-block;
+  outline-width: 0;
+  font-size: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.pod-supplier-review-list .shenheyijian2 {
+  display: inline-block;
+  font-size: 14px;
+}

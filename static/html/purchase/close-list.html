@@ -1,0 +1,728 @@
+
+<div class="custom-orders-wrap">
+	<div class="c-ord-mid">
+		<!-- 右边的内容部分 -->
+		<div class="ord-right-con">
+			<div class="content">
+				<div class="c-ord-conall">
+					<div class="c-ord-con">
+						<div class="c-ord-fun tit-box" id="purch-box">
+							
+							<div class="c-us-stuv">
+								<div class="c-fun-right">
+									<input class="Wdate data-inp"
+									ng-change="timeClickFun()" id="c-data-time" type="text" ng-model="listParam.beginDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})"
+										placeholder="起始日期">
+									<input id="cdatatime2" ng-change="timeClickFun()" ng-model="listParam.endDate" placeholder="结束日期" class="Wdate data-inp"
+										type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked: function(){$(this).trigger('change')}})" />
+									<select
+										style="float: left;height: 30px;margin-left: 10px" ng-model="searchType" id="selectSearch">
+										<option value="orderId">1688订单号</option>
+										<option value="biantiSku">变体SKU</option>
+										<option value="caigouren">采购人</option>
+										<option value="fuKuanRen">付款人</option>
+										<option value="gongHuoGongSi">供货公司</option>
+										<option value="zhuiZongHao">追踪号</option>
+									</select>
+									<input id="searchInfo" placeholder="" ng-model="searchVal" class="c-seach-inp">
+									<a ng-click="searchFun()" class="c-seach-btn"
+									href="javascript:void(0)">{{'100025' | translate}}</a>
+									<span ng-click="timeClickFun($event,2)" class="time-click">前日</span>
+									<span ng-click="timeClickFun($event,1)" class="time-click">昨日</span>
+									<span ng-click="timeClickFun($event,0)" class="time-click">今日</span>
+									<a target="_blank"
+										href="receive-podsp.html" class="rk-btn">POD签收</a>
+									<a target="_blank" href="print-code.html"
+										class="rk-btn">{{'打印条形码'}}</a>
+									<a href="javascript:;" ng-click="navQueryPackage()" class="rk-btn">{{'查询包裹'}}</a>
+
+									<a target="_blank"
+										href="receive-new-0110.html" class="rk-btn">新签收</a>
+									
+								</div>
+							</div>
+							<div class="thead-box">
+								<div class="th-group" style="width: 9%;">
+									<span>订单序号</span>
+								</div>
+								<div class="th-group" style="width: 15%;">
+									<span>1688订单号</span>
+								</div>
+								<div class="th-group" style="width: 5%;">
+									创建时间
+								</div>
+								<div class="th-group" style="width: 5%;">
+									创建人
+								</div>
+								<div style="width: 5%;" class="th-group">
+									付款时间
+								</div>
+								<div style="width: 5%;" class="th-group">
+									付款人
+								</div>
+								<div style="width: 5%;" class="th-group">
+									供货公司
+								</div>
+								<div style="width: 5%;" class="th-group">
+									总价
+								</div>
+								<div style="width: 5%;" class="th-group">
+									实际支付
+								</div>
+								<div style="width: 10%;" class="th-group">
+									追踪号
+								</div>
+								<div style="width: 8%;" class="th-group">
+									excel上传时间
+								</div>
+								<div style="width: 5%;" class="th-group">excel上传人</div>
+								<div style="width: 5%;" class="th-group">操作人</div>
+								<div style="width: 5%;" class="th-group">备注</div>
+								<div class="th-group" style="width: 8%;">
+									操作
+								</div>
+							</div>
+						</div>
+						<div class="toogle-ord-stu" id="c-zi-ord">
+							<!-- 订单列表部分 -->
+							<div class="c-ord-list">
+								<table class="orders-table">
+									<tbody class="c-ord-tbody" ng-repeat="zddlist in orderList track by $index"
+										ng-init="pIndex=$index" repeat-finish>
+										<tr class="erporder-detail">
+											<td class="ordlist-fir-td stop-prop" style="width: 9%;">
+												<img class="cor-check-box stop-prop"
+													src="static/image/order-img/multiple1.png">
+												<p class="stop-prop cg-id" ng-cloak>{{zddlist.id}}</p>
+												<p style="display: none;" class="id1688">{{zddlist.orderId}}</p>
+												<p style="display: none;" class="zzh-text">{{zddlist.zhuiZongHao}}</p>
+												<img ng-click="LookLog(zddlist,'purchase',$event)" class="log-img" src="static/image/public-img/ord-log.png">
+											</td>
+											<td class="moshow-sp-td" style="width: 15%">
+												<p ng-cloak>{{zddlist.orderId}}</p>
+												<span title="该订单里有异常商品" class="warn-span"
+													ng-if="zddlist.hasException==1">异</span>
+											</td>
+											<td class="ordlist-imgtd moshow-sp-td" style="width: 5%;">
+												<p ng-if="zddlist.createDate" ng-cloak>
+													{{zddlist.createDate | date:'yyyy-MM-dd HH:mm:ss'}}
+												</p>
+											</td>
+											<td class="moshow-sp-td" style="width: 5%;">
+												<p ng-cloak>{{zddlist.caigouRen}}</p>
+											</td>
+											<td style="width: 5%;" class="store-name-td moshow-sp-td">
+												<p ng-if="zddlist.fuKuanDate" class="store-name-p" ng-cloak>
+													{{ zddlist.fuKuanDate | date:'yyyy-MM-dd HH:mm:ss' }}
+												</p>
+											</td>
+											<td style="width: 5%;" class="moshow-sp-td">
+												<p ng-cloak>{{zddlist.fuKuanRen}}</p>
+											</td>
+											<td style="width: 5%;" class="moshow-sp-td">
+												<p ng-cloak>{{zddlist.gongHuoGongSi}}</p>
+											</td>
+											<td style="width: 5%;" class="moshow-sp-td">
+												<p ng-cloak>{{zddlist.yunFei-0+(zddlist.huoWuZongJia-0) | number:2}}</p>
+											</td>
+											<td style="width: 5%;" class="moshow-sp-td">
+												<p ng-cloak>{{zddlist.zhiFu}}</p>
+											</td>
+											<td style="width: 10%;" class="moshow-sp-td">
+												<p ng-cloak ng-repeat="(key,val) in zddlist.zhuiZongHao">{{val}}:
+													{{key}}</p>
+												<p ng-show="wuLiuVal=='y'">包裹件数: {{zddlist.packageNum}}</p>
+											</td>
+											<td style="width: 8%;" class="moshow-sp-td">
+												<p ng-if="zddlist.excelDate" ng-cloak>
+													{{ zddlist.excelDate | date:"yyyy-MM-dd HH:mm"}}
+												</p>
+											</td>
+											<td style="width: 5%;" class="moshow-sp-td">
+												<p ng-cloak>{{zddlist.excelShangChuanRen}}</p>
+											</td>
+											<td style="width: 5%;">{{zddlist.skuQueRenRen}}</td>
+											<td style="width: 5%;">{{zddlist.closeRemark}}</td>
+											<td style="width: 8%;">
+												<button ng-click="addWaitOrder(zddlist,$index,$event)"
+													class="puchord-czbtn">提交到待签收</button>
+											</td>
+										</tr>
+										<tr class="erpd-toggle-tr">
+											<td class="d-tog-td" colspan="16">
+												<div class="erpd-toggle-div">
+													<table ng-repeat="pList in zddlist.products"
+														ng-class='{"suc-back":pList.isupSucFlag}'>
+														<tr class="sp-fir-tr">
+															<td rowspan="2" class="dt-img-td" ng-cloak>
+																<span class="blank-span">
+																	<img class="sp-smallimg" ng-src="{{pList.cjImg}}">
+																	<img class="hide-bigimg" ng-src="{{pList.cjImg}}">
+																</span>
+															</td>
+															<td rowspan="2" ng-cloak>采购链接: <a target="_blank"
+																	class="cg-href"
+																	ng-href="{{pList.caiGouLianJie}}">{{pList.caiGouLianJie}}</a>
+															</td>
+															<td rowspan="2" ng-cloak>1688货品名称: {{pList.huoWuBiaoTi}}
+															</td>
+															<td 
+																rowspan="2" ng-cloak>单价: ¥{{pList.danJia}}</td>
+															<td
+																rowspan="2" ng-cloak>数量:
+																{{pList.shuLiang}}{{pList.danWei}}</td>
+														</tr>
+													</table>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+						<div ng-show="erpordTnum<1" style="text-align: center;">暂无数据</div>
+						<!-- 分页 -->
+						<page page-data="pageData"></page>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改订单号 -->
+<div class="isaddyfh-wrap" ng-show="modefyOrdNumFlag">
+	<div class="isaddyfh-con">
+		<div class="margin-bottom20px">
+			<span class="name-span">新订单号:</span>
+			<input ng-model='new1688OrdNum' style="height: 30px;width:200px;text-indent: 12px;"></input>
+		</div>
+		<div class="isaddyfh-btns">
+			<button ng-click="modefyOrdNumFlag=false" class="ispc-can-btn">取消</button>
+			<button ng-click="sureModOrdFun()" class="ispc-con-btn">确定</button>
+		</div>
+	</div>
+</div>
+<comlog-tk ng-if="isLookLog" list='ctrl.list' type='ctrl.type'></comlog-tk>
+<style type="text/css">
+	.c-seach-inp {
+		height: 30px;
+		float: left;
+		width: 200px;
+		text-indent: 12px;
+		border-radius: 0;
+		border-left: none;
+	}
+
+	.c-seach-btn {
+		padding: 0 10px;
+		border: 1px solid #ececec;
+		border-left: none;
+		height: 30px;
+		line-height: 28px;
+		float: left;
+	}
+
+	.c-fun-right .two-ck-btn {
+		height: 30px;
+		margin-left: 20px;
+	}
+
+	.c-fun-right .act-btn {
+		background-color: #08aceb;
+		color: #fff;
+	}
+
+	#up-form {
+		position: relative;
+		display: inline-block;
+		float: right;
+	}
+
+	#upLoadInp,#nbcgUpLoadInp {
+		width: 75px;
+		font-size: 0;
+		border: 1px solid red;
+		display: inline-block;
+		height: 30px;
+		position: absolute;
+		right: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.cg-href {
+		width: 120px;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin: 0 auto;
+	}
+
+	.tj-sku-btn {
+		padding: 2px 4px;
+		border: 1px solid #5dbdf2;
+		background-color: #fff;
+		color: #5dbdf2;
+		border-radius: 4px;
+	}
+
+	.tj-sku-btn:hover {
+		background-color: #5dbdf2;
+		color: #fff;
+	}
+
+	.sku-val {
+		height: 26px;
+		width: 230px;
+	}
+
+	.add-sp-tit {
+		width: 80px;
+		display: inline-block;
+		text-align: right;
+	}
+
+	.add-sp-inp {
+		height: 30px;
+		width: 290px;
+	}
+
+	.add-sku-list li {
+		margin: 10px 0;
+	}
+
+	.puchord-czbtn {
+		padding: 3px 5px;
+		margin: 0 2px;
+		color: #5dbdf2;
+		border: 1px solid #5dbdf2;
+		background-color: #fff;
+		border-radius: 4px;
+		font-size: 12px;
+	}
+
+	.puchord-czbtn:hover {
+		background-color: #5dbdf2;
+		color: #fff;
+	}
+
+	.warn-span {
+		display: inline-block;
+		padding: 0 3px;
+		border-radius: 4px;
+		font-size: 10px;
+		color: #fff;
+		background-color: #f45d1a;
+		margin-top: 4px;
+		cursor: pointer;
+	}
+
+	.warn-bg {
+		background-color: #f45d1a;
+	}
+
+	.add-sku-table {
+		width: 100%;
+		border: 1px solid #ececec;
+		text-align: center;
+	}
+
+	.add-sku-table tr {
+		border-bottom: 1px solid #ececec;
+	}
+
+	.add-sku-table th {
+		border-right: 1px solid #ececec;
+		height: 40px;
+		text-align: center;
+	}
+
+	.add-sku-table td {
+		border-right: 1px solid #ececec;
+		height: 40px;
+		font-size: 12px;
+	}
+
+	.w60h60 {
+		width: 60px;
+		height: 60px;
+	}
+
+	.w100 {
+		width: 100px;
+		height: 30px;
+		text-align: center;
+	}
+
+	.add-tabcon {
+		height: 400px;
+		overflow-y: auto;
+	}
+
+	.addsku-btn {
+		padding: 0 15px;
+		height: 30px;
+		line-height: 28px;
+		border: 1px solid #b4b4b4;
+		border-radius: 4px;
+		background: #d2d2d2;
+		color: #000000;
+		text-align: center;
+		font-size: 12px;
+		float: right;
+		margin-top: -5px;
+	}
+
+	.zzh-li {
+		font-size: 12px;
+		text-align: center;
+		padding: 5px 0;
+	}
+
+	.w200 {
+		width: 200px;
+		height: 30px;
+		margin-right: 30px;
+	}
+
+	.zzh-li img {
+		cursor: pointer;
+	}
+
+	.zzh-li img:last-child {
+		padding: 11px 2px;
+	}
+
+	.suc-back {
+		background-color: #04a452;
+	}
+
+	.label-span {
+		display: inline-block;
+		width: 100px;
+		text-align: right;
+		margin-right: 20px;
+	}
+
+	.rk-btn {
+		background: #08aceb;
+		height: 30px;
+		line-height: 30px;
+		border-radius: 4px;
+		color: #fff;
+		padding: 0 15px;
+		float: right;
+		display: inline-block;
+		margin-left: 15px;
+	}
+
+	.time-click {
+		height: 30px;
+		line-height: 30px;
+		padding: 0 10px;
+		cursor: pointer;
+	}
+
+	.time-click:hover {
+		color: #5dbdf2;
+	}
+
+	.time-act {
+		color: #5dbdf2;
+	}
+
+	.thead-box {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-width: 952px;
+		z-index: 99999;
+		border: 1px solid #e1e1e1;
+		border-bottom: none;
+		margin-top: 20px;
+	}
+
+	.th-group {
+		background: #F4F8FB;
+		text-align: center;
+		padding: 10px 0;
+		height: 60px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+		/*border-right: 1px solid red;*/
+	}
+
+	.th-group span {
+		font-size: 14px;
+	}
+
+	.tit-box {
+		/*position: fixed;*/
+		left: 290px;
+		right: 58px;
+		z-index: 999;
+		background-color: #fff;
+		min-width: 952px;
+	}
+
+	.c-ord-conall {
+		min-width: 1010px;
+	}
+
+	.c-ord-conall .pur-chuli-act {
+		background-color: #5dbdf2;
+		color: #fff;
+	}
+
+	.wl-mes-ul li {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.wid20 {
+		width: 20%;
+	}
+	.wid30 {
+		width: 30%;
+	}
+	.wid76 {
+		width: 76%;
+	}
+
+	.clearfix {
+		display: flex;
+	}
+
+	.clearfix li {
+		float: left;
+		padding: 0 10px;
+		margin: 0 15px;
+		line-height: 54px;
+	}
+
+	.clearfix .Act {
+		color: #F9AE08;
+		border-bottom: 4px solid #F9AE08;
+	}
+
+	.blank-span {
+		position: relative;
+	}
+
+	.sp-smallimg {
+		width: 60px;
+		height: 60px;
+		cursor: pointer;
+	}
+
+	.hide-bigimg {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		left: 60px;
+		top: -60px;
+		background-color: #fff;
+		z-index: 9;
+		cursor: pointer;
+		max-width: none;
+		max-height: none;
+	}
+	.top-150px{
+		top: -150px;
+	}
+	.radio-td .check-box{
+		margin-left: 10px;
+	}
+	.radio-td .check-box input {
+		padding: 0;
+		width: 17px;
+	}
+
+	.add-sku-table .radio-td .check-box label {
+		background-image: url(../static/image/public-img/radiobutton1.png);
+	}
+	.add-sku-table .radio-td .check-box .act {
+		background-image: url(../static/image/public-img/radiobutton2.png);
+	}
+	.dis-flex-wrap{
+		display: flex;
+		justify-content: space-between;
+	}
+	.edit-add-btn{
+		color: #ff8d31;
+		height: 30px;
+		width: 76px;
+		border-radius: 4px;
+		font-size: 14px;
+		background-color: #fff;
+		border: 1px solid #ff8d31;
+	}
+	.edit-act{
+		background-color: #ff8d31;
+		color: #fff;
+	}
+	.invoice-ul li{
+		font-size: 12px;
+	}
+	.tip-label{
+		/* width: 120px;
+		text-align: right; */
+	}
+	.pingzhengImgs img{
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+	}
+	.tk-big-img{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		max-width: 1000px;
+	}
+	.dispute-upload {
+        display: flex;
+        margin: 5px auto 0;
+        /* margin-top: 5px; */
+        overflow-y: auto;
+		padding-top: 12px;
+    }
+    
+    .dispute-upload .upload_wrap {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .dispute-upload .upload_wrap li {
+        margin-right: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        margin-bottom: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+    }
+    
+    .dispute-upload .upload_wrap .li-img {
+        width: 104px;
+        height: 104px;
+		position: relative;
+    }
+	.dispute-upload .upload_wrap .before-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .dispute-upload .upload_wrap .close-img {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        z-index: 1000;
+        cursor: pointer;
+		width: 20px;
+    }
+	.upload-img {
+        width: 104px;
+        height: 104px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.02);
+        position: relative;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .upload_file {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 104px;
+        height: 104px;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    .upload_img_wrap img {
+        width: 37px;
+        height: 33px;
+    }
+	.selsea-key{
+		float: left;
+		height: 30px;
+		margin-left: 10px;
+		border: 1px solid #ececec;
+	}
+	.c-ord-tbody .check-box{
+		position: absolute;
+		left: 16px;
+	}
+	.thead-box .check-box{
+		position: absolute;
+		left: 47px;
+	}
+	.pad-left40px{
+		padding-left: 40px;
+	}
+	@media screen and (max-width: 1300px){
+		.isaddyfh-wrap .tijiao-ordcon{
+			left: 260px;
+			transform: translateY(-50%);
+		}
+	}
+	.red-border{
+		border: 1px solid red;
+	}
+	.remark{
+		width: 200px;
+		word-wrap:break-word;
+	}
+	.imgs{
+		width: 50px;
+		height: 50px;
+	}
+	.Aws{
+		width: 10%;
+	}
+	.Aw{
+		width: 12%;
+	}
+	#upexcel-btn{
+        background-color: #fff;
+        border: 1px solid #5dbdf2;
+        height: 30px;
+        padding: 0 10px;
+        border-radius: 4px;
+        color: #5dbdf2;
+    }
+	.isaddyfh-con .margin-bottom20px{
+		margin-bottom: 20px;
+	}
+	.isaddyfh-con .margin-bottom70px{
+		margin-bottom: 70px;
+	}
+	.isaddyfh-con .name-span{
+		width: 80px;
+	}
+	.new-ydh-box{
+		max-height: 300px;
+		overflow-y: auto;
+		margin-bottom: 60px;
+	}
+	.new-ydh-box img{
+		cursor: pointer;
+	}
+	.data-inp{
+		text-indent: 12px;
+		position:relative;
+		top: 0px;
+		float: left;
+		width: 110px;
+		margin-right: 5px;
+	}
+</style>

@@ -1,0 +1,377 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+
+		<!-- filter -->
+		<form class="filter flex fwp">
+			<div class="item">
+				<span>类目名称：</span>
+				<input type="text" placeholder="请输入二次类目名称" ng-model="data.secondaryCategoryName" />
+			</div>
+
+			<div class="item">
+				<span>所属一级类目：</span>
+				<select ng-model="data.primaryCategories" ng-change="search()" placeholder="请选择一级类目">
+					<option value="">全部</option>
+					<option ng-repeat="i in classifications" value="{{ i.id }}">{{ i.name }}</option>
+				</select>
+			</div>
+
+			<div class="item">
+				<span>采购员：</span>
+				<input type="text" placeholder="请输入采购员姓名" ng-model="data.buyerName" />
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="search()">查询</a>
+				<a href="javascript:void(0)" class="btn ghost" ng-click="getClassificationsAndPersonWork()">分配工作</a>
+			</div>
+
+		</form>
+
+		<table class="k-table" style="width:100%;margin-top:20px;">
+			<thead>
+				<th>二级类目名称</th>
+				<th>所属一级类目</th>
+				<th>采购员</th>
+				<th>最近分配时间</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in assignWorkList">
+					<td>
+						<div class="td">{{ item.secondaryCategoryName }}</div>
+					</td>
+					<td>
+						<div class="td">{{ item.primaryCategoryName }}</div>
+					</td>
+					<td>
+						<div class="td">{{ item.buyerName }}</div>
+					</td>
+					<td>
+						<!--  | date:"yyyy-MM-dd HH:mm:ss"  -->
+						<div class="td">{{ item.createDate }}</div>
+					</td>
+					<td>
+						<div class="td">
+							<div class="tools">
+								<a href="javascript:void(0)" ng-click="openReAssign(item)">重新分配</a>
+								<a href="javascript:void(0)" ng-click="openAssignRecord(item)">查看记录</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 分页 -->
+		<page></page>
+
+	</div>
+</div>
+
+<!-- 分配任务 -->
+<div class="erp-common-tan-v2-wrap" ng-show="assignOperation">
+	<div class="erp-common-tan-v2" style="width: 800px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="assignOperation=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>分配工作</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="classification_tree">
+				<ul class="flex fdc">
+					<li class="flex fdc item" ng-repeat="item in assignClassifications">
+						<div class="flex fdr aic">
+							<span class="toggle" ng-click="toggle(item)"
+								ng-show="item.childList.length > 0">{{ item.isExpand ? '-' : '+' }}</span>
+							<div class="con" ng-style='{"margin-left":!item.childList || item.childList.length <= 0 ? "25px" : 0}'>
+								{{ item.name }}</div>
+						</div>
+						<ul class="subClassification" ng-show="item.childList.length > 0 && item.isExpand == true">
+							<li class="flex fdr aic" ng-repeat="i in item.childList">
+								<span>{{ i.name }}</span>
+								<div class="assignCon">
+									<a href="javascript:void(0)" ng-show="!i.isAssign && !i.buyerId" ng-click="i.isAssign = true"
+										style="color:#F8A636;">分配</a>
+									<select ng-model="i.buyerId" ng-show="i.buyerId || i.isAssign" ng-change="changeAssignPerson(i)">
+										<option value="">未分配</option>
+										<option ng-repeat="i in ErpEmployeeList" value="{{ i.id }}">{{ i.loginName }}</option>
+									</select>
+								</div>
+							</li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="assignOperation=false;" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="batchAssignWork()" class="que-ding-btn">立即生效</a>
+		</div>
+	</div>
+</div>
+
+<!-- 重新分配 -->
+<div class="erp-common-tan-v2-wrap" ng-show="reAssign">
+	<div class="erp-common-tan-v2" style="width: 800px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="reAssign=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>分配工作</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="item flex aic">
+				<span>{{ currentItem.secondaryCategoryName }}：</span>
+				<select style="min-width:80px;" ng-model="currentItem.buyerId">
+					<option ng-repeat="i in ErpEmployeeList" value="{{ i.id }}">{{ i.loginName }}</option>
+				</select>
+			</div>
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="reAssign=false;" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="assignWork(currentItem)" class="que-ding-btn">确认</a>
+		</div>
+	</div>
+</div>
+
+<!-- 分配记录 -->
+<div class="erp-common-tan-v2-wrap" ng-show="assignRecord">
+	<div class="erp-common-tan-v2" style="width: 800px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="assignRecord=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>分配记录</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<table class="k-table" style="width:100%;margin-top:20px;">
+				<thead>
+					<th>采购员</th>
+					<th>分配人</th>
+					<th>分配时间</th>
+				</thead>
+				<tbody style="max-height:350px;">
+					<tr ng-repeat="i in assignRecordList">
+						<td>
+							<div class="td">{{ i.buyerName }}</div>
+						</td>
+						<td>
+							<div class="td">{{ i.assignmentName }}</div>
+						</td>
+						<td>
+							<!--  | date:"yyyy-MM-dd hh:mm:ss" -->
+							<div class="td">{{ i.createDate}}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="assignRecord=false;" class="qu-xiao-btn">关闭</a>
+			<!-- 确认按钮（彩色） -->
+			<!-- <a href="javascript:void(0);" ng-click="addLossPro()" class="que-ding-btn">确认</a> -->
+		</div>
+	</div>
+</div>
+
+<style>
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.classification_tree {
+		overflow: auto;
+		max-height: 400px;
+	}
+
+	.classification_tree .item {
+		margin-bottom: 10px;
+	}
+
+	.classification_tree .subClassification {
+		padding-left: 40px;
+		margin-top: 5px;
+	}
+
+	.classification_tree .subClassification li {
+		margin-bottom: 10px;
+	}
+
+	.classification_tree .subClassification .assignCon {
+		margin-left: 15px;
+	}
+
+	.classification_tree .subClassification .assignCon select {
+		min-width: 80px;
+	}
+
+	.toggle {
+		display: block;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		color: #ccc;
+		margin-right: 10px;
+		width: 15px;
+		height: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* tools */
+	.tools a {
+		margin: 0 5px;
+		color: #F8A636;
+	}
+
+	.tools a:hover {
+		opacity: 0.4;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+</style>

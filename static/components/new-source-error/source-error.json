@@ -1,0 +1,62 @@
+{
+	"list": [
+		{
+			"cn": "没有找到一样的，有类似的",
+			"en": "We contacted many manufacturers for this product. Unfortunately, no exact same one found. And we have similar ones below for your reference. You can also ask your agent for more recommendations here: here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "价格太贵，比速卖通贵很多",
+			"en": "We contacted many manufacturers in the past hours, none of them give CJ good price. Sorry that CJ price will not be competitive than Aliexpress, we can not meet your price. If you still want to dropship it at another price, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "代购太贵",
+			"en": "The source of this product is outside of China, and it is quite expensive.  Please talk with your agent about the detail: https://chat.cjdropshipping.com"
+		},{
+			"cn": "断货，没有货",
+			"en": "We contacted with many manufacturers, unfortunately none of them have inventory. If you accept a replacement, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "产品太重，运费远高于产品价格",
+			"en": "The weight of this product is too heavy, and the shipping cost is much higher than the product value. This is kind of beyond the dropshipping concept. If you still insist to drop ship this product, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "价格太高，不在售卖范围",
+			"en": "The price for this product is too high, CJ can dropship it for you but WITHOUT aftersale. If you agree with dropshipping WITHOUT aftersale on this product,  please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "特殊产品（100ml以上液体、白色粉末、带喷头液体、枪炸弹武器形状产品），没有渠道发货",
+			"en": "No shipping method for special products, including the liquid measured 100ml or above, white powder, liquid, sprayer, weapon shaped products."
+		},{
+			"cn": "找不到",
+			"en": "We contacted many manufacturers, unfortunately, we were unable to find it. If you have the contact of your own manufacturer, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "品牌产品，不允许售卖",
+			"en": "Copyright products, we can dropship it only have the permit or license. If you have the permit or license, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "食品不允许售卖",
+			"en": "Foods are not allowed to dropship."
+		},{
+			"cn": "起批量太大",
+			"en": "We contacted many manufacturers, the MOQ is too high from them. We can not purchase the stocks for that amount, the only way to solve this issue is you purchase your own inventory and stocked it in our warehouse, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "需要定制，起批量大",
+			"en": "We contacted many manufacturers, this product has to be customized produced. And the MOQ is too high for us to stock it. the only way to solve this issue is you purchase your own inventory and stocked it in our warehouse and it might take time, please talk with your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "客户链接打不开，也没有图片",
+			"en": "We are unable to open the URL you send or find the images for this sourcing request. Please post a new sourcing request with a valid URL and Images."
+		},{
+			"cn": "新鲜花朵、树苗",
+			"en": "Seeds are not allowed to dropship."
+		},{
+			"cn": "找到链接，卖家不回复，不接收信息，销量为0，不清楚是否有货",
+			"en": "We were trying to connect with different manufacturers but did not get a reply from them. We will keep following this sourcing, please allow us to put this sourcing as failed, you can contact your agent later for updates. Contact your agent here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "易燃易爆商品",
+			"en": "Inflammable and explosives are not allowed to dropship."
+		},{
+			"cn": "易碎商品",
+			"en": "It is a fragile product that will have a high risk of getting broken during the shipping. If you would like to dropship it, you will need to pay much more on the packaging. Please talk with your agent to figure out a good solution here: https://chat.cjdropshipping.com"
+		},{
+			"cn": "暂不支持此类目产品",
+			"en": "Unfortunately, CJ is unavailable to drop ship these kinds of products."
+		},{
+			"cn": "处理产品，量少，卖完断货",
+			"en": "We contacted many manufacturers, there are very few stocks for this product and they will not produce it anymore. The only way to solve this issue is that you initial a bulk purchase as your own inventory from CJ so we can negotiate with the manufactures about starting a new production. Please talk with your agent here: https://chat.cjdropshipping.com"
+		}
+	]
+}

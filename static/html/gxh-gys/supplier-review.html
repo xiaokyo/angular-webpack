@@ -1,0 +1,113 @@
+<div class="gxh-gys-wrap pod-supplier-review-list">
+	<div class="gxh-gys-con">
+		<div class="gxh-gys-top">
+			<div class="gxh-sealabel">
+				<input class="w20h40inp" type="text"></input><button class="w90h40btn"></button>
+			</div>
+			<div class="gxh-nav">
+				<a class="nav-a-act" href="">待审核(12)</a>
+				<a href="">未通过(4)</a>
+				<!-- <button>导出</button> -->
+			</div>
+		</div>
+		<div class="gxh-gys-mid">
+			<div class="table-box">
+				<!-- <table class="table table-bordered"> -->
+				<table class="gxh-table">
+					<thead>
+						<tr>
+							<th>
+								<div class="check-box">
+                    <input type="checkbox" ng-model="item.checked" ng-click="checkMerch(item, $index)">
+                    <label for=""></label>
+                </div>
+							</th>
+							<th>供应商</th>
+							<th>商品描述</th>
+							<th>关联SKU</th>
+							<th>申请日期</th>
+							<th>有效期</th>
+							<th>供应商链接</th>
+							<th>其他资料</th>
+							<th>审核意见</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="check-box">
+                    <input type="checkbox" ng-model="item.checked" ng-click="checkMerch(item, $index)">
+                    <label for=""></label>
+                </div>
+							</td>
+							<td>小丸子</td>
+							<td>
+								<img src="" alt="">
+								<span>Computer Backpack Waterproof…</span>
+							</td>
+							<td>12324</td>
+							<td>2017-09-02</td>
+							<td>3个月</td>
+							<td><a href="http://www.cj.com" target="_blank">http://www.cj.com</a></td>
+							<td><a href="213243534544/.rar" target="_blank">213243534544/.rar</a></td>
+							<td>
+								<p class="shenheyijian" contenteditable="true">有瑕疵</p>
+							</td>
+							<td class="ope-td">
+								<button class="btn1 active">通过</button>
+								<button class="btn2">不通过</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="page-box">
+          <div class="select-page-num">
+              <select class="form-control" ng-model="pageSize" ng-change="getPageSize()">
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+              </select>
+              <span>每页</span>
+          </div>
+          <div class="total-num">
+              共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+          </div>
+          <div class="page-index">
+              <div id="pagination1" class="pagination2"></div>
+          </div>
+          <div class="to-go">
+              <span>跳转：</span>
+              <input type="text" class="form-control" placeholder="" ng-model="specifiedPage">
+              <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="getSpecifiedPage()">go</a>
+          </div>
+      </div>
+		</div>
+	</div>
+</div>
+<!-- pod订单附件 -->
+<div class="erp-common-tan-v2-wrap" ng-show="showFujian">
+	<div class="erp-common-tan-v2 pod-fj-tan">
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="showFujian=false;"><img src="static/image/public-img/close-img.png"></a>
+		<div class="tan-v2-top">
+			<h6>附件清单</h6>
+		</div>
+		<div class="tan-v2-con">
+			<p class="ord-num">子订单号:4345345</p>
+			<div class="load-item">
+				<img src="" alt="">
+				<span class="name">荔枝纹包纹理.png</span>
+				<button>下载</button>
+			</div>
+			<div class="load-item">
+				<img src="" alt="">
+				<span class="name">荔枝纹包纹理.png</span>
+				<button>下载</button>
+			</div>
+		</div>
+		<!-- <div class="tan-v2-bot">
+			<a href="javascript:void(0);" class="btn1">Submit</a>
+		</div> -->
+	</div>
+</div>

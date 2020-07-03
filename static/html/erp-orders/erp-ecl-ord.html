@@ -1,0 +1,311 @@
+<div class="excel-orders-wrap" ng-app="ecxel-app">
+	<div class="e-ord-mid">
+		<!-- 左侧导航 -->
+		<div class="left-bar-nav">
+			<ul>
+				<li><a class="ord-left-nav" href="#/custom-ord">客户店铺订单</a></li>
+				<li><a class="ord-left-nav" style="background: #fff;border-left: solid #08ACE9 4px;color: #08ACE9;" href="#/excel-ord">Excel订单</a></li>
+			</ul>
+		</div>
+		<!-- 右边的内容部分 -->
+		<div class="eorder-right-mid">
+			<div class="econtent">
+				<!-- 订单的导航按钮 -->
+				<div class="erp-ord-nav">
+					<ul class="et-nav-ul">
+						<!-- <li class="et-nav-li1"><a class="e-customer-ord" href="#/custom-ord">客户店铺订单</a></li>
+						<li><a class="e-customer-ord e-excel-ord" style="color: #000;background: #fff;" href="#/excel-ord">Excel订单</a></li> -->
+						<li class="et-nav-li1">
+							<a class="all-view-ord order-view" style="color: #646464;background: #d5d5d5;" href="#/excel-ord">订单总览</a>
+						</li>
+						<li>
+							<a class="ord-deal-a order-view" style="color: #333;background: #fff;" href="#/ecl-ord">订单处理</a>
+						</li>
+						
+					</ul>
+				</div>
+				<div class="e-ord-conall">
+					<div class="e-ord-con">
+						
+						<!-- 订单处理 控制显示隐藏 -->
+						<div class="toggle-delord-div">
+							<!-- 订单动能 时间等的部分 -->
+							<div class="e-ord-fun">
+								<!-- 上传 下载 -->
+								<div class="e-upordown-fun">
+									<a class="upload-ord" href="javascript:void(0)">创建Excel订单</a>
+									<a class="download-ord" href="javascript:void(0)">下载订单模板</a>
+								</div>
+								<!-- 特别关注 -->
+								<!-- <div class="e-data-time">
+									<div class="e-fun-left">特别关注:</div>
+									<div class="e-fun-right">
+										<input class="Wdate data-inp" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" style="text-indent: 12px;" id="e-ord-time"></input>
+										<span class="all-order-span">总订单:</span>
+										<span>2333</span>
+									</div>
+								</div> -->
+								<!-- 客户订单状态查看 -->
+								<!-- <div class="e-ord-stuv">
+									<div class="e-fun-left">客户订单状态查看:</div>
+									<div class="e-fun-right">
+										<a href="javascript:void(0)">等待客户付款</a>
+										<a href="javascript:void(0)">已取消订单</a>
+									</div>
+								</div> -->
+								<!-- 我们操作的订单 -->
+								<div class="e-us-stuv">
+									<!-- <div class="e-fun-left">客户订单状态查看:</div> -->
+									<div class="e-fun-right">
+										<!-- <input class="Wdate data-inp" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" style="text-indent: 12px;" id="e-ord-time"></input> -->
+										<input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text" onclick="var cdatatime2=$dp.$('cdatatime2');WdatePicker({onpicked:function(){cdatatime2.click();},maxDate:'#F{$dp.$D(\'cdatatime2\')}'})"></input><input id="cdatatime2" class="Wdate data-inp" style="text-indent: 12px;" type="text" onclick="WdatePicker({minDate:'#F{$dp.$D(\'c-data-time\')}'})"/><input class="erp-seachInp" type="button" value="搜索"></input>
+										<a class="exc-sta-a" href="javascript:void(0)">等待我们发货</a>
+										<a class="exc-sta-a" href="javascript:void(0)">已发货订单</a>
+										<a class="exc-sta-a" href="javascript:void(0)">退款订单</a>
+										<a class="exc-sta-a" href="javascript:void(0)">已关闭订单</a>
+										<span class="all-order-span">总订单:</span>
+										<span>2333</span>
+									</div>
+								</div>
+								<!-- 订单搜索部分 -->
+								<div class="e-seach-fun">
+									<div class="e-seach-div">
+										<select class="e-seach-country">
+											<!-- <option  ng-repeat="country in countryList" ng-bind="country.nameEn">国家</option> -->
+											<option>订单号</option>
+											<option>客户</option>
+											<option>业务员</option>
+											<option>总金额</option>
+										</select>
+										<input class="e-seach-inp"></input>
+										<a class="e-seach-btn" href="javascript:void(0)">搜索</a>
+									</div>
+									<select class="e-select-ord">
+										<option class="e-select-option">所有订单</option>
+										<option class="e-select-option">筛选可发货订单</option>
+										<option class="e-select-option">筛选可生成运单状态订单</option>
+										<option class="e-select-option">筛选可上传运单状态订单</option>
+									</select>
+									<!-- <p id="e-filter-ord"> -->
+										<span class="e-order-allnum">120条订单</span>
+										<a class="print-ord-a" href="javascript:void(0)">批量打印运单及发货</a>
+									<!-- </p> -->
+									<p class="ord-fun-btn">
+										<a class="batch-change" href="javascript:void(0)">批量修改物流</a>
+										<a class="end-ord" href="javascript:void(0)">终止订单</a>
+										<a class="e-export-ord" href="javascript:void(0)">导出</a>
+									</p>
+								</div>
+							</div>
+
+							<!-- 订单列表部分 -->
+							<div class="e-ord-list">
+								<table id="e-deal-table">
+									<thead class="e-ord-thead">
+										<tr>
+											<th class="ordlist-fir-th" style="width: 100px">
+												<img class="e-check-all" src="static/image/order-img/multiple1.png">
+												<span>店铺</span>
+											</th>
+											<th style="width: 60px">图片</th>
+											<th style="width: 80px">订单号</th>
+											<th style="width: 95px">下单日期</th>
+											<th style="width: 135px">客户</th>
+											<th style="width: 105px">SKU</th>
+											<th style="width: 80px">
+												<p>数量</p>
+												<p>金额</p>
+											</th>
+											<th style="width: 60px">国家</th>
+											<th style="width: 90px">付款状态</th>
+											<th style="width: 75px">物流</th>
+											<th style="width: 80px">运单状态</th>
+											<th style="width: 80px">
+												<p>打印面单</p>
+												<p>及发货</p>
+											</th>
+											<th style="width: 135px">发货状态</th>
+										</tr>
+									</thead>
+									<tbody class="e-ord-tbody">
+										<tr>
+											<td class="ordlist-fir-td">
+												<img class="eo-check-box" src="static/image/order-img/multiple1.png">
+												<p>shopify</p>
+												<p>a店铺</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="ordlist-imgtd">
+												<img class="ordlist-goods-img" src="static/image/order-img/pic6.png">
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												A000001
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>9-12</p>
+												<p>12:00</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>Chompa-rangsey Chan</p>
+												<p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>CTXL70111</p>
+												<p class="goods-property">
+													<span class="y-pro">液</span>
+													<span class="f-pro">粉</span>
+													<span class="c-pro">磁</span>
+												</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>100个</p>
+												<p>$224.81</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												us
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												已付款
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<select>
+													<option>e邮宝</option>
+												</select>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="created-td">
+												已生成
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<a class="prient-ord" href="javascript:void(0)">打印运单</a>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>未发货</td>
+										</tr>
+										<!-- 第二行 -->
+										<tr>
+											<td class="ordlist-fir-td">
+												<img class="eo-check-box" src="static/image/order-img/multiple1.png">
+												<p>shopify</p>
+												<p>a店铺</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td class="ordlist-imgtd">
+												<img class="ordlist-goods-img" src="static/image/order-img/pic6.png">
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												A000001
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>9-12</p>
+												<p>12:00</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>Chompa-rangsey Chan</p>
+												<p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>CTXL70111</p>
+												<p class="goods-property">
+													<span class="y-pro">液</span>
+													<span class="f-pro">粉</span>
+													<span class="c-pro">磁</span>
+												</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<p>100个</p>
+												<p>$224.81</p>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												us
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												已付款
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<select>
+													<option>e邮宝</option>
+												</select>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<a class="have-created-td" href="javascript:void(0)">生成</a>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>
+												<a class="gray-prient-ord" href="javascript:void(0)">打印运单</a>
+												<!-- td 右边的边框 -->
+												<span class="border-span"></span>
+											</td>
+											<td>未发货</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- 分页 -->
+							<div class="pages-fun">
+								<select class="select-page-num">
+									<option>1</option>
+									<option>3</option>
+									<option>10</option>
+									<option>20</option>
+								</select>
+								<span class="every-page">每页</span>
+								<span class="every-page gong">共</span>
+								<span class="all-num-line"></span>
+								<span class="every-page">条</span>
+							    <span id="demo3-text"></span>
+							    <div id="pages-fun"></div>
+							    <span class="every-page">跳转:</span>
+							    <input class="inp-num-go"></input>
+							    <span class="jump-btn">go</span>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

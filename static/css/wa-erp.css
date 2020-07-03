@@ -1,0 +1,224 @@
+
+.ea-right-content .wa-right-nav{ background: #F1F3F2; padding-top: 50px;text-align:left !important;}
+.ea-right-content .ea-right-nav ul{margin-left:149px;}
+.ea-right-content .ea-right-nav ul li{ display: inline-block; margin-right: 20px;position: relative;}
+.wa-right-twoNav{text-align:center;padding-top:27px;}
+.wa-right-twoNav ul li{display:inline-block;width:98px;height:30px;line-height:30px;text-align:center;margin-right:20px;}
+.wa-right-twoNav ul .active{border:1px solid #08aceb;color:#08aceb;}
+.wa-right-search{ margin: 0 50px; margin-top: 12px !important; padding-top: 30px; border-top: solid #e1e1e1 1px;}
+
+
+/*代发商品-全部*/
+.wa-bianJi{width:66px;height:30px;text-align:center;line-height:31px;border:1px solid #818181;float:left;margin-left:20px;}
+.wa-moreOperating{display:block;float:left;margin-left:10px;line-height:30px;}
+.la_tr .wa-more{display:block;float:left;margin-left:5px;width:10px;line-height:30px;}
+.wa-sp{width:200px;position:relative;}
+/*代发商品-搜品关联*/
+// .wa-GuestsDetails{width:690px;padding:15px 15px 40px 15px;position: absolute;z-index: 99;left: 28%;top: 50%;background-color: #fff; box-shadow: 0px 5px 15px #999;}
+.wa-GuestsDetails{width:100%;}
+.more-box{width:76px;padding:10px 15px 10px 7px;border:1px solid #e3e3e3;color:#333;font-size:12px;line-height:25px;position:absolute;
+    right:0;top:52px;background-color:#fff;box-shadow: 0px 5px 15px #999;z-index:10;text-align:left;}
+.more-box li:hover{background-color:#eee;}
+.wa-GuestsDetails h4{margin-bottom:15px;text-align:center;}
+
+
+
+/*物流弹框设置*/
+
+/*特殊国家弹框*/
+.wa-BulletBox{position:absolute;height:312px;box-shadow: 0px 13px 29px 0px
+rgba(0, 0, 0, 0.35);border-radius:4px;background:#fff;left:35%;display:none;padding:0 63px;top:85%;}
+.wa-SpecialCountry{width:257px;margin:0 auto;display:none;}
+.wa-SpecialCountry h3{padding:29px 0 40px 0;text-align:center;}
+.wa-country p{float:left;color:#000;font-size:12px;vertical-align: middle;line-height:28px;}
+.wa-country select{float:left;width:172px;height:28px;margin:0 13px 0 0;font-size:14px;color:#000;}
+.wa-del{font-size:12px;color:#333;}
+.wa-addCountry{width:58px;height:30px;border:1px solid #08aceb;color:#08aceb;font-size:12px;margin-top:12px;text-align:center;line-height:30px;border-radius:4px;margin-left:3em;}
+.wa-selBox{height:30px;width:250px;line-height:30px;text-align:center;font-size:14px;margin:83px auto 0 auto ;}
+.wa-selBox div{float:left;width:106px;height:30px;line-height:30px;border-radius:4px;}
+.wa-cancel{margin-right:30px;border:1px solid #d0d0d0;background-color:#d2d2d2;color:#515151;float:left;font-family: ﻿FZLTZHK--GBK1-0;}
+.wa-true{border:1px solid #e9e9e9;background-color:#08aceb;color:#fff;float:left;}
+
+/*正常情况弹框*/
+.wa-NormalCircum{width:257px;margin:0 auto;display:none;}
+.wa-NormalCircum h3{padding:29px 0 40px 0;text-align:center;}
+.wa-dayNumBox p{color:#000;float:left;line-height:28px;font-size:12px;}
+.wa-dayNumCont{float:left;margin-right:8px;}
+.wa-dayNumCont input{color:#000;font-size:14px;outline:none;display:block;float:left;width:68px;height:28px;border:1px solid #e9e9e9;text-indent:1em;}
+.wa-wa-dayTitle{font-size:14px;float:left;}
+
+/*重置运费设置弹框*/
+.wa-ResetFreight{width:320px;display:none;}
+.wa-ResetFreight h3{padding:29px 0 20px 0;text-align:center;}
+.wa-Logistics{color:#000;font-size:12px;margin-bottom:15px;}
+.wa-LogisticsCont{font-size:14px;text-indent:1em;display: inline-block;}
+.wa-channel{color:#000;font-size:12px;margin-bottom:15px;}
+.wa-channelCont{font-size:14px;text-indent:1em;display: inline-block;}
+.wa-improve{color:#000;font-size:12px;line-height:28px;}
+.wa-improveCont{width:70px;height:28px;outline:none;border:1px solid #e9e9e9;display: inline-block;margin-right:10px;}
+
+.wa-country,.wa-wuLiu,.wa-channel-type,.wa-YunFei,.normalDay{cursor:pointer;}
+.wa-inpBox{position:absolute;height:244px;width:414px;box-shadow: 0px 13px 29px 0px
+rgba(0, 0, 0, 0.35);border-radius:4px;background:#fff;left:35%;display:none;top:40%;}
+.wa-inpBoxCont{color:#000;margin-top:80px;}
+.wa-inpBoxContMsg{text-align:center;}
+.wa-selBox2{height:30px;width:250px;line-height:30px;text-align:center;font-size:14px;margin:60px auto 0 auto ;}
+.wa-selBox2 div{float:left;width:106px;height:30px;line-height:30px;border-radius:4px;}
+
+
+/*客户审核页补充*/
+.wa-btn-bottom{margin:50px auto 0 auto;padding-bottom:30px;width:1095px;}
+.wa-btnBottom-box{margin-left:430px;float:left;}
+.wa-btnBottom-box div{width:160px;height:36px;text-align:center;line-height:35px;border-radius:4px;}
+.wa-btnBottom-box .wa-btnBottom-close{margin-right:15px;border:1px solid #a6a6a6;color:#a6a6a6;float:left;}
+.wa-btnBottom-box .wa-btnBottom-pass{border:1px solid #08aceb;background:#08aceb;color:#fff;float:left;}
+
+.wa-RefuseBox{float:right;}
+.wa-RefuseBox div{height:36px;border-radius:4px;line-height:35px;text-align:center;}
+.wa-RefuseBox .wa-Refuse{width:101px;background:#d63515;color:#fff;float:left;margin-right:7px;}
+.wa-RefuseBox .wa-addHeiMingDan{width:101px;background:#818181;color:#fff;float:left;}
+
+/*客户审核的弹框*/
+.wa-ShenHeBox{padding:27px 70px 45px 70px;width:390px;background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 13px 29px 0px
+    rgba(0, 0, 0, 0.35);
+    border-radius: 4px 4px 4px 4px;display:none;margin:0 auto;}
+.wa-selYeWuYuan{width:370px;display:none;}
+.wa-selYeWuYuan h3{text-align:center;margin-bottom:37px;}
+.wa-selYeWuYuan input{width:217px;height:28px;outline:none;border:1px solid #e9e9e9;margin-left:50px;display:block;float:left;}
+.wa-selYeWuYuan .wa-sousuo{float:left;border:1px solid #e9e9e9;border-left:0;color:#888888;font-size:12px;width:57px;height:28px;line-height:30px;text-align:center;}
+.wa-selYeWuYuan select{width:277px;border:1px solid #e9e9e9;border-radius:4px;height:30px;margin-top:20px;margin-left:50px;text-indent:1em;}
+
+.wa-SelBtn-Box{margin:40px auto 0 auto;width:260px;}
+.wa-SelBtn-cancle{width:106px;margin-right:48px;height:30px;background:#d2d2d2;text-align:center;line-height:30px;color:#515151;border-radius:4px;float:left;}
+.wa-SelBtn-true{width:106px;height:30px;background:#08aceb;text-align:center;line-height:30px;color:#fff;border-radius:4px;float:left;}
+
+
+/*拒绝原因*/
+.wa-RefuseReasonBox{width:387px;display:none;}
+.wa-RefuseReasonBox h3{text-align:center;margin-bottom:23px;}
+.wa-RefuseReasonBox textarea{width:387px;height:93px;border:1px solid #dfdfdf;border-radius:4px;}
+
+/*加入黑名单理由*/
+.wa-addReasonBox{width:528px;display:none;padding:27px 0 45px 0;margin:0 auto;	background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 13px 29px 0px
+    rgba(0, 0, 0, 0.35);
+    border-radius: 4px 4px 4px 4px;}
+.wa-addReasonBox p{width:333px;margin:0 auto;line-height:25px;text-align:center;}
+.wa-addReasonBox h3{text-align:center;margin-top:50px;}
+.wa-addReasonBox textarea{width:315px;height:67px;margin:12px auto 0 auto;}
+.wa-text{width:315px;margin:0 auto;}
+
+
+=======
+.ea-right-content .wa-right-nav{ background: #F1F3F2; padding-top: 50px;text-align:left !important;}
+.ea-right-content .ea-right-nav ul{margin-left:149px;}
+.ea-right-content .ea-right-nav ul li{ display: inline-block; margin-right: 20px;position: relative;}
+.wa-right-twoNav{text-align:center;padding-top:27px;}
+.wa-right-twoNav ul li{display:inline-block;width:98px;height:30px;line-height:30px;text-align:center;margin-right:20px;}
+.wa-right-twoNav ul .active{border:1px solid #08aceb;color:#08aceb;}
+.wa-right-search{ margin: 0 50px; margin-top: 12px !important; padding-top: 30px; border-top: solid #e1e1e1 1px;}
+
+
+/*代发商品-全部*/
+.wa-bianJi{width:66px;height:30px;text-align:center;line-height:31px;border:1px solid #818181;float:left;margin-left:20px;}
+.wa-moreOperating{display:block;float:left;margin-left:10px;line-height:30px;}
+.la_tr .wa-more{display:block;float:left;margin-left:5px;width:10px;line-height:30px;}
+.wa-sp{width:200px;position:relative;}
+/*代发商品-搜品关联*/
+.wa-GuestsDetails{width:690px;padding:15px 15px 40px 15px;position: absolute;z-index: 99;left: 28%;top: 50%;background-color: #fff; box-shadow: 0px 5px 15px #999;}
+.more-box{width:76px;padding:10px 15px 10px 7px;border:1px solid #e3e3e3;color:#333;font-size:12px;line-height:25px;position:absolute;
+    right:0;top:52px;background-color:#fff;box-shadow: 0px 5px 15px #999;z-index:10;text-align:left;}
+.more-box li:hover{background-color:#eee;}
+.wa-GuestsDetails h4{margin-bottom:15px;text-align:center;}
+
+
+
+/*物流弹框设置*/
+
+/*特殊国家弹框*/
+.wa-BulletBox{position:absolute;height:312px;box-shadow: 0px 13px 29px 0px
+rgba(0, 0, 0, 0.35);border-radius:4px;background:#fff;left:35%;display:none;padding:0 63px;top:85%;}
+.wa-SpecialCountry{width:257px;margin:0 auto;display:none;}
+.wa-SpecialCountry h3{padding:29px 0 40px 0;text-align:center;}
+.wa-country p{float:left;color:#000;font-size:12px;vertical-align: middle;line-height:28px;}
+.wa-country select{float:left;width:172px;height:28px;margin:0 13px 0 0;font-size:14px;color:#000;}
+.wa-del{font-size:12px;color:#333;}
+.wa-addCountry{width:58px;height:30px;border:1px solid #08aceb;color:#08aceb;font-size:12px;margin-top:12px;text-align:center;line-height:30px;border-radius:4px;margin-left:3em;}
+.wa-selBox{height:30px;width:250px;line-height:30px;text-align:center;font-size:14px;margin:83px auto 0 auto ;}
+.wa-selBox div{float:left;width:106px;height:30px;line-height:30px;border-radius:4px;}
+.wa-cancel{margin-right:30px;border:1px solid #d0d0d0;background-color:#d2d2d2;color:#515151;float:left;font-family: ﻿FZLTZHK--GBK1-0;}
+.wa-true{border:1px solid #e9e9e9;background-color:#08aceb;color:#fff;float:left;}
+
+/*正常情况弹框*/
+.wa-NormalCircum{width:257px;margin:0 auto;display:none;}
+.wa-NormalCircum h3{padding:29px 0 40px 0;text-align:center;}
+.wa-dayNumBox p{color:#000;float:left;line-height:28px;font-size:12px;}
+.wa-dayNumCont{float:left;margin-right:8px;}
+.wa-dayNumCont input{color:#000;font-size:14px;outline:none;display:block;float:left;width:68px;height:28px;border:1px solid #e9e9e9;text-indent:1em;}
+.wa-wa-dayTitle{font-size:14px;float:left;}
+
+/*重置运费设置弹框*/
+.wa-ResetFreight{width:320px;display:none;}
+.wa-ResetFreight h3{padding:29px 0 20px 0;text-align:center;}
+.wa-Logistics{color:#000;font-size:12px;margin-bottom:15px;}
+.wa-LogisticsCont{font-size:14px;text-indent:1em;display: inline-block;}
+.wa-channel{color:#000;font-size:12px;margin-bottom:15px;}
+.wa-channelCont{font-size:14px;text-indent:1em;display: inline-block;}
+.wa-improve{color:#000;font-size:12px;line-height:28px;}
+.wa-improveCont{width:70px;height:28px;outline:none;border:1px solid #e9e9e9;display: inline-block;margin-right:10px;}
+
+.wa-country,.wa-wuLiu,.wa-channel-type,.wa-YunFei,.normalDay{cursor:pointer;}
+.wa-inpBox{position:absolute;height:244px;width:414px;box-shadow: 0px 13px 29px 0px
+rgba(0, 0, 0, 0.35);border-radius:4px;background:#fff;left:35%;display:none;top:40%;}
+.wa-inpBoxCont{color:#000;margin-top:80px;}
+.wa-inpBoxContMsg{text-align:center;}
+.wa-selBox2{height:30px;width:250px;line-height:30px;text-align:center;font-size:14px;margin:60px auto 0 auto ;}
+.wa-selBox2 div{float:left;width:106px;height:30px;line-height:30px;border-radius:4px;}
+
+
+/*客户审核页补充*/
+.wa-btn-bottom{margin:50px auto 0 auto;padding-bottom:30px;width:1095px;}
+.wa-btnBottom-box{margin-left:430px;float:left;}
+.wa-btnBottom-box div{width:160px;height:36px;text-align:center;line-height:35px;border-radius:4px;}
+.wa-btnBottom-box .wa-btnBottom-close{margin-right:15px;border:1px solid #a6a6a6;color:#a6a6a6;float:left;}
+.wa-btnBottom-box .wa-btnBottom-pass{border:1px solid #08aceb;background:#08aceb;color:#fff;float:left;}
+
+.wa-RefuseBox{float:right;}
+.wa-RefuseBox div{height:36px;border-radius:4px;line-height:35px;text-align:center;}
+.wa-RefuseBox .wa-Refuse{width:101px;background:#d63515;color:#fff;float:left;margin-right:7px;}
+.wa-RefuseBox .wa-addHeiMingDan{width:101px;background:#818181;color:#fff;float:left;}
+
+/*客户审核的弹框*/
+.wa-ShenHeBox{padding:27px 70px 45px 70px;width:390px;background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 13px 29px 0px
+    rgba(0, 0, 0, 0.35);
+    border-radius: 4px 4px 4px 4px;display:none;margin:0 auto;}
+.wa-selYeWuYuan{width:370px;display:none;}
+.wa-selYeWuYuan h3{text-align:center;margin-bottom:37px;}
+.wa-selYeWuYuan input{width:217px;height:28px;outline:none;border:1px solid #e9e9e9;margin-left:50px;display:block;float:left;}
+.wa-selYeWuYuan .wa-sousuo{float:left;border:1px solid #e9e9e9;border-left:0;color:#888888;font-size:12px;width:57px;height:28px;line-height:30px;text-align:center;}
+.wa-selYeWuYuan select{width:277px;border:1px solid #e9e9e9;border-radius:4px;height:30px;margin-top:20px;margin-left:50px;text-indent:1em;}
+
+.wa-SelBtn-Box{margin:40px auto 0 auto;width:260px;}
+.wa-SelBtn-cancle{width:106px;margin-right:48px;height:30px;background:#d2d2d2;text-align:center;line-height:30px;color:#515151;border-radius:4px;float:left;}
+.wa-SelBtn-true{width:106px;height:30px;background:#08aceb;text-align:center;line-height:30px;color:#fff;border-radius:4px;float:left;}
+
+
+/*拒绝原因*/
+.wa-RefuseReasonBox{width:387px;display:none;}
+.wa-RefuseReasonBox h3{text-align:center;margin-bottom:23px;}
+.wa-RefuseReasonBox textarea{width:387px;height:93px;border:1px solid #dfdfdf;border-radius:4px;}
+
+/*加入黑名单理由*/
+.wa-addReasonBox{width:528px;display:none;padding:27px 0 45px 0;margin:0 auto;	background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 13px 29px 0px
+    rgba(0, 0, 0, 0.35);
+    border-radius: 4px 4px 4px 4px;}
+.wa-addReasonBox p{width:333px;margin:0 auto;line-height:25px;text-align:center;}
+.wa-addReasonBox h3{text-align:center;margin-top:50px;}
+.wa-addReasonBox textarea{width:315px;height:67px;margin:12px auto 0 auto;}
+.wa-text{width:315px;margin:0 auto;}
+
+
+

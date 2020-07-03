@@ -1,0 +1,187 @@
+<div class="pod-box">
+	<div class="pod-title" id="aa">
+		定制区域
+		<button class="add-btn" ng-disabled="areaList.length === 8" ng-show="from!='detail'" ng-click="addNewArea()">新增定制区域（{{areaList.length}}/8）</button>
+	</div>
+	<div class="pod-list">
+		<div class="pod-item" ng-repeat="(index,item) in areaList track by $index">
+			<div class="pod-item-title">
+				{{item.areaName}}（{{item.typeName}}）
+				<div class="right">
+					<span class="num"></span>
+					<i class="iconfont" ng-show="from!='detail'" ng-click="editFun(index)">&#xe61e;</i>
+					<i class="iconfont" ng-show="from!='detail'"  ng-click="delFun(index)">&#xe69c;</i>
+				</div>
+			</div>
+			<div class="img-box">
+				<div class="img-file">
+					<img src="{{item.img |IMG_SIZE}}" alt="">
+				</div>
+				<p class="img-title">
+					默认
+				</p>
+			</div>
+			<div class="img-box" ng-repeat="(childIndex,childItem) in item.backImgList track by $index">
+				<div class="img-file" ng-click="upLoadAreaItemImg(index,childIndex)">
+					<img src="{{childItem.imgsrc |IMG_SIZE}}" alt="">
+					<i class="iconfont add">&#xe620;</i>
+					<p>上传图片</p>
+				</div>
+				<p class="img-title">
+					{{childItem.color}}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 定制区域弹框 -->
+<div class="asj-common-tanwrap" ng-show="showCustom">
+	<div class="podconfirm">
+		<div class="podconfirm-load" ng-show="isLoad">
+			<img src="/static/layer/skin/default/loading-2.gif" alt=""> 绘制中，请稍后
+		</div>
+		<div class="podconfirm-title">
+			定制区域（<span>{{areaList.length}}</span>/8）
+			<i class="podconfirm-close" ng-click="showCustom=false">✖</i>
+		</div>
+		<div class="podconfirm-list">
+			<div class="podconfirm-item">
+				<span class="title">
+					区域名称:
+				</span>
+				<div class="input-main">
+					<input type="text" placeholder="请输入区域名称" ng-show="custom.podType!=2" ng-model="custom.areaName" maxlength="20">
+					<span ng-show="custom.podType==2">{{custom.areaName}}</span>
+				</div>
+			</div>
+			<div class="podconfirm-item">
+				<span class="title">
+					定制类型:
+				</span>
+				<div class="input-main">
+					<select class="model ui-select" ng-model="custom.podType" ng-change="changeType(custom.podType)">
+						<option ng-show="productType!=3" value="1">简化文字</option>
+						<option ng-show="productType!=3 && (areaList.length==0||isEdit&&areaList.length==1)" value="2">简化全局</option>
+						<option value="3">文字</option>
+						<option value="4">图片</option>
+						<option value="5">图片+文字</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="podconfirm-list" ng-show="custom.podType==4||custom.podType==5">
+			<div class="podconfirm-item">
+				<span class="title">
+					区域长度:
+				</span>
+				<div class="input-main ui-length">
+					<input type="text" placeholder="请输入数字" ng-model="custom.areaLength" ng-change="numberInput('length')">
+				</div>
+			</div>
+			<div class="podconfirm-item">
+				<span class="title">
+					区域宽度:
+				</span>
+				<div class="input-main ui-length">
+					<input type="text" placeholder="请输入数字" ng-model="custom.areaWidth" ng-change="numberInput('width')">
+				</div>
+			</div>
+		</div>
+		<div class="podconfirm-main">
+			<div class="img-main">
+				<div class="upload-btn">
+					<span>上传图片</span>
+					<input type="{{uploadImg}}" class="upload-file" onchange="angular.element(this).scope().upLoadCustomImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+				</div>
+				<span class="tip">支持jpg、jpeg、png、bmp格式，且照片小于20M</span>
+				<div class="upload-box">
+					<div ng-show="custom.img!=''">
+						<img src="{{custom.img}}" class="uploadimg" alt="">
+						<canvas id="canvasImg" width="500" height="500"></canvas>
+					</div>
+					<div ng-show="custom.img==''">
+						<i class="icon iconfont" alt="">&#xe651;</i>
+						<span>请上传图片</span>
+						<input type="{{uploadImg}}" class="upload-file" onchange="angular.element(this).scope().upLoadCustomImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+					</div>
+				</div>
+			</div>
+			<div class="opera-main">
+				<div class="graphics" ng-show="custom.podType!=2">
+					<div class="graphics-title">区域图形</div>
+					<ul class="graphics-list" id="graphicsList">
+						<li class="graphics-item" ng-repeat="(index,item) in graphicsList track by $index" ng-class="{curr:item.isShow}" ng-click="chooseArea(item.type,index)">
+							<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+								<g>
+									<rect ng-if="item.type==1" class="curr" id="area1" height="60" width="60" y="0" x="0" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#C3C3C3" fill="#fff"/>
+									<ellipse ng-if="item.type==2" fill="#fff" id="area2" stroke="#C3C3C3" stroke-width="null" stroke-opacity="null" fill-opacity="null" cx="30" cy="30" rx="29" ry="29"/>
+									<path ng-if="item.type==3" stroke="#C3C3C3" id="area3" d="m0,59l30,-60l30,60-59,0z" fill-opacity="null" stroke-opacity="null" stroke-width="null" fill="#fff"/>
+									<path ng-if="item.type==4" stroke="#C3C3C3" id="area4" d="m0,19l22,0l7,-20l7,20l23,0l-18,13l7,22l-18,-13l-18,13l7,-22l-18,-13z" fill-opacity="null" stroke-opacity="null" stroke-width="null" fill="#fff"/>
+									<path ng-if="item.type==5" stroke="#C3C3C3" id="area5" fill="#fff" stroke-width="null" stroke-opacity="null" fill-opacity="null" d="m2,21l30,-21l28,21l-11,35l-36,0l-11,-35l1,-0.5z"/>
+									<path ng-if="item.type==6" stroke="#C3C3C3" id="area6" d="m30,18c11,-33 56,0 0,42c-56,-42 -11,-75 0,-42z" fill-opacity="null" stroke-opacity="null" stroke-width="null" fill="#fff"/>
+								</g>
+							</svg>
+						</li>
+					</ul>
+				</div>
+				<div class="podconfirm-show-result" ng-class="{all:custom.podType==2}" ng-show="custom.podType==4||custom.podType==5||custom.podType==2">
+					<div class="title" ng-show="custom.podType==4||custom.podType==5">预览图</div>
+					<div class="title" ng-show="custom.podType==2">效果素材图</div>
+					<div class="main">
+						<div class="upload-box" ng-show="custom.podType==2">
+							<div ng-show="!custom.imgicon">
+								<i class="icon iconfont" alt="">&#xe651;</i>
+								<span>请上传图片</span>
+							</div>
+							<input type="{{uploadImg}}" class="upload-file" onchange="angular.element(this).scope().upLoadCustomIconImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+							<img ng-show="custom.imgicon" src="{{custom.imgicon}}" alt="">
+						</div>
+						<img ng-show="custom.podType==4||custom.podType==5" src="{{imgHtml}}" alt="">
+						<img class="uploadimg" ng-show="custom.podType==4||custom.podType==5&&custom.img" src="{{custom.img}}" />
+					</div>
+				</div>
+				<!-- 文字操作 -->
+				<div  ng-show="custom.podType==1||custom.podType==3">
+					<div class="font-box">
+						<div class="title">字体大小</div>
+						<div class="font-main">
+							<span class="font-reduce ui-btn disable" ng-click="reduceFont('size')">-</span>
+							<input type="text" class="num" value="6.5" ng-model="custom.fontSize" ng-blur="fontBlur()" ng-change="fontChange('size')">
+							<span class="font-add ui-btn" ng-click="addFont('size')">+</span>
+						</div>
+					</div>
+					<div class="font-box">
+						<div class="title">字母间距</div>
+						<div class="font-main">
+							<span class="font-reduce ui-btn disable" ng-click="reduceFont('space')">-</span>
+							<input type="text" class="num" value="6.5" ng-model="custom.fontSpace" ng-change="fontChange('space')">
+							<span class="font-add ui-btn" ng-click="addFont('space')">+</span>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="podconfirm-btn-group">
+			<span class="ui-btn save" ng-click="saveFun()">保存</span>
+			<span class="ui-btn cancel" ng-click="showCustom=false">取消</span>
+		</div>
+	</div>
+</div>
+
+<!-- 选择变量对应图片弹框 -->
+<div class="asj-common-tanwrap" ng-show="isShowImgbox">
+	<div class="pod-imglist-main">
+		<div class="imglist">
+			<img alt="" ng-repeat="item in imgList track by $index" ng-src="{{item.src}}" ng-click="chooseAreaImg(item)" ng-class="{check:item.check}">
+		</div>
+		<div class="btn-box">
+			<div class="ui-btn cancel" ng-click="isShowImgbox=false">
+				取消
+			</div>
+			<div class="ui-btn sure" ng-click="saveAreaImg()">
+				确认
+			</div>
+		</div>
+	</div>
+</div>

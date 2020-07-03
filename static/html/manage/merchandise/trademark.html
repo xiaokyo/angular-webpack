@@ -1,0 +1,122 @@
+<div class="merchandise-box">
+    <div class="right-bar-wrap">
+		    <div class="tab">
+					<a class="active" href="manage.html#/merchandise/trademark">侵权查询</a>
+					<a href="manage.html#/merchandise/customsName">报关品名</a>
+				</div>
+        <div class="trademark-con">
+            <div class="tracon-top">
+                <select class="tort-type" ng-model="tortType" ng-change="searchFun()">
+                    <option value="0">著名品牌</option>
+                    <option value="1">其它品牌</option>
+                </select>
+                <input class="tratop-inp" ng-model="searchVal"></input><button ng-click="searchFun()" class="tratop-seabtn" style=""></button>
+                <div ng-show="canShow" ng-click="addFlag=true" class="tratop-btn tratop-btn1">
+                    <img src="static/image/public-img/w10-plus.png">
+                    <span>新增</span>
+                </div>
+                <div ng-show="canShow" ng-click="updateFun()" class="tratop-btn tratop-btn1">
+                    <img src="static/image/public-img/change-img.png">
+                    <span>修改</span>
+                </div>
+                <div ng-show="canShow" ng-click="deleteFlag=true" class="tratop-btn tratop-btn2">
+                    <img src="static/image/public-img/w10-close.png">
+                    <span>删除</span>
+                </div>
+            </div>
+            <div class="famous-tit">
+                <p>{{tortType=='0'?'著名品牌':'其他品牌'}}</p>
+            </div>
+            <ul class="brand-list">
+                <li ng-repeat="item in brandList1">
+                    <div class="brandlist-left">
+                        <p class="check-p">
+                            <input type="checkbox" ng-model="item.checked" ng-click="checkFun1(item,$index)">
+                            <label for=""></label>
+                        </p>
+                        <span ng-if="$index+1<10">{{'00'+($index+1)}}</span>
+                        <span ng-if="$index+1>9&&$index+1<100">{{'0'+($index+1)}}</span>
+                        <span ng-if="$index+1>99">{{$index+1}}</span>
+                    </div>
+                    <div class="brandlist-right">
+                        <p>{{item.nameen}} {{item.namecn}}</p>
+                        <!-- <p>
+                            <span>{{item.nameen}}</span>
+                            <span>{{item.namecn}}</span>
+                        </p> -->
+                    </div>
+                </li>
+            </ul>
+            <!-- <div class="famous-tit">
+                <p>其它品牌</p>
+            </div>
+            <ul class="brand-list">
+                <li ng-repeat="item in brandList2">
+                    <div class="brandlist-left">
+                        <p class="check-p">
+                            <input type="checkbox" ng-model="item.checked" ng-click="checkFun2(item,$index)">
+                            <label for=""></label>
+                        </p>
+                        <span ng-if="$index+1<10">{{'00'+($index+1)}}</span>
+                        <span ng-if="$index+1>9&&$index+1<100">{{'0'+($index+1)}}</span>
+                        <span ng-if="$index+1>99">{{$index+1}}</span>
+                    </div>
+                    <div class="brandlist-right">
+                        <p>{{item.nameen}} {{item.namecn}}</p>
+                    </div>
+                </li>
+            </ul> -->
+
+            <page></page>
+        </div>
+    </div>
+    <!-- 修改 -->
+    <div class="tademark-tkwrap" ng-show="modefyFlag">
+        <div class="w360-h252con">
+            <div class="tmarkform-group">
+                <select ng-model="selBrandVal">
+                    <option value="">请选择品牌</option>
+                    <option value="0">著名品牌</option>
+                    <option value="1">其它品牌</option>
+                </select>
+                <input ng-model="modefyNameen" ></input>
+                <input ng-model="modefyNamecn" ></input>
+            </div>
+            <div class="right-btns">
+                <button ng-click="modefyFun()" class="confirm-btn">修改</button>
+                <button ng-click="(modefyNamecn='')||(modefyNameen='')||(modefyFlag=false)||(selBrandVal='')" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+    <!-- 新增 -->
+    <div class="tademark-tkwrap" ng-show="addFlag">
+        <div class="w360-h252con">
+            <div class="tmarkform-group">
+                <select ng-model="selBrandVal">
+                    <option value="">请选择品牌</option>
+                    <option value="0">著名品牌</option>
+                    <option value="1">其它品牌</option>
+                </select>
+                <input ng-model="modefyNameen" placeholder="请输入品牌名称英文"></input>
+                <input ng-model="modefyNamecn" placeholder="请输入品牌名称中文"></input>
+            </div>
+            <div class="right-btns">
+                <button ng-click="addFun()" class="confirm-btn">确认</button>
+                <button ng-click="addFlag=false" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+    <!-- 删除 -->
+    <div class="tademark-tkwrap" ng-show="deleteFlag">
+        <div class="w360-h252con w360-h200con">
+            <div class="tmarkform-tip">
+                <img src="static/image/public-img/icon-qustion.png">
+                <span>确认要删除这条品牌信息吗？</span>
+            </div>
+            <div class="right-btns">
+                <button ng-click="deleteFun()" class="confirm-btn">确认</button>
+                <button ng-click="deleteFlag=false" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

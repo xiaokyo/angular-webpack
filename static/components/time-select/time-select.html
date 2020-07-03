@@ -1,0 +1,19 @@
+<div class="yzy-time-select-wrap d-flex-center">
+	<div class="yzy-time-select">
+		<div class="time-select-box">
+			{{selectProps.current.name}}
+			<b></b>
+		</div>
+		<ul class="time-select-drop">
+			<li ng-click="selectTimeFn(item)" ng-repeat="item in selectProps.list">{{item.name}}</li>
+		</ul>
+	</div>
+	<!-- ng-show="selectProps.current.type === 'custom'" -->
+	<div class="custom-box" ng-show="selectProps.current.type === 'custom'">
+		<wui-date class="custom-time startTime" format="yyyy-mm-dd" width="100" placeholder="开始时间"
+			btns="{'ok':'确定','now':'今天'}" ng-model="startTime"></wui-date>
+		<wui-date class="custom-time endTime" format="yyyy-mm-dd" width="100" placeholder="结束时间"
+			btns="{'ok':'确定','now':'今天'}" ng-model="endTime"></wui-date>
+		<button ng-click="customSearch()" class="custom-btn">搜索</button>
+	</div>
+</div>

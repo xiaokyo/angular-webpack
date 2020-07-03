@@ -1,0 +1,78 @@
+
+<div class="content ruzhu-wrap">
+    <div class="filter-box">
+        <input class="seach-inp" placeholder="请输入用户名/邮箱/公司名称" ng-keyup="keyUpFun($event)" ng-model="seachVal"></input>
+        <span style="margin-left: 6px;">账号类型</span>
+        <select  ng-model="accountType" style="width: 80px;margin-left: 12px;height: 30px;">
+          <option value="">所有</option>
+          <option value="0">企业</option>
+          <option value="1">个体</option>
+        </select>
+       <button class="search" style="float: none;margin-left: 24px;" ng-click="searchInput()">查询</button>
+    </div>
+    <div class="table-box">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>账号类型</th>
+                <th>申请时间</th>
+                <th>审核时间</th>
+                <th>所在国家</th>
+                <th>公司名称/姓名</th>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>手机号</th>
+                <th>店铺名称</th>
+                <th>拒绝原因</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in dataList">
+                <td>{{(resPageNum-1)*resPageSize+$index+1}}</td>
+                <td>
+                    <span ng-show="item.accountType==0">企业</span>
+                    <span ng-show="item.accountType==1">个体</span>
+                </td>
+                <td>{{item.applyAt | date:'yyyy-MM-dd hh:mm'}}</td>
+                <td>{{item.auditAt | date:'yyyy-MM-dd hh:mm'}}</td>
+                <td>{{item.countryName}}</td>
+                <td>
+                    <span ng-show="item.accountType==0">{{item.companyName}}</span>
+                    <span ng-show="item.accountType==1">{{item.legalPerson}}</span>
+                </td>
+                <td>{{item.userName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.legalPhone}}</td>
+                <td>{{item.shopName}}</td>
+                <td class="w200px">{{item.reason}}</td>
+                <td>
+                    <button ng-click="detailFun(item)" class="link-tip">详情</button>
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
+        <div ng-show="totalNum<1" class="no-data-box">暂无数据</div>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>

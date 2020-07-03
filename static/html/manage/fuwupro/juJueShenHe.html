@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>服务商品-审核中</title>
+    <link rel="stylesheet" type="text/css" href="static/css/fuwusp.css">
+</head>
+<body>
+<div class="tab d-flex justify-content-between align-items-center">
+    <ul class="clearfix">
+        <li><a href="#/merchandise/pendfuwu">待审核</a></li>
+        <li><a href="#/merchandise/fuwuShenHeZhong">审核中</a></li>
+        <li class="Act"><a href="#/merchandise/fuwuShenHeJujue">审核拒绝</a></li>
+        <li><a href="#/merchandise/fuwuShenHeChengGong">审核成功</a></li>
+    </ul>
+    <div class="search-group d-flex">
+    	<input class="search-inp" ng-model="searchVal" placeholder="请输入SKU/客户名称/审核人"></input>
+    	<button ng-click="searchFun()" class="search-btn"></button>
+    </div>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+    <div class="filter clearfix">
+    </div>
+    <div class="parent-order">
+        <table>
+            <thead id="table-header">
+            <tr>
+                <th>商品名称</th>
+                <th>图片</th>
+                <th>SKU</th>
+                <th>客户</th>
+                <th>审核人</th>
+                <th>群主/业务员</th>
+                <th>拒绝原因</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in listArr">
+                <td>
+                    <span class="maxwidth400px">{{item.dbProductName}}</span>
+                </td>
+                <td style="position: relative;" ng-mouseenter="item.isOver = true;" ng-mouseleave="item.isOver = false;">
+                    <img class="padding-tb-10px" 
+                         ng-src="{{item.dbImage | IMG_SIZE:60}}" alt="">
+                    <img class="samlimg" ng-show="item.isOver"
+                         ng-src="{{item.dbImage | IMG_SIZE:200}}" alt="">
+                </td>
+                <td>{{item.dbSku}}</td>
+                <td>{{item.createUserName}}</td>
+                <td>{{item.checkName}}</td>
+                <td>
+                    <span>{{item.salemanName}}</span>
+                </td>
+                <td>
+                    <p class="reason-text">{{item.reason}}</p>
+                    <!-- <button ng-click="spDetail(item)" class="dbopter-btn font-size-14px">添加</button>
+                    <button ng-click="jujueFun(item)" class="dbopter-btn font-size-14px">拒绝</button> -->
+                </td>
+            </tr>
+            <tr ng-show="totalNum < 1">
+                <td colspan="9">暂无数据。</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum > 0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <!-- <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option> -->
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+</body>
+<!--审核拒绝-->
+<div class="lookProduct" ng-show="jujueFlag">
+    <div class="content" style="width: 600px;min-height: inherit;">
+        <!-- <h3>拒绝原因<span class="close" ng-click="close()">×</span></h3> -->
+        <div class="tk-top-tit">
+            <p>拒绝原因</p>
+        </div>
+        <div class="tk-mid-con">
+            <textarea class="jujue-text" ng-model="jujueResVal"></textarea>
+        </div>
+        <div class="tk-btns">
+            <button ng-click="jujueFlag=false" class="tk-qx-btn">取消</button>
+            <button ng-click="conJuJueFun()" class="tk-qd-btn">确定</button>
+        </div>
+    </div>
+</div>
+</html>

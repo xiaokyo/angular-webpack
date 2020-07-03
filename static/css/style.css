@@ -1,0 +1,284 @@
+/* 查询tab栏 */
+
+.filter-tab {
+    display: flex;
+    justify-self: start;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-tab-item {
+    line-height: 25px;
+    color: #5dbdf2;
+    border: 1px solid #5dbdf2;
+    background: #fff;
+    border-radius: 4px;
+    padding: 0 8px;
+    font-size: 12px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.filter-tab-item.active {
+    color: #fff;
+    background: #5dbdf2;
+}
+
+.cursor-point {
+    cursor: pointer;
+}
+
+.confirm-content .page-box {
+    font-size: 16px;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.f-blue {
+    color: #08ACE9;
+}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+
+/* 表格样式 */
+
+.cj-table-box {
+    width: calc(100% - 20px);
+    overflow-x: auto;
+    margin: 10px 10px 20px 10px
+}
+
+.cj-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: solid #eee 1px;
+    border-bottom: none;
+    font-size: 13px;
+    word-wrap: break-word;
+}
+
+.cj-table-thead {
+    background: #f4f8fd;
+}
+
+.cj-table-thead th {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    border-right: 1px solid #ececec;
+    padding: 8px 2px;
+    font-weight: bold;
+}
+
+.cj-table-tbody {
+    border: 1px solid #ececec;
+}
+
+.cj-table-tr {
+    border-left: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    text-align: center;
+}
+
+.cj-table-tr.active {
+    background: #FFB85F;
+}
+
+.cj-table-tr td,
+.cj-table-tr th {
+    border-right: 1px solid #ececec;
+    font-size: 12px;
+    text-align: center;
+    color: #000;
+    position: relative;
+    padding: 5px;
+    line-height: 25px;
+}
+
+.cj-table-tr:last-child {
+    border-bottom: 0 none;
+}
+
+.cj-table-tr td:last-child,
+.cj-table-tr td:last-child {
+    border-right: 0 none;
+}
+
+.cj-table-tr .imgbox {
+    position: relative;
+}
+
+.cj-table-tr .imgbox .small {
+    width: 50px;
+}
+
+.cj-table-tr .imgbox .bigimg {
+    width: 280px;
+    display: none;
+    position: absolute;
+    top: -100px;
+    right: -10px;
+}
+
+.cj-table-tr .imgbox:hover .bigimg {
+    width: 280px;
+    display: block;
+}
+
+.table-input {
+    padding: 0 5px;
+    line-height: 1.5;
+    min-width: 20px;
+    width: 80%;
+}
+
+.table-input.blur {
+    border-color: #08ACE9;
+}
+.cj-td-name{
+  width: 280px;
+  word-break: break-all;
+  white-space: normal;
+}
+/* table表格样式 --start*/
+
+/* 公共按钮 */
+
+.cj-btn {
+    padding: 3px 15px;
+    border: solid #08ACE9 1px;
+    border-radius: 4px;
+    color: #08ACE9;
+    min-width: 80px;
+    margin: 5px 0;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.cj-btn.fill-btn {
+    color: #fff;
+    background: #08ACE9;
+}
+
+.cj-btn-box {
+    margin: 15px 10px 5px;
+    display: flex;
+    align-items: center;
+}
+
+.cj-btn-box.right {
+    justify-content: flex-end;
+}
+
+.cj-btn-box.space-between {
+    justify-content: space-between;
+}
+
+.cj-btn-box.right .cj-btn {
+    margin-left: 15px;
+}
+
+.cj-btn-box.center {
+    justify-content: center;
+}
+
+.cj-btn-box.center .cj-btn {
+  margin-left: 7px;
+  margin-right: 8px;
+}
+.mr-15{
+  margin-right: 15px;
+}
+.cj-table-tr .link-status{
+  color: #08ACE9;
+  cursor: pointer;
+}
+.cj-table-tr p{
+    font-size: inherit;
+}
+.cj-nodata{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+/* 查询tab栏 */
+.filter-tab {
+  display: flex;
+  justify-self: start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-tab-item {
+  line-height: 25px;
+  color: #5dbdf2;
+  border: 1px solid #5dbdf2;
+  background: #fff;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: 12px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.filter-tab-item.active {
+  color: #fff;
+  background: #5dbdf2;
+}
+.cj-serach-box{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.cj-serach-input{
+    border: 1px solid #ececec;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    min-width:250px ;
+}
+.cj-serach-btn{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #5dbdf2;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.cursor-point{
+    cursor: pointer;
+}
+.confirm-content .page-box{
+    margin: 5px 0;
+}
+/* tab选择栏 */
+.tab-status{
+	margin: 10px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.tab-status-item{
+	margin-right: 15px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.tab-status-select{
+  border-radius: 4px;
+  border: solid #ccc 1px;
+  height: 25px;
+  max-width: 150px;
+  display: inline-block;
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品分析-设置权重</title>
+    <!--业务员管理-->
+    <link rel="stylesheet" type="text/css" href="static/css/SalesmanManagement.css">
+    <script src="erp_otweb/js/video.min.js"></script>
+</head>
+<style>
+    .filter {
+        line-height: 30px !important;
+    }
+
+    .filter .datetab {
+        width:50px;
+        height:24px;
+        border-radius:15px;
+        border:1px solid #E4E4E4;
+        color: #666666;
+        font-size: 12px;
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+        line-height: 22px;
+    }
+
+    .filter .dateact {
+        color: #fff;
+        background-color: #F9AE08;
+        border: none;
+        line-height: 24px;
+    }
+
+    .search-by-con {
+        height: 30px;
+        position: relative;
+        float: left;
+    }
+
+    .default-con {
+        width: 240px;
+        height: 30px;
+        padding-left: 10px;
+        line-height: 30px;
+        border: 1px solid #e5e5e5;
+        position: relative;
+    }
+
+    .has-list-cate {
+        float: left;
+        margin-right: 15px;
+    }
+
+    .serch-by-name {
+        height: 30px;
+        line-height: 30px;
+        float: left;
+    }
+
+    input, select {
+        height: 30px !important;
+        width: 90px;
+    }
+
+    .three-grade-list {
+        position: absolute;
+        left: 0;
+        top: 0px;
+        margin-top: 0;
+        padding-left: 0;
+        background: #fff;
+        z-index: 99;
+        display: none;
+    }
+
+    .caret {
+        position: absolute;
+        right: 10px;
+        top: 13px;
+    }
+
+    .like-navbtn {
+        height: 30px;
+        padding: 0 12px;
+        background-color: #C1C1C1;
+        color: #fff;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 14px;
+        display: inline-block;
+    }
+    .like-navbtn:hover{
+        color: #fff;
+    }
+    .act-btn{
+        background-color: #FFB900;
+    }
+    .lookProduct {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        top: 0;
+        left: 0;
+        z-index: 10000;
+    }
+
+    .lookProduct .content {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+        width: 523px;
+        min-height: 330px;
+        margin: initial;
+        border-radius: 4px;
+        padding: initial;
+    }
+    .label-width90px{
+        width: 90px;
+        text-align: right;
+        font-size: 14px;
+    }
+    .shezhi-con{
+        margin-top: 40px;
+        padding-left: 38px;
+    }
+    .shezhi-line{
+        margin: 30px 0;
+    }
+    .cancel-btn{
+        height: 30px;
+        padding: 0 12px;
+        background-color: #fff;
+        color: #666666;
+        border-radius: 4px;
+        border: 1px solid #E6E6E6;
+    }
+    .margin-top-100px{
+        margin-top: 100px;
+    }
+</style>
+<body>
+<div class="tab">
+    <ul class="clearfix">
+        <li><a href="#/CommodityAnalysis/Turnover">成交</a></li>
+        <li><a href="#/CommodityAnalysis/dispute">纠纷</a></li>
+        <li><a href="#/CommodityAnalysis/NewProduct">新品</a></li>
+        <li><a href="#/CommodityAnalysis/cusStore">客户店铺</a></li>
+        <!-- <li><a href="#/CommodityAnalysis/ranking">操作统计</a></li> -->
+        <li class="Act"><a href="#/CommodityAnalysis/quanZhong">猜你喜欢</a></li>
+        <li><a href="#/CommodityAnalysis/LinkageAndPublication">刊登与关联</a></li>
+	    <li><a href="#/CommodityAnalysis/activityStatistics">活动统计</a></li>
+        <li><a href="#/CommodityAnalysis/activityStatistics-new">新-活动统计</a></li>
+    </ul>
+</div>
+<div style="height: 68px;"></div>
+<div class="content">
+    <div class="filter clearfix">
+       <a class="like-navbtn act-btn" href="#/CommodityAnalysis/quanzhong" style="margin-left: 5px;">权重设置</a>
+       <a class="like-navbtn" href="#/CommodityAnalysis/profenzhi">商品分值</a>
+       <a class="like-navbtn" href="#/CommodityAnalysis/customerfenzhi">客户分值</a>
+    </div>
+    <div class="shezhi-con">
+        <div class="shezhi-tit d-flex justify-content-between">
+            <p>客户操作商品权重</p>
+            <div ng-show="adminFlag">
+                <button class="like-navbtn font-size-14px act-btn" ng-hide="bianJiFlag1" ng-click="bianJiFun1()">编辑</button>
+                <button class="like-navbtn font-size-14px act-btn" ng-show="bianJiFlag1" ng-click="baoCunFun('1')">保存</button>
+                <button class="cancel-btn font-size-14px" ng-show="bianJiFlag1" ng-click="quXiaoFun('1')">取消</button>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">点击: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.click,'click')" ng-model="jsonInp1.click"></input>
+                <span ng-hide="bianJiFlag1">{{json1.click}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">收藏: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.mark,'mark')" ng-model="jsonInp1.mark"></input>
+                <span ng-hide="bianJiFlag1">{{json1.mark}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">刊登: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.publish,'publish')" ng-model="jsonInp1.publish"></input>
+                <span ng-hide="bianJiFlag1">{{json1.publish}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">关联: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.relevance,'relevance')" ng-model="jsonInp1.relevance"></input>
+                <span ng-hide="bianJiFlag1">{{json1.relevance}}</span>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">添加SKU List: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.addSkuList,'addSkuList')" ng-model="jsonInp1.addSkuList"></input>
+                <span ng-hide="bianJiFlag1">{{json1.addSkuList }}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">添加购物车: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.addCart,'addCart')" ng-model="jsonInp1.addCart"></input>
+                <span ng-hide="bianJiFlag1">{{json1.addCart}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">购买: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.orders,'orders')" ng-model="jsonInp1.orders"></input>
+                <span ng-hide="bianJiFlag1">{{json1.orders}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">纠纷: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum4(jsonInp1.dispute,'dispute','1')" ng-model="jsonInp1.dispute"></input>
+                <span ng-hide="bianJiFlag1">{{json1.dispute}}</span>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">分享权重: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.shareCount,'shareCount')" ng-model="jsonInp1.shareCount"></input>
+                <span ng-hide="bianJiFlag1">{{json1.shareCount }}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">下载视频: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.videoDownload,'videoDownload')" ng-model="jsonInp1.videoDownload"></input>
+                <span ng-hide="bianJiFlag1">{{json1.videoDownload}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">视频拍摄请求: </label>
+                <input ng-show="bianJiFlag1" ng-keyup="clearNoNum1(jsonInp1.videoFilmingReqeust,'videoFilmingReqeust')" ng-model="jsonInp1.videoFilmingReqeust"></input>
+                <span ng-hide="bianJiFlag1">{{json1.videoFilmingReqeust}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px"> </label>
+                <!-- <input ng-show="bianJiFlag1" ng-keyup="clearNoNum4(jsonInp1.dispute,'dispute','1')" ng-model="jsonInp1.dispute"></input>
+                <span ng-hide="bianJiFlag1">{{json1.dispute}}</span> -->
+            </div>
+        </div>
+        <div class="shezhi-tit d-flex justify-content-between margin-top-100px">
+            <p>商品被操作权重</p>
+            <div ng-show="adminFlag">
+                <button class="like-navbtn font-size-14px act-btn" ng-hide="bianJiFlag2" ng-click="bianJiFun2()">编辑</button>
+                <button class="like-navbtn font-size-14px act-btn" ng-show="bianJiFlag2" ng-click="baoCunFun('2')">保存</button>
+                <button class="cancel-btn font-size-14px" ng-show="bianJiFlag2" ng-click="quXiaoFun('2')">取消</button>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">点击: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.click,'click')" ng-model="jsonInp2.click"></input>
+                <span ng-hide="bianJiFlag2">{{json2.click}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">收藏: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.mark,'mark')" ng-model="jsonInp2.mark"></input>
+                <span ng-hide="bianJiFlag2">{{json2.mark}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">刊登: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.publish,'publish')" ng-model="jsonInp2.publish"></input>
+                <span ng-hide="bianJiFlag2">{{json2.publish}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">关联: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.relevance,'relevance')" ng-model="jsonInp2.relevance"></input>
+                <span ng-hide="bianJiFlag2">{{json2.relevance}}</span>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">添加SKU List: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.addSkuList,'addSkuList')" ng-model="jsonInp2.addSkuList"></input>
+                <span ng-hide="bianJiFlag2">{{json2.addSkuList }}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">添加购物车: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.addCart,'addCart')" ng-model="jsonInp2.addCart"></input>
+                <span ng-hide="bianJiFlag2">{{json2.addCart}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">购买: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.orders,'orders')" ng-model="jsonInp2.orders"></input>
+                <span ng-hide="bianJiFlag2">{{json2.orders}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">纠纷: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum3(jsonInp2.dispute,'dispute','2')" ng-model="jsonInp2.dispute"></input>
+                <span ng-hide="bianJiFlag2">{{json2.dispute}}</span>
+            </div>
+        </div>
+        <div class="shezhi-line d-flex justify-content-between">
+            <div class="shezhi-group">
+                <label class="label-width90px">分享权重: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.shareCount,'shareCount')" ng-model="jsonInp2.shareCount"></input>
+                <span ng-hide="bianJiFlag2">{{json2.shareCount }}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">下载视频: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.videoDownload,'videoDownload')" ng-model="jsonInp2.videoDownload"></input>
+                <span ng-hide="bianJiFlag2">{{json2.videoDownload}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px">视频拍摄请求: </label>
+                <input ng-show="bianJiFlag2" ng-keyup="clearNoNum2(jsonInp2.videoFilmingReqeust,'videoFilmingReqeust')" ng-model="jsonInp2.videoFilmingReqeust"></input>
+                <span ng-hide="bianJiFlag2">{{json2.videoFilmingReqeust}}</span>
+            </div>
+            <div class="shezhi-group">
+                <label class="label-width90px"> </label>
+                <!-- <input ng-show="bianJiFlag2" ng-keyup="clearNoNum3(jsonInp2.dispute,'dispute','2')" ng-model="jsonInp2.dispute"></input>
+                <span ng-hide="bianJiFlag2">{{json2.dispute}}</span> -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!--查看视频-->
+<div class="lookProduct" ng-show="isLook">
+    <div class="content">
+        <h3>查看视频<span class="close" ng-click="close()">×</span></h3>
+        
+    </div>
+</div>
+<!--是否取消此次修改-->
+<div class="asj-common-tanwrap" ng-show="isCancelFlag">
+    <div class="asj-common-tan" style="width:430px; height: 110px;">
+        <div class="wa-GuestsDetails">
+            确定取消此次修改吗?
+        </div>
+        <div class="tan-btns">
+            <a class="tan-btn0" ng-click="closeFun()">关闭</a>
+            <a class="tan-btn1" ng-click="sureFun()">{{'100050' | translate}}</a>
+        </div>
+    </div>
+</div>
+<!--有改动 请先完成本部分的权重设置-->
+<!-- <div class="asj-common-tanwrap" ng-show="isEditAnother">
+    <div class="asj-common-tan" style="width:430px; height: 110px;">
+        <div class="wa-GuestsDetails">
+            请先完成本部分的权重设置?
+        </div>
+        <div class="tan-btns">
+            <a class="tan-btn0" ng-click="fangQiFun">关闭</a>
+            <a class="tan-btn1" ng-click="queDingFun()">{{'100050' | translate}}</a>
+        </div>
+    </div>
+</div> -->
+<!-- 是否确认修改 -->
+<div class="asj-common-tanwrap" ng-show="isEditFlag">
+    <div class="asj-common-tan" style="width:430px; height: 110px;">
+        <div class="wa-GuestsDetails">
+            确定此次编辑吗?
+        </div>
+        <div class="tan-btns">
+            <a class="tan-btn0" ng-click="cancelEditFun()">关闭</a>
+            <a class="tan-btn1" ng-click="sureEditFun()">{{'100050' | translate}}</a>
+        </div>
+    </div>
+</div>
+</html>

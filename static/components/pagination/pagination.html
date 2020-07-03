@@ -1,0 +1,25 @@
+<!-- 分页区域 -->
+<div class="page-nav">
+  <div class="page-box" style="margin: 0;">
+    <div class="select-page-num">
+      <select class="form-control" ng-model="pageSize" ng-change="changePageSize()" ng-options="x for x in pageSizeRange">
+        <!-- <option value="size" ng-repeat="size in pageSizeRange">{{size}}</option> -->
+        <!-- <option value="10">10</option>
+        <option value="30">30</option>
+        <option value="50">50</option> -->
+      </select>
+      <span>每页</span>
+    </div>
+    <div class="total-num">
+      共&nbsp;&nbsp;{{ pageTotal }}&nbsp;&nbsp;条
+    </div>
+    <div class="page-index" ng-attr-id="{{pageId}}">
+      <div class="pagination2"></div>
+    </div>
+    <div class="to-go">
+      <span>跳转：</span>
+      <input type="text" class="form-control" ng-model="pageNumGo">
+      <a class="btn btn-default" href="javascript: void(0);" style="line-height: 24px" ng-click="pageNav()">go</a>
+    </div>
+  </div>
+</div>

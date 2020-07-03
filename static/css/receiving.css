@@ -1,0 +1,159 @@
+.main {padding: 20px 20px 120px; min-height: 100vh;}
+    .header {padding: 0 20px; height: 60px;}
+    .option>li {margin-right: 30px; font-size: 16; }
+    
+    .option>li input {border: 1px solid #ddd; line-height: 25px; text-indent: 5px;}
+    .no-data {height: 500px;}
+
+    .edit-area {padding: 0 10px;}
+    .edit-area>input { max-width: 60px; width: 100%; border-bottom: 1px solid rgb(10, 181, 248); text-align: center;}
+
+    .message {width: 300px; margin-left: 20px;}
+    .message li { border: 1px solid #eee; padding: 10px 5px; }
+
+    /* 独立打印区域设置 合格 次品 多出 */
+    .table .print-area>input{padding-top: 17px; }
+    .table .print-area>button{padding: 0; min-height: 17px; color: red; width: 100%; }
+    #main .table-item { min-height: 80px; }
+    .table-head {min-height: 60px;}
+    .table-head>li {text-align: center; line-height: 1.2em;}
+    .table-body>li:nth-last-of-type(1) .hover-img {top: auto; bottom: 0px;}
+    .table-body>li:nth-last-of-type(2) .hover-img {top: auto; bottom: 0px;}
+    .table-body>li:nth-last-of-type(3) .hover-img {top: auto; bottom: 0px;}
+    .table-body>li:nth-of-type(1) .hover-img {top: 0; bottom: auto;}
+    .table-body>li:nth-of-type(2) .hover-img {top: 0; bottom: auto;}
+    .table-body>li:nth-of-type(3) .hover-img {top: 0; bottom: auto;}
+    .info-box {min-width: 600px; min-height: 480px; background-color: #fff;}
+    .info-box h3 {line-height: 30px; text-align: center;}
+    input[type=number] { -moz-appearance:textfield; }  
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .confirm-box {width: 500px; min-height: 200px; background-color: #fff; padding: 20px;}
+    .confirm-box h2 { line-height: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+    .confirm-content {min-height: 180px; line-height: 1.2em;}
+    .confirm-box button{padding: 6px 14px;}
+    .confirm-box input {border: 1px solid #eee; line-height: 20px; text-indent: 5px;}
+    .right-area {width: 50%;}
+    .right-area ul { background-color: #FCF4D9; min-height: 60px; border: 1px solid #eee;}
+    .right-area img {width: 100%;}
+    .table-body .checked-sku { background: #C5F9D9;}
+    .count {min-width: 20px; line-height: 20px; text-align: center;}
+    .checked-sku .count {background-color: #06CF50; color: #fff;}
+    .table-body .actived-sku { background: #FFD9D9;}
+    .actived-sku .count {background-color: red; color: #fff}
+    .disable-btn {background-color: #ccc;}
+    .confirm-box1 {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .confirm-main {
+        min-width: 360px;
+        max-width: 1200px;
+        border-radius: 4px;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        min-height: 150px;
+        max-height: 800px;
+      }
+      .confirm-title {
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        width: 100%;
+        background: #F9F8F8;
+        text-align: center;
+      }
+      .confirm-close {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        z-index: 1;
+      }
+      .confirm-close::after {
+        content: '\e617';
+        font-size: 14px;
+      }
+      .confirm-content {
+        padding: 20px 10px 80px;
+        text-align: center;
+        overflow-y: auto;
+        font-size: 14px;
+        max-height: 550px;
+      }
+      .f-center .confirm-content {
+        text-align: left;
+      }
+      .confirm-content .link {
+        display: block;
+        color: #3870b5;
+        font-size: 14px;
+      }
+      .confirm-btn-box {
+        text-align: center;
+        background: #fff;
+        padding: 20px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .confirm-btn-box .yes-btn,
+      .confirm-box1 .yes-btn
+      {
+        background: rgb(10, 181, 248);
+      }
+      .confirm-btn-box .no-btn,
+      .confirm-btn-box .yes-btn, 
+      .confirm-btn-box .sure-btn,
+      .confirm-box1 .confirm-btn {
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        width: 80px;
+        margin: 0 8px;
+        font-size: 14px;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px #fff;
+        color: #fff;
+        cursor: pointer;
+      }
+      .confirm-box1 .confirm-btn{
+        width: 50px;
+      }
+      .confirm-btn-box .no-btn {
+        color: #666;
+        box-shadow: 0 0 0 1px #E4E4E4;
+        background: #F9F9F9;
+      }
+      .confirm-btn-box .no-btn:hover {
+        box-shadow: 0px 0 3px 0px rgba(170, 166, 166, 0.5) inset;
+        border-color: #C1C1C1;
+      }
+      .cj-table{
+          border-bottom: 1px solid #eee;
+      }
+      .confirm-box .bg-b1{
+          color: #fff;
+          cursor: pointer;
+          margin-bottom: 10px;
+      }
+      .confirm-box .bg-y1{
+          color: #fff;
+          cursor: pointer;
+      }
+      .table button{
+          margin: 0 5px;
+          cursor: pointer;
+      }
+      .confirm-box .table-input{
+        text-align: center;
+      }

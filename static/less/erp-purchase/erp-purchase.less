@@ -1,0 +1,261 @@
+.xauto{
+	margin: 0 auto;
+}
+.border{
+	border: 1px solid red;
+}
+.border1{
+	border: 1px solid blue;
+}
+.border2{
+	border: 1px solid black;
+}
+.erp-purchase-wrap{
+	background-color: #e5e5e5;
+	width: 100%;
+	padding: 20px 15px;
+	// .border;
+}
+// 订单导航
+.erp-purchase-nav{
+	width: 1121px;
+	.xauto;
+	// .border;
+	.ep-nav-ul{
+		overflow: hidden;
+		li{
+			float: left;
+			a{
+				width: 200px;
+				height: 40px;
+				font-size: 14px;
+				display: inline-block;
+				line-height: 40px;
+				vertical-align: top;
+				text-align: center;
+				border-radius: 4px 4px 0 0;
+			}
+			.ep-nav-supplier{
+				color: #646464;
+				background-color: #d5d5d5;
+			}
+			.ep-nav-a{
+				color: #000;
+				background-color: #fff;
+			}
+		}
+		.ep-nav-li1{
+			margin: 0 20px 0 80px; 
+		}
+	}
+}
+.e-p-conall{
+	width: 100%;
+	background-color: #fff;
+}
+.e-p-con{
+	width: 1121px;
+	.xauto;
+}
+// 采购的功能 时间等的部分
+.e-p-fun{
+	.border;
+}
+// 出单采购 采购库存
+.ep-c-way{
+	padding: 26px 0 34px 0;
+	border-bottom: 1px solid #f1f1f1;
+	a{
+		color: #030303;
+		width: 120px;
+		display: inline-block;
+		line-height: 28px;
+		text-align: center;
+		.border1;
+	}
+	.ep-way-act{
+		color: #08aceb;
+		border: 1px solid #08aceb;
+		width: 120px;
+		height: 30px;
+		display: inline-block;
+		line-height: 28px;
+		text-align: center;
+	}
+}
+// 时间 采购状态
+.ep-time-stu{
+	margin: 15px 0 24px;
+	a{
+		font-size: 14px;
+		color: #030303;
+	}
+	//选日期时间
+	.ep-fun-time{
+		margin-left: 18px;
+	}
+	//选日期的输入框
+	.ep-sel-time{
+		width: 200px;
+		height: 30px;
+		border: 1px solid #e5e5e5;
+		margin: 0 18px;
+	}
+	.ep-fun-stu{
+		margin-left: 30px;
+	}
+}
+// 搜索部分
+.pd-seach{
+	padding: 0 0 19px 20px;
+	p{
+		display: inline-block;
+		width: 450px;
+		height: 40px;
+		border: 1px solid #e5e5e5;
+		a{
+			display: inline-block;
+			width: 70px;
+			height: 38px;
+			text-align: center;
+			line-height: 38px;
+			border-left: 1px solid #e7e7e7;
+			background-color: #f7f7f7;
+			color: #888888;
+			float: right;
+		}
+	}
+}
+
+// 订单列表部分
+.pd-ord-list{
+	width: 1121px;
+	table{
+		border: 1px solid #ececec;
+	}
+}
+.pd-ord-thead{
+	background-color: rgb(244, 248, 253);
+	tr{
+		width: 1121px;
+		height: 47px;
+		th{
+			text-align: center;
+			font-size: 14px;
+			color: #333;
+			p{
+				font-size: 14px;
+				color: #333;
+			}
+		}
+		.ordlist-fir-th{
+			position: relative;
+			img{
+				position: absolute;
+				left: 15px;
+				top: 17px;
+			}
+			span{
+				margin-left: 45px;
+			}
+		}
+	}
+}
+.inline-block{
+	display: inline-block;
+	border-radius: 4px;
+	height: 30px;
+}
+.pd-ord-tbody{
+	tr{
+		border-top: 1px solid #ececec;
+		td{
+			font-size: 12px;
+			text-align: center;
+			color: #000;
+			position: relative;
+			height: 60px;
+			p{
+				color: #000;
+				font-size: 12px;
+			}
+			.border-span{
+				height: 40px;
+				width: 1px;
+				position: absolute;
+				top: 10px;
+				right: 0;
+				background-color: #ececec;
+			}
+		}
+		.ordlist-fir-td{
+			position: relative;
+			img{
+				position: absolute;
+				left: 14px;
+				top: 24px;
+			}
+			// p{
+			// 	display: inline-block;
+			// 	margin-left: 45px;
+			// 	font-size: 12px;
+			// }
+			.pd-ord-time{
+				margin-left: 30px;
+			}
+		}
+		.pd-img-td{
+			img{
+				width: 46px;
+				height: 46px;
+			}
+		}
+		.ordlist-imgtd{
+			.ordlist-goods-img{
+				width: 46px;
+				height: 46px;
+			}
+		}
+		//客户星级
+		.pd-star-num-p{
+			width: 140px;
+			display: inline-block;
+			text-align: left;
+		}
+		//修改状态  操作
+		.pd-change-stu,.pd-cx-buy{
+			display: inline-block;
+			width: 99px;
+			height: 30px;
+			text-align: center;
+			line-height: 28px;
+			border-left: 1px solid #e7e7e7;
+			background-color: #fff;
+			color: #08aceb;
+			border: 1px solid #08aceb;
+			border-radius: 4px;
+		}
+		//采购
+		.pd-purchase-succ{
+			display: inline-block;
+			width: 56px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			background-color: #08aceb;
+			border-radius: 4px;
+			color: #fff;
+		}
+		.pd-purchase-err{
+			.inline-block;
+			// display: inline-block;
+			width: 56px;
+			// height: 30px;
+			text-align: center;
+			line-height: 28px;
+			border-radius: 4px;
+			color: #08aceb;
+			border: 1px solid #08aceb;
+		}
+	}
+}

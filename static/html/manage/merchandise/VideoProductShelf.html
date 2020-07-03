@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>视频商品</title>
+</head>
+<style>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .guanlianshangpin-wrap .clos {
+        background-color: orange;
+        color: #fff;
+        padding: 4px 10px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    body .guanlianshangpin {
+        width: 700px;
+        height: 500px;
+    }
+
+    .guanlianshangpin ul {
+        padding: 40px 20px 10px 20px;
+        font-size: 14px;
+        line-height: 30px;
+        overflow-y: auto;
+        height: 475px;
+    }
+
+    .guanlianshangpin ul li span {
+        float: left;
+    }
+
+    .guanlianshangpin ul li span:nth-child(2) {
+        color: #999;
+        word-wrap: break-word;
+        width: 470px;
+    }
+
+    .table-con-box tr button {
+        background-color: orange;
+        font-size: 12px;
+        color: #fff;
+        padding: 3px 8px;
+        margin: 0;
+    }
+
+    .selectActive {
+        background: #e8f4ff;
+    }
+
+    .overTR:hover {
+        background: #e8f4ff;
+    }
+    .ea-list-table th{
+        font-size: 12px;
+        border-right: none;
+    }
+    .ea-list-table td{
+        font-size: 12px;
+        border-right: none;
+	      padding: 0 10px;
+    }
+    .ea-list-table td span {
+	    word-break: break-word;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    display: -webkit-box;
+	    -webkit-box-orient: vertical;
+	    -webkit-line-clamp: 2;
+    }
+    .setprice label{
+        margin-right: 10px;
+    }
+    .setprice input{
+        height: 28px;
+        line-height: 28px;
+        padding: 0 8px;
+    }
+    .setprice button{
+        width: 60px;
+        height: 28px;
+        line-height: 28px;
+        border-radius: 3px;
+        color: #fff;
+        background: #08aceb;
+    }
+    .h6{
+        height: 61px;
+    }
+    .tan-delete-ware {
+        border-radius: 4px;
+        min-height: 120px;
+        height: initial;
+    }
+    .asj-common-tan h3 {
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        color: rgba(102, 102, 102, 1);
+        line-height: 20px;
+        margin: 20px 0;
+        text-align: left;
+    }
+    .asj-common-tan .tan-btns {
+        text-align: right;
+        height: 30px;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        bottom: 15px;
+        left: 0;
+    }
+    .asj-common-tan .tan-btns .tan-btn1 {
+        width: 80px;
+        height: 30px;
+        background: rgba(249, 174, 8, 1);
+        border-radius: 2px;
+        color: #fff;
+        margin: initial;
+    }
+    .asj-common-tan .tan-btns .tan-btn0 {
+        width: 80px;
+        height: 30px;
+        border-radius: 2px;
+        border: 1px solid rgba(247, 157, 45, 1);
+        margin: 0 20px;
+        color: #F9AE08;
+        background-color: #fff;
+    }
+    .red{
+        color: red !important;
+    }
+    .greens{
+        color: green !important;
+    }
+    .search-text {color: blue; font-weight: 550;}
+</style>
+<body>
+<div class="ea-content">
+    <div class="right-bar-wrap ea-right-content">
+        <div class="asj-h10"></div>
+        <div class="right-bar">
+            <div class="ea-right-search">
+                <div class="input-group search-box">
+                    <div class="input-group search-box">
+                        <div style="display: flex; border: 1px solid #08aceb;">
+                            <div class="img-box" ng-mouseover="isHover = true" ng-mouseleave="isHover = false" ng-class="{'hover-boder':isHover,'no-hover-boder':!isHover}" ng-show="resUrl">
+                              <img src="{{resUrl}}" alt="">
+                              <div class="img-clear" ng-class="{'hover':isHover,'no-hover':!isHover}" ng-click="imgClear()">x</div>
+                            </div>
+                            <input type="text" class="top-search-inp change-inp" placeholder="请按SKU查询" ng-model="title">
+                            <label for="img-upload" ng-mouseover="iisShow = true" ng-mouseleave="iisShow = false">
+                              <input type="file" id="img-upload" style="display: none;" onchange="angular.element(this).scope().upLoadImg4(this.files)">
+                              <img class="img-upload" src="static\image\public-img\img-upload.png" ng-show="!iisShow">
+                              <img class="img-upload" src="static\image\public-img\img-upload-hover.png" ng-show="iisShow">
+                            </label>
+                        </div>
+                        <a role="button" class="btn btn-default top-search-btn" type="button"
+                           ng-click="usersearch()">搜索</a>
+                    </div>
+                </div>
+            </div>
+           <!-- <div class="setprice" style="margin-top: 10px;padding-left: 10px;">
+                <label>
+                    <span>永久视频价格($):</span>
+                    <input type="number" ng-model="perpetualVideoPrice">
+                </label>
+                <label>
+                    <span>3次使用价格($):</span>
+                    <input type="number" ng-model="temporaryVideoPrice">
+                </label>
+                <button ng-click="setPrice()">设置</button>
+            </div>-->
+            <div class="table-con-box">
+                <table class="ea-list-table ea-erp-cs">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>图片</th>
+                            <th>商品名称</th>
+                            <th>SKU</th>
+                            <th style="border-right: solid #e1e1e1 1px;">商品类目</th>
+                            <th>视频名称</th>
+                            <th>上架时间</th>
+                            <th style="border-right: solid #e1e1e1 1px;">下架时间</th>
+                            <th>有版权价格</th>
+                            <th>购买次数</th>
+                            <th>购买人数</th>
+                            <th style="border-right: solid #e1e1e1 1px;">总金额</th>
+                            <th>无版权价格</th>
+                            <th>购买次数</th>
+                            <th>购买人数</th>
+                            <th style="border-right: solid #e1e1e1 1px;">总金额</th>
+                            <th style="border-right: solid #e1e1e1 1px;">是否免费下载</th>
+                            <th style="border-right: solid #e1e1e1 1px;">上传状态</th>
+                            <th style="width: 150px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="items in proList" ng-click="TrClick($index)" ng-class='{selectActive: $index == focus,"overTR":isoverTR}'>
+                        <tr>
+                            <td rowspan="{{rowfun(items.businessVideoLists.length+1)}}" style="border-right: solid #e1e1e1 1px;">{{($index+1)+(pagenum-1)*pagesize}}</td>
+                            <td rowspan="{{rowfun(items.businessVideoLists.length+1)}}"><img width="50" height="50" ng-src="{{items.img | IMG_SIZE : 50}}" alt=""></td>
+                            <td rowspan="{{rowfun(items.businessVideoLists.length+1)}}" >
+                                <span ng-click="detal(items)" style="cursor: pointer;">{{items.entryname}}</span>
+                            </td>
+                            <td rowspan="{{rowfun(items.businessVideoLists.length+1)}}">{{items.sku}}</td>
+                            <td rowspan="{{rowfun(items.businessVideoLists.length+1)}}" style="border-right: solid #e1e1e1 1px;">{{items.category}}</td>
+                        </tr>
+                        <tr class="h6" ng-show="items.businessVideoLists.length == 0">
+                            <td>--</td>
+                            <td>--</td>
+                            <td style="border-right: solid #e1e1e1 1px;">--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td style="border-right: solid #e1e1e1 1px;">--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td style="border-right: solid #e1e1e1 1px;">--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr ng-class="{h6:items.businessVideoLists.length == 1}" ng-show="items.businessVideoLists.length > 0" ng-repeat="item in items.businessVideoLists">
+                            <td style="max-width: 100px;">
+	                            <span>{{item.videoName}}</span>
+                            </td>
+                            <td>{{item.uploadDate || '--'}}</td>
+                            <td style="border-right: solid #e1e1e1 1px;">{{item.downDate || '--'}}</td>
+                            <td>{{item.copyrightPrice | currency}}</td>
+                            <td>{{item.yongjiu.downLoadCount}}</td>
+                            <td>{{item.yongjiu.downloadUserCount}}</td>
+                            <td style="border-right: solid #e1e1e1 1px;">{{item.yongjiu.videoPriceSum | currency}}</td>
+                            <td>{{item.notCopyrightPrice == ''? null : item.notCopyrightPrice | currency}}</td>
+                            <td>{{item.sanci.downLoadCount}}</td>
+                            <td>{{item.sanci.downloadUserCount}}</td>
+                            <td style="border-right: solid #e1e1e1 1px;">{{item.sanci.videoPriceSum | currency}}</td>
+                            <td style="border-right: solid #e1e1e1 1px;">
+                                <span ng-show="item.isFree == '1'">是</span>
+                                <span ng-show="item.isFree == '0'">否</span>
+                            </td>
+                            <td ng-class="{red:item.uploadState !=3 , greens:item.uploadState ==3}" style="border-right: solid #e1e1e1 1px;">{{videoState(item.uploadState)}}</td>
+                            <td>
+                                <div ng-show="item.copyright == 1">
+                                    <button ng-click="Shelves(item)" ng-show="item.videoState == 'DOWN_STATE' && item.uploadState == 3" style="background-color: green;">上架</button>
+                                    <button ng-click="Shelves(item)" ng-show="item.videoState == 'ON_STATE' && item.uploadState == 3" style="background-color: red;">下架</button>
+                                    <button ng-show="item.uploadState == 3" style="background-color: orange;" ng-click="upVideo(item)">修改</button>
+                                    <button style="background-color: orange;" ng-click="removeVideo(item)">删除</button>
+                                </div>
+                                <span ng-show="item.copyright == 2"> 客户版权 </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex fxc fyc" style="min-height: 400px;" ng-show="needOptimisation">
+                    <p>您好，为了节省服务器带宽，默认将不显示所有商品，但你仍可通过 <a class="search-text" href="javascript:;" ng-click="usersearch()">搜索</a> 查找所有商品信息</p>
+                </div>
+                <!-- 分页 -->
+                <div class="no-data" ng-show="totalNum == 0 && !needOptimisation" style="text-align: center;">没有数据</div>
+                <page ng-show="!needOptimisation"></page>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="asj-common-tanwrap ng-scope" ng-show="isupdate">
+    <div class="asj-common-tan tan-delete-ware">
+        <h3 class="ng-binding">修改</h3>
+        <div style="margin-bottom: 40px;">
+            <h3 style="margin: initial;display: inline-block;">有版权价格($):</h3>
+            <input placeholder="" ng-model="copyrightPrice" type="number" style="padding: 0 8px;line-height: 27px;width: 180px;" class="ng-pristine ng-untouched ng-valid ng-empty">
+            <h3 style="display: inline-block;margin-top: 10px;margin-bottom: initial;">无版权价格($):</h3>
+            <input placeholder="" ng-model="notCopyrightPrice" type="number" style="padding: 0 8px;line-height: 27px;width: 180px;" class="ng-pristine ng-untouched ng-valid ng-empty">
+            <h3 style="display: inline-block;margin-top: 10px;margin-bottom: initial;">是否免费下载:</h3>
+            <select ng-model="isFree" style="padding: 0 8px;height:27px;line-height: 27px;width: 180px;">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+        <div class="tan-btns">
+            <a class="tan-btn1" ng-click="goclick()">确认</a>
+            <a class="tan-btn0" ng-click="isupdate=false">取消</a>
+        </div>
+    </div>
+</div>
+<!--修改/删除-->
+<div class="asj-common-tanwrap ng-scope" ng-show="isShow">
+    <div class="asj-common-tan tan-delete-ware">
+        <h3 class="ng-binding">{{contentTxt}}</h3>
+        <div class="tan-btns">
+            <a class="tan-btn1" ng-click="Yclick()">确认</a>
+            <a class="tan-btn0" ng-click="isShow=false">取消</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

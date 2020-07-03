@@ -1,0 +1,55 @@
+<!-- 
+    {
+            "id": "00B4A477-F5A6-4FD1-90D5-9C13CDCED9AF",
+            "loginName": "苏慧"
+        },
+ -->
+<select ng-model="currentPerson.id" ng-change="onchange()" style="height:30px;margin-left:10px;display: none;">
+    <option value="">全部</option>
+    <!-- <option value="POD">POD商品</option> -->
+    <option ng-repeat="i in purchasePersonList" value="{{ i.id }}">{{ i.loginName }}</option>
+</select>
+
+<div class="purchase_persons">
+    <!-- <input type="text" ng-model="iptPerson" ng-change="searchPerson()" placeholder="输入采购员"> -->
+    <k-input value="currentPerson.loginName" on-change="searchPerson()" placeholder="{{ vm.placeholder }}"></k-input>
+
+    <ul class="searchList" ng-show="searchList.length > 0">
+        <li ng-repeat="i in searchList" ng-click="selectPurchase(i)">{{ i.loginName }}</li>
+    </ul>
+</div>
+
+<style>
+    .purchase_persons {
+        display: inline-block;
+        position: relative;
+    }
+
+    .purchase_persons input {
+        width: 100%;
+    }
+
+    .purchase_persons .searchList {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        /* min-height: 100px; */
+        z-index: 10;
+        overflow: auto;
+        background-color: #fff;
+        box-shadow: 0 0 4px #ccc;
+    }
+
+    .purchase_persons .searchList li {
+        /* text-align: center; */
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all .45s;
+    }
+
+    .purchase_persons .searchList li:hover {
+        background-color: #f2f2f2;
+    }
+</style>

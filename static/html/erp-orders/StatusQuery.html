@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>状态查询</title>
+    <!--业务员管理-->
+    <link rel="stylesheet" type="text/css" href="../../../static/css/SalesmanManagement.css">
+
+</head>
+<style>
+    .filter {
+        line-height: 30px !important;
+    }
+
+    .filter .datetab {
+        margin-left: 15px;
+    }
+
+    .filter .dateact {
+        color: #0d8efb;
+    }
+
+    .content {
+        margin-top: 20px;
+    }
+
+    input, select {
+        height: 30px !important;
+    }
+
+    .filter .search {
+        height: 30px !important;
+    }
+    .filter select{
+        width: initial;
+    }
+	.log-img{
+		cursor: pointer;
+	}
+	table tbody tr:hover{
+		background: #fff !important;
+	}
+	table tbody tr.active{
+		background: #FFFDF8 !important;
+	}
+	.sp-fir-tr td{
+		line-height: 24px;
+		padding: 10px 3px;
+	}
+</style>
+<body>
+<div class="content">
+    <!--<div class="filter clearfix">
+        <span style="float: left;">下单/付款日期:</span>
+        <input id="date1" class="Wdate data-inp" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="" readonly="">
+        <span class="line" style="float: left;">-</span>
+        <input id="date2" class="Wdate data-inp" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" placeholder="Now" readonly="">
+        <a class="datetab" ng-class="{dateact:item.flag}" href="javascript:void(0)" ng-repeat="item in dateArr" ng-click="dateClick(item)">{{item.name}}</a>
+    </div>-->
+    <div class="filter clearfix">
+        <span style="float: left;">业务员:</span>
+        <select ng-model="salesmanId" ng-options="item.ID as item.NAME for item in yewuyuan">
+            <option value="">全部</option>
+        </select>
+        <span style="float: left;">订单状态:</span>
+        <select ng-model="status">
+            <option value="">全部</option>
+            <option value="3">未付款</option>
+            <option value="10">已付款未处理</option>
+            <option value="11">已付款未到账</option>
+            <option value="6">待发货</option>
+            <option value="12">已发货</option>
+            <option value="14">已完成</option>
+            <option value="13">已结束</option>
+            <option value="68">拦截中</option>
+            <option value="69">已拦截</option>
+        </select>
+        <!-- 2019.8.26新增查询条件 -->
+        <select ng-model="condition" style="border-right:none; border-radius: 4px; margin-right: 0">
+            <option value="1">直发单号</option>
+            <option value="2">客户名称</option>
+            <option value="3">原始追踪单号</option>
+            <option value="4">CJ追踪单号</option>
+            <option value="5">SKU</option>
+            <option value="6">群主</option>
+        </select>
+        <input type="text" ng-model="inputTxt">
+        <button class="search" ng-click="searchInput()">查询</button>
+
+        <div class="buli-list-div" ng-mouseenter="showul=true" ng-mouseleave="showul=false">
+            <button class="plcz-btn">批量操作</button>
+            <ul class="bulk-list-ul" ng-show="showul" ng-cloak>
+
+                <li ng-click="batchAddLanJie()">批量添加拦截</li>
+                <li ng-click="batchCancelLanJie()">批量取消拦截</li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="parent-order" id="c-zi-ord">
+        <table class="c-ord-tbody">
+            <thead>
+            <tr>
+                <th>
+                    <img class="c-checkall" src="static/image/order-img/multiple1.png">
+                    序号</th>
+                <th>客户订单号</th>
+                <th>运单号</th>
+                <th>下单/付款日期</th>
+                <th>客户</th>
+                <th>业务员/群主</th>
+                <th>
+                    <span style="display: block;line-height: 20px;">数量/金额</span>
+                    <span style="display: block;line-height: 20px;">重量/邮费</span>
+                </th>
+                <th>折扣价</th>
+                <th>状态</th>
+                <th>操作</th>
+			</tr>
+            </thead>
+            <tbody ng-mouseenter="mouserEnterFn('enter', item.id)" ng-mouseleave="mouserEnterFn('leave', item.id)" ng-repeat="item in dataList">
+            <tr ng-class="{'active': item.isShowProduct}">
+                <td>
+                    <img ng-if="item.canShow" data-id="{{item.id}}"  class="cor-check-box" src="static/image/order-img/multiple1.png">
+                    <p style="display: none;" class="hide-order-id">{{item.id}}</p>
+                    {{$index+1}}</td>
+                <td >
+	                {{item.id}}
+	                <img ng-if="item.id.includes('ZF')" ng-click="handleLookLog(item.id,$event)" class="log-img" src="static/image/public-img/ord-log.png">
+                </td>
+	              <td>{{item.trackingNumber}}</td>
+                <td>
+                    <span ng-show="!item.paymentDate">{{item.createdAt}}</span>
+                    <span ng-show="item.paymentDate">{{item.paymentDate}}</span>
+                </td>
+                <td>{{item.accCustomerName}}</td>
+                <td>
+					<p style="line-height: 24px; ">{{item.ownerName || item.salesmanName}}</p>
+					<p style="line-height: 24px; color: #999">{{item.ownerName ? '群主' : '业务员'}}</p>
+				</td>
+                <td>
+                    <span style="display: block;line-height: 20px;" ng-cloak>
+                        <span class="ord-spnum">{{item.orderQuantity}}</span>个 /
+                        <span>${{item.amount}}</span>
+                    </span>
+                    <span style="display: block;line-height: 20px;" ng-cloak>
+                        <span class="oneord-wei">{{item.orderWeight}}</span>g /
+                        <span>${{item.postage}}</span>
+                    </span>
+                </td>
+                <td>${{item.discountFromMoney}}</td>
+                <td>
+                    <span ng-if="item.status == 3">未付款</span>
+                    <span ng-if="item.status == 10">已付款未处理</span>
+                    <span ng-if="item.status == 11">已付款未到账</span>
+                    <span ng-if="item.status == 6">待发货</span>
+                    <span ng-if="item.status == 12">已发货</span>
+                    <span ng-if="item.status == 14">已完成</span>
+                    <span ng-if="item.status == 13">已结束</span>
+                    <span ng-if="item.status ==68">拦截中</span>
+                    <span ng-if="item.status =='69'">已拦截</span>
+                    <span ng-if="item.status =='70'">面单已过期</span>
+                    <br ng-if="item.disputeId=='1'">
+                    <span ng-if="item.disputeId=='1'" style="color: red;">纠纷订单</span>
+                </td>
+                <td class="moshow-sp-td">
+                    <button ng-if="item.status != 68 && item.status != 69 && item.canShow" ng-click="oneAddLanJie(item)" class="erp-zi-bjbtn">添加拦截</button>
+                    <button ng-if="item.status == 68 || item.status == 69 && item.canShow " ng-click="oneCancelLanJie(item)" class="erp-zi-bjbtn">取消拦截</button>
+
+                </td>
+			</tr>
+			<tr ng-show="item.isShowProduct">
+				<td colspan="16">
+					<div class="erpd-toggle-div">
+						<table class="pro-item-sp" ng-repeat="product in item.productList">
+							<tr class="sp-fir-tr">
+								<td style="width: 10%;" rowspan="2" class="dt-img-td">
+									<span class="blank-span">
+										<img class="sp-smallimg" ng-src="{{product.cjImage | IMG_SIZE: 80}}">
+										<img class="hide-bigimg" ng-src="{{product.cjImage | IMG_SIZE: 280}}">
+									</span>
+								</td>
+								<td style="width: 15%;" rowspan="2" >
+                                    SKU: {{product.SKU}}
+                                    <button class="cg-mes-btn" ng-click="showPurchases(item.id, product.stanproductId)">采购人</button>
+                                    <!-- 采购订单日志 -->
+                                    <button class="cg-mes-btn" ng-click="showPurchases(item.id, product.stanproductId, true)">采购日志</button>
+								</td>
+								<td style="width: 10%;" rowspan="2" class="hgh-td" ng-cloak>
+									{{'100129' | translate}}: {{product.quantity}}个
+								</td>
+								<td style="width: 10%;" rowspan="2">
+									{{'100005' | translate}}:
+									<span ng-show="item.logisticName == 'USPS+'"> {{'100132' | translate}}</span>
+									<span ng-show="item.logisticName != 'USPS+' && item.store==0">义乌</span>
+									<span ng-show="item.logisticName != 'USPS+' && item.store==1">深圳</span>
+                                    <span ng-show="item.logisticName != 'USPS+' && item.store==4">泰国</span>
+                                    <span ng-show="item.logisticName != 'USPS+' && item.store==5">金华</span>
+								</td>
+								<td style="width: 10%;" rowspan="2" ng-cloak>
+									{{'100350' | translate}}: ${{product.price}}
+								</td>
+								<td style="width: 10%;" class="sp-sx-td" rowspan="2" ng-cloak>{{'100078' | translate}}:
+									<span class="sp-sx-span" ng-repeat="prop in product.property.split(',')">{{prop}}</span>
+								</td>
+								<td style="width: 20%;" rowspan="2" ng-cloak>{{'100079' | translate}}: {{product.cj_product_name}}</td>
+								<td style="width: 15%;" class="namecn-td" ng-cloak>
+									{{'100081' | translate}}: {{product.cjproductnamecn}}
+								</td>
+							</tr>
+							<tr class="sp-fir-tr">
+								<td style="width: 15%;" class="nameen-td" ng-cloak>
+									{{'100082' | translate}}: {{product.cjproductnameen}}
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				
+			</tr>        
+			</tbody>
+			<tbody ng-show="dataList.length == 0">
+				<tr >
+					<td colspan="10">暂无数据，请搜索查询。</td>
+				</tr>
+			</tbody>
+        </table>
+        <!--分页-->
+        <div class="page-box">
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<!-- 是否添加拦截 -->
+<div class="isaddyfh-wrap" ng-show="batchAddLanJiePopup">
+    <div class="isaddyfh-con">
+        <p>是否添加拦截?</p>
+        <div class="isaddyfh-btns">
+            <button ng-click="batchAddLanJiePopup=false" class="ispc-can-btn">取消</button>
+            <button ng-click="batchAddLanJiePopupConfirm()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 单个添加拦截 -->
+<div ng-show="oneAddLanJiePage" class="oneistbdp-wrap">
+    <div class="oneistbdp-con">
+        <p>是否添加拦截?</p>
+        <div class="oneistbdp-btns">
+            <button ng-click="oneAddLanJiePage=false" class="oneistbdp-can-btn">取消</button>
+            <button ng-click="oneAddLanJieConfirm()" class="oneistbdp-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 拦截成功返回 -->
+<div class="isaddyfh-wrap" style="z-index: 99999;" ng-show="resultIntercept">
+    <div class="isaddyfh-con" style="height: 160px;">
+        <p align="center">拦截成功id</p>
+        <input style="width: 100%;display:block;height: 30px;text-indent: 12px;" ng-model="lrzzhNum" ></input>
+        <div class="isaddyfh-btns">
+            <button ng-click="resultIntercept=false" class="ispc-can-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- 是否批量取消拦截 -->
+<div class="isaddyfh-wrap" ng-show="batchCancelLanJiePopup">
+    <div class="isaddyfh-con">
+        <p>是否取消拦截?</p>
+        <div class="isaddyfh-btns">
+            <button ng-click="batchCancelLanJiePopup=false" class="ispc-can-btn">取消</button>
+            <button ng-click="batchCancelLanJiePopupConfirm()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 单个添加拦截 -->
+<div ng-show="oneCancelLanJiePage" class="oneistbdp-wrap">
+    <div class="oneistbdp-con">
+        <p>是否添加拦截?</p>
+        <div class="oneistbdp-btns">
+            <button ng-click="oneCancelLanJiePage=false" class="oneistbdp-can-btn">取消</button>
+            <button ng-click="oneCancelLanJieConfirm()" class="oneistbdp-con-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 拦截成功返回 -->
+<div class="isaddyfh-wrap" style="z-index: 99999;" ng-show="resultCancelIntercept">
+    <div class="isaddyfh-con" style="height: 160px;">
+        <p align="center">拦截成功id</p>
+        <input style="width: 100%;display:block;height: 30px;text-indent: 12px;" ng-model="lrzzhNum" ></input>
+        <div class="isaddyfh-btns">
+            <button ng-click="resultCancelIntercept=false" class="ispc-can-btn">确定</button>
+        </div>
+    </div>
+</div>
+
+<!-- 查看采购员 -->
+<purchases-modal init-callback="purchaseOrderCallback(showPurchases)"></purchases-modal>
+
+<!-- 日志 -->
+<log-tk ng-if="isLookLog" no="ctrl.no"></log-tk>
+</html>
+

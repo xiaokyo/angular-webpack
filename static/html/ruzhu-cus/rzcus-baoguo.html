@@ -1,0 +1,134 @@
+
+<div class="content ruzhu-wrap">
+    <div class="filter clearfix">
+       <a class="like-navbtn" ng-click="typeStuFun(1)" ng-class="{'tab-act':typeStu==1}" href="javascript:void(0)">已发货</a>
+       <a class="like-navbtn" ng-click="typeStuFun(2)" ng-class="{'tab-act':typeStu==2}" href="javascript:void(0)">已签收</a>
+       <select class="sel-store" ng-model="selStroge" ng-change="changeStrogeFun()">
+           <option value="{{item.id}}" ng-repeat="item in strogeList">{{item.name}}</option>
+       </select>
+    </div>
+    <div class="filter-box margin-top20px d-flex">
+       <div>
+            <input class="seach-inp" placeholder="请输入供应商名称" ng-keyup="keyUpFun($event)" ng-model="seachVal"></input>
+            <button class="search" style="float: none;" ng-click="searchInput()">查询</button>
+            <select class="width200" ng-model="gysId" ng-change="selGysFun()">
+                <option value="">请选择入驻商名称</option>
+                <option value="{{item.supplierId}}" ng-repeat="item in gysList">{{item.companyName}}</option>
+            </select>
+       </div>
+       <!-- <div>
+            <button class="bulk-btn">批量通过</button>
+            <button class="bulk-btn">批量拒绝</button>
+       </div> -->
+    </div>
+    <div class="table-box">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <!-- <div class="check-box">
+                        <input type="checkbox" ng-model="checkAllMark" ng-change="checkAllFun(checkAllMark)">
+                        <label for=""></label>
+                    </div> -->
+                    序号
+                </th>
+                <th>商户名称</th>
+                <th>提交时间</th>
+                <th>总重量</th>
+                <th>总数量</th>
+                <th>始发地</th>
+                <th>发往仓库</th>
+                <th>目的仓库</th>
+                <th>运单号</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="item in dataList" ng-click="toogleSpFun(item)" ng-init="pIndex = $index">
+                <tr>
+                    <td>
+                        <!-- <div class="check-box" ng-click="stopPropFun($event)">
+                            <input type="checkbox" ng-model="item.checkFlag" ng-change="checkItemFun(item)">
+                            <label for=""></label>
+                        </div> -->
+                        {{resPageNum*resPageSize+$index+1}}
+                    </td>
+                    <td>{{item.companyName}}</td>
+                    <td>{{item.createTime}}</td>
+                    <td>{{item.packageWeight}}g</td>
+                    <td>{{item.productNum}}</td>
+                    <td>{{item.originAddress}}</td>
+                    <td>{{item.generationOriginName}}</td>
+                    <td>{{item.originName}}</td>
+                    <td>{{item.logisticsNumber}}</td>
+                    <td>{{item.remark}}
+                        <span>
+                            <i ng-click="toogleFun(item,$event)" ng-class="{'glyphicon glyphicon-triangle-top':item.spFlag,'glyphicon glyphicon-triangle-bottom':!item.spFlag}" style="font-size: 20px;cursor: pointer;" class="glyphicon glyphicon-triangle-bottom"></i>
+                        </span>
+                    </td>
+                    <!-- <td ng-click="stopPropFun($event)">
+                        <button ng-click="detailFun(item)" class="link-tip">通过</button>
+                        <button ng-click="detailFun(item)" class="link-tip">拒绝</button>
+                    </td> -->
+                </tr>
+                <tr ng-show="item.spFlag" ng-repeat="sp in item.productResultVOS">
+                    <td colspan="2">
+                        <!-- <img class="w60h60-img" src="{{sp.imageUrl}}"> -->
+                        <span class="blank-span">
+                            <img class="w60h60-img" ng-src="{{sp.imageUrl}}">
+                            <img class="hide-bigimg" ng-class="{'hide-bigimg-act':pIndex>4}" ng-src="{{sp.imageUrl}}">
+                        </span>
+                        <span>商品名称: {{sp.title}}</span>
+                    </td>
+                    <td colspan="3">
+                        SKU: {{sp.sku}}
+                    </td>
+                    <td colspan="2">
+                        数量: {{sp.productNum}}
+                    </td>
+                    <td colspan="2">
+                        <div>单个重量: {{sp.productSingleWeight}}g</div>
+                        <div>单个邮寄重量: {{sp.productSingleMailWeight}}g</div>
+                    </td>
+                    <td colspan="2">
+                        单价: ${{sp.price}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="totalNum<1" class="no-data-box">暂无数据</div>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+</div>
+<div class="tkbg-wrap" ng-show="juJueFlag">
+    <div class="tk-con">
+        <div class="d-flex">
+            <span>拒绝原因</span>
+            <img ng-click="juJueFlag = false" class="close-tkimg" src="static/image/public-img/close-img.png">
+        </div>
+        <p>
+            <textarea class="text-area"></textarea>
+        </p>
+        <div class="isaddyfh-btns">
+            <button ng-click="juJueFlag=false;" class="ispc-can-btn">取消</button>
+            <button ng-click="sureLiXianYhFun()" class="ispc-con-btn">确定</button>
+        </div>
+    </div>
+</div>

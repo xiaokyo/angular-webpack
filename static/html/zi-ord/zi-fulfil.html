@@ -1,0 +1,581 @@
+<style>
+  .fuifil-div .plcz-btn {
+    width: 100px;
+  }
+  .toogle-ord-stu .plcz-btn {
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+    text-align: center;
+    background-color: #87CEFA;
+    border-radius: 4px;
+    color: #fff;
+  }
+  .laofan{
+      width: 100px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2;
+  }
+</style>
+<div class="custom-orders-wrap">
+  <div class="c-ord-mid">
+    <!-- 右边的内容部分 -->
+    <div class="ord-right-con">
+      <div class="content">
+        <div class="c-ord-conall">
+          <div class="c-ord-con">
+            <!-- 订单动能 时间等的部分 -->
+            <div class="c-ord-fun fiexd-box">
+              <!-- 我们操作的订单 -->
+              <div class="c-us-stuv">
+                <storageTab callback="storageCallback" has-all="true"></storageTab>
+                <!-- <div class="store-div">
+                  <button ng-click="storeFun($event, 0)" class="two-ck-btn two-ck-activebtn">义乌仓</button>
+                  <span ng-show="storeNumFlag">{{'('+yiWuCount+')'}}</span>
+                  <button ng-click="storeFun($event, 1)" class="two-ck-btn">深圳仓</button>
+                  <span ng-show="storeNumFlag">{{'('+shenZhenCount+')'}}</span>
+                  <button ng-click="storeFun($event, 2)" class="two-ck-btn">美西奇诺仓</button>
+                  <span ng-show="storeNumFlag">{{'('+meiGuoCount+')'}}</span>
+                  <button ng-click="storeFun($event, 3)" class="two-ck-btn">美东新泽西仓</button>
+                  <span ng-show="storeNumFlag">{{'('+meiDongCount+')'}}</span>
+                    <button ng-click="storeFun($event, 4)" class="two-ck-btn">泰国仓</button>
+                    <span ng-show="storeNumFlag">{{'('+taiGuoCount+')'}}</span>
+                  <button ng-click="localFun($event)" class="two-ck-btn">美东新泽西仓</button>
+                </div> -->
+                <div class="c-fun-right">
+                  <input class="Wdate data-inp" style="text-indent: 12px;" id="c-data-time" type="text"
+                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})">
+                  </input><input id="cdatatime2"
+                    placeholder="Now" class="Wdate data-inp" style="text-indent: 12px;" type="text"
+                    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" />
+                </div>
+              </div>
+              <!-- 订单搜索部分 -->
+              <div class="c-seach-fun">
+                <div class="c-seach-div">
+                  <select class="c-seach-country" ng-model="isSelJqcz">
+                    <option value="业务员">{{'101316' | translate}}</option>
+                    <option value="群主">{{ '101317' | translate }}</option>
+                    <option value="子订单号">{{'100023' | translate}}</option>
+                    <option value="店铺名称">{{'100055' | translate}}</option>
+                    <option value="商品SKU">{{'100106' | translate}}</option>
+                    <option value="客户名称">{{'100108' | translate}}</option>
+                    <option value="母订单号">{{'100054' | translate}}</option>
+                    <option value="追踪号">{{'100109' | translate}}</option>
+                    <option value="收件人">{{'100058' | translate}}</option>
+                    <option value="客户订单号">{{'100052' | translate}}</option>
+                    <option value="参考号">{{'101390' | translate}}</option>
+                    <!-- <option>精确查找</option> -->
+                  </select>
+                  <input class="c-seach-inp"></input>
+                  <a ng-click="searchFun()" class="c-seach-btn" href="javascript:void(0)">{{'100025' | translate}}</a>
+                </div>
+                <select class="sel-ord-type" ng-model="ordType" ng-change="selOrdTypeFun()">
+                  <option value="">全部订单</option>
+                  <option value="1">POD订单</option>
+                  <option value="2">普通订单</option>
+                </select>
+                <select class="sel-ord-type" ng-model="fulfilStatus" ng-change="selfulfilStatus()">
+                  <option value="">全部订单</option>
+                  <option value="2">等待履行</option>
+                  <option value="1">履行中</option>
+                  <option value="3">履行失败</option>
+                  <!-- <option value="4">重新处理订单</option> -->
+                </select>
+                <!-- <div class="buli-list-div" ng-mouseenter="showul=true" ng-mouseleave="showul=false">
+                  <button class="plcz-btn">批量操作</button>
+                  <ul class="bulk-list-ul" ng-show="showul" ng-cloak>
+                    <li ng-show="isfulfillment" ng-click="BatchSynchronization()">{{'100113' | translate}}</li>
+                    <li ng-hide="isfulfillment" ng-click="jqczFun()">{{'100026' | translate}}</li>
+                    <li ng-hide="isfulfillment" ng-if="selstu==3" ng-click="istbdpTc()">{{'100113' | translate}}</li>
+                    <li ng-hide="isfulfillment" ng-if="selstu==3||selstu==1" ng-click="bulkAddYfhFun()">{{'100112' | translate}}</li>
+                    <li ng-if="cxclAdminShowFlag" ng-click="addLanJieFun()">批量添加到拦截中</li>
+                    <li ng-if="selstu==1&&powerJob==1" ng-click="changeWLFun()">批量修改物流</li>
+                    <li ng-if="selstu==1" ng-click="isydFun()">{{'100111' | translate}}</li>
+                    <li ng-show="selstu==1||selstu==3" ng-click="bulkChangeCk()">批量修改仓库</li>
+                    <li ng-hide="isfulfillment" ng-click="isdcfun()">{{'100068' | translate}}</li>
+                  </ul>
+                </div> -->
+                <div class="buli-list-div fuifil-div">
+                  <button ng-show="tongBuAdminFlag" ng-click="BatchSynchronization(erporderList)" class="plcz-btn">{{'100113' | translate}}</button>
+                  <button ng-click="defeated(erporderList)" class="plcz-btn">同步失败通知</button>
+                </div>
+              </div>
+              <!-- 变动展示的内容部分 查看子订单-->
+              <!-- <h1 style="color: red;">查看订单</h1> -->
+              <div class="toogle-ord-stu" id="c-zi-ord">
+                <!-- 订单列表部分 -->
+                <div class="c-ord-list">
+                  <table class="orders-table">
+                    <thead class="c-ord-thead">
+                      <tr>
+                        <th class="ordlist-fir-th" style="width: 100px">
+                          <img class="c-checkall" src="static/image/order-img/multiple1.png">
+                          <span>{{'100114' | translate}}</span>
+                        </th>
+                        <th style="width: 100px;">
+                          <p>{{'100115' | translate}}</p>
+                          <p>{{'100054' | translate}}</p>
+                        </th>
+                        <th style="width: 90px">
+                          <!-- <p>下单日期</p>
+                            <p>提交日期</p> -->
+                          {{'100028' | translate}}
+                        </th>
+                        <!-- <th style="width: 90px;">提交日期</th> -->
+                        <th style="width: 80px">{{'100030' | translate}}</th>
+                        <th style="width: 70px">{{'100055' | translate}}</th>
+                        <!-- <th style="width: 60px">图片</th> -->
+
+                        <th style="width: 70px;">{{'101318' | translate}}</th>
+                        <!-- <th style="width: 80px">
+                            <p>商品名称</p>
+                            <p>SKU</p>
+                          </th> -->
+                        <th style="width: 105px">
+                          <p>{{'100056' | translate}}</p>
+                          <p>{{'100057' | translate}}</p>
+                        </th>
+                        <th style="width: 70px;">{{'100058' | translate}}</th>
+                        <th style="width: 100px;">
+                          <p>{{'100059' | translate}}</p>
+                          <p>{{'100060' | translate}}</p>
+                        </th>
+                        <th style="width: 80px">{{'100061' | translate}}</th>
+
+                        <th style="width: 65px">{{'100062' | translate}}</th>
+                        <th style="width: 200px">{{'100063' | translate}}</th>
+                        <th style="width: 65px">履行状态</th>
+                          <th style="width: 65px">错误信息</th>
+                        <th style="width: 75px;">{{'100043' | translate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody class="c-ord-tbody" ng-repeat="zddlist in erporderList" repeat-finish>
+                      <tr class="erporder-detail">
+                        <td class="ordlist-fir-td">
+                          <img class="cor-check-box" src="static/image/order-img/multiple1.png">
+                          <img ng-click="LookLog(zddlist.order.ID,$event)" class="log-img"
+                            src="static/image/public-img/ord-log.png">
+                          <p ng-cloak>{{zddlist.order.ORDER_NUMBER}}</p>
+                          <p style="display: none;" class="hide-order-id">{{zddlist.order.ID}}</p>
+                          <p>
+                            <span ng-show="zddlist.order.properties!=false"
+                              style="background: red;color: #fff;padding: 1px 3px;border-radius: 3px;cursor: pointer;"
+                              ng-click="openZZC2(zddlist.order.properties,$event,'order')">个</span>
+                          </p>
+                        </td>
+                        <td class="id-td moshow-sp-td">
+                          <p ng-cloak>{{zddlist.order.ID}}</p>
+                          <p ng-cloak>{{zddlist.order.SHIPMENTS_ORDER_ID}}</p>
+                          <!-- <img ng-click="LookLog(zddlist.order.ID)" class="log-img" src="static/image/public-img/ord-log.png"> -->
+                        </td>
+                        <td class="ordlist-imgtd moshow-sp-td">
+                          <!-- <p ng-cloak>{{ zddlist.order.paymentDate.time | date:"yyyy-MM-dd HH:mm:ss"}}</p> -->
+                          <p ng-cloak>
+                            {{ zddlist.order.paymentDate.year+1900}}-{{zddlist.order.paymentDate.month+1}}-{{zddlist.order.paymentDate.date}}
+                            {{zddlist.order.paymentDate.hours}}:{{zddlist.order.paymentDate.minutes}}:{{zddlist.order.paymentDate.seconds}}
+                          </p>
+                          <!-- <p ng-cloak>{{ zddlist.order.createDate.time | date:"yyyy-MM-dd HH:mm:ss"}}</p> -->
+                        </td>
+                        <td class="moshow-sp-td">
+                          <p ng-cloak>{{zddlist.order.consumerName}}</p>
+                          <!-- <p class="star-num-p"><img src="static/image/order-img/iconstar.png"></p> -->
+                          <p class="note-nowrap-box" title="{{zddlist.order.NOTE_ATTRIBUTES}}">{{zddlist.order.NOTE_ATTRIBUTES}}</p>
+                          <p ng-if="zddlist.order.NOTE_ATTRIBUTES">
+                            <img ng-click="messageimgFun(zddlist.order,$index)" style="cursor: pointer;"
+                              title="{{zddlist.order.NOTE_ATTRIBUTES}}" src="static/image/public-img/iconnote.png">
+                          </p>
+                          <span style="cursor: pointer;"
+                            ng-click="openAnalysis(zddlist.order.MERCHANTN_NUMBER,zddlist.order.consumerName)"
+                            ng-if="zddlist.order.userLevel==3" class="yzkehu-flag">优</span>
+                          <span style="cursor: pointer;"
+                            ng-click="openAnalysis(zddlist.order.MERCHANTN_NUMBER,zddlist.order.consumerName)"
+                            ng-if="zddlist.order.userLevel==2" class="ptkehu-flag">普</span>
+                          <span style="cursor: pointer;"
+                            ng-click="openAnalysis(zddlist.order.MERCHANTN_NUMBER,zddlist.order.consumerName)"
+                            ng-if="zddlist.order.userLevel==1" class="qzkehu-flag">潜</span>
+                          <img src="static/image/public-img/order.png">
+                          <span class="cus-dengji">LV{{zddlist.order.cunLevel}}</span>
+                          <img src="static/image/public-img/money.png">
+                          <span class="cus-dengji">LV{{zddlist.order.moneyLevel}}</span>
+                        </td>
+                        <td class="moshow-sp-td">
+                          <p ng-cloak>{{zddlist.order.STORE_NAME}}</p>
+                        </td>
+
+                        <td class="moshow-sp-td" title="{{zddlist.order.ownerName ? '群主' : '没有群主显示业务员'}}">
+  												<div ng-cloak>
+  													{{zddlist.order.ownerName || zddlist.order.salesmanName}}
+  													<div ng-show="!zddlist.order.ownerName" style="font-size:10px;color:#ccc;transform:scale(.8)">{{'101316' | translate}}</div>
+  												</div>
+                          <p ng-if="zddlist.order.erpnote">
+                            <img ng-click="ywymesimgFun(zddlist.order,$event)" style="cursor: pointer;"
+                              title="{{zddlist.order.erpnote}}" src="static/image/public-img/iconnote.png">
+                          </p>
+                        </td>
+                        <td class="moshow-sp-td">
+                          <p ng-cloak>
+                            <span>{{zddlist.order.ORDER_QUANTITY}}个</span> /
+                            <span>${{zddlist.order.AMOUNT}}</span>
+                          </p>
+                          <p ng-cloak>
+                            <span>{{zddlist.order.ORDERWEIGHT}}g</span> /
+                            <span>${{zddlist.order.POSTAGE}}</span>
+                          </p>
+                        </td>
+                        <td class="moshow-sp-td">
+                          <p ng-cloak>{{zddlist.order.CUSTOMER_NAME}}</p>
+                        </td>
+                        <td class="moshow-sp-td">
+                          <p ng-cloak>{{zddlist.order.SHIPPING_ADDRESS}}</p>
+                          <p ng-cloak>{{zddlist.order.shippingAddress2}}</p>
+                        </td>
+                        <td class="moshow-sp-td">
+                          <span ng-cloak>{{zddlist.order.CITY}}</span>
+                          <span ng-cloak>{{zddlist.order.PROVINCE}}</span>
+                          <span ng-cloak>{{zddlist.order.ZIP}}</span>
+                          <span ng-cloak>{{zddlist.order.COUNTRY_CODE}}</span>
+                          <!-- <p ng-cloak>{{zddlist.order.ZIP}}</p> -->
+                          <p ng-cloak>{{zddlist.order.PHONE}}</p>
+                          <p ng-if="zddlist.order.taxidExtend"
+
+                          title="{{zddlist.order.taxidExtend}}" class="taixd-text"
+                            ng-cloak>Tax ID: {{zddlist.order.taxidExtend}}</p>
+                        </td>
+                        <td class="wl-ord-td moshow-sp-td">
+                          <p class="wl-name-p" ng-cloak>{{zddlist.order.LOGISTIC_NAME}}</p>
+                          <p ng-cloak>{{zddlist.order.LOGISTICSMODENAME}}</p>
+                        </td>
+                        <td class="created-td moshow-sp-td">
+                          <p class="reson-p"
+                            ng-class="{drkgreen:zddlist.order.fulfillmentsId||zddlist.order.shopshipstationId}"
+                            ng-if="zddlist.order.TRACKINGNUMBER">{{zddlist.order.TRACKINGNUMBER}}</p>
+                           <p>{{zddlist.order.CJTracknumber}}</p>
+                          <p class="reson-p" ng-if="zddlist.order.TRACKINGNUMBER==null">{{'100116' | translate}}</p>
+                          <p ng-if="zddlist.order.logisticErrorInfo">{{zddlist.order.logisticErrorInfo}}</p>
+                          <div class="inp-zzhdiv">
+                            <input class="zzh-inp"></input>
+                            <!-- <button ng-if="selstu==1" ng-click="lrFun(zddlist.order,$event,$index)" class="lr-zzhbtn stop-prop">{{'100119' | translate}}</button>
+                            <button ng-if="selstu==2||selstu==3" ng-click="lrFun(zddlist.order,$event,$index)" class="lr-zzhbtn stop-prop">{{'100120' | translate}}</button> -->
+                            <button style="width: 50px" ng-click="qxlrFun($event)" class="qxlr-btn stop-prop">{{'100051' | translate}}</button>
+                            <button style="width: 50px" ng-click="surelrFun(zddlist.order,$event,$index)" class="qdlr-btn stop-prop">{{'100050' | translate}}</button>
+                          </div>
+                          <span ng-click="hisTraNumFun(zddlist.order)" class="sp-change-text" title="{{'原:'+zddlist.order.TRACKINGNUMBERHISTORY.replace(zddlist.order.TRACKINGNUMBER,'')}}" ng-if="zddlist.order.TRACKINGNUMBERHISTORY.split(',').length>2">换</span>
+                          <span class="sd-lrzzh-flag" ng-if="selstu!=1&&zddlist.order.TRACKINGNUMBERTYPE=='1'">手</span>
+                          <span title="{{zddlist.order.INTERNALODDNUMBER}}" ng-click="fzZdhFun($event)" class="sd-ckh-flag" ng-show="zddlist.order.INTERNALODDNUMBER" style="background-color: #12d3df;">转</span>
+                          <input style="position: absolute;top:-9999px;right:9999px;" value="{{zddlist.order.INTERNALODDNUMBER}}" class="zdh-val"></input>
+                          <span class="sczzh-time" ng-if="zddlist.order.trackingNumberGenerationTime">{{dayFun(zddlist.order.trackingNumberGenerationTime.time,curTime)+'天'}}</span>
+                          <button ng-if="selstu==3&&(zddlist.order.TRACKINGNUMBER.indexOf('EYT')>=0||zddlist.order.TRACKINGNUMBER.indexOf('EQKPT')>=0)" ng-click="quaryZdhFun(zddlist.order,$event,$index)" class="hqzdh-btn">{{'100121' | translate}}</button>
+                        </td>
+                        <td>
+                          <p ng-show="zddlist.order.fulfillmentStatus == '0' || zddlist.order.fulfillmentStatus == '2'">等待履行</p>
+                          <p ng-show="zddlist.order.fulfillmentStatus == '1'" style="color: green;">履行中</p>
+                          <p ng-show="zddlist.order.fulfillmentStatus == '3'" style="color: red;">履行失败</p>
+                          <!-- <div style="width: 92px;" class="morefun-div" ng-click="stopFun($event)" ng-show="zddlist.order.fulfillmentStatus == '3'">
+                              <span class="caret">操作</span>
+                              <ul class="more-selul">
+                                <li>提交至待发货</li>
+                                <li>下一步</li>
+                              </ul>
+                          </div> -->
+<!--                            错误信息-->
+                       </td>
+                          <td>
+                              <p class="laofan" ng-cloak title="{{zddlist.order.fulfillmentErrorInfo}}">{{zddlist.order.fulfillmentErrorInfo}}</p>
+                          </td>
+                        <!-- <td class="moshow-sp-td">
+                          <p class="jf-tip-stu" ng-if="zddlist.order.flag1!=1">货代未匹配</p>
+                          <p class="jf-tip-stu drkgreen" ng-if="zddlist.order.flag1==1">货代已匹配</p>
+                          <p class="jf-tip-stu drkgreen" ng-if="zddlist.order.flag2==33">{{zddlist.order.message2}}
+                          </p>
+                          <p ng-show="zddlist.order.isTuiJian == 1" style="color: red;">退件订单</p>
+                        </td> -->
+                        <td class="moshow-sp-td">
+                          <button ng-show="zddlist.order.fulfillmentStatus == '0'&&tongBuAdminFlag" ng-click="Synchronization(zddlist.order)" class="plcz-btn">{{'100124' | translate}}</button>
+                          <!--  <button ng-if="selstu!=2" ng-click="editFun(zddlist.order,$event,$index)" class="erp-zi-bjbtn">{{'100120' | translate}}</button>
+												  <button ng-if="selstu==2" ng-click="responseMsgFun(zddlist.order,$index)" class="erp-zi-bjbtn">{{'100122' | translate}}</button>
+												  <div style="width: 92px;" class="morefun-div" ng-click="stopFun($event)" ng-if="selstu!=2">
+                            <a href="javascript:void(0);" class="more-btn">{{'100094' | translate}}</a><span class="caret"></span>
+                            <ul class="more-selul">
+                              <li ng-hide="isfulfillment" ng-click="istbzdpFun(zddlist.order)" ng-if="selstu==3&&zddlist.order.TRACKINGNUMBER.indexOf('EYT')<0&&zddlist.order.TRACKINGNUMBER.indexOf('EQKPT')<0">{{'100124' | translate}}</li>
+                              <li ng-hide="isfulfillment" ng-click="onescydhFunclick(zddlist.order,$event,zddlist)" ng-if="selstu==1">{{'100123' | translate}}</li>
+                              <li ng-hide="isfulfillment" ng-if="selstu==2">{{'100127' | translate}}</li>
+                              <li ng-hide="isfulfillment" ng-if="selstu==2">{{'100128' | translate}}</li>
+                              <li ng-hide="isfulfillment" ng-click="singleAddyfhFun(zddlist.order,$event)" ng-if="selstu==3||selstu==1">{{'100125' | translate}}</li>
+                              <li ng-show="isfulfillment && zddlist.order.fulfillmentStatus == '0'" ng-click="Synchronization(zddlist.order)">{{'100124' | translate}}</li>
+                              <li ng-click="ckBzFun(zddlist.order,$index,$event)">指定包装</li>
+                              <li ng-click="addressError(zddlist.order,$index,$event)" ng-if="zddlist.order.STORE_NAME=='Brightpearl'">地址错误</li>
+                            </ul>
+												  </div> -->
+                        </td>
+                      </tr>
+                      <tr class="erpd-toggle-tr">
+                        <td class="d-tog-td" colspan="16">
+                          <div class="erpd-toggle-div">
+                            <table ng-style="{'background-color':pList.SKU.includes('BZSP') ? '#ececec': 'initial'}" ng-repeat="pList in zddlist.product">
+
+                              <tr>
+                                <td rowspan="2" class="dt-img-td" ng-cloak>
+                                  <span class="blank-span">
+                                    <img class="sp-smallimg" ng-src="{{pList.cjImage | IMG_SIZE: 80}}">
+                                    <img class="hide-bigimg" ng-src="{{pList.cjImage | IMG_SIZE: 280}}">
+                                  </span>
+                                </td>
+                                <td rowspan="2" ng-cloak>
+                                  SKU:
+                                  <input title="{{pList.SKU}}" class="bj-spsku" value="{{pList.SKU}}" disabled="disabled"></input></br>
+                                  <!-- <button class="xg-spskubtn" ng-click="bjSkuFun($event)">{{'100120' | translate}}</button> -->
+                                  <button style="width: 50px" class="qxspbj-btn bjsame-btn" ng-click="bjSkuQxFun($event)">{{'100051' | translate}}</button>
+                                  <button style="width: 50px" class="surespbj-btn bjsame-btn" ng-click="bjSkuSureFun($event,pList)">{{'100050' | translate}}</button>
+                                  <p style="display: none;" class="spsku-text">{{pList.SKU}}</p>
+                                  <p style="color:#04a452;" ng-if="pList.horizontalFlag">{{pList.horizontalFlag}}</p>
+                                  <p style="color:#e55264;" ng-if="!pList.horizontalFlag">未到货</p>
+                                  <p ng-show="pList.properties!=false"><span style="background: red;color: #fff;padding: 1px 3px;border-radius: 3px;cursor: pointer;" ng-click="openZZC(pList.properties,$event,'product')">个</span></p>
+                                </td>
+                                <td rowspan="2" ng-cloak>
+                                  {{'100129' | translate}}: {{pList.QUANTITY}}个
+																<p>
+																	<span>{{'100130' | translate}}:</span>
+																	<input class="bj-spsku" value="{{pList.entryCode}}" disabled="disabled"></input></br>
+																	<!-- <button class="xg-spskubtn" ng-click="bjHghFun($event)">{{'100120' | translate}}</button> -->
+																	<button style="width: 50px" class="qxspbj-btn bjsame-btn" ng-click="bjHghQxFun($event)">{{'100051' | translate}}</button>
+																	<button style="width: 50px" class="surespbj-btn bjsame-btn" ng-click="bjHghSureFun($event,pList)">{{'100050' | translate}}</button>
+																	<p style="display: none;" class="spsku-text">{{pList.SKU}}</p>
+																</p>
+                                </td>
+                                <td rowspan="2" ng-cloak>
+                                  {{'100005' | translate}}:
+                                  <span
+                                    ng-if="zddlist.order.LOGISTIC_NAME=='USPS+'&&!zddlist.order.store">{{'100132' | translate}}</span>
+                                  <span
+                                    ng-if="zddlist.order.LOGISTIC_NAME!='USPS+'&&!zddlist.order.store">{{'100131' | translate}}</span>
+                                    <span>{{ showStoreName(zddlist.order.store) }}</span>
+                                </td>
+                                <td ng-cloak>
+                                  {{'100076' | translate}}: ${{pList.PRICE}}
+                                </td>
+                                <td ng-cloak>
+                                  折后总金额: ${{pList.PRICE*pList.QUANTITY | number:2}}
+                                </td>
+                                <td class="sp-sx-td" rowspan="2" ng-cloak>{{'100078' | translate}}:
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('COMMON') != -1">{{'100083' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('ELECTRONIC') != -1">{{'100084' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('BATTERY') != -1">{{'100085' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('IS_ELECTRICITY') != -1">{{'100086' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY=='HAVE_LIQUID'">{{'100087' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('HAVE_STIVE') != -1">{{'100088' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('HAVE_CREAM') != -1">{{'100089' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('HAVE_MAGNETISM') != -1">{{'100090' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('EDGE') != -1">{{'100091' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('NO_ENTRY') != -1">{{'100093' | translate}}</span>
+                                  <span class="sp-sx-span"
+                                    ng-if="pList.PROPERTY.split(',').indexOf('CLONE') != -1">{{'100093' | translate}}</span>
+                                </td>
+                                <td ng-cloak>{{'100079' | translate}}: {{pList.cj_product_name}}</td>
+                                <td class="namecn-td" ng-cloak>{{'100081' | translate}}:
+                                  <input class="edit-inp" value="{{pList.cjproductnamecn}}" disabled="disabled"></input>
+																<p style="display: none;" class="hideinp-val">{{pList.cjproductnamecn}}</p>
+                                <p class="sp-edit-p">
+                                  <!-- <button class="sp-cnedit-btn" ng-click="speditFun(pList,$event)" id="sp-edit-btn">{{'100120' | translate}}</button> -->
+                                  <button style="width: 50px" class="sp-par-p" ng-click='spcnsaveFun(pList,$event)' id="sp-save-btn">{{'100133' | translate}}</button>
+                                  <button style="width: 50px" class="sp-par-p" ng-click="spenqxFun(pList,$event)" id="sp-qx-btn">{{'100051' | translate}}</button>
+                                </p>
+                                </td>
+                              </tr>
+                              <tr class="sp-sec-tr">
+                                <td ng-cloak>
+                                  {{'100077' | translate}}: ${{pList.originalPrice}}
+                                </td>
+                                <td ng-cloak>
+                                  总金额: ${{pList.originalPrice*pList.QUANTITY | number:2}}
+                                </td>
+                                <td>{{'100080' | translate}}: {{pList.SHIPPING_NAME}}</td>
+                                <td class="nameen-td" ng-cloak>{{'100082' | translate}}:
+                                  <input class="edit-inp" value="{{pList.cjproductnameen}}" disabled="disabled">
+                                  <p style="display: none;" class="hideinp-val">{{pList.cjproductnameen}}</p>
+                                  <p class="sp-edit-p">
+                                    <!-- <button class="sp-cnedit-btn" ng-click="speditFun(pList,$event)" id="sp-edit-btn">{{'100120' | translate}}</button> -->
+                                    <button style="width: 50px" class="sp-par-p" ng-click='spensaveFun(pList,$event)' id="sp-save-btn">{{'100133' | translate}}</button>
+                                    <button style="width: 50px" class="sp-par-p" ng-click="spenqxFun(pList,$event)" id="sp-qx-btn">{{'100051' | translate}}</button>
+                                  </p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div ng-show="erpordTnum<1" style="text-align: center;">暂无数据</div>
+              <!-- 分页 -->
+              <div class="pages-fun" ng-show="erpordTnum>0">
+                <select id="page-sel" class="c-select-page-num">
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <!-- <option value="200">200</option> -->
+                </select>
+                <span class="every-page">每页</span>
+                <span class="every-page gong">共</span>
+                <span class="c-all-num-line">{{erpordTnum}}</span>
+                <span class="every-page">条</span>
+                <span id="demo3-text"></span>
+                <div id="c-pages-fun"></div>
+                <span class="every-page">跳转:</span>
+                <input id="inp-num" class="c-inp-num-go"></input>
+                <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+                <span class="count-money">总金额:</span>
+                <span class="count-mnum">{{countMoney}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 修改编辑的弹框 -->
+<div ng-show="editFlag" class="erpzi-tc-wrap">
+	<div class="erpzi-tc-con">
+		<div class="erpzi-tc-top">
+			<ul>
+				<li>
+					<p>
+						<span>{{'100134' | translate}}:</span>
+						<input ng-model="customerName" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>目的国家简码:</span>
+						<input ng-model="countryCode" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100135' | translate}}:</span>
+						<input ng-model="countryName" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100136' | translate}}:</span>
+						<input ng-model="province" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100137' | translate}}:</span>
+						<input ng-model="city" class="w200"></input>
+					</p>
+				</li>
+
+				<li>
+					<p>
+						<span>{{'100059' | translate}}:</span>
+						<input ng-model="shipAddress1" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100060' | translate}}:</span>
+						<input ng-model="shipAddress2" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100138' | translate}}:</span>
+						<input ng-model="zip" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100139' | translate}}:</span>
+						<input ng-model="phone" class="w200"></input>
+					</p>
+				</li>
+				<li>
+					<p>
+						<span>{{'100176' | translate}}:</span>
+						<input ng-model="eMail" class="w200"></input>
+					</p>
+				</li>
+				<!-- <li>
+					<p>
+						<span>运输方式:</span>
+						<input ng-model="logisticName" class="w200"></input>
+					</p>
+				</li> -->
+			</ul>
+		</div>
+		<div class="erpzi-tc-btns">
+			<button ng-click="closeFun()" class="erpzi-can-btn">Cancel</button>
+			<button ng-click="confirmEditFun()" class="erpzi-con-btn">Confirm</button>
+		</div>
+	</div>
+</div>
+<!-- 批量修改仓库 -->
+<div class="iscxcl-wrap" ng-show="changeCkFlag">
+	<div class="iscxcl-con change-ck-con" style="height: 140px;">
+		<p style="margin-bottom: 10px;">生成追踪号的美国仓订单,不允许转移仓库!</p>
+		<select class="sel-ck-num">
+			<option value="0">义乌仓</option>
+			<option value="1">深圳仓</option>
+			<option value="2">美西奇诺仓</option>
+			<option value="3">美东新泽西仓</option>
+		</select>
+		<div class="iscxcl-btns">
+			<button ng-click="changeCkFlag=false" class="iscxclqx-btn">取消</button>
+			<button ng-click="sureChangeCkFun()" class="iscxclqd-btn">确定</button>
+		</div>
+	</div>
+</div>
+<!-- 同步订单询问框 -->
+<div class="isaddyfh-wrap" ng-show="isTongBuFlag">
+  <div class="isaddyfh-con">
+    <p>是否同步至店铺?</p>
+    <div class="isaddyfh-btns">
+      <button ng-click="isTongBuFlag=false" class="ispc-can-btn">否</button>
+      <button ng-click="sureTongBuFun()" class="ispc-con-btn">是</button>
+    </div>
+  </div>
+</div>
+<!-- 修改运单号 -->
+<div class="isaddyfh-wrap" style="z-index: 99999;" ng-show="zzhChaFlag">
+    <div class="isaddyfh-con" style="height: 160px;">
+      <input style="width: 100%;display:block;height: 30px;text-indent: 12px;" ng-model="lrzzhNum" placeholder="请输入追踪号"></input>
+      <div class="md-href" style="margin-top: 10px;position: relative;">
+        <input style="width: 230px;height: 30px;text-indent: 12px;" ng-model="lrHref" placeholder="请输入/上传面单链接"></input>
+        <button class="upload-mdbtn">上传</button>
+        <form id="upLoadPdf" class="pull-left" action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" ng-model="documentupload2" id="file" multiple onchange="angular.element(this).scope().upLoadImg4(this.files)" style="display:inline-block; margin: 0;width: 64px;height: 30px;font-size: 0;cursor: pointer;position: absolute;opacity:0;right: 0;" ng-click="df($event)">
+        <input type="hidden">
+        </form>
+      </div>
+      <div class="isaddyfh-btns">
+        <button ng-click="canLrFun()" class="ispc-can-btn">取消</button>
+        <button ng-click="sureChaZzhFun()" class="ispc-con-btn">确定</button>
+      </div>
+    </div>
+  </div>
+<log-tk ng-if="isLookLog" no="ctrl.no"></log-tk>
+<podmes-tk ng-if="gxhOrdFlag" type="ctrl.type" pro="ctrl.pro"></podmes-tk>
+<podmes-tk ng-if="gxhProductFlag" type="ctrl.type" pro="ctrl.pro"></podmes-tk>
+<!--客户分析-->
+<customer-Analysis ng-if="isAnalysis" no="ctrl.no"></customer-Analysis>
+<script type="text/javascript" src="static/js/public/echarts.common.min.js"></script>

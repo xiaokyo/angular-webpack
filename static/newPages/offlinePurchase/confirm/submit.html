@@ -1,0 +1,463 @@
+<div class="my-wrap">
+
+  <div class="back-btn" style="margin-bottom:15px;">
+    <a href="javascript:history.go(-1)" class="btn">&lt;返回</a>
+  </div>
+
+  <!-- filter -->
+  <div class="filter flex fwp">
+    <div class="item">
+      <div class="tit">进仓编号：</div>
+      <div class="con">{{ sendParams.storageNumber }}</div>
+    </div>
+    <div class="item">
+      <div class="tit">供货公司：</div>
+      <div class="con">
+        <input type="text" ng-model="sendParams.gongHuoGongSi" />
+      </div>
+    </div>
+    <div class="item">
+      <div class="tit">仓库：</div>
+      <div class="con">
+        <select ng-model="sendParams.store">
+          <option ng-repeat="i in warehouseList" value="{{i.value}}">{{i.label}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="item">
+      <div class="tit">标记：</div>
+      <div class="con">
+        <select ng-model="sendParams.caiGouLiuYan">
+          <option value="">全部</option>
+          <option ng-repeat="(key,value) in markList" value="{{key}}">{{value}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="item">
+      <div class="tit">标记备注：</div>
+      <div class="con">
+        <input type="text" ng-model="sendParams.signRemark">
+      </div>
+    </div>
+
+    <hr class="hr-100" />
+
+    <div class="item">
+      <div class="tit">付款方式：</div>
+      <div class="con">
+        <select ng-model="sendParams.payType" ng-change="payTypeChange()">
+          <option ng-repeat="(key,value) in payforObj" value={{key}}>{{value}}</option>
+        </select>
+        <select ng-model="frontMoneyType" ng-show="sendParams.payType == 1">
+          <option ng-repeat="(key,value) in frontMoneyTypeObj" value={{key}}>{{value}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="item" ng-show="sendParams.payType==1 && frontMoneyType != 2">
+      <div class="tit">订金(￥)：</div>
+      <div class="con">
+        <input type="number" step="0.01"  ng-model="sendParams.frontMoney" />
+      </div>
+    </div>
+    <div class="item" ng-show="sendParams.payType==1 && frontMoneyType != 2">
+      <div class="tit">尾款(￥)：</div>
+      <div class="con">
+        <input type="number" step="0.01"  ng-model="sendParams.restMoney" />
+      </div>
+    </div>
+
+    <div class="item" ng-show="sendParams.payType!=1 && !frontMoneyType">
+      <div class="tit">共需支付(￥)：</div>
+      <div class="con">
+        <input type="number" step="0.01"  ng-model="sendParams.zhiFu" />
+      </div>
+    </div>
+
+    <!-- 分批发货 -->
+    <div class="flex aic jcc" ng-show="frontMoneyType == 2">
+      <div class="item" ng-repeat="item in barCodPayList track by $index">
+        <div class="tit">第{{ $index + 1 }}批：</div>
+        <div class="con">
+          <input type="number" step="0.01" ng-model="item.value">
+        </div>
+      </div>
+      <div class="item">
+        <a href="javascript:void(0)" class="btn primary" ng-click="addBarCodPay()">增加</a>
+        <a href="javascript:void(0)" class="btn primary" ng-show="barCodPayList.length>1" ng-click="barCodPayList.splice(barCodPayList.length-1,1)">删除</a>
+      </div>
+    </div>
+    
+    
+    <hr class="hr-100" />
+
+    <div class="flex aic">
+      <div class="item">
+        <div class="tit">收款类型：</div>
+        <div class="con">
+          <select ng-model="sendParams.acceptType">
+            <option ng-repeat="(key,value) in receiptObj" value="{{key}}">{{value}}</option>
+          </select>
+        </div>
+      </div>
+       <!-- 银行卡 -->
+    <div class="flex aic" ng-show="sendParams.acceptType==1">
+      <div class="item">
+        <div class="tit">收款银行：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.bank" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="tit">收款银行支行：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.branchBank" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="tit">账户名称：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.accountName" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="tit">银行账号：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.bankAccount" />
+        </div>
+      </div>
+    </div>
+  
+    <!-- 支付宝 -->
+    <div class="flex aic" ng-show="sendParams.acceptType==2">
+      <div class="item">
+        <div class="tit">支付宝账户名称：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.accountName" />
+        </div>
+      </div>
+      <div class="item">
+        <div class="tit">支付宝账号：</div>
+        <div class="con">
+          <input type="text" ng-model="sendParams.bankAccount" />
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <hr class="hr-100" />
+
+  <!-- 收获地址 -->
+  <div class="filter flex fwp">
+    <div class="item">
+      <div class="tit">收货地址：</div>
+      <div class="con">
+        <select ng-model="sendParams.addressId">
+          <option value="">请选择收货地址</option>
+          <option value="{{i.addressId}}" ng-repeat="i in deliveryAddressArr">{{i.addressCodeText}} {{i.townText}} {{i.address}} {{i.fullName}},{{i.mobile}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hr-100" />
+
+  <!-- 物流公司 -->
+  <div class="filter flex fwp" ng-repeat="i in logistics">
+    <div class="item">
+      <div class="tit">物流公司：</div>
+      <div class="con">
+        <input type="text" ng-model="i.company" />
+      </div>
+    </div>
+    <div class="item">
+      <div class="tit">运单号：</div>
+      <div class="con">
+        <input type="text" ng-model="i.orderNo" />
+      </div>
+    </div>
+    <div class="item">
+      <a href="javascript:void(0)" class="btn primary" ng-click="addLogistics()">增加</a>
+      <a href="javascript:void(0)" class="btn primary" ng-show="logistics.length>1" ng-click="logistics.splice($index,1)">删除</a>
+    </div>
+  </div>
+
+  <!-- table -->
+  <table class="k-table" style="width:100%;margin-top:20px;">
+    <thead>
+      <th>图片</th>
+      <th>SKU</th>
+      <th>今日订单统计数量</th>
+      <th>可用库存数量</th>
+      <th>建议采购数量</th>
+      <th>搜品价格(¥)</th>
+      <th>实际采购数量 <a href="javascript:void(0)" class="batch" ng-click="batchEditBubble=true">批量设置</a></th>
+    </thead>
+    <tbody style="max-height: 350px;">
+      <tr ng-repeat="i in skuList">
+        <td><div class="td"><img src="{{i.img}}" width=45 height=45 /></div></td>
+        <td><div class="td" style="text-align: center;">{{i.sku}} <br/> 短码：{{ i.num }}</div></td>
+        <td><div class="td">{{i.orderneedcount || 0}}</div></td>
+        <td><div class="td">{{i.kucun || 0}}</div></td>
+        <td><div class="td">{{i.recommentCount || 0}}</div></td>
+        <td><div class="td">{{i.costprice}}</div></td>
+        <td><div class="td"><input type="text" ng-model="i.shuLiang" /></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="filter flex" style="margin-top:20px;">
+    <div class="item flex">
+      <div class="tit">采购凭证(jpg, gif, jpeg, png, pdf, excel)(可拖拽)：</div>
+      <div class="con flex">
+        <uploadfiles id="'uploadFiles1'" callback="uploadFilesCallback" init-files="certPic"></uploadfiles>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom_operator flex fdrr aic">
+    <a href="javascript:void(0)" class="btn primary" ng-click="openConfrimBubble()">提交</a>
+    <a href="javascript:history.go(-1)" class="btn">取消</a>
+  </div>
+  
+</div>
+
+<!-- 批量修改采购数量弹框 -->
+<div class="erp-common-tan-v2-wrap" ng-show="batchEditBubble">
+	<div class="erp-common-tan-v2" style="width: 500px; height: auto;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="batchEditBubble=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>批量修改</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con">
+      <div class="flex fdr aic">
+        <span>请输入采购数量：</span>
+        <input type="number" ng-model="batchPurchaseNum" />
+      </div>
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="batchEditBubble=false;" class="qu-xiao-btn">取消</a>
+      <!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="batchEditPurchaseNum()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<!-- 确认框 -->
+<div class="erp-common-tan-v2-wrap" ng-show="submitBubble">
+	<div class="erp-common-tan-v2" style="width: 1000px; height: auto;">
+    <!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="submitBubble=false;"><img src="static/image/public-img/close-img.png"></a>
+    <!-- title -->
+		<div class="tan-v2-top">
+			<h6>{{payforObj[sendParams.payType]}}</h6>
+		</div>
+    <!-- 内容 -->
+		<div class="tan-v2-con submitBubble">
+      <div class="filter flex fwp">
+        <div class="item">
+          <div class="tit">供货公司：</div>
+          <div class="con">{{ sendParams.gongHuoGongSi || empty }}</div>
+        </div>
+        <div class="item">
+          <div class="tit">仓库：</div>
+          <div class="con">{{ formatWarehouse(sendParams.store) || empty }}</div>
+        </div>
+        <div class="item">
+          <div class="tit">标记：</div>
+          <div class="con">{{ markList[sendParams.caiGouLiuYan] || empty }}</div>
+        </div>
+        <div class="item">
+          <div class="tit">标记备注：</div>
+          <div class="con">{{ sendParams.signRemark || empty }}</div>
+        </div>
+        <div class="item">
+          <div class="tit">付款方式：</div>
+          <div class="con">{{ payforObj[sendParams.payType] || empty }} {{ sendParams.payType==1 ? '(' + frontMoneyTypeObj[frontMoneyType] + ')' : '' }}</div>
+        </div>
+
+        <!-- 订金 -->
+        <div class="flex aic" ng-show="sendParams.payType==1 && frontMoneyType != 2">
+          <div class="item">
+            <div class="tit">订金（￥）：</div>
+            <div class="con">{{ sendParams.frontMoney || empty }}</div>
+          </div>
+          <div class="item">
+            <div class="tit">尾款：</div>
+            <div class="con">{{ sendParams.restMoney || empty }}</div>
+          </div>
+        </div>
+        <!-- 订金 -->
+
+        <!-- 共需支付 -->
+        <div class="item" ng-show="sendParams.payType!=1 && !frontMoneyType">
+          <div class="tit">共需支付（￥）：</div>
+          <div class="con">{{ sendParams.zhiFu || empty }}</div>
+        </div>
+
+        <!-- 分批发货 -->
+        <div class="item" ng-show="frontMoneyType == 2" ng-repeat="item in barCodPayList track by $index">
+          <div class="tit">第{{ $index + 1 }}批：</div>
+          <div class="con">{{ item.value }}</div>
+        </div>
+
+        <div class="item">
+          <div class="tit">收款类型：</div>
+          <div class="con">{{ receiptObj[sendParams.acceptType] || empty }}</div>
+        </div>
+
+        <!-- 银行 -->
+        <div class="flex aic" ng-show="sendParams.acceptType==1">
+          <div class="item">
+            <div class="tit">收款银行：</div>
+            <div class="con">{{ sendParams.bank || empty }}</div>
+          </div>
+          <div class="item">
+            <div class="tit">收款银行支行：</div>
+            <div class="con">{{ sendParams.branchBank || empty }}</div>
+          </div>
+          <div class="item">
+            <div class="tit">账户名称：</div>
+            <div class="con">{{ sendParams.accountName || empty }}</div>
+          </div>
+          <div class="item">
+            <div class="tit">银行账号：</div>
+            <div class="con">{{ sendParams.bankAccount || empty }}</div>
+          </div>
+        </div>
+        <!-- 银行 -->
+
+        <!-- 支付宝 -->
+        <div class="flex aic" ng-show="sendParams.acceptType==2">
+          <div class="item">
+            <div class="tit">支付宝账户名称：</div>
+            <div class="con">{{ sendParams.accountName || empty }}</div>
+          </div>
+          <div class="item">
+            <div class="tit">支付宝账号：</div>
+            <div class="con">{{ sendParams.bankAccount || empty }}</div>
+          </div>
+        </div>
+        <!-- 支付宝 -->
+
+      </div>
+
+      <div class="filter flex">
+        <div class="item">
+          <div class="tit">收货地址：</div>
+          <div class="con">{{ getAddressText(sendParams.addressId) || empty }}</div>
+        </div>
+      </div>
+
+      <div class="filter flex" ng-repeat="i in logistics">
+        <div class="item">
+          <div class="tit">物流公司：</div>
+          <div class="con">{{ i.company || empty }}</div>
+        </div>
+        <div class="item">
+          <div class="tit">运单号：</div>
+          <div class="con">{{ i.orderNo || empty }}</div>
+        </div>
+      </div>
+
+      <table class="k-table" style="width:100%;margin-top:20px;">
+        <thead>
+          <th>图片</th>
+          <th>SKU</th>
+          <th>今日订单统计数量</th>
+          <th>可用库存数量</th>
+          <th>建议采购数量</th>
+          <th>搜品价格(¥)</th>
+          <th>实际采购数量</th>
+        </thead>
+        <tbody style="max-height: 350px;">
+          <tr ng-repeat="i in skuList">
+            <td><div class="td"><img src="{{i.img}}" width=45 height=45 /></div></td>
+            <td><div class="td" style="text-align: center;">{{i.sku}} <br/> 短码：{{ i.num }}</div></td>
+            <td><div class="td">{{i.orderneedcount || 0}}</div></td>
+            <td><div class="td">{{i.kucun || 0}}</div></td>
+            <td><div class="td">{{i.recommentCount || 0}}</div></td>
+            <td><div class="td">{{i.costprice}}</div></td>
+            <td><div class="td">{{i.shuLiang}}</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="filter flex" style="margin-top:20px;">
+        <div class="item flex">
+          <div class="tit">采购凭证(jpg, gif, jpeg, png, pdf, excel)：</div>
+          <div class="con flex">
+            <uploadfiles id="'uploadFiles2'" init-files="certPic" show-component="true"></uploadfiles>
+          </div>
+        </div>
+      </div>
+
+		</div>
+    <!-- 底部 -->
+		<div class="tan-v2-bot">
+      <!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="submitBubble=false;" class="qu-xiao-btn">取消</a>
+      <!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="saveCaigou()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<style>
+  .my-wrap { margin-left:215px;background: #fff; padding:15px;min-height:100vh; }
+  .flex{display: flex;}
+  .flex.fdc{flex-direction: column;}
+  .flex.jcc{justify-content: center;}
+  .flex.fdrr{flex-direction: row-reverse;}
+  .flex.fdcr{flex-direction: column-reverse;}
+  .flex.aic{align-items: center;}
+  .flex.fwp{flex-wrap: wrap;}
+  
+  .hr-100{width:100%;margin-bottom:15px;}
+
+  /* tablist */
+  .tablist{height:45px;width:100%;border-bottom:1px solid #e6e6e6;}
+  .tablist .item{padding:0 15px;position: relative;}
+  .tablist .item.active a::after,.tablist .item:hover a::after{display:block;width:100%;height:2px;background-color:#F9AE08;content:' ';position:absolute;left:0;bottom:-1px;}
+  .tablist .item.active a,.tablist .item:hover a{color:#F9AE08;}
+
+  /* filter */
+  .filter input{width:150px;}
+  .filter select{height:30px;border-radius: 4px;}
+  .filter .item{margin-right:15px;margin-bottom:15px; display: flex;align-items: center;font-size:14px;color:#000;}
+
+  /* tools */
+  .tools{margin-top:15px;}
+  .tools a{margin-left:15px;}
+
+  /* btn */
+  a.btn{padding:5px 10px;}
+  a.btn.primary{background-color:#F8A636;color:#fff;}
+  a.btn.primary:hover{opacity: 0.6;}
+
+  a.batch{color:#F8A636;}
+  a.batch:hover{opacity: 0.6;}
+
+  /* bottom_operator */
+  .bottom_operator{margin-top:20px;}
+
+   /* upload img */
+   .upload-img{margin-right:10px;width:100px;height:100px;position:relative;}
+  .upload-img.upBtn{background:url('/static/image/public-img/plus.png') center no-repeat;}
+  .upload-img img{width:100%;height:100%;position:absolute;top:0;left:0;}
+  .upload-img input[type='file']{position: absolute;left:0;top:0;opacity:0;display: block;width: 100%!important;height: 100%!important;cursor: pointer;}
+  .upload-img .edit-box-wrap{position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; display: none; background: rgba(0, 0, 0, 0.5); transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; }
+  .upload-img:hover .edit-box-wrap{display: block;}
+  .upload-img .edit-box-wrap .edit-box { position: absolute; width: 100%;  height: 30px; bottom: 0; left: 50%; margin-left: -50px; line-height: 30px; }
+  .upload-img .edit-box-wrap .edit-box a{ color: #fff; float: left; width: 50%; text-align: center; font-size: 14px; line-height: 24px; }
+
+  /* submitBubble */
+  .submitBubble .filter .item{margin-right:20px;}
+  .submitBubble .filter .item .con{color:#999;}
+</style>

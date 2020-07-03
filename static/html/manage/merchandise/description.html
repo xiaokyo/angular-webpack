@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .tab{
+            position: fixed;
+            background: #fff;
+            width: calc(100% - 290px);
+            top: 0;
+            z-index: 99;
+            padding: 0 23px;
+            line-height:58px;
+            display: flex;
+        }
+        .tab a{
+            display: block;
+            border-bottom: 4px solid transparent;
+            margin-right: 42px;
+            font-size: 16px;
+        }
+        .tab a.act{
+            border-bottom-color: #F9AE08;
+            color: #F8B00E;
+        }
+        .tab a:hover{
+            color: #F8B00E;
+        }
+        .cont{
+          margin-top: 68px;
+          background-color: #fff;
+          padding:20px 28px;
+          min-height: 700px;
+          width: calc(100% - 20px);
+        }
+        .cont .filter select{
+          width:150px;
+          height:32px;
+          color:#999;
+        }
+        .cont .filter label{
+          margin-left: 15px;
+        }
+        .cont .filter input{
+          width:140px;
+        }
+        .cont .filter button{
+          width:80px;
+          height:32px;
+          background: #F9AE08;
+          color:#fff;
+          border-radius: 4px;
+          margin-left: 17px;
+        }
+        .desList{
+          margin-top:20px;
+        }
+        .desList table{
+          width:100%;
+          text-align: center;
+          table-layout: fixed;
+        }
+        .desList th{
+          color:#8B572A;
+          font-size: 14px;
+          height:44px;
+          background:rgba(252,244,217,1);
+          border-radius:4px 4px 0px 0px;
+          text-align: center;
+        }
+        .desList td{
+          height:72px;
+          font-size: 12px;
+          padding:4px;
+          word-wrap:break-word;
+          word-break:break-all;
+        }
+        .desList td img{
+          width:60px;
+          height:60px;
+        }
+        .desList tr{
+          border:1px solid #F3F3F3;
+        }
+        .staring{
+          height: 17px;
+          width: 72px;
+          display: inline-block;
+          margin:0;
+        }
+        .staring > label{
+          position: relative;
+          float: right;
+          width: 14px;
+          height: 14px;
+          color: transparent;
+          background-image: url("static/image/manage/starIcon.png");
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+        .staring > label.rated{
+          background-position: 0 -14px; 
+        }
+        .staring > label:before{
+          display: none;
+          position: absolute;
+          content: " ";
+          width: 14px;
+          height: 14px;
+          background-image: url("static/image/manage/starIcon.png");
+          background-repeat: no-repeat;
+          background-size: 100%;
+          bottom: 0;
+        }
+        .sWrap{
+          width: 100%;
+          height: 100%;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index:10004;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+        .sWrap .box {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 404px;
+          height: 223px;
+          background-color: #fff;
+          border-radius: 4px;
+          color:#333;
+        } 
+        .sWrap .checkBox {
+          width: 534px;
+          height: 524px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #fff;
+          border-radius: 4px;
+          color:#333;
+        } 
+        .checkBox .infos{
+          padding:30px 30px 0;
+          font-size: 14px;
+        }
+        .checkBox .infos div{
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 30px;
+        }
+        .checkBox .infos p{
+          margin-bottom: 30px;
+          font-size: 14px;
+          line-height: 1;
+        }
+        .checkBox .infos textarea{
+          width:100%;
+          border:1px solid #D9D9D9;
+          border-radius: 4px;
+          margin-top: 10px;
+          padding:10px 15px;
+          font-size: 14px;
+          color:#999;
+        }
+        .checkBox .infos>span .staring{
+          height:13px;
+        }
+        .sWrap .box h4,.sWrap .checkBox h4{
+          text-align: center;
+          font-size: 16px;
+          padding:19px 0;
+          border-bottom: 1px solid #F0F0F0;
+        }
+        .sWrap .checkBox .btns{
+          text-align: center;
+        }
+        .sWrap .box p{
+          padding:30px 30px 0;
+          font-size: 14px;
+        }
+        .sWrap .box div{
+          padding:30px 0;
+          text-align: center;
+        }
+        .sWrap .box button,.checkBox button{
+          width:80px;
+          height:32px;
+          color:#666;
+          border-radius: 4px;
+          border:1px solid #C1C1C1;
+          font-size: 14px;
+        }
+        .sWrap .box button.sur,.checkBox button.sur{
+          background-color: #F9AE08;
+          color:#fff;
+          border:none;
+          margin-left: 18px;
+        }
+        .redis span{
+          margin-right: 49px;
+        }
+        .redis input{
+          opacity: 0;
+          position: absolute;
+          width:18px;
+          height:18px;
+          z-index: 99;
+          cursor: pointer;
+        }
+        .redis input:checked+label{
+          background: url(static/image/manage/checked.png);
+          background-size: 100%;
+        }
+        .redis label{
+          width:18px;
+          height:18px;
+          display: inline-block;
+          margin-right: 5px;
+          background: url(static/image/manage/uncheck.png);
+          background-size: 100%;
+          position: relative;
+          top:3px;
+        }
+        .page-box{
+          display: flex;
+          justify-content: flex-end;
+        }
+        .page-box .page-index a{
+          padding:0 7px;
+        }
+    </style>
+</head>
+<body>
+<div class="ea-content">
+    <div class="right-bar-wrap">
+        <div class="tab">
+          <a ng-class="{act:check==2}" ng-click="switch(2)">商品描述评论</a>
+          <a ng-class="{act:check==0}" ng-click="switch(0)">待审核</a>
+          <a ng-class="{act:check==1}" ng-click="switch(1)">未通过</a>
+        </div>
+        <div class="cont">
+          <div class="filter">           
+            <label for="">SKU：</label>
+            <input type="text" placeholder="请输入SKU" ng-model="dbLocproductSku">
+            <label for="">描述模板：</label>
+            <input type="text" placeholder="请输入描述模板" ng-model="dbLocproductLanguageName">
+            <label for="">商户名称：</label>
+            <input type="text" placeholder="请输入商户名称" ng-model="dspAccountName">
+            <label>选择日期：</label>
+						<wui-date class="startTime searchDay" format="yyyy-mm-dd" ng-class="{'disable-opacity': disable.select}"
+							placeholder="开始时间" btns="{'ok':'确定','now':'今天'}" ng-model="startDate"></wui-date>
+						<wui-date class="endTime searchDay" format="yyyy-mm-dd" ng-class="{'disable-opacity': disable.select}"
+							class="margin-left-small" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}" ng-model="endDate">
+            </wui-date>
+            <button ng-click="searchList()">筛选</button>
+          </div>
+          <div class="desList">
+            <table>
+              <tr>
+                <th>图片</th>
+                <th style="width:15%;">商品名称</th>
+                <th style="width:8%;">SKU</th>
+                <th>描述模板</th>
+                <th style="width:8%;">商户</th>
+                <th>评分</th>
+                <th style="width:20%;">评论</th>
+                <th ng-show="check==2">状态</th>
+                <th>提交时间</th>
+                <th>审核人</th>
+                <th>操作</th>
+              </tr>
+              <tr ng-repeat="item in dataList">
+                <td>
+                  <img ng-src="{{item.srcImg}}" alt="无">
+                </td>
+                <td>{{item.dbLocproductNameen}}</td>
+                <td>{{item.dbLocproductSku}}</td>
+                <td>{{item.dbLocproductLanguageName}}</td>
+                <td>{{item.dspAccountName}}</td>
+                <td>
+                  <div class="staring">
+                    <label for="rated5" ng-class="{'rated':5<=item.score}"></label>
+                    <label for="rated4" ng-class="{'rated':4<=item.score}"></label>
+                    <label for="rated3" ng-class="{'rated':3<=item.score}"></label>
+                    <label for="rated2" ng-class="{'rated':2<=item.score}"></label>
+                    <label for="rated1" ng-class="{'rated':1<=item.score}"></label>
+                  </div>
+                </td>
+                <td>{{item.content}}</td>
+                <td ng-show="check==2">{{item.status==1?"隐藏":"显示"}}</td>
+                <td>{{item.createDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{item.checkName}}</td>
+                <td>
+                  <a href="/manage.html#/merchandise/description/detail/{{item.id}}">查看</a>                  
+                  <span ng-hide="check==1">|</span>
+                  <a ng-show="check==0" ng-click="checkShow(item)">审核</a>
+                  <a ng-show="check==2" ng-click="toggleShow(item.status,item.id)">{{item.status==1?"显示":"隐藏"}}</a>
+                </td>
+              </tr>
+            </table>
+            <page></page>
+          </div>
+        </div>       
+    </div>
+    <div class="sWrap" ng-show="toshow">
+      <div class="box">
+        <h4 ng-show="isHide==1">是否确定显示该评论？</h4>
+        <h4 ng-show="isHide==0">是否确定隐藏该评论？</h4>
+        <p ng-show="isHide==1">确定后则该商户评论信息将会被展示在商品详情中，且该评论的分值将被记录到商品中，请谨慎操作。</p>
+        <p ng-show="isHide==0">确定后则该商户评论信息将会被隐藏，且评论分值将不会被记录，请谨慎操作。</p>
+        <div>
+          <button ng-click="toshow=false">取消</button>
+          <button class="sur" ng-click="submit()">确定</button>
+        </div>
+      </div>
+    </div>
+    <div class="sWrap" ng-show="tocheck">
+      <div class="checkBox">
+        <h4>审核评论</h4>
+        <div class="infos clearfix">
+          <div>
+            <span>商户姓名：{{tocheckData.dspAccountName}}</span>
+            <span>提交时间：{{tocheckData.createDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+          </div>
+          <p>
+            商品描述评分：
+            <span class="staring">
+              <label for="rated5" ng-class="{'rated':5<=tocheckData.score}"></label>
+              <label for="rated4" ng-class="{'rated':4<=tocheckData.score}"></label>
+              <label for="rated3" ng-class="{'rated':3<=tocheckData.score}"></label>
+              <label for="rated2" ng-class="{'rated':2<=tocheckData.score}"></label>
+              <label for="rated1" ng-class="{'rated':1<=tocheckData.score}"></label>
+            </span>
+          </p>
+          <p style="margin-bottom: 20px;">
+            商品描述评论
+            <textarea cols="30" rows="2" disabled="disabled">{{tocheckData.content}}</textarea>
+          </p>
+          <p class="redis">
+            <input type="radio" name="check" value="2" checked><label></label><span>审核通过</span>
+            <input type="radio" name="check" value="1"><label></label><span>审核不通过</span>
+          </p>
+          <p>
+            备注
+            <textarea cols="30" rows="4" ng-model="remark" placeholder="请输入"></textarea>
+          </p>
+        </div>
+        <div class="btns">
+          <button ng-click="clearInput()">取消</button>
+          <button class="sur" ng-click="checkData()">确定</button>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

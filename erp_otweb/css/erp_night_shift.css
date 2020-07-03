@@ -1,0 +1,47 @@
+.right-bar-wrap{
+	padding: 0 20px 0 230px !important;
+}
+.top-tab-search{
+	padding: 20px 0;
+}
+/* .top-tab-bottom{
+	padding: 20px 20px 0 20px !important;
+} */
+.top-tab-search select{
+	height: 30px;
+	border-radius: 4px;
+	border: 1px solid #e1e1e1;
+}
+.search-group{
+	margin-right: 15px;
+}
+.search-group button{
+	margin-right: 15px;
+	padding: 0 15px;
+}
+.tan-v2-bot {
+  position: initial !important;
+  padding: 0 !important;
+}
+.add-item{
+	margin-bottom: 16px;
+}
+.add-item .add-item-label{
+	width: 80px;
+}
+.add-item-content select{
+	height: 40px;
+	border-radius: 4px;
+	border: 1px solid #e1e1e1
+}
+.time-middle{
+	margin: 0 5px;
+}
+#content-wrap{
+	min-height: 600px;
+	margin-top: 196px;
+}
+.tb-tbody-td button{
+	padding: 0 15px;
+	margin:  0 5px;
+}

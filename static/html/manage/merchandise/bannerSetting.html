@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品设置</title>
+    <!--ProductSettings-->
+    <link rel="stylesheet" type="text/css" href="static/css/ProductSettings.css">
+</head>
+
+<body>
+    <!--页面开始-->
+    <div class="home-wrap">
+        <!--内容区域-->
+        <div class="content" ng-show="type==1">
+            <div class="c-us-stuv">
+                <div class="c-fun-right">
+                    <input class="Wdate data-inp" id="starttime" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="起始日期">
+                    <input id="endtime" placeholder="结束日期" class="Wdate data-inp" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                    <select class="select" ng-model="dataObj.sort">
+                        <option value="">请选择</option>
+                        <option ng-repeat="item in positionList track by $index" value="{{item}}">{{item}}</option>
+                    </select>   
+                    <select class="select" ng-model="dataObj.sort">
+                        <option value="">请选择</option>
+                        <option ng-repeat="item in positionList track by $index" value="{{item}}">{{item}}</option>
+                    </select>
+                    <select class="select" ng-model="dataObj.status">
+                        <option value="">请选择</option>
+                        <option value="1">未上架</option>
+                        <option value="2">已上架</option>
+                        <option value="3">已下架</option>
+                    </select>
+                    <span class="add-merch-btn" ng-click="searchFun()">搜索</span>
+                    <span class="add-merch-btn" ng-click="addProduct()">添加</span>
+                </div>
+            </div>
+            <div class="table-list">
+                <div class="tr">
+                    <span class="th">图片</span>
+                    <span class="th width200">链接/SKU</span>
+                    <span class="th">平台</span>
+                    <span class="th">放置位置</span>
+                    <span class="th">点击数</span>
+                    <span class="th">上架时间</span>
+                    <span class="th">下架时间</span>
+                    <span class="th">状态</span>
+                    <span class="th">最近编辑时间</span>
+                    <span class="th">最近编辑人</span>
+                    <span class="th">操作</span>
+                </div>
+                <div class="tr" ng--repeat="item in proList track by $index">
+                    <span class="td img">
+                        <img ng-show="item.platformType==1" src="{{item.webImg}}" alt="">
+                        <img ng-show="item.platformType==1" class="bigimg" src="{{item.webImg}}" alt="">
+                        <img ng-show="item.platformType==2" src="{{item.appImg}}" alt="">
+                        <img ng-show="item.platformType==2" class="bigimg" src="{{item.appImg}}" alt="">
+                    </span>
+                    <span class="td width200" title="{{item.urlOrSku}}">{{item.urlOrSku||'/'}}</br><span ng-show="item.isSkuOut==1">
+                        已下架</span></span>
+                    <span class="td">{{item.platformType?(item.platformType==1?'PC端':'手机端'):'--'}}</span>
+                    <span class="td">{{item.sort}}</span>
+                    <span class="td">{{item.checkNum}}</span>
+                    <span class="td">{{item.putTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="td">{{(item.outTime | date:'yyyy-MM-dd HH:mm:ss') || '/'}}</span>
+                    <span class="td">{{item.status | stateFil}}</span>
+                    <span class="td">{{item.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    <span class="td">{{item.updateName}}</span>
+                    <span class="td">
+                        <span class="puchord-czbtn" ng-show='item.status=="1"' ng-click="addProduct(item)">设置</span>
+                        <span class="puchord-czbtn" ng-show='item.status=="1"' ng-click="delFun(item)">删除</span>
+                        <span class="puchord-czbtn" ng-show='item.status=="2"' ng-click="downFun(item)">下架</span>
+                        <span ng-show='item.state==3'>/</span>
+                    </span>
+                </div>
+            </div>
+            <page></page>
+        </div>
+        <div class="content" ng-show="type==2">
+            <ul class="add-list">
+                <li class="add-item">
+                    <span class="label" for="">banner平台</span>
+                    <div class="add-item-content">
+                        <select class="select" ng-model="addObj.platformType">
+                            <option value="">请选择平台</option>
+                            <option value="1">PC端</option>
+                            <option value="2">手机端</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="add-item">
+                    <span class="label" for="">上传图片</span>
+                    <div class="add-item-content">
+                        <div class="upload-btn" ng-show="!uploadImg">
+                            <span>上传</span>
+                            <input type="file" class="upload-file" onchange="angular.element(this).scope().upLoadCustomImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+                        </div>
+                        <div class="upload-img" ng-show="uploadImg">
+                            <i class="iconfont del" ng-click="uploadImg=''">&#xe628;</i>
+                            <img src="{{uploadImg}}">
+                            <input type="file" class="upload-file" onchange="angular.element(this).scope().upLoadCustomImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+                            <span class="upload-img-tips">点击可替换</span>
+                        </div>
+                        <span class="upload-tips">建议上传尺寸<span ng-show="addObj.platformType==1">（660*550）</span><span ng-show="addObj.platformType==2">（710*284）</span></span>
+                    </div>
+                </li>
+                <!-- <li class="add-item">
+                    <span class="label" for="">上传图片</span>
+                    <div class="add-item-content">
+                        <div class="upload-btn" ng-show="!addObj.appImg">
+                            <span>上传</span>
+                            <input type="file" class="upload-file" onchange="angular.element(this).scope().upLoadCustomappImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+                        </div>
+                        <div class="upload-img" ng-show="addObj.appImg">
+                            <i class="iconfont del" ng-click="addObj.appImg=''">&#xe628;</i>
+                            <img src="{{addObj.appImg}}">
+                            <input type="file" class="upload-file" onchange="angular.element(this).scope().upLoadCustomappImg(this.files)" accept=".jpg,.png,.jpeg,.bmp">
+                            <span class="upload-img-tips">点击可替换</span>
+                        </div>
+                        <span class="upload-tips">建议上传尺寸（710*284）</span>
+                    </div>
+                </li> -->
+                <li class="add-item">
+                    <span class="label" for="">跳转至</span>
+                    <div class="add-item-content">
+                        <input class="ui-radio" name="go" id="go1" value="1" ng-model="addObj.skipType" type="radio">
+                        <label for="go1" class="input-title">不跳转</label>
+                        <input class="ui-radio" name="go" id="go2" value="2" ng-model="addObj.skipType" type="radio">
+                        <label for="go2" class="input-title">跳转至网页</label>
+                        <input class="ui-radio" name="go" id="go3" value="3" ng-model="addObj.skipType" type="radio">
+                        <label for="go3" class="input-title">跳转至商品详情页</label>
+                    </div>
+                    <div class="add-item-detail" ng-show="addObj.skipType==2||addObj.skipType==3">
+                        <input class="input" type="text" ng-model="addObj.urlOrSku" placeholder="{{addObj.skipType==2?'请输入地址':'请输入商品SKU'}}" ng-blur="searchSKU()">
+                    </div>
+                </li>
+                <li class="add-item">
+                    <span class="label" for="">放置顺序</span>
+                    <div class="add-item-content">
+                        <select class="select" ng-model="addObj.sort">
+                            <option value="">请选择</option>
+                            <option ng-repeat="item in positionList track by $index" value="{{item}}">{{item}}</option>
+                        </select>
+                    </div>
+                </li>
+                <li class="add-item">
+                    <span class="label" for="">上架时间</span>
+                    <div class="add-item-content">
+                        <input class="ui-radio" name="up" value="true" ng-model="addObj.now" id="up1" type="radio">
+                        <label for="up1" class="input-title">立即上架</label>
+                        <input class="ui-radio" name="up" value="false" ng-model="addObj.now" id="up2" type="radio">
+                        <label for="up2" class="input-title">设置上架时间</label>
+                    </div>
+                    <div class="add-item-detail" ng-show="addObj.now=='false'">
+                        <input class="input" type="text" id="starttimeadd" type="text"
+                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{\'%y-%M-%d\'}'})" placeholder="请选择上架时间">
+                    </div>
+                </li>
+                <li class="add-item">
+                    <span class="add-merch-btn" ng-click="type=1">取消</span>
+                    <span class="add-merch-btn" ng-click="submitFun()">提交</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="asj-common-tanwrap" ng-show="isShowTip">
+        <div class="asj-common-tan comfirm-box">
+            <div class="table-list" ng-show="showType!=3">
+                <div class="tr">
+                    <span class="th">banner图片</span>
+                    <span class="th">跳转至</span>
+                    <span class="th">放置顺序</span>
+                    <span class="th">上架时间</span>
+                </div>
+                <div class="tr">
+                    <span class="td">
+                        <img src="{{addObj.webImg}}" alt="">
+                    </span>
+                    <span class="td">{{addObj.urlOrSku||'/'}}</span>
+                    <span class="td">{{addObj.sort}}</span>
+                    <span class="td">{{addObj.putTime}}</span>
+                </div>
+            </div>
+            <p class="comfirm-box-tip">{{showConfirmMsg}}</p>
+            <p class="center" ng-show="showType!=3&&showType!=6">
+                <span class="add-merch-btn" ng-click="isShowTip=false">取消</span>
+                <span class="add-merch-btn" ng-click="sureFun()">确认</span>
+            </p>
+            <p class="center" ng-show="showType==3||showType==6">
+                <span class="add-merch-btn" ng-click="isShowTip=false">知道了</span>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

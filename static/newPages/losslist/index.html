@@ -1,0 +1,330 @@
+<div class="my-wrap">
+	<div class="submitBubble">
+
+		<!-- filter -->
+		<div class="filter flex fwp">
+			<div class="item">
+				<wui-date format="yyyy-mm-dd" placeholder="开始时间" btns="{'ok':'确定','now':'今天'}" ng-model="getParams.startTime">
+				</wui-date>
+				-
+				<wui-date format="yyyy-mm-dd" placeholder="结束时间" btns="{'ok':'确定','now':'今天'}" ng-model="getParams.endTime">
+				</wui-date>
+			</div>
+
+			<div class="item flex aic jcc">
+				<select ng-model="productNameOrSKU" ng-change="setProductNameOrSKU()">
+					<option value="productName">商品名称</option>
+					<option value="sku">变体SKU</option>
+				</select>
+				<input type="text" ng-model="searchVal" ng-change="setProductNameOrSKU()" />
+			</div>
+
+			<div class="item">
+				<a href="javascript:void(0)" class="btn primary" ng-click="getList()">搜索</a>
+			</div>
+
+			<div class="item">
+				<select ng-model="getParams.lossCause" ng-change="getList()">
+					<option value="">选择损耗原因</option>
+					<option ng-repeat="(key,value) in lossOBJ" value="{{ key }}">{{ value }}</option>
+				</select>
+			</div>
+
+			<div class="item">
+				<storageTab is-select="true" callback="storageCallback"></storageTab>
+			</div>
+
+		</div>
+
+		<!-- tools -->
+		<div class="tools flex fdrr">
+			<a href="javascript:void(0)" class="btn primary" ng-click="openLossPro()">新增损耗商品</a>
+		</div>
+
+		<table class="k-table" style="width:100%;margin-top:20px;">
+			<thead>
+				<th>序号</th>
+				<th>SKU</th>
+				<th>图片</th>
+				<th width="180">商品名称</th>
+				<!-- <th>批次号</th> -->
+				<th>成本价</th>
+				<th>损耗数量</th>
+				<th>总价</th>
+				<th>损耗原因</th>
+				<th width="180">备注</th>
+				<th>责任人</th>
+				<th>存放仓库</th>
+				<th width="180">处理方式</th>
+				<th>处理人</th>
+				<th>处理时间</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="i in losslist">
+					<td>
+						<div class="td">{{ $index+1 }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.sku }}</div>
+					</td>
+					<td>
+						<div class="td">
+							<img src="{{ i.img }}" width="45" height="45" />
+						</div>
+					</td>
+					<td>
+						<div class="td">
+							{{ i.productName }}
+						</div>
+					</td>
+					<!-- <td>
+						<div class="td">{{ i.batchNumber }}</div>
+					</td> -->
+					<td>
+						<div class="td">￥{{ i.costPrice }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.batchNumber || 0}}</div>
+					</td>
+					<td>
+						<div class="td">￥{{ i.totalPrice }}</div>
+					</td>
+					<td>
+						<div class="td">{{ lossOBJ[i.lossCause] }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.remark }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.responsiblePerson }}</div>
+					</td>
+					<td>
+						<div class="td">{{ storage[i.storageWarehouse] || '未知' }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.handleManner }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.handlePerson }}</div>
+					</td>
+					<td>
+						<div class="td">{{ i.handleDate | date:"yyyy-MM-dd HH:mm:ss" }}</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 分页 -->
+		<page></page>
+
+	</div>
+</div>
+
+<div class="erp-common-tan-v2-wrap" ng-show="lossBubble">
+	<div class="erp-common-tan-v2" style="width: 800px; height: auto;">
+		<!-- 关闭按钮 -->
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="lossBubble=false;"><img
+				src="static/image/public-img/close-img.png"></a>
+		<!-- title -->
+		<div class="tan-v2-top">
+			<h6>录入信息</h6>
+		</div>
+		<!-- 内容 -->
+		<div class="tan-v2-con">
+			<div class="filter flex fwp">
+				<div class="item">
+					<span class="labela"><span class="red">*</span>SKU:</span>
+					<input type="text" ng-model="addParams.sku" />
+				</div>
+				<div class="item">
+					<span class="labela"><span class="red">*</span>数量:</span>
+					<input type="text" ng-model="addParams.batchNumber" />
+				</div>
+				<div class="item">
+					<span class="labela"><span class="red">*</span>损耗原因:</span>
+					<select ng-model="addParams.lossCause">
+						<option value="">选择损耗原因</option>
+						<option ng-repeat="(key,value) in lossOBJ" value="{{ key }}">{{ value }}</option>
+					</select>
+				</div>
+				<div class="item" style="width:100%;">
+					<span class="labela">备注:</span>
+					<textarea rows="5" ng-model="addParams.remark"></textarea>
+				</div>
+				<div class="item">
+					<span class="labela">责任人:</span>
+					<input type="text" ng-model="addParams.responsiblePerson" />
+				</div>
+				<div class="item">
+					<span class="labela">仓库:</span>
+					<select ng-model="addParams.storageWarehouse">
+						<option value="">选择仓库</option>
+						<option ng-repeat="(key,value) in storage" value="{{ key }}">{{ value }}</option>
+					</select>
+				</div>
+				<div class="item" style="width: 100%;">
+					<span class="labela">处理人:</span>
+					<input type="text" ng-model="addParams.handlePerson" />
+				</div>
+				<div class="item" style="width: 100%;">
+					<span class="labela">处理方式:</span>
+					<textarea rows="5" ng-model="addParams.handleManner"></textarea>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- 底部 -->
+		<div class="tan-v2-bot">
+			<!-- 取消按钮（灰色） -->
+			<a href="javascript:void(0);" ng-click="lossBubble=false;" class="qu-xiao-btn">取消</a>
+			<!-- 确认按钮（彩色） -->
+			<a href="javascript:void(0);" ng-click="addLossPro()" class="que-ding-btn">确定</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.my-wrap {
+		margin-left: 215px;
+		background: #fff;
+		padding: 15px;
+		min-height: 100vh;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex.fdc {
+		flex-direction: column;
+	}
+
+	.flex.jcc {
+		justify-content: center;
+	}
+
+	.flex.fdrr {
+		flex-direction: row-reverse;
+	}
+
+	.flex.fdcr {
+		flex-direction: column-reverse;
+	}
+
+	.flex.aic {
+		align-items: center;
+	}
+
+	.flex.fwp {
+		flex-wrap: wrap;
+	}
+
+	/* tablist */
+	.tablist {
+		height: 45px;
+		width: 100%;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.tablist .item {
+		padding: 0 15px;
+		position: relative;
+	}
+
+	.tablist .item.active a::after,
+	.tablist .item:hover a::after {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #F9AE08;
+		content: ' ';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+	}
+
+	.tablist .item.active a,
+	.tablist .item:hover a {
+		color: #F9AE08;
+	}
+
+	/* filter */
+	.filter input {
+		width: 150px;
+	}
+
+	.filter select {
+		height: 30px;
+		border-radius: 4px;
+	}
+
+	.filter textarea {
+		border: 1px solid #e6e6e6;
+		flex: 1;
+	}
+
+	.filter span.labela {
+		margin-right: 15px;
+		min-width: 60px;
+		text-align: right;
+	}
+
+	.filter .item {
+		margin-right: 15px;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		color: #000;
+	}
+
+	/* tools */
+	.tools {
+		margin-top: 15px;
+	}
+
+	.tools a {
+		margin-left: 15px;
+	}
+
+	/* btn */
+	a.btn {
+		padding: 5px 10px;
+	}
+
+	a.btn.primary {
+		background-color: #F8A636;
+		color: #fff;
+	}
+
+	a.btn.primary:hover {
+		opacity: 0.6;
+	}
+
+	a.batch {
+		color: #F8A636;
+	}
+
+	a.batch:hover {
+		opacity: 0.6;
+	}
+
+	span.red {
+		color: red;
+	}
+
+	/* bottom_operator */
+	.bottom_operator {
+		margin-top: 20px;
+	}
+
+	/* submitBubble */
+	.submitBubble .filter .item {
+		margin-right: 20px;
+	}
+
+	.submitBubble .filter .item .con {
+		color: #999;
+	}
+</style>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>message-list</title>
+	<link rel="stylesheet" type="text/css" href="../../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../css/wangEditor.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/system-message.css">
+</head>
+
+<body>
+	<div class="cj-am-wrap">
+		<div class="cj-am-cen">
+			<div class="cj-am-main">
+				<div class="erp-main-top">
+					<p>通知编辑</p>
+				</div>
+				<div class="erp-main-content">
+					<div class="erp-mes-num">
+						<p class="erp-num-p">
+							<span class="erp-mum-span1">通知编号:</span>
+							<span class="erp-mum-span2">23456</span>
+						</p>
+					</div>
+					<div class="erp-mes-stu">
+						<p class="erp-stu-p">
+							<span class="erp-stu-span">通知类型:</span>
+							<select class="erp-stu-sel">
+								<option>产品通知</option>
+								<option>物流通知</option>
+								<option>财务通知</option>
+								<option>营业通知</option>
+								<option>功能通知</option>
+								<option>政策通知</option>
+								<option>其他通知</option>
+							</select>
+						</p>
+					</div>
+					<div class="erp-mid-con">
+						<div class="erp-mc-left">
+							<div class="erp-mcl-sjr">
+								<p>
+									<span>收件人:</span>
+									<input class="erp-sjr-inp"></input>
+								</p>
+							</div>
+							<div class="erp-mc-text">
+								<p class="erp-text-p">正文:</p>
+								<div id="editor-trigger"></div>
+							</div>
+						</div>
+						<div class="erp-mc-right">
+							<p class="erp-mr-p">
+								<span>查找:</span>
+								<input class="erp-s-inp"></input>
+							</p>
+							<div class="erp-mr-list">
+								<p class="erp-s-jgp">查找到:</p>
+								<ul class="erp-list-ul">
+									<li>
+										<p class="erp-list-p1">name</p>
+										<p class="erp-list-p2">messageaaa</p>
+									</li>
+									<li>
+										<p class="erp-list-p1">name</p>
+										<p class="erp-list-p2">messageaaa</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="erp-mes-btns">
+							<a href="javascript:void(0)">发送</a>
+							<a class="sel-time-btn" href="javascript:void(0)">定时发送</a>
+							<a href="javascript:void(0)">存草稿</a>
+							<a href="javascript:void(0)">关闭</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 弹框中的内容 -->
+			<!-- <div class="erp-mes-tc">
+				<div class="erp-tc-top">
+					<p>定时发送</p>
+				</div>
+				<div class="erp-tc-mid">
+					<span class="erp-tc-tspan">选择定时发送的时间:</span>
+					<select class="erp-select-year">
+						<option>2017</option>
+						<option>2017</option>
+						<option>2017</option>
+					</select>
+					<span class="erp-text-s">年</span>
+					<select class="erp-select-month"></select>
+					<span class="erp-text-s">月</span>
+					<select class="erp-select-date"></select>
+					<span class="erp-text-s">日</span>
+					<select class="erp-select-hour"></select>
+					<span class="erp-text-s">时</span>
+					<select class="erp-select-minute"></select>
+					<span class="erp-text-s">分</span>
+				</div>
+				<p class="erp-send-time">
+					<span class="erp-send-s1">本邮件将在</span>
+					<span class="erp-send-s2">今天</span>
+					<span class="erp-send-s2">下午3:40</span>
+					<span class="erp-send-s1">投递到对方收件箱。</span>
+				</p>
+			</div> -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../js/public/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="../../js/public/wangEditor.min.js"></script>
+<script type="text/javascript" src="../../js/erp-orders/system-message.js"></script>
+</html>

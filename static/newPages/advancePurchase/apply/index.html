@@ -1,0 +1,118 @@
+<ul class="advancePurchase wrapper">
+  <!-- <div class="flex aic jce"><a href="javascript:void(0);" class="btn">导出excle</a></div> -->
+
+  <!--  -->
+  <div class="filter flex fwp fdr">
+    <div class="input-item flex aic jcc">
+      <span>SKU：</span>
+      <div class="con">
+        <input type="text" placeholder="输入SKU" ng-model="sendParams.sku" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>仓库：</span>
+      <div class="con">
+        <select ng-model="sendParams.storage">
+          <option value="">全部</option>
+          <option ng-repeat="(key,value) in warehouseobj" value="{{key}}">{{value}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>退货：</span>
+      <div class="con">
+        <select ng-model="sendParams.returned">
+          <option value="">全部</option>
+          <option value="0">可退货</option>
+          <option value="1">不可退货</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>采购价格：</span>
+      <div class="con">
+        <input type="text" placeholder="输入采购价格" ng-model="sendParams.procurementPrice" ng-keyup="keyUpByMoney($event)" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>预采购数量：</span>
+      <div class="con">
+        <input type="text" placeholder="请输入采购数量" ng-model="sendParams.procurementCount" ng-keyup="onKeyUpEventByNumber('procurementCount')" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>采购周期：</span>
+      <div class="con flex aic">
+        <input type="text" placeholder="输入天数" class="day" ng-model="sendParams.procurementPeriodLow" ng-keyup="onKeyUpEventByNumber('procurementPeriodLow')" />
+        -
+        <input type="text" placeholder="输入天数" class="day" ng-model="sendParams.procurementPeriodHigh" ng-keyup="onKeyUpEventByNumber('procurementPeriodHigh')" />
+      </div>
+    </div>
+    <div class="input-item flex aic jcc">
+      <span>到货周期：</span>
+      <div class="con flex aic">
+        <input type="text" placeholder="输入天数" class="day" ng-model="sendParams.arrivalPeriodLow" ng-keyup="onKeyUpEventByNumber('arrivalPeriodLow')" />
+        -
+        <input type="text" placeholder="输入天数" class="day" ng-model="sendParams.arrivalPeriodHigh" ng-keyup="onKeyUpEventByNumber('arrivalPeriodHigh')" />
+      </div>
+    </div>
+  </div>
+
+  <ul class="k-tab flex fdr aic">
+    <li ng-class="{'active':sendParams.procurementStatus=='0'}" ng-click="sendParams.procurementStatus='0'"><span>待审核</span></li>
+    <li ng-class="{'active':sendParams.procurementStatus=='1'}" ng-click="sendParams.procurementStatus='1'"><span>已审核</span></li>
+    <li ng-class="{'active':sendParams.procurementStatus=='2'}" ng-click="sendParams.procurementStatus='2'"><span>已拒绝</span></li>
+  </ul>
+  <table class="k-table" width="100%">
+    <thead>
+      <th>图片</th>
+      <th>SKU</th>
+      <th>采购周期（天）</th>
+      <th>到货周期(天)</th>
+      <th>周期使用数量</th>
+      <th>预采购数量</th>
+      <th>采购价格($)</th>
+      <th>是否可以退货</th>
+      <th>所属仓库</th>
+      <th>状态</th>
+      <th>操作</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="i in list track by i.id">
+        <td>
+          <div class="td">
+            <div class="preView">
+              <img src="{{i.image}}" />
+            </div>
+          </div>
+        </td>
+        <td><div class="td">{{i.sku}}</div></td>
+        <td><div class="td">{{i.procurementPeriod}}</div></td>
+        <td><div class="td">{{i.arrivalPeriod}}</div></td> 
+        <td><div class="td">{{i.orderNum}}</div></td>
+        <td><div class="td">{{i.procurementCount}}</div></td>
+        <td><div class="td">{{i.procurementPrice}}</div></td>
+        <td><div class="td">{{i.returned=='0'?'可退货':'不可退货'}}</div></td>
+        <td><div class="td">{{warehouseobj[i.storage] || '无'}}</div></td>
+        <td><div class="td">{{statusobj[i.procurementStatus] || '无'}}</div></td>
+        <td>
+          <div class="td">
+            <div class="flex aic">
+              <a href="javascript:void(0)" ng-show="i.procurementStatus!='1'" class="btn primary" ng-click="updateStatus(i,'1')">通过</a>
+              <a href="javascript:void(0)" ng-show="i.procurementStatus!='2'" class="btn" ng-click="updateStatus(i,'2')">拒绝</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <page></page>
+
+</div>
+
+<style>
+  /* module */
+  input.day{width:100px;}
+
+</style>

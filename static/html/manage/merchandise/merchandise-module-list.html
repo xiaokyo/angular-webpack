@@ -1,0 +1,275 @@
+<style>
+  .selectGys {
+    margin-left: 10px;
+    /*position: relative;*/
+  }
+
+  .selectGys>span.selectDropBtn {
+    display: block;
+    background: #fff;
+    width: 140px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .selectDropBtn>span:first-child {
+    display: inline-block;
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .selectDropBtn>span:last-child {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border: 5px solid transparent;
+    border-top-color: #333;
+    position: relative;
+    top: -7px;
+
+  }
+
+  .selectWrap {
+    background: #fff;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    position: absolute;
+    left: 325px;
+    top: 40px;
+    z-index: 9999;
+    display: none;
+  }
+
+  .wrap-top {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+  }
+
+  .wrap-top>input {
+    width: 100%;
+    min-width: 200px;
+    border-radius: 50px;
+    padding: 0 22px 0 10px;
+    height: 26px;
+
+  }
+
+  .resetBtn {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: url("static/image/public-img/close.png") no-repeat;
+    background-size: 15px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .wrap-bottom {
+    /*padding: 8px 10px;*/
+    font-size: 12px;
+    max-height: 390px;
+    overflow-y: auto;
+  }
+
+  .wrap-bottom>ul>li>span {
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+  }
+
+  .wrap-bottom>ul>li>span:hover {
+    color: #fff;
+    background: #5CACEE;
+  }
+
+  .resetBtn {
+    display: none;
+  }
+
+  .soldOutNav {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    height: 60px;
+    padding: 0 20px;
+    width: calc(100% - 270px);
+    z-index: 999;
+  }
+
+  .inquiry-and-drop .right-bar.soldOutWrap {
+    margin-top: 70px;
+  }
+
+  .soldOutNav>a {
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    width: 60px;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .soldOutNav>a:hover {
+    color: rgba(255, 162, 0, 1);
+  }
+
+  .soldOutNav>a.act {
+    color: rgba(255, 162, 0, 1);
+    border-bottom-color: rgba(255, 162, 0, 1);
+  }
+
+  .supply-price-layer .sell-price-list .sp-vlist-title li {
+    width: 12.5%;
+  }
+
+  .supply-price-layer .sell-price-list .sp-vlist-body .line-item .line-item-item {
+    width: 12.5%;
+  }
+
+  .prism-big-play-btn {
+    left: calc(50% - 32px) !important;
+    bottom: calc(50% - 32px) !important;
+  }
+
+  #uploadVideoBtn {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    background: #fff;
+    font-size: 12px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 29px;
+    position: absolute;
+    top: -4px;
+    cursor: pointer;
+  }
+
+  .prism-player .prism-cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .more-operate .drop-down {
+    left: -50px;
+  }
+
+  .merchan-list .merchan-list-con .li-img .hidden-bigimg-po {
+    top: -300px;
+  }
+</style>
+<div class="merchandise-box langModule">
+  <div class="right-bar-wrap inquiry-and-drop">
+    <div class="soldOutNav" ng-show="isSoldOut">
+      <a class="act">商品</a>
+      <a ng-click="gotoSoldOut()">变体</a>
+    </div>
+
+    <div class="right-bar" ng-class="{soldOutWrap:isSoldOut}">
+      <div class="asj-h15"></div>
+
+      <!-- 上面功能条 -->
+      <div class="function-bar">
+        <div class="bottom-search flex ait jbt">
+          <div>SKU : {{ proSku }}</div>
+          <div>
+            <div class="add-merch" style="margin-right: 10px;"><a href="javascript:void(0);" class="add-merch-btn" ng-click="openDialog()">添加模板</a></div>
+          </div>
+        </div>
+      </div>
+      <!-- 列表 -->
+      <div id="merchan-list-all" ng-class="{'merchan-list': true, 'merchan-audit-fail': (merchanStatus=='4' || merchanStatus=='5'), 'merchan-list-auto': (isAutoLinkMerch || isListedMerch || isOffAssMerch), 'merchan-list-waitsubmit': merchanStatus=='1', 'merchan-list-underreview': merchanStatus=='2','merchan-list-service':dropFlag=='service'}">
+        <!-- 列表top -->
+        <ul class="merchan-list-top">
+          <!-- <li class="li-img">
+            <div class="check-box">
+              <input type="checkbox" name="" id="" ng-model="checkAllMark" ng-click="checkAllMerch(checkAllMark, $event)">
+              <label for=""></label>
+            </div>
+            <span>{{'100382' | translate}}</span>
+          </li> -->
+          <li class="li-name">模板名称</li>
+          <li class="li-lang">语言类型</li>
+          <li class="li-operate">{{'100043' | translate}}</li>
+        </ul>
+        <!-- 列表body -->
+        <!-- merchList -->
+        <!-- ng-show="hasMerch" -->
+        <div class="erp-load-box">
+          <div class="merchan-list-con-wrap" ng-repeat="item in moduleList">
+            <!-- ng-click="showDetail(item.id)" -->
+            <ul class="merchan-list-con clearfix">
+              <li class="li-name">{{item.template}}</li>
+              <li class="li-lang">{{item.lang}}</li>
+              <li class="li-operate" style="position: relative;">
+                <a role="button" class="btn btn-default edit-btn" ng-click="openDialog(item)">{{'100120' | translate}}</a>
+                <a role="button" class="btn btn-default edit-btn" ng-click="delModule(item)">{{'100227' | translate}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分页 -->
+      <!-- <div ng-include="'./static/html/manage/merchandise/merchandise-common-page.html'" onload="do($parent)"></div> -->
+      <!-- <p id="demo3-text"></p> -->
+      <!-- <page></page> -->
+      <!-- <div ng-hide="hasMerch">没有找到数据</div> -->
+    </div>
+  </div>
+</div>
+
+<div class="asj-common-tanwrap" ng-show="showDialog">
+  <div class="asj-common-tan supply-price-layer" style="width:1000px;height:750px;">
+    <div class="tan-title">{{isEdit?'编辑':'添加'}}模板</div>
+    <div class="langModule-addoredit">
+      <div class="_box">
+        <div>
+          <div class="input-item">
+            <label>商品名称</label>
+            <div>{{defaultProductNameEn}}</div>
+          </div>
+          <div class="input-item">
+            <label>商品描述</label>
+            <div id="wang-editor-default" class="wang-editor"></div>
+          </div>
+          <div style="color:red;padding-left:140px;">以上信息仅供参考</div>
+        </div>
+        <div class="input-item">
+          <label><span>*</span> 模板商品名称</label>
+          <input type="text" ng-model="currentItem.title" />
+        </div>
+        <div class="input-item">
+          <label><span>*</span> 模板商品描述</label>
+          <div id="wang-editor" class="wang-editor"></div>
+        </div>
+        <div class="input-item">
+          <label><span>*</span> 选择语言</label>
+          <select class="chose-consumer-one" ng-model="defaultLang">
+            <option value="en">英文</option>
+            <option value="zh">中文</option>
+            <option value="th">泰文</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="tan-btns">
+      <a class="tan-btn0" ng-click="showDialog=false;">关闭</a>
+      <a class="tan-btn1" ng-click="moduleSubmit()">提交</a>
+    </div>
+
+  </div>
+</div>

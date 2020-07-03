@@ -1,0 +1,214 @@
+<style>
+    .deration-text{
+        cursor: pointer;
+        color: #08ACE9;
+        text-decoration: underline;
+        font-size: 12px;
+    }
+    #c-pages-fun .current{
+        color: #08aceb;
+    }
+    .c-ord-con{
+        margin-top: 90px;
+    }
+    .refresh-btn{
+        font-size: 12px;
+        width: 80px;
+        height: 30px;
+        border: 1px solid #5dbdf2;
+        background-color: #fff;
+        border-radius: 4px;
+        float: right;
+    }
+    .refresh-btn:hover{
+        background-color: #fff;
+        color: #5dbdf2;
+    }
+    .store-sel {
+        height: 30px;
+        vertical-align: top;
+        font-size: 12px;
+        width: 120px;
+    }
+</style>
+<div class="custom-orders-wrap">
+    <div class="c-ord-mid">
+        <!-- 右边的内容部分 -->
+        <div class="ord-right-con">
+            <div id="top-tab" class="top-tab position-fixed">
+                <!-- tab -->
+                  <div class="top-tab-nav d-flex">
+                    <span ng-class="{'tab-active':lanJieStu=='3'}" ng-click="stuTypeFun(3)" class="tab-span tab-border-bt cursor-pointer">拦截中</span>
+                    <span ng-class="{'tab-active':lanJieStu=='8'}" ng-click="stuTypeFun(8)" class="tab-span tab-border-bt cursor-pointer">拦截失败</span>
+                    <span ng-class="{'tab-active':lanJieStu=='7'}" ng-click="stuTypeFun(7)" class="tab-span tab-border-bt cursor-pointer">拦截成功</span>
+                  </div>
+            </div>
+            <div class="content">
+                <div class="c-ord-conall">
+                    <div class="c-ord-con">
+                        <!-- 订单动能 时间等的部分 -->
+                        <div class="c-ord-fun fiexd-box">
+                            <!-- 订单搜索部分 -->
+                            <div class="c-seach-fun">
+
+                                <div class="c-seach-div">
+                                    <select class="c-seach-country" ng-model="searchKey">
+                                        <option value="id">{{'100023' | translate}}</option>
+                                        <option value="shipmentsOrderId">{{'100054' | translate}}</option>
+                                        <option value="salesmanName">{{'101316' | translate}}</option>
+                                        <option value="accountName">{{'101418' | translate}}</option>
+                                    </select>
+                                    <input class="c-seach-inp" ng-model="searchVal" />
+                                    <a ng-click="searchFun()" class="c-seach-btn" href="javascript:void(0)">{{'100025' | translate}}</a>
+                                </div>
+                                <select ng-model="store" ng-change="storeChangeFun()" class="store-sel">
+                                    <option value="">请选择仓库</option>
+                                    <option value="{{item.store}}" ng-repeat="item in storeList">{{item.storeName}}</option>
+                                </select>
+
+                                <div class="buli-list-div" ng-show="lanJieStu=='3'" ng-mouseenter="showul=true" ng-mouseleave="showul=false">
+                                    <button class="plcz-btn">批量操作</button>
+                                    <ul class="bulk-list-ul" ng-show="showul" ng-cloak>
+                                        <li ng-click="addLanJieFun()">批量取消拦截</li>
+                                    </ul>
+                                </div>
+                                <button class="refresh-btn" ng-click="freshFun()" ng-show="lanJieStu==5">刷新</button>
+                            </div>
+                        </div>
+
+                        <div class="toogle-ord-stu" id="c-zi-ord">
+
+                            <div class="c-ord-list">
+                                <table class="orders-table">
+                                    <thead class="c-ord-thead">
+                                    <tr>
+                                        <th class="ordlist-fir-th" style="width: 100px">
+                                            <img class="c-checkall" src="static/image/order-img/multiple1.png">
+                                            <span>{{'100115' | translate}}</span>
+                                        </th>
+                                        <th style="width: 80px">{{'101418' | translate}}</th>
+                                        <th style="width: 80px">{{'101316' | translate}}</th>
+                                        
+                                        <th style="width: 100px;">
+                                            <p>{{'100054' | translate}}</p>
+                                        </th>
+
+                                        <th style="width: 80px">{{'100055' | translate}}</th>
+                                        <th style="width: 80px">{{'100005' | translate}}</th>
+                                        
+
+
+                                        <th style="width: 75px;">{{'100043' | translate}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="c-ord-tbody" ng-repeat="zddlist in erporderList" ng-init="pIndex=$index" repeat-finish>
+                                    <tr class="erporder-detail">
+                                        <td class="ordlist-fir-td mac-w60px">
+                                            <img data-id="{{zddlist.id}}" data-type="{{zddlist.order.fulfillmentStatus}}" class="cor-check-box" src="static/image/order-img/multiple1.png">
+                                            <p ng-cloak>{{zddlist.id}}</p>
+                                            <p style="display: none;" class="hide-order-id">{{zddlist.id}}</p>
+                                        </td>
+                                        <td class="moshow-sp-td" style="position: relative;">
+                                            <p  ng-cloak>{{zddlist.accountName}}</p>
+                                        </td>
+                                        <td class="moshow-sp-td" style="position: relative;">
+                                            <p  ng-cloak>{{zddlist.salesmanName}}</p>
+                                        </td>
+                                        <td class="moshow-sp-td" style="position: relative;">
+                                            <p  ng-cloak>{{zddlist.shipmentsOrderId}}</p>
+                                        </td>
+                                        
+
+                                        <td class="store-name-td moshow-sp-td">
+                                            <p class="store-name-p" ng-cloak>{{zddlist.storeName}}</p>
+                                        </td>
+                                        <td class="moshow-sp-td" style="position: relative;">
+                                            <p ng-show="zddlist.store=='0'" ng-cloak>义乌</p>
+                                            <p ng-show="zddlist.store=='1'" ng-cloak>深圳</p>
+                                            <p ng-show="zddlist.store=='2'" ng-cloak>美西</p>
+                                            <p ng-show="zddlist.store=='3'" ng-cloak>美东</p>
+                                            <p ng-show="zddlist.store=='4'" ng-cloak>泰国</p>
+                                            <p ng-show="zddlist.store=='5'" ng-cloak>金华</p>
+                                        </td>
+                                        <td class="moshow-sp-td">
+                                            <button ng-if="selstu!=2" ng-click="addLanJieFun(zddlist)" class="erp-zi-bjbtn">取消拦截</button>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div ng-show="erpordTnum<1" style="text-align: center;">暂无数据</div>
+                        <!-- 分页 -->
+                        <div class="pages-fun" ng-show="erpordTnum>0">
+                            <select id="page-sel" class="c-select-page-num" ng-model="pageSize" ng-change="changePageFun()">
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="every-page">每页</span>
+                            <span class="every-page gong">共</span>
+                            <span class="c-all-num-line">{{erpordTnum}}</span>
+                            <span class="every-page">条</span>
+                            <span id="demo3-text"></span>
+                            <div id="c-pages-fun"></div>
+                            <span class="every-page">跳转:</span>
+                            <input id="inp-num" class="c-inp-num-go" ng-model="pageNum"></input>
+                            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 拦截成功返回 -->
+
+<div class="isaddyfh-wrap" style="z-index: 99999;" ng-show="resultIntercept">
+	<div class="isaddyfh-con" style="height: 160px;">
+		<p align="center">拦截成功id</p>
+		<input style="width: 100%;display:block;height: 30px;text-indent: 12px;" ng-model="lrzzhNum"
+			placeholder="请输入追踪号"></input>
+		<div class="isaddyfh-btns">
+			<button ng-click="resultIntercept=false" class="ispc-can-btn">确定</button>
+		</div>
+	</div>
+</div>
+
+
+<!-- 是否取消拦截 -->
+<!-- <div class="isaddyfh-wrap" ng-show="isaddLjzFlag">
+	<div class="isaddyfh-con">
+		<p>是否取消拦截?</p>
+		<div class="isaddyfh-btns">
+			<button ng-click="cancelAddLjzFun()" class="ispc-can-btn">取消</button>
+			<button ng-click="sureAddLjzFun()" class="ispc-con-btn">确定</button>
+		</div>
+	</div>
+</div> -->
+
+<!-- 单个取消拦截 -->
+<div ng-show="addLanJieFlag" class="oneistbdp-wrap">
+	<div class="oneistbdp-con">
+		<p>是否取消拦截?</p>
+		<div class="oneistbdp-btns">
+			<button ng-click="addLanJieFlag=false" class="oneistbdp-can-btn">取消</button>
+			<button ng-click="sureLanJieFun()" class="oneistbdp-con-btn">确定</button>
+		</div>
+	</div>
+</div>
+
+<pod-note ng-if="spMessageflag" p-index="ctrl.pIndex" index="ctrl.index" list="ctrl.list" p-item="ctrl.pItem"
+	item="ctrl.item"></pod-note>
+<log-tk ng-if="isLookLog" no="ctrl.no"></log-tk>
+<podmes-tk ng-if="gxhOrdFlag" type="ctrl.type" pro="ctrl.pro"></podmes-tk>
+<podmes-tk ng-if="gxhProductFlag" type="ctrl.type" pro="ctrl.pro"></podmes-tk>
+<!--客户分析-->
+<customer-Analysis ng-if="isAnalysis" no="ctrl.no"></customer-Analysis>
+<script type="text/javascript" src="static/js/public/echarts.common.min.js"></script>

@@ -1,0 +1,79 @@
+.yzy-time-select{
+	padding: 3px 0;
+	cursor: pointer;
+	position: relative;
+}
+.yzy-time-select .time-select-box{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 34px;
+	line-height: 34px;
+	padding: 0 10px;
+	border: 1px solid #e1e1e1;
+	border-radius: 4px;
+	min-width: 70px;
+	font-size: 12px;
+	color: #666;
+	box-sizing: border-box;
+}
+.yzy-time-select .time-select-box b{
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	background: url('../../../static/image/finance/drop.svg') no-repeat;
+	background-size: 12px;
+	position: relative;
+	top: 3px;
+	margin-left: 8px;
+}
+.yzy-time-select .time-select-drop {
+	width: 100%;
+	border-radius: 4px;
+	background: #fff;
+	position: absolute;
+	box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.15);
+	top: 36px;
+	display: none;
+	/* overflow: hidden; */
+}
+.yzy-time-select .time-select-drop li{
+	width: 100%;
+	padding: 6px 10px;
+	margin: 0;
+}
+.yzy-time-select .time-select-drop li:hover{
+	background: rgba(255,119,0, 0.6);
+	color: #fff;
+}
+.yzy-time-select:hover .time-select-box b{
+	background: url('../../../static/image/finance/up.svg') no-repeat;
+	background-size: 12px;
+}
+.yzy-time-select:hover .time-select-drop{
+	display: block;
+}
+.yzy-time-select-wrap .custom-box{
+	margin-left: 8px;
+	font-size: 12px;
+}
+.yzy-time-select-wrap .custom-time.startTime input{
+	border-radius: 4px 0 0 4px;
+}
+.yzy-time-select-wrap .custom-time.endTime input{
+	border-radius: 0 ;
+}
+.yzy-time-select-wrap .custom-time.endTime{
+	position: relative;
+	left: -4px;
+}
+.yzy-time-select-wrap .custom-btn{
+	height: 34px;
+	padding: 0 10px;
+	border-radius: 0 4px 4px 0;
+	font-size: 12px;
+	position: relative;
+	left: -8px;
+	background: #F9AE08;
+	color: #fff;
+}

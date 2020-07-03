@@ -1,0 +1,157 @@
+<div class="content chorme-order">
+    <div class="c-ord-conall">
+        <!-- tab -->
+        <div class="ordertab">
+            <a ng-show="ordStatus == '3'" href="#/erp-zf-ord/3">CJ订单</a>
+            <a ng-show="ordStatus == '10'" href="#/erp-zf-ord">CJ订单</a>
+            <a ng-show="ordStatus == '3'" class="act" href="#/chromeOrder/3">Chrome插件订单</a>
+            <a ng-show="ordStatus == '10'" class="act" href="#/chromeOrder/10">Chrome插件订单</a>
+        </div>
+        <!--内容-->
+        <div class="table-con-box">
+            <div class="ea-right-search">
+                <div class="input-group search-box">
+                    <input type="text" class="form-control top-search-inp" placeholder="输入订单号搜索"
+                           ng-model="searchinfo"
+                           ng-keyup="enterSearch($event)">
+                    <a role="button" class="btn btn-default top-search-btn" type="button"
+                       ng-click="searchcustomer()">{{'100025' | translate}}</a>
+                </div>
+            </div>
+            <div class="asj-top-head">
+                <ul class="clearfix" ng-show="ordStatus == '3'">
+                    <li style="width: 5%;">序号</li>
+                    <li style="width: 24%;">商品信息</li>
+                    <li style="width: 7%;">采购价格</li>
+                    <li style="width: 6%;">数量</li>
+                    <li style="width: 6%;">长(mm)</li>
+                    <li style="width: 6%;">宽(mm)</li>
+                    <li style="width: 6%;">高(mm)</li>
+                    <li style="width: 6%;">净重(g)</li>
+                    <li style="width: 6%;">毛重(g)</li>
+                    <li style="width: 6%;">售价</li>
+                    <li style="width: 5%;">URL</li>
+                    <li style="width: 5%;">客户</li>
+                    <li style="width: 5%;">销售员/群主</li>
+                    <li style="width: 7%;">类型</li>
+                </ul>
+                <ul class="clearfix" ng-show="ordStatus == '10'">
+                    <li style="width: 5%;">序号</li>
+                    <li style="width: 23%;">商品信息</li>
+                    <li style="width: 5.25%;">采购价格</li>
+                    <li style="width: 5.25%;">数量</li>
+                    <li style="width: 6%;">长(mm)</li>
+                    <li style="width: 5.25%;">宽(mm)</li>
+                    <li style="width: 6%;">高(mm)</li>
+                    <li style="width: 5.25%;">净重(g)</li>
+                    <li style="width: 6%;">毛重(g)</li>
+                    <li style="width: 5.25%;">售价</li>
+                    <li style="width: 5%;">URL</li>
+                    <li style="width: 5%;">客户</li>
+                    <li style="width: 5%;">销售员/群主</li>
+                    <li style="width: 5%;">类型</li>
+                    <li style="width: 7.5%;">状态</li>
+                </ul>
+            </div>
+            <div class="asj-order-body bott" ng-repeat="(index1,item) in datalist track by index1">
+                <div class="asj-order-title">
+                    <ul class="clearfix">
+                        <li class="li-date">{{item.createDate}}</li>
+                        <li class="li-num">Order Number：{{item.id}}</li>
+                    </ul>
+                </div>
+                <table class="asj-order-con bott" style="width: 100%;">
+                    <tr>
+                        <td class="idx br" style="width: 5%;">{{index1+1}}</td>
+                        <td class="li-pro-info br" style="width: 65%;">
+                            <table class="pro-info bott" width="100%" ng-repeat="(index2,itemP) in item.productList track by index2 ">
+                                <tr>
+                                    <td colspan="10" height="10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="li-img clearfix">
+                                        <div ng-mouseenter="itemP.isover = true;" ng-mouseleave="itemP.isover = false;">
+                                            <img class="small-img" ng-src="{{itemP.img | IMG_SIZE: 80}}">
+                                        </div>
+                                        <img class="big-img" ng-show="itemP.isover" ng-src="{{itemP.img | IMG_SIZE: 400}}" alt="">
+                                        <div ng-attr-title="{{itemP.name}}" class="merch-name">{{itemP.name}}</div>
+                                        <div class="merch-size">{{itemP.sku}}</div>
+                                    </td>
+                                    <td class="li-pro-price">${{itemP.purchasePrice}}</td>
+                                    <td class="li-pro-quan">{{itemP.totalNum}}</td>
+                                    <td class="weight2">{{itemP.length}}</td>
+                                    <td class="weight2">{{itemP.width}}</td>
+                                    <td class="weight2">{{itemP.height}}</td>
+                                    <td class="weight1">{{itemP.weight}}</td>
+                                    <td class="weight2">{{itemP.GRAMS}}</td>
+                                    <td ng-if="itemP.price" style="width: 5%;">${{itemP.price}}</td>
+                                    <td ng-if="!itemP.price" style="width: 5%;color: red;">Quoting</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" height="10"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="url br" style="width: 5%;">
+                            <a ng-href="{{item.supplierLink}}" target="_blank">链接</a>
+                        </td>
+                        <td style="width: 5%;">{{item.customerName}}</td>
+                        <td style="width: 5%;">{{item.ownerName ? item.ownerName : item.salesmanName}}</td>
+                        <td class="li-type br" style="width: 5%;">
+                            {{item.impStorageFlag == '' ? 'Wholesale' : 'Inventory'}}
+                        </td>
+                        <td class="li-opera br" style="width: 7%;" ng-show="ordStatus == '10'">
+                            <!--<a class="acct" ng-show="item.isEntering == '0' && item.status == '10'" ng-click="writeInOpe(item)">录入商品</a>-->
+                            <span style="color: green;display: block;" ng-show="item.sourceNum">{{item.sourceNum}}</span>
+                            <span style="color: green;display: block;" ng-show="item.sourceNum">已加入平台搜品</span>
+                            <span style="color: red;display: block;" ng-show="!item.sourceNum">加入平台搜品失败</span>
+                            <span style="color: red;display: block;" ng-show="item.isEntering == '2'">采购失败</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class="asj-order-total">
+                    {{item.orderNumber}} Units&nbsp;&nbsp;&nbsp;Amount: <span
+                        ng-if="(item.discountFromMoney * 1) > (item.orderMoney * 1)"
+                        style="text-decoration: line-through;">${{item.discountFromMoney}}</span>&nbsp;&nbsp;<span
+                        class="bigSize">${{item.orderMoney}}</span> <span ng-if="item.impStorageFlag == ''">(Shipping Included)</span>
+                </div>
+            </div>
+            <!-- 分页 -->
+            <div class="no-data" ng-show="totalNum == 0" style="text-align: center;">{{'100980' | translate}}。</div>
+            <div class="page-box" ng-show="totalNum > 0">
+                <div class="select-page-num">
+                    <select class="form-control" ng-model="pagesize" ng-change="pagechange(pagesize)"
+                            style="width: 65px;height: 31px;">
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>每页</span>
+                </div>
+                <div class="total-num">
+                    共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+                </div>
+                <div class="page-index">
+                    <div class="pagegroup">
+                        <a href="#">&lt;&lt;</a>
+                        <a href="#">&lt;</a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a class="current" href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">···</a>
+                        <a href="#">&gt;</a>
+                        <a href="#">&gt;&gt;</a>
+                    </div>
+                </div>
+                <div class="to-go">
+                    <span>跳转：</span>
+                    <input type="text" class="goyema form-control" placeholder="" ng-model="pagenum">
+                    <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

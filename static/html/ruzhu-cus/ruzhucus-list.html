@@ -1,0 +1,283 @@
+<style type="text/css">
+
+  /* 套餐试用弹窗里的样式 */
+  .openTryOut-tankuang {
+    width: 800px;
+    height: 400px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #_btnContainer{
+    position: absolute;
+    bottom: 0;
+    line-height: 40px;
+    background: #eee;
+    text-align: center;
+    width: 100%;
+  }
+  #_btnContainer >button{
+    width:100px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+  }
+  #_btnContainer >button:nth-child(1){
+    background: #fff;
+    color: black;
+    margin-right: 24px;
+  }
+  #_btnContainer >button:nth-child(2){
+    background: #FFb900;
+    color: #fff;
+  } 
+
+  ._openLine{
+    padding:0 24px;
+    line-height: 48px;
+
+  }
+  ._openLine>div{
+    width: 50%;
+  }
+
+  ._extendCanBtn{
+    background: #fff;
+    width: 68px;
+    margin-right: 12px;
+    line-height: 30px;
+    height: 30px;
+    border: 1px #eee solid;
+    border-radius: 4px;
+    margin-left: 12px;
+  }
+
+  ._extendConBtn{
+    background: #FFb900;
+    width: 68px;
+    margin-right: 12px;
+    line-height: 30px;
+    height: 30px;
+    color: #fff;
+    border: 1px #eee solid;
+    border-radius: 4px;
+  }
+
+</style>
+
+
+<div class="content ruzhu-wrap">
+    <div class="filter-box">
+      <input class="seach-inp" placeholder="请输入用户名/邮箱/供应商编号/公司名称" ng-keyup="keyUpFun($event)" ng-model="seachVal" style="width: 280px;"></input>
+      <span style="margin-left: 6px;">账号类型</span>
+      <select  ng-model="accountType" style="width: 80px;margin-left: 12px;height: 30px;">
+        <option value="">所有</option>
+        <option value="0">企业</option>
+        <option value="1">个体</option>
+      </select>
+      <button class="search" style="float: none;margin-left: 24px;" ng-click="searchInput()">查询</button>
+    </div>
+    <div class="table-box">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>账号类型</th>
+                <th>供应商编号</th>
+                <th>申请时间</th>
+                <th>审核时间</th>
+                <th>所在国家</th>
+                <th>默认发货仓</th>
+                <th>公司名称/姓名</th>
+                <th>用户名</th>
+                <th>当前套餐</th>
+                <th>邮箱</th>
+                <th>手机号</th>
+                <th>店铺名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in dataList">
+                <td>{{(resPageNum-1)*resPageSize+$index+1}}</td>
+                <td>
+                    <span ng-show="item.accountType==0">企业</span>
+                    <span ng-show="item.accountType==1">个体</span>
+                </td>
+                <td>{{item.supplierSn}}<a style="display: block;background: #f99429; width: 50px; border-radius: 4px; color: #fff; margin-top: 3px;" href="javascript:void(0);" ng-click="goToCj(item)">To Supplier</a></td>
+                <td>{{item.applyAt | date:'yyyy-MM-dd hh:mm'}}</td>
+                <td>{{item.auditAt | date:'yyyy-MM-dd hh:mm'}}</td>
+                <td>{{item.countryName}}</td>
+                <td>{{item.areaName}}</td>
+                <td>
+                    <span ng-show="item.accountType==0">{{item.companyName}}</span>
+                    <span ng-show="item.accountType==1">{{item.legalPerson}}</span>
+                </td>
+                <td>{{item.userName}}</td>
+                <td>{{item.planName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.legalPhone}}</td>
+                <td>{{item.shopName}}</td>
+                <td>
+                  <div>
+                    <button ng-click="detailFun(item)" class="link-tip">详情</button>
+                    <button ng-click="tryOutPackage(item)" class="link-tip" ng-show="item.trialType==1">套餐试用</button>
+                    <button ng-click="stopTryOut(item)" class="link-tip" ng-show="item.trialType==0">终止试用</button>
+                  </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-show="totalNum<1" class="no-data-box">暂无数据</div>
+        <!--分页-->
+        <div class="page-box" ng-show="totalNum>0&&dataList.length>0">
+            <div class="total-num">
+                <select class="selpage" ng-model="pageSize" ng-change="chanPageSize()">
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="total-num">
+                共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+            </div>
+            <div class="page-index">
+                <div class="pagegroup1"></div>
+            </div>
+            <input class="page-input" ng-model="pageNum"></input>
+            <span style="cursor: pointer;" ng-click="gopageFun()" class="jump-btn">go</span>
+        </div>
+    </div>
+
+  <!-- 开启试用套餐的弹框 -->
+  <div ng-show="showOpenTryOut" class="erp-common-tan-v2-wrap">
+    <div class="openTryOut-tankuang">
+      <div style="line-height: 40px;background: #eee;text-align: center;">
+        开启试用套餐
+      </div>
+      <div style="display: flex;" class="_openLine">
+        <div>
+          <span>账号类型:</span>
+          <span ng-show="selectedUser.accountType==0">企业</span>
+          <span ng-show="selectedUser.accountType==1">个体</span>
+        </div>
+        <div>
+          <span>供应商编号:</span>
+          <span>{{selectedUser.supplierSn}}</span>
+        </div>
+      </div>
+
+      <div style="display: flex;" class="_openLine">
+        <div>
+          <span></span>
+          <span ng-show="selectedUser.accountType==0">公司名称:{{selectedUser.companyName}}</span>
+          <span ng-show="selectedUser.accountType==1">姓名:{{selectedUser.legalPerson}}</span>
+        </div>
+        <div>
+          <span>用户名:</span>
+          <span>{{selectedUser.userName}}</span>
+        </div>
+      </div>
+
+      <div class="_openLine">
+        <span>套餐名称:</span>
+        <span>{{selectedUser.planName}}</span>
+      </div>
+
+      <div class="_openLine">
+        <span>试用天数:</span>
+        <input placeholder="请输入试用天数" ng-model="tryOutDay" type="number"></input>
+        <span>天</span>
+      </div>
+      <div class="_openLine">
+        <span>试用套餐选择:</span>
+        <select ng-model="selectedTryPack" ng-options='tryOut.id as tryOut.planName for tryOut in tryOutList' style="width: 210px">
+        </select>
+      </div>
+
+      <div id="_btnContainer">
+        <button ng-click="cancelOpen()">取消</button>
+        <button ng-click="confirmOpen()">开启</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 终止试用套餐的弹框 -->
+  <div ng-show="showStopTryOut" class="erp-common-tan-v2-wrap">
+    <div class="openTryOut-tankuang">
+      <div style="line-height: 40px;background: #eee;text-align: center;">
+        终止试用套餐
+      </div>
+      <div style="display: flex;" class="_openLine">
+        <div>
+          <span>账号类型:</span>
+          <span ng-show="selectedUser.accountType==0">企业</span>
+          <span ng-show="selectedUser.accountType==1">个体</span>
+        </div>
+        <div>
+          <span>供应商编号:</span>
+          <span>{{selectedUser.supplierSn}}</span>
+        </div>
+      </div>
+
+      <div style="display: flex;" class="_openLine">
+        <div>
+          <span></span>
+          <span ng-show="selectedUser.accountType==0">公司名称:{{selectedUser.companyName}}</span>
+          <span ng-show="selectedUser.accountType==1">姓名:{{selectedUser.legalPerson}}</span>
+        </div>
+        <div>
+          <span>用户名:</span>
+          <span>{{selectedUser.userName}}</span>
+        </div>
+      </div>
+
+      <div class="_openLine">
+        <span>套餐名称:</span>
+        <span>{{selectedUser.planName}}</span>
+      </div>
+
+      <div class="_openLine">
+        <span>试用套餐到期:</span>
+        <span>{{selectedUser.trialEndTime}}</span>
+        <span style="color: coral;cursor: pointer;" ng-click="showExtend = true" ng-show="!showExtend">延长试用</span>
+
+        <span ng-show="showExtend" style="margin-left: 48px;">
+          <span>延长</span>
+          <input ng-model="extendDay" type="number" style="width: 60px;"></input>
+          <span>天</span>
+          <button 
+            ng-click="cancelExtend()" 
+            class="_extendCanBtn"
+          >取消</button>
+          <button 
+            ng-click="conformExtend()" 
+            class="_extendConBtn"
+          >确定</button>
+        </span>
+
+      </div>
+      <div class="_openLine">
+        <span style="color: coral">试用套餐:</span>
+        <span>{{selectedUser.planName}}</span>
+      </div>
+
+      <div id="_btnContainer">
+        <button ng-click="cancelStop()">取消</button>
+        <button ng-click="confirmStop()">终止</button>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

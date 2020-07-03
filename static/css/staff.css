@@ -1,0 +1,122 @@
+.daywoker-main{
+    margin-top: 50px;
+}
+.daywoker-title{
+    text-align: center;
+    font-size: 32px;
+    color: #40a9ff;
+    padding-bottom: 30px;
+}
+.daywoker-btn-box{
+    padding: 10px 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.daywoker-btn{
+    color: #fff;
+    background: #40a9ff;
+    border-color: #40a9ff;
+    line-height: 1.5715;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    touch-action: manipulation;
+    border-radius: 2px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.daywoker-content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.info-list{
+    margin-left: 15px;
+    color: rgba(0,0,0,.85);
+    width: 400px;
+}
+.info-item{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+.info-item-title{
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+    justify-content: flex-end;
+    vertical-align: middle;
+    flex: 0 0 33.33333333%;
+}
+.info-item-title::after{
+    content: ':';
+    position: relative;
+    top: -.5px;
+    margin: 0 8px 0 2px;
+}
+.info-item-input,
+.info-item-textarea
+{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-variant: tabular-nums;
+    list-style: none;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+.opera-box .info-item-textarea{
+    margin-top:15px;
+}
+.daywoker-select {
+    -webkit-appearance: none;
+    border: none;
+    font-variant: tabular-nums;
+    margin-right: 5px;
+}
+.daywoker-select-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 30px;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    line-height: 1.5715;
+    margin-right: 15px;
+    height: 30px;
+    padding: 0 5px;
+    border-radius: 2px;
+    position: relative;
+}
+.daywoker-select-box::after{
+    content: '▼';
+}
+input.daywoker-input{
+    border: 1px solid #d9d9d9;
+    height: 30px;
+}

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重量待确认</title>
+    <link rel="stylesheet" type="text/css" href="erp_otweb/css/erp-wa-KeHu-style.css"/>
+    <style>
+        body {
+            position: relative;
+        }
+
+        .clearfix:after {
+            content: "";
+            visibility: hidden;
+            display: block;
+            clear: both;
+            height: 0;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+        .asj-common-tanwrap {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            z-index: 100003;
+        }
+
+        .tan-add-ware {
+            width: 360px;
+            height: 420px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 4px;
+        }
+        .asj-common-tan h3 {
+            font-size: 14px;
+            font-family: PingFangSC-Medium;
+            color: rgba(102, 102, 102, 1);
+            line-height: 20px;
+            margin: 10px 0;
+            text-align: left;
+        }
+        .asj-common-tan span{
+            font-size: 14px;
+            font-family: PingFangSC-Medium;
+            color: rgba(102, 102, 102, 1);
+        }
+        .asj-common-tan .weight input{
+            width: 190px;
+            height: 28px;
+            padding: 0 8px;
+        }
+        .tan-add-ware ul {
+            min-height: 80px;
+        }
+        .tan-add-ware li {
+            display: inline-block;
+            font-size: 14px;
+            font-family: PingFangSC-Medium;
+            color: rgba(153, 153, 153, 1);
+            line-height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .asj-common-tan .tan-btns {
+            height: 30px;
+            text-align: right;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            bottom: 15px;
+            left: 0;
+        }
+        .asj-common-tan .tan-btns .tan-btn1 {
+            width: 80px;
+            height: 30px;
+            background: rgba(249, 174, 8, 1);
+            border-radius: 2px;
+            color: #fff;
+        }
+        .asj-common-tan .tan-btns .tan-btn0 {
+            width: 80px;
+            height: 30px;
+            border-radius: 2px;
+            border: 1px solid rgba(247, 157, 45, 1);
+            margin: 0 20px;
+            color: #F9AE08;
+            background-color: #fff;
+        }
+        .table-con-box .asj-top-head li{
+            float: left;
+            height: 40px;
+            background: rgba(252, 244, 217, 1);
+            line-height: 40px;
+            padding: initial;
+            font-size: 14px;
+            color: rgba(176, 86, 9, 1);
+            text-align: center;
+        }
+        .table-con-box .asj-top-head li:nth-child(1){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(2){
+            width: 20%;
+        }
+        .table-con-box .asj-top-head li:nth-child(3){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(4){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(5){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(6){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(7){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(8){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(9){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(10){
+            width: 10%;
+        }
+        .table-con-box .asj-top-head li:nth-child(11){
+            width: 10%;
+        }
+        .table-con-box .asj-top-head li:nth-child(12){
+            width: 10%;
+        }
+        .table-con-box .asj-top-head li:nth-child(13){
+            width: 5%;
+        }
+        .table-con-box .asj-top-head li:nth-child(14){
+            width: 5%;
+        }
+        .asj-order-title ul{
+            margin-top: 10px;
+            height: 40px;
+            line-height: 40px;
+            background: #f3f3f3;
+        }
+        .asj-order-title ul li{
+            float: left;
+            margin-right: 20px;
+            padding-left: 10px;
+            font-size: 12px;
+            color: #333333;
+        }
+        .li-pro-info{
+            width: 65%;
+        }
+        .li-pro-info td{
+            font-size: 12px;
+            color: #333333;
+            border-right: none;
+        }
+        .br{
+            border-right: 1px solid #e1e1e1;
+        }
+        .bott{
+            border-bottom: 1px solid #e1e1e1;
+        }
+        .asj-order-con td{
+            text-align: center;
+            font-size: 12px;
+            color: #333333;
+        }
+        .asj-order-con .idx{
+            width: 5%;
+            border-left: 1px solid #e1e1e1;
+        }
+        .asj-order-con .url a{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width: 100%;
+            white-space: normal;
+            word-break: break-all;
+            word-wrap: break-word;
+            color: #337ab7;
+        }
+        .pro-info .li-img {
+	        width: 19%;
+	        position: relative;
+        }
+        .pro-info .li-img .small-img{
+            width: 80px;
+            height: 80px;
+            /*height: 70px;*/
+            float: left;
+            margin-left: initial;
+            margin-right: 10px;
+        }
+        .pro-info .li-img .big-img{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            left: 80px;
+            top: 0;
+            z-index: 10;
+        }
+        .pro-info .li-img .merch-name{
+            width: 50%;
+            float: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+        }
+        .pro-info .li-img .merch-size{
+            float: left;
+            color: #7b7b7b;
+            font-size: 12px;
+            line-height: 18px;
+            margin-top: 3px;
+            width: 100%;
+        }
+      /*  .pro-info .li-pro-name{
+            width: 10%;
+        }*/
+        .pro-info .li-pro-price{
+            width: 5%;
+        }
+        .pro-info .li-pro-quan {
+	        width: 4%;
+        }
+        .pro-info .weight1 {
+	        width: 4%;
+        }
+        .pro-info .weight2 {
+	        width: 4%;
+        }
+        .li-status li{
+            font-size: 12px;
+            color: #333333;
+        }
+        .pro-info:nth-last-child(1){
+            border-bottom: none;
+        }
+        .li-opera a{
+            padding: 2px 4px;
+        }
+        .asj-order-total{
+            text-align: right;
+            font-size: 12px;
+            color: #333333;
+            border-left: 1px solid #e1e1e1;
+            border-right: 1px solid #e1e1e1;
+        }
+        .acct {
+	        color: rgba(176, 86, 9, 1);
+	        display: block;
+	        margin: 5px 0;
+        }
+        .tab{
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        .tab li{
+            display: inline-block;
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+            color: #000;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            /*margin-right: 10px;*/
+	        cursor: pointer;
+        }
+
+        .table-con-box {
+	        margin-top: 0;
+	        overflow-x: auto;
+        }
+
+        .tabAct {
+	        background-color: rgba(252, 244, 217, 1) !important;
+	        color: rgba(176, 86, 9, 1) !important;
+        }
+
+        .table-box {
+	        width: 1600px;
+        }
+
+        .pro-info {
+	        margin: 0;
+        }
+
+        .search-box {
+	        display: flex;
+	        align-items: center;
+        }
+
+        .search-box select {
+	        height: 30px !important;
+	        margin-left: 5px;
+        }
+
+        .refus-reason {
+	        width: 100%;
+	        height: 100%;
+	        border: 1px solid #9c9c9c;
+	        border-radius: 4px;
+	        padding: 8px;
+	        font-size: 14px;
+        }
+
+        .pro-info span, .table-box tbody td {
+	        word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="ea-content">
+    <!-- right con -->
+    <div class="right-bar-wrap ea-right-content">
+        <div class="bg-geduan"></div>
+        <div class="right-bar" style="min-height: 850px;">
+            <div class="ea-right-search" style="margin-bottom: 15px;">
+                <div class="input-group search-box">
+                  <input type="text" class="form-control top-search-inp" placeholder="输入订单号搜索"
+                         ng-model="searchinfo"
+                         ng-keyup="enterSearch($event)">
+                  <a role="button" class="btn btn-default top-search-btn" type="button"
+                     ng-click="searchcustomer()">{{'100025' | translate}}</a>
+	                <span style="margin-left: 15px;">订单状态:</span>
+	                <select ng-model="type" ng-change="handleChangeSearch()">
+		                <option value="0">全部</option>
+		                <option value="1">正常</option>
+		                <option value="2">拒绝</option>
+	                </select>
+                </div>
+            </div>
+            <!-- right list -->
+            <div class="table-con-box">
+	            <div class="table-box">
+		            <div class="asj-top-head">
+                        <ul class="clearfix">
+                            <li style="width: 2%;">序号</li>
+                            <li style="width: 19%;">商品信息</li>
+                            <li style="width: 5%;">采购价格</li>
+                            <li style="width: 4%;">数量</li>
+                            <li style="width: 4%;">长(mm)</li>
+                            <li style="width: 4%;">宽(mm)</li>
+                            <li style="width: 4%;">高(mm)</li>
+                            <li style="width: 4%;">净重(g)</li>
+                            <li style="width: 4%;">毛重(g)</li>
+                            <li style="width: 5%;">设置属性</li>
+                            <li style="width: 5%;">售价</li>
+                            <li style="width: 11%;">1688/Taobao URL</li>
+                            <li style="width: 5%;">客户</li>
+                            <li style="width: 5%;">销售员/群主</li>
+                            <li style="width: 5%;">类型</li>
+	                          <li style="width: 5%;">状态</li>
+	                          <li style="width: 6%;">拒绝原因</li>
+	                          <li style="width: 3%;">操作</li>
+                        </ul>
+                    </div>
+                <div class="asj-order-body bott" ng-repeat="(index1,item) in datalist track by index1">
+                        <div class="asj-order-title">
+                            <ul class="clearfix">
+                                <li class="li-date">{{item.createDate}}</li>
+                                <li class="li-num">Order Number：{{item.id}}</li>
+                            </ul>
+                        </div>
+                        <table class="asj-order-con bott" style="width: 100%;">
+                            <tr>
+                                <td class="idx br" style="width: 2%;">{{index1+1}}</td>
+                                <td class="li-pro-info br" style="width: 58%;">
+                                    <table class="pro-info bott" ng-repeat="(index2,itemP) in item.productList track by index2 ">
+                                        <tr>
+                                            <td colspan="11" height="11"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="li-img clearfix">
+                                                <div ng-mouseenter="itemP.isover = true;" ng-mouseleave="itemP.isover = false;">
+                                                    <img class="small-img" ng-src="{{itemP.img | IMG_SIZE: 80}}">
+                                                </div>
+                                                <img class="big-img" ng-show="itemP.isover" ng-src="{{itemP.img | IMG_SIZE: 400}}" alt="">
+                                                <div ng-attr-title="{{itemP.name}}" class="merch-name">{{itemP.name}}</div>
+                                                <div class="merch-size">{{itemP.sku}}</div>
+                                            </td>
+                                            <td class="li-pro-price">${{itemP.purchasePrice}}</td>
+                                            <td class="li-pro-quan">{{itemP.totalNum}}</td>
+                                            <td class="weight2">{{itemP.length}}</td>
+                                            <td class="weight2">{{itemP.width}}</td>
+                                            <td class="weight2">{{itemP.height}}</td>
+                                            <td class="weight1">{{itemP.weight}}</td>
+                                            <td class="weight2">{{itemP.GRAMS}}</td>
+                                            <td style="width: 5%;">
+                                                <a ng-show="item.status == '111'" class="acct" ng-click="upset(itemP,item.id)">设置</a>
+                                                <span ng-show="item.status != '111'" style="color: #ccc;margin-right: initial;" class="acct">已设置</span>
+                                            </td>
+                                            <td style="width: 5.5%;">
+	                                            <span ng-if="itemP.price">${{itemP.price}}</span>
+	                                            <span ng-if="!itemP.price" style="width: 5%;color: red;">Quoting</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="11" height="11"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="url br" style="width: 10%;">
+                                    <a ng-href="{{item.supplierLink}}" target="_blank">{{item.supplierLink}}</a>
+                                </td>
+                                <td style="width: 5%;">{{item.customerName}}</td>
+                                <td style="width: 5%;">{{item.salesmanName + '/' + item.ownerName}}</td>
+                                <td class="li-type br" style="width: 5%;">
+                                    {{item.impStorageFlag == '' ? 'Wholesale' : 'Inventory'}}
+                                </td>
+	                              <td style="width: 5%;">{{item.status === '20' ? '拒绝' : '正常'}}</td>
+	                              <td style="width: 6%;">
+		                              <span style="word-break: break-all;">{{item.refuseReason}}</span>
+	                              </td>
+	                              <td style="width: 3%;">
+		                              <a class="acct" ng-click="handleRefuse(item)">拒绝</a>
+	                              </td>
+                            </tr>
+                        </table>
+                        <div class="asj-order-total">
+                            {{item.orderNumber}} Units&nbsp;&nbsp;&nbsp;Amount: <span
+	                        ng-if="(item.discountFromMoney * 1) > (item.orderMoney * 1)"
+	                        style="text-decoration: line-through;">${{item.discountFromMoney}}</span>&nbsp;&nbsp;<span
+	                        class="bigSize">${{item.orderMoney}}</span> <span ng-if="item.impStorageFlag == ''">(Shipping Included)</span>
+                        </div>
+                    </div>
+	            </div>
+	            <!-- 分页 -->
+              <div class="no-data" ng-show="totalNum == 0" style="text-align: center;">{{'100980' | translate}}。</div>
+              <div class="page-box" ng-show="totalNum > 0">
+                  <div class="select-page-num">
+                      <select class="form-control" ng-model="pagesize" ng-change="pagechange(pagesize)"
+                              style="width: 65px;height: 31px;">
+                          <option value="20">20</option>
+                          <option value="30">30</option>
+                          <option value="50">50</option>
+                      </select>
+                      <span>每页</span>
+                  </div>
+                  <div class="total-num">
+                      共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+                  </div>
+                  <div class="page-index">
+                      <div class="pagegroup">
+                          <a href="#">&lt;&lt;</a>
+                          <a href="#">&lt;</a>
+                          <a href="#">1</a>
+                          <a href="#">2</a>
+                          <a class="current" href="#">3</a>
+                          <a href="#">4</a>
+                          <a href="#">5</a>
+                          <a href="#">6</a>
+                          <a href="#">···</a>
+                          <a href="#">&gt;</a>
+                          <a href="#">&gt;&gt;</a>
+                      </div>
+                  </div>
+                  <div class="to-go">
+                      <span>跳转：</span>
+                      <input type="text" class="goyema form-control" placeholder="" ng-model="pagenum">
+                      <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="asj-common-tanwrap" ng-show="upSet">
+    <div class="asj-common-tan tan-add-ware">
+        <div class="weight">
+            <div>
+                <span>长(mm)：<input ng-model="length" type="number"></span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span>宽(mm)：<input ng-model="width" type="number"></span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span>高(mm)：<input ng-model="height" type="number"></span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span>*净重(g)：<input ng-model="weight" type="number"></span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span>*毛重(g)：<input ng-model="GRAMS" type="number"></span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span>*售价($)：<input ng-model="price" type="number"></span>
+            </div>
+        </div>
+        <div style="margin-top: 10px;">
+            <span>*产品属性:</span>
+            <ul style="display: block;">
+                <li ng-repeat="item in attrlist" ng-click="checkbg(item)">
+                    <img class="c-mu-chekbox" ng-show="!item.flag" src="static/image/order-img/multiple1.png">
+                    <img class="c-mu-chekbox" ng-show="item.flag" src="static/image/order-img/multiple2.png">
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="tan-btns">
+            <a class="tan-btn1" ng-click="upSetclick()">确认</a>
+            <a class="tan-btn0" ng-click="upSet = false;">取消</a>
+        </div>
+    </div>
+</div>
+
+<div class="asj-common-tanwrap" ng-show="isRefuseFlag">
+    <div class="asj-common-tan tan-add-ware">
+				<textarea placeholder="请输入拒绝发货理由，请输入英文，字符限制256" class="refus-reason" ng-model="refusReason"></textarea>
+        <div class="tan-btns">
+            <a class="tan-btn1" ng-click="handleRefuseConfirm()">确认</a>
+            <a class="tan-btn0" ng-click="isRefuseFlag = false;">取消</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

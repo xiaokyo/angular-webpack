@@ -1,0 +1,103 @@
+<div id="customsName-page" class="merchandise-box">
+	<div class="right-bar-wrap">
+    <div class="tab">
+			<a href="manage.html#/merchandise/trademark">侵权查询</a>
+			<a class="active" href="manage.html#/merchandise/customsName">报关品名</a>
+		</div>
+		<div class="content-box">
+			<div class="filter">
+				<input type="text" ng-model="searchVal">
+				<button ng-click="handleSearch()"></button>
+        <div class="tracon-top">
+          <div ng-click="handleAdd()" class="tratop-btn tratop-btn1">
+              <img src="static/image/public-img/w10-plus.png">
+              <span>新增</span>
+          </div>
+          <div ng-click="handleEdit()" class="tratop-btn tratop-btn1">
+              <img src="static/image/public-img/change-img.png">
+              <span>修改</span>
+          </div>
+          <div ng-click="handleDelete()" class="tratop-btn tratop-btn2">
+              <img src="static/image/public-img/w10-close.png">
+              <span>删除</span>
+          </div>
+        </div>
+			</div>
+			<div class="data-list">
+				<div class="zh-list list-box">
+					<p class="title">中文品名</p>
+				  <ul class="brand-list" ng-show="zh_brandList.length>0">
+            <li ng-repeat="item in zh_brandList">
+              <div class="brandlist-left">
+                <p class="check-p">
+                  <input type="checkbox" ng-model="item.checked" ng-click="handleSelect(item,$index,zh_brandList)">
+                  <label for=""></label>
+                </p>
+                <span ng-if="$index+1<10">{{'00'+($index+1)}}</span>
+                <span ng-if="$index+1>9&&$index+1<100">{{'0'+($index+1)}}</span>
+                <span ng-if="$index+1>99">{{$index+1}}</span>
+              </div>
+              <div class="brandlist-right">
+                <p>{{item.sensitiveWord}}</p>
+              </div>
+            </li>
+          </ul>
+					<div class="no-data" ng-show="zh_brandList.length === 0">
+						暂无数据。
+					</div>
+				</div>
+				<div class="en-list list-box ">
+					<p class="title">英文品名</p>
+				  <ul class="brand-list" ng-show="en_brandList.length>0">
+            <li ng-repeat="item in en_brandList">
+              <div class="brandlist-left">
+                <p class="check-p">
+                  <input type="checkbox" ng-model="item.checked" ng-click="handleSelect(item,$index,en_brandList)">
+                  <label for=""></label>
+                </p>
+                <span ng-if="$index+1<10">{{'00'+($index+1)}}</span>
+                <span ng-if="$index+1>9&&$index+1<100">{{'0'+($index+1)}}</span>
+                <span ng-if="$index+1>99">{{$index+1}}</span>
+              </div>
+              <div class="brandlist-right">
+                <p>{{item.sensitiveWord}}</p>
+              </div>
+            </li>
+          </ul>
+					<div class="no-data" ng-show="en_brandList.length === 0">
+						暂无数据。
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 新增/编辑 -->
+  <div class="tademark-tkwrap" ng-show="isEditOrAdd">
+        <div class="w360-h252con">
+            <div class="tmarkform-group">
+                <select ng-model="selBrandVal">
+                    <option value="1">中文</option>
+                    <option value="2">英文</option>
+                </select>
+                <input ng-model="modefyName" placeholder="请输入品名"/>
+            </div>
+            <div class="right-btns">
+                <button ng-click="editOrAddConfirm()" class="confirm-btn">确认</button>
+                <button ng-click="isEditOrAdd=false" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+	<!-- 删除 -->
+  <div class="tademark-tkwrap" ng-show="isDelete">
+        <div class="w360-h252con w360-h200con">
+            <div class="tmarkform-tip">
+                <img src="static/image/public-img/icon-qustion.png">
+                <span>确认要删除报关品名吗？</span>
+            </div>
+            <div class="right-btns">
+                <button ng-click="deleteConfirm()" class="confirm-btn">确认</button>
+                <button ng-click="isDelete=false" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1108 @@
+<style type="text/css">
+	.zzc{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.4);
+		z-index: 99999;
+		/*display: none;*/
+	}
+	.zzc-product{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.4);
+		z-index: 99999;
+		/*display: none;*/
+	}
+	.zzcWrap{
+		width: 620px;
+		background: #fff;
+		border-radius: 5px;
+		margin: 100px auto;
+		padding: 20px;
+	}
+	.dz-img{
+		position: relative;
+		cursor: pointer;
+	}
+	.ea-list-table .bigimg{
+		background: #fff;
+		border: 1px solid #e6e6e6;
+		width: 200px;
+		height: 200px;
+		/*display: block;*/
+	}
+	.dz-img:hover .bigimg{
+		display: block;
+	}
+	.closeBtn{
+		padding: 5px 15px;
+		color: #fff;
+		border-radius: 5px;
+		background: orange;
+	}
+	.spys-bacolor{
+		display: inline-block;
+		width: 60px;
+		height: 20px;
+	}
+	.link-active{
+        color: #08ACE9;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+<!--个性化订单弹窗-->
+<div class="zzc" ng-if="gxhOrdFlag">
+	<div class="zzcWrap" style="max-height: 600px;overflow-y:auto;">
+		<h2 style="text-align: center;font-size: 18px;">个性化信息</h2>
+		<div class="zzc-con" ng-if="type0Arr" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户的定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">定制区域图</th>
+					<th style="width: 100px;">展示图</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody ng-repeat="item0 in type0Arr">
+					<tr ng-if="item0.customMessgae.zone.front">
+						<td>CJ前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" target="_blank" href="{{item0.customMessgae.zone.front.editimgurl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="item0.customMessgae.zone.back">
+						<td>CJ后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" target="_blank" href="{{item0.customMessgae.zone.front.editimgurl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+
+					<tr ng-if="item0.customDesign.front">
+						<td>客户前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customDesign.front.imgUrl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customDesign.front.imgUrl}}" alt=""/>
+							</div>
+						</td>
+						<td>--</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="item0.customDesign.front.text">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{item0.customDesign.front.text}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.front.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{item0.customDesign.front.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.front.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{item0.customDesign.front.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.front.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{item0.customDesign.front.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" target="_blank" href="{{item0.customDesign.front.imgUrl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="item0.customDesign.back">
+						<td>客户后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item0.customDesign.back.imgUrl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item0.customDesign.back.imgUrl}}" alt=""/>
+							</div>
+						</td>
+						<td>--</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="item0.customDesign.back.text">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{item0.customDesign.back.text}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.back.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{item0.customDesign.back.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.back.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{item0.customDesign.back.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item0.customDesign.back.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{item0.customDesign.back.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" target="_blank" href="{{item0.customDesign.back.imgUrl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="zzc-con" ng-if="type1Arr" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户的客户定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">定制区域图</th>
+					<th style="width: 100px;">展示图</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody ng-repeat="item1 in type1Arr">
+					<tr ng-if="item1.customMessgae.zone.front">
+						<td>CJ前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" target="_blank" href="{{item1.customMessgae.zone.front.editimgurl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="item1.customMessgae.zone.back">
+						<td>CJ后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" target="_blank" href="{{item1.customMessgae.zone.front.editimgurl}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+
+					<tr ng-if="item1.customPodDesign.cj_pod_zone_front">
+						<td>客户的客户前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customPodDesign.cj_pod_zone_front.design_sketch}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customPodDesign.cj_pod_zone_front.design_sketch}}" alt=""/>
+							</div>
+						</td>
+						<td>--</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_color">
+								<span class="pod-text-tit">定制商品颜色:</span>
+								<span>{{item1.customPodDesign.cj_pod_color}}</span>
+								<span class="spys-bacolor" ng-style="{'background-color': item1.customPodDesign.cj_pod_color.indexOf('#')!=-1?item1.customPodDesign.cj_pod_color:'#'+item1.customPodDesign.cj_pod_color}"></span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_front.podtext">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_front.podtext}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_front.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_front.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_front.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_front.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_front.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_front.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" target="_blank" href="{{item1.customPodDesign.cj_pod_zone_front.design_sketch}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="item1.customPodDesign.cj_pod_zone_back">
+						<td>客户的客户后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item1.customPodDesign.cj_pod_zone_back.design_sketch}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item1.customPodDesign.cj_pod_zone_back.design_sketch}}" alt=""/>
+							</div>
+						</td>
+						<td>--</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_color">
+								<span class="pod-text-tit">定制商品颜色:</span>
+								<span>{{item1.customPodDesign.cj_pod_color}}</span>
+								<span class="spys-bacolor" ng-style="{'background-color': item1.customPodDesign.cj_pod_color.indexOf('#')!=-1?item1.customPodDesign.cj_pod_color:'#'+item1.customPodDesign.cj_pod_color}"></span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_back.podtext">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_back.podtext}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_back.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_back.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_back.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_back.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="item1.customPodDesign.cj_pod_zone_back.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{item1.customPodDesign.cj_pod_zone_back.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" target="_blank" href="{{item1.customPodDesign.cj_pod_zone_back.design_sketch}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<tbody ng-repeat="item1 in type1Arr" ng-if="item1.thirdPardMessage">
+					<tr ng-if="item1.thirdPardMessage" ng-repeat="item in item1.thirdPardMessage">
+						<td ng-repeat="(key,val) in item">
+                            <a download="" target="_blank" href="{{val}}" style="font-size: 13px;float: left">下载图片</a>
+                            {{key}}:
+							<span ng-if="val.indexOf('https')==-1">{{val}}</span>
+							<div ng-if="val.indexOf('https')!=-1" class="dz-img" style="display: inline-block;">
+								<div style="text-align: center">
+									<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+										<img width="80" height="80" ng-src="{{val}}" alt=""/>
+									</div>
+								</div>
+
+								<div class="bigimg" style="left: -100px;">
+									<img width="200" height="200" ng-src="{{val}}" alt=""/>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div class="zzc-con" ng-if="type2Arr" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户的客户第三方定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th style="width: 100px;">示例图片</th>
+					<th>留言备注</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="dz in type2Arr">
+					<td style="width: 100px;" class="dz-img">
+						<div style="text-align: center">
+							<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+								<img width="80" height="80" ng-src="{{dz.image}}" alt=""/>
+							</div>
+						</div>
+
+						<div class="bigimg">
+							<img width="200" height="200" ng-src="{{dz.image}}" alt=""/>
+						</div>
+					</td>
+					<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{dz.text?dz.text:dz.thirdPardMessage}}</span></td>
+					<td>
+						<a download="" href="{{dz.image}}" target="_blank" style="font-size: 13px;">下载图片</a>
+						<!-- <a ng-click="downLoadImg(dz.image)" style="font-size: 13px;">下载图片</a> -->
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="zzc-con" ng-if="typeCommon" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户的客户第三方定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<!-- <th style="width: 100%;" colspan="{{orderColspanNum}}">{{typeCommon[maxIndex].cj_custom}}</th> -->
+					<th style="width: 100%;" colspan="2">{{ordTableTit}}</th>
+				</tr>
+				</thead>
+				<tbody ng-repeat="item in typeCommon">
+					<!-- <tr>
+						<th ng-repeat="(x,y) in properties.cj_content[0]">{{x}}</th>
+					</tr> -->
+					<tr ng-repeat="(x,y) in item">
+						<td>
+							{{x}}
+						</td>
+						<td>
+							<div style="text-align: center" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{y}}" alt=""/>
+									<a download="" target="_blank" href="{{y}}" style="font-size: 13px;float: left">下载图片</a>
+								</div>
+							</div>
+							<div class="bigimg" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<img width="200" height="200" ng-src="{{y}}" alt=""/>
+							</div>
+							<div ng-show="!(x!='cj_count' && y.indexOf('http')!=-1)">
+								<span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{y}}</span>
+							</div>
+						</td>
+					</tr>
+					
+				<!-- <tr>
+					<th ng-repeat="(x,y) in properties.cj_content[0]">{{x}}</th>
+				</tr>
+				<tr ng-repeat="item in properties.cj_content">
+					<td style="width: 100px;" class="{{(x!='cj_count' && y.indexOf('http')!=-1)?'dz-img':'dz-beizhu'}}" ng-repeat="(x,y) in item">
+						<div style="text-align: center" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+							<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+								<img width="80" height="80" ng-src="{{y}}" alt=""/>
+								<a download="" target="_blank" href="{{y}}" style="font-size: 13px;float: left">下载图片</a>
+							</div>
+						</div>
+						<div class="bigimg" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+							<img width="200" height="200" ng-src="{{y}}" alt=""/>
+						</div>
+						<div ng-show="!(x!='cj_count' && y.indexOf('http')!=-1)">
+							<span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{y}}</span>
+						</div>
+					</td>
+				</tr> -->
+				</tbody>
+			</table>
+		</div>
+
+
+		<!-- type 3,4 -->
+		<div class="zzc-con" ng-if="newCusDesignArr.length>0" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<!-- <h2 style="text-align: center;font-size: 18px;">客户定制个性化信息</h2> -->
+			<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+				<p style="text-align: center;">定制信息</p>
+				<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+					<thead>
+					<tr>
+						<th>定制位置</th>
+						<th style="width: 100px;">效果图</th>
+						<th>类型</th>
+						<th style="width: 100px;">下载图片</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat = "item in newCusDesignArr track by $index">
+							<td>{{item.areaName}}</td>
+							<td style="width: 100px;" class="dz-img">
+								<div style="text-align: center">
+									<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+										<img width="80" height="80" ng-src="{{item.img}}" alt=""/>
+									</div>
+								</div>
+	
+								<div class="bigimg">
+									<img width="200" height="200" ng-src="{{item.img}}" alt=""/>
+								</div>
+							</td>
+							<td class="dz-beizhu">
+								<p class="pod-text-p">
+									<span ng-click="tuCengFun(item.layer)" ng-if="item.img" class="link-active">{{item.type}}</span>
+									<span ng-if="!item.img">{{item.type}}</span>
+								</p>
+								<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{properties.customDesign.front.text}}</span> -->
+							</td>
+							<td><a download="" href="{{item.img}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- <div class="" style="text-align: center;margin-top: 15px;">
+				<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+			</div> -->
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+</div>
+<!--个性化商品弹窗-->
+<div class="zzc-product" ng-if="gxhProductFlag">
+	<div class="zzcWrap" ng-if="properties.cj_custom" style="max-height: 600px;overflow-y: auto;">
+		<h2 style="text-align: center;font-size: 18px;">客户的客户第三方定制个性化信息【{{sku}}】</h2>
+		<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<!-- <thead>
+				<tr>
+					<th style="width: 100%;" colspan="{{colspanNum}}">{{properties.cj_custom}}</th>
+				</tr>
+				<tr>
+					<th ng-repeat="(x,y) in properties.cj_content[0]">{{x}}</th>
+				</tr>
+				</thead> -->
+				<!-- <tbody>
+				<tr ng-repeat="item in properties.cj_content">
+						<td style="width: 100px;" class="{{(x!='cj_count' && y.indexOf('http')!=-1)?'dz-img':'dz-beizhu'}}" ng-repeat="(x,y) in item">
+							<div style="text-align: center" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{y}}" alt=""/>
+									<a download="" target="_blank" href="{{y}}" style="font-size: 13px;float: left">下载图片</a>
+								</div>
+							</div>
+							<div class="bigimg" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<img width="200" height="200" ng-src="{{y}}" alt=""/>
+							</div>
+							<div ng-show="!(x!='cj_count' && y.indexOf('http')!=-1)">
+								<span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{y}}</span>
+							</div>
+						</td>
+				</tr>
+				</tbody> -->
+				<tbody ng-repeat="item in properties.cj_content">
+					<tr ng-repeat="(x,y) in item">
+						<td>
+							{{x}}
+						</td>
+						<td class="{{(x!='cj_count' && y.indexOf('http')!=-1)?'dz-img':'dz-beizhu'}}">
+							<div style="text-align: center" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{y}}" alt=""/>
+									<a download="" target="_blank" href="{{y}}" style="font-size: 13px;float: left">下载图片</a>
+								</div>
+							</div>
+							<div class="bigimg" ng-show="x!='cj_count' && y.indexOf('http')!=-1">
+								<img width="200" height="200" ng-src="{{y}}" alt=""/>
+							</div>
+							<div ng-show="!(x!='cj_count' && y.indexOf('http')!=-1)">
+								<span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{y}}</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+	<div class="zzcWrap" ng-if="properties.type==0" style="max-height: 600px;overflow-y: auto;">
+		<h2 style="text-align: center;font-size: 18px;">客户定制个性化信息</h2>
+		<div class="zzc-con" ng-if="properties.customMessgae" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">CJ定制区域</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">定制区域图</th>
+					<th style="width: 100px;">展示图</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="properties.customMessgae.zone.front">
+						<td>前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span>
+						</td>
+						<td><a download="" href="{{properties.customMessgae.zone.front.editimgurl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="properties.customMessgae.zone.back">
+						<td>前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" href="{{properties.customMessgae.zone.front.editimgurl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="zzc-con" ng-if="properties.customDesign" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">定制区域</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="properties.customDesign.front">
+						<td>前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customDesign.front.imgUrl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customDesign.front.imgUrl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<p class="pod-text-p" ng-show="properties.customDesign.front.text">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{properties.customDesign.front.text}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customDesign.front.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{properties.customDesign.front.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customDesign.front.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{properties.customDesign.front.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customDesign.front.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{properties.customDesign.front.fontfamily}}</span>
+							</p>
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{properties.customDesign.front.text}}</span> -->
+						</td>
+						<td><a download="" href="{{properties.customDesign.front.imgUrl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="properties.customDesign.back">
+						<td>后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customDesign.back.imgUrl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customDesign.back.imgUrl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{properties.customDesign.back.text}}</span> -->
+							<p class="pod-text-p" class="pod-text-p" ng-show="properties.customDesign.back.text">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{properties.customDesign.back.text}}</span>
+							</p>
+							<p class="pod-text-p" class="pod-text-p" ng-show="properties.customDesign.back.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{properties.customDesign.back.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" class="pod-text-p" ng-show="properties.customDesign.back.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{properties.customDesign.back.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" class="pod-text-p" ng-show="properties.customDesign.back.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{properties.customDesign.back.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" href="{{properties.customDesign.back.imgUrl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+	<div class="zzcWrap" ng-if="properties.type==1" style="max-height: 600px;overflow-y: auto;">
+		<h2 style="text-align: center;font-size: 18px;">客户的客户定制个性化信息</h2>
+		<div class="zzc-con" ng-if="properties.customMessgae" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">CJ定制区域</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">定制区域图</th>
+					<th style="width: 100px;">展示图</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="properties.customMessgae.zone.front">
+						<td>前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td>
+						<td><a download="" href="{{properties.customMessgae.zone.front.editimgurl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="properties.customMessgae.zone.back">
+						<td>后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.editimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customMessgae.zone.front.showimgurl}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span></td> 
+						<td><a download="" href="{{properties.customMessgae.zone.front.editimgurl}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="zzc-con" ng-if="properties.customPodDesign" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">客户定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">效果图</th>
+					<th style="width: 100px;">定制图</th>
+					<th>定制信息</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="properties.customPodDesign.cj_pod_zone_front">
+						<td>前</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customPodDesign.cj_pod_zone_front.design_sketch}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customPodDesign.cj_pod_zone_front.design_sketch}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customPodDesign.cj_pod_zone_front.podimage}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customPodDesign.cj_pod_zone_front.podimage}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_color">
+								<span class="pod-text-tit">定制商品颜色:</span>
+								<span>{{properties.customPodDesign.cj_pod_color}}</span>
+								<span class="spys-bacolor" ng-style="{'background-color': properties.customPodDesign.cj_pod_color.indexOf('#')!=-1?properties.customPodDesign.cj_pod_color:'#'+properties.customPodDesign.cj_pod_color}"></span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_front.podtext">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_front.podtext}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_front.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_front.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_front.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_front.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_front.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_front.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" ng-show="properties.customPodDesign.cj_pod_zone_front.podimage" target="_blank" href="{{properties.customPodDesign.cj_pod_zone_front.podimage}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+					<tr ng-if="properties.customPodDesign.cj_pod_zone_back">
+						<td>后</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customPodDesign.cj_pod_zone_back.design_sketch}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customPodDesign.cj_pod_zone_back.design_sketch}}" alt=""/>
+							</div>
+						</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{properties.customPodDesign.cj_pod_zone_back.podimage}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{properties.customPodDesign.cj_pod_zone_back.podimage}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;"></span> -->
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_color">
+								<span class="pod-text-tit">定制商品颜色:</span>
+								<span>{{properties.customPodDesign.cj_pod_color}}</span>
+								<span class="spys-bacolor" ng-style="{'background-color': properties.customPodDesign.cj_pod_color.indexOf('#')!=-1?properties.customPodDesign.cj_pod_color:'#'+properties.customPodDesign.cj_pod_color}"></span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_back.podtext">
+								<span class="pod-text-tit">定制文字:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_back.podtext}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_back.fontsize">
+								<span class="pod-text-tit">字体大小:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_back.fontsize}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_back.fontcolor">
+								<span class="pod-text-tit">字体颜色:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_back.fontcolor}}</span>
+							</p>
+							<p class="pod-text-p" ng-show="properties.customPodDesign.cj_pod_zone_back.fontfamily">
+								<span class="pod-text-tit">字体名字:</span>
+								<span>{{properties.customPodDesign.cj_pod_zone_back.fontfamily}}</span>
+							</p>
+						</td>
+						<td><a download="" ng-show="properties.customPodDesign.cj_pod_zone_back.podimage" target="_blank" href="{{properties.customPodDesign.cj_pod_zone_back.podimage}}" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="zzc-con" ng-if="properties.thirdPardMessage" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">第三方定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<tbody>
+					<tr ng-repeat="item in properties.thirdPardMessage">
+						<td ng-repeat="(key,val) in item">
+                            <a download="" target="_blank" href="{{val}}" style="font-size: 13px;float: left">下载图片</a>
+                            {{key}}:
+							<span ng-if="val.indexOf('https')==-1">{{val}}</span>
+							<div ng-if="val.indexOf('https')!=-1" class="dz-img" style="display: inline-block;">
+								<div style="text-align: center">
+									<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+										<img width="80" height="80" ng-src="{{val}}" alt=""/>
+                                    </div>
+								</div>
+
+								<div class="bigimg" style="left: -100px;">
+									<img width="200" height="200" ng-src="{{val}}" alt=""/>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+	<div class="zzcWrap" ng-if="properties.type==2" style="max-height: 600px;overflow-y: auto;">
+		<h2 style="text-align: center;font-size: 18px;">客户的客户第三方定制个性化信息</h2>
+		<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th style="width: 100px;">示例图片</th>
+					<th>留言备注</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="dz in dzList">
+					<td style="width: 100px;" class="dz-img">
+						<div style="text-align: center">
+							<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+								<img width="80" height="80" ng-src="{{dz.image}}" alt=""/>
+							</div>
+						</div>
+
+						<div class="bigimg">
+							<img width="200" height="200" ng-src="{{dz.image}}" alt=""/>
+						</div>
+					</td>
+					<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: block;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{dz.text?dz.text:dz.thirdPardMessage}}</span></td>
+					<td><a download="" target="_blank" href="{{dz.image}}" style="font-size: 13px;">下载图片</a></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+	<div class="zzcWrap" style="max-height: 600px;overflow-y: auto;" ng-if="(!properties.type||properties.type==4)&&(properties.image||properties.text)">
+		<h2 style="text-align: center;font-size: 18px;">客户的客户第三方定制个性化信息</h2>
+		<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th style="width: 100px;">示例图片</th>
+					<th>留言备注</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="dz in dzList">
+					<td style="width: 100px;" class="dz-img">
+						<div style="text-align: center">
+							<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+								<img width="80" height="80" ng-src="{{dz.image}}" alt=""/>
+							</div>
+						</div>
+
+						<div class="bigimg">
+							<img width="200" height="200" ng-src="{{dz.image}}" alt=""/>
+						</div>
+					</td>
+					<td class="dz-beizhu"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{dz.text}}</span></td>
+					<td><a download="" target="_blank" href="{{dz.image}}" style="font-size: 13px;">下载图片</a></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+	<!-- type 3,4 -->
+	<div class="zzcWrap" ng-if="(properties.type==3 || properties.type==4)&&(properties.customPodDesign||properties.customDesign||properties.customMessgae)" style="max-height: 600px;overflow-y: auto;">
+		<!-- <h2 style="text-align: center;font-size: 18px;">客户定制个性化信息</h2> -->
+		<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 180px;overflow: auto;">
+			<p style="text-align: center;">定制信息</p>
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>定制位置</th>
+					<th style="width: 100px;">效果图</th>
+					<th>类型</th>
+					<th style="width: 100px;">下载图片</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat = "item in newCusDesignArr track by $index">
+						<td>{{item.areaName}}</td>
+						<td style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item.img}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg">
+								<img width="200" height="200" ng-src="{{item.img}}" alt=""/>
+							</div>
+						</td>
+						<td class="dz-beizhu">
+							<p class="pod-text-p">
+								<span ng-click="tuCengFun(item.layer)" ng-if="item.img" class="link-active">{{item.type}}</span>
+								<span ng-if="!item.img">{{item.type}}</span>
+							</p>
+							<!-- <span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp:2;-webkit-box-orient: vertical;text-align: left;padding: 0 10px;">{{properties.customDesign.front.text}}</span> -->
+						</td>
+						<td><a download="" href="{{item.img}}" target="_blank" style="font-size: 13px;">下载图片</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="closeZZC()">关闭</button>
+		</div>
+	</div>
+
+</div>
+
+<!--个性化图层信息弹窗-->
+<div class="zzc-product" ng-if="tuCengFlag">
+	<div class="zzcWrap" style="max-height: 600px;overflow-y: auto;">
+		<h2 style="text-align: center;font-size: 18px;">图层信息</h2>
+		<div class="zzc-con" style="margin-top: 15px;max-height: 500px;min-height: 400px;overflow: auto;">
+			<table class="ea-list-table ea-erp-cs" style="table-layout: fixed;width: 559px;">
+				<thead>
+				<tr>
+					<th>序号</th>
+					<th style="width: 100px;">类型</th>
+					<th>内容</th>
+				</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in tuCengArr track by $index">
+						<td>{{$index+1}}</td>
+						<td style="width: 100px;">{{item.type}}</td>
+						<td ng-if="item.type=='text'||item.type=='Text'">{{item.title}}</td>
+						<td ng-if="item.type=='image'||item.type=='Picture'" style="width: 100px;" class="dz-img">
+							<div style="text-align: center">
+								<div class="dz-img-con" style="width: 80px;margin: 0 auto;height: 80px;border: 1px solid #e6e6e6;">
+									<img width="80" height="80" ng-src="{{item.imgsrc}}" alt=""/>
+								</div>
+							</div>
+
+							<div class="bigimg" style="left: -100%;">
+								<img width="200" height="200" ng-src="{{item.imgsrc}}" alt=""/>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="" style="text-align: center;margin-top: 15px;">
+			<button class="closeBtn" ng-click="tuCengCloseFun()">关闭</button>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,301 @@
+<div class="asj-pod-merch">
+  <!-- {{$ctrl.podarray}} -->
+	<div class="pod-item pod-zone" ng-show="podType=='1'">
+		<div class="title clearfix">
+			<h6>定制区域</h6>
+			<div class="set-range">
+			</div>
+		</div>
+		<div class="top-con clearfix">
+      <ul>
+        <li ng-class="{'current': !editBackImg}" ng-click="editBackImg=false;">正面</li>
+        <li ng-show="showBackImg" ng-class="{'current': editBackImg}" ng-click="editBackImg=true;">背面</li>
+      </ul>
+      <div class="switch-btn" ng-hide="showdetail">
+        <span class="switch-text">是否定制背面</span>
+        <span class="switch-icon">
+          <b>Off</b>
+          <i ng-class="{'on':showBackImg, 'off':!showBackImg}" ng-click="toggleBackImg();"></i>
+          <b>On</b>
+        </span>
+      </div>
+    </div>
+    <div class="bottom-con-wrap" ng-hide="showdetail">
+      <div class="bottom-con" ng-show="!editBackImg">
+        <div class="img-box clearfix">
+          <div class="add-img" ng-show="!frontShowImgSrc">
+            <span><img src="./static/image/public-img/iconplus.png" alt=""></span>
+            <a href="javascript: void(0);"  class="add-btn">{{'正面展示图片'}}</a>
+             <form action="" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" id="front-show-img" onchange="angular.element(this).scope().upLoadImg2(this.files,'front1')" title="添加图片" accept=".jpg,.png,.jpeg,.bmp">
+            </form>
+          </div>
+          <div class="show-img" ng-show="frontShowImgSrc">
+            <img ng-click="deletePic2('front1');" class="del-btn" src="./static/image/public-img/close-circle.png" alt="">
+            <img class="preview" src="{{frontShowImgSrc}}" alt="">
+          </div>
+          <div class="add-img" ng-show="!frontEditImgSrc">
+            <span><img src="./static/image/public-img/iconplus.png" alt=""></span>
+            <a href="javascript: void(0);"  class="add-btn">{{'正面定制图片'}}</a>
+             <form action="" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" id="front-edit-img" onchange="angular.element(this).scope().upLoadImg2(this.files,'front2')" title="添加图片" accept=".jpg,.png,.jpeg,.bmp">
+            </form>
+          </div>
+          <div class="show-img" ng-show="frontEditImgSrc" style="width: 402px; height: 402px;">
+             <img ng-click="deletePic2('front2')" class="del-btn" src="./static/image/public-img/close-circle.png" alt="">
+             <canvas id="frontedit-cvs" width="400" height="400"></canvas>
+            <!-- <img class="preview" src="{{frontEditImgSrc}}" alt=""> -->
+          </div>
+        </div>
+        <div class="print-sele">
+          <span>定制类型：</span>
+          <select ng-model="frontEditType">
+            <option value="pic">图片</option>
+            <option value="text">文字</option>
+            <option value="picandtext">图片和文字</option>
+          </select>
+        </div>
+      </div>
+      <div class="bottom-con clearfix" ng-show="editBackImg">
+        <div class="img-box clearfix">
+          <div class="add-img" ng-show="!backShowImgSrc">
+            <span><img src="./static/image/public-img/iconplus.png" alt=""></span>
+            <a href="javascript: void(0);"  class="add-btn">{{'背面展示图片'}}</a>
+             <form action="" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" id="back-show-img" onchange="angular.element(this).scope().upLoadImg2(this.files,'back1')" title="添加图片" accept=".jpg,.png,.jpeg,.bmp">
+            </form>
+          </div>
+          <div class="show-img" ng-show="backShowImgSrc">
+            <img ng-click="deletePic2('back1')" class="del-btn" src="./static/image/public-img/close-circle.png" alt="">
+            <img class="preview" src="{{backShowImgSrc}}" alt="">
+          </div>
+          <div class="add-img" ng-show="!backEditImgSrc">
+            <span><img src="./static/image/public-img/iconplus.png" alt=""></span>
+            <a href="javascript: void(0);"  class="add-btn">{{'背面定制图片'}}</a>
+             <form action="" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" id="back-edit-img" onchange="angular.element(this).scope().upLoadImg2(this.files,'back2')" title="添加图片" accept=".jpg,.png,.jpeg,.bmp">
+            </form>
+          </div>
+          <div class="show-img" ng-show="backEditImgSrc" style="width: 402px; height: 402px;">
+            <img ng-click="deletePic2('back2')" class="del-btn" src="./static/image/public-img/close-circle.png" alt="">
+            <!-- <img class="preview" src="{{backEditImgSrc}}" alt=""> -->
+            <canvas id="backedit-cvs" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <div class="print-sele">
+          <span>定制类型：</span>
+          <select ng-model="backEditType">
+            <option value="pic">图片</option>
+            <option value="text">文字</option>
+            <option value="picandtext">图片和文字</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-con-wrap" ng-show="showdetail">
+      <div class="bottom-con" ng-show="!editBackImg">
+        <div class="img-box clearfix">
+          <div class="show-img" ng-show="frontShowImgSrc">
+            <img class="preview" src="{{frontShowImgSrc}}" alt="">
+          </div>
+          <div class="show-img" ng-show="frontEditImgSrc" style="width: 402px; height: 402px;">
+             <canvas id="frontedit-cvs-show" width="400" height="400"></canvas>
+            <!-- <img class="preview" src="{{frontEditImgSrc}}" alt=""> -->
+          </div>
+        </div>
+        <div class="print-sele">
+          <span>定制类型：</span>
+          <span ng-show="frontEditType=='pic'">图片</span>
+          <span ng-show="frontEditType=='text'">文字</span>
+          <span ng-show="frontEditType=='picandtext'">图片和文字</span>
+        </div>
+      </div>
+      <div class="bottom-con clearfix" ng-show="editBackImg">
+        <div class="img-box clearfix">
+          <div class="show-img" ng-show="backShowImgSrc">
+            <img class="preview" src="{{backShowImgSrc}}" alt="">
+          </div>
+          <div class="show-img" ng-show="backEditImgSrc" style="width: 402px; height: 402px;">
+            <canvas id="backedit-cvs-show" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <div class="print-sele">
+          <span>定制类型：</span>
+          <span ng-show="backEditType=='pic'">图片</span>
+          <span ng-show="backEditType=='text'">文字</span>
+          <span ng-show="backEditType=='picandtext'">图片和文字</span>
+        </div>
+      </div>
+    </div>
+	</div>
+  <div class="pod-item" ng-show="podType=='1'">
+    <div class="title clearfix">
+      <h6>定制颜色</h6>
+      <div class="set-range" ng-hide="showdetail">
+        <span class="left">基础色值：</span>
+        <input type="text" ng-model="basicColor" style="margin-right: 20px;" ng-focus="choseBasicColor($event)">
+        <!-- <span class="tip" style="margin-right: 20px;">(请输入类似“#cecece”)</span> -->
+        <span class="left">色差：</span>
+        <input type="text" ng-model="colorRange">
+        <span class="tip">(请输入0～255之间的数字)</span>
+      </div>
+      <div class="set-range" ng-show="showdetail && colorRange">
+        <span class="left">色差：</span>
+        <span>{{colorRange}}</span>
+      </div>
+    </div>
+    <script src="./static/js-color/jscolor.js"></script>
+    <div class="pod-colors">
+      <div class="add-pod-colors" ng-hide="showdetail">
+        <input type="text" placeholder="颜色名称（中文）" ng-model="podColorNameCn">
+        <input type="text" placeholder="颜色名称（英文）" ng-model="podColorNameEn">
+        <!-- <input type="color" placeholder="颜色色值" ng-model="podColorValue"> -->
+        <input class="jscolor{zIndex:100005}" value="" ng-model="podColorValue">
+        <a href="javascript: void(0);" class="add-btn" ng-click="addPodColor()"><img src="./static/image/public-img/iconplus.png" alt="" title="新增颜色"></a>
+      </div>
+      <table class="table table-bordered pod-colors-table" ng-hide="showdetail">
+          <tr class="tr-head">
+              <td width="300">{{'颜色名称（中文）'}}</td>
+              <td width="300">{{'颜色名称（英文）'}}</td>
+              <td width="200">{{'颜色色值'}}</td>
+              <td width="100">{{'100043' | translate}}</td>
+          </tr>
+          <tr ng-repeat="item in podColors">
+              <td class="td-link">
+                <input type="text" ng-model="item.nameCn">
+              </td>
+              <td class="td-link">
+                <input type="text" ng-model="item.nameEn">
+              </td>
+              <td class="td-star">
+                <input type="text" ng-model="item.value">
+              </td>
+              <td><a href="javascript:void(0);" ng-click="deletePodColor($index)">{{'100227' | translate}}</a></td>
+          </tr>
+      </table>
+      <table class="table table-bordered pod-colors-table" ng-show="showdetail && podColors.length>0">
+          <tr class="tr-head">
+              <td width="300">{{'颜色名称（中文）'}}</td>
+              <td width="300">{{'颜色名称（英文）'}}</td>
+              <td width="200">{{'颜色色值'}}</td>
+              <!-- <td width="100" ng-hide="showdetail">{{'100043' | translate}}</td> -->
+          </tr>
+          <tr ng-repeat="item in podColors">
+              <td class="td-link">
+                {{ item.nameCn }}
+              </td>
+              <td class="td-link">
+                {{ item.nameEn }}
+              </td>
+              <td class="td-star">
+                {{item.value}}
+              </td>
+              <!-- <td ng-hide="showdetail"><a href="javascript:void(0);" ng-click="deletePodColor($index)">{{'100227' | translate}}</a></td> -->
+          </tr>
+      </table>
+    </div>
+    <div ng-show="podColors.length > 0"><a href="javascript:void(0);" style="display: inline-block; height: 28px; line-height: 28px; padding: 0 10px; border: 1px solid #ececec; border-radius: 4px;" ng-click="previewColor();">预览</a></div>
+  </div>
+	<div class="pod-item pod-puretext" ng-show="podType=='2'">
+    <div class="title clearfix">
+      <h6>纯文字定制</h6>
+      <div class="set-range">
+      </div>
+    </div>
+    <div>
+      <p class="max-num">最大数量：<input type="number" ng-model="pureTextNum"></p>
+    </div>
+  </div>
+  <div class="pod-item pod-combine" ng-show="podType=='3'">
+    <div class="title clearfix">
+      <h6>组合定制</h6>
+      <div class="set-range">
+      </div>
+    </div>
+    <div>
+    
+    </div>
+  </div>
+</div>
+<!-- 蕖基础色弹框 -->
+ <!-- ng-show="choseBasicColorFlag" -->
+<div class="asj-common-tanwrap" ng-show="choseBasicColorFlag">
+  <div class="asj-common-tan chose-img-new" style="height: 530px; width: 740px;">
+      <!-- <div class="tan-title">{{'选择图片' + nowcolor}}</div> -->
+      <!-- <div class="top-con clearfix">
+        <ul>
+          <li ng-class="{'current': !choseBackImg}" ng-click="changeFace('front')">正面</li>
+          <li ng-show="showBackImg" ng-class="{'current': choseBackImg}" ng-click="changeFace('back')">背面</li>
+        </ul>
+        <select ng-model="choseImgType">
+          <option value="print">绘制图片</option>
+          <option value="chose">从图片列表选择</option>
+        </select>
+      </div> -->
+      <div class="change-img">
+        <h4>左商品图，右色值图(鼠标点击左侧图片取色)</h4>
+        <canvas class="canvas-show" id="basic-color-quse" width="400" height="400" style="cursor: crosshair;"></canvas>
+        <!-- <canvas class="canvas-quse" id="canvas-quse" width="250" height="250"></canvas> -->
+        <div id="basic-color-result" style="float: left; width: 200px; height: 200px; margin-top: 10px; border: 1px solid #ccc;"></div>
+        <!-- <canvas ng-show="choseBackImg" class="canvas-show" id="canvas-show-back" width="600" height="600"></canvas>
+        <canvas ng-show="choseBackImg" class="canvas-quse" id="canvas-quse-back" width="250" height="250"></canvas> -->
+        <!-- <img ng-show="!choseBackImg" src="{{frontShowImgSrc}}" id="mug-front" width="380" height ="380"/> -->
+        <!-- <img ng-show="choseBackImg" src="{{backShowImgSrc}}" id="mug-back" width="380" height ="380"/> -->
+        <!-- <script src="./static/js-color/jscolor.js"></script> -->
+        <!-- value="ab2567" -->
+        <!-- <span class="color-span">
+          Color:
+          <br>
+          <input class="jscolor{zIndex:100005}" value="ffffff" id="color-picker">
+        </span> -->
+        <div class="huanse">
+        <p>基础色值：<input id="basic-color"></p>
+        <!-- <p>容差范围：<input type="number" id="tolerance" min="0" max="255" step="1" value="0" size="4"></p> -->
+        <!-- <p>换色色值：
+          <input class="jscolor{zIndex:100005}" value="ffffff" id="color-picker">
+        </p> -->
+        <!-- <p><button id="huanse-button">执行换色</button></p> -->
+        </div>
+      </div>
+      <!-- <div class="img-list" ng-show="choseImgType=='chose'">
+        <ul ng-show="!choseBackImg">
+          <li ng-repeat="item in picContainer" ng-class="{'current': item.src==seleFrontImg.src}" ng-click="selectImg(item,'front')"><img src="{{item.src}}" alt=""></li>
+        </ul>
+        <ul ng-show="choseBackImg">
+          <li ng-repeat="item in picContainer" ng-class="{'current': item.src==seleBackImg.src}" ng-click="selectImg(item,'back')"><img src="{{item.src}}" alt=""></li>
+        </ul>
+      </div> -->
+      <div class="tan-btns">
+        <a class="tan-btn0" ng-click="choseBasicColorFlag=false;">{{'100051' | translate}}</a>
+        <a class="tan-btn1" ng-click="goSaveBasicColor()">{{'100050' | translate}}</a>
+      </div>
+  </div>
+</div>
+<!-- 预览颜色弹框 -->
+ <!-- ng-show="choseBasicColorFlag" -->
+<div class="asj-common-tanwrap" ng-show="previewColorFlag">
+  <div class="asj-common-tan chose-img-new" style="height: 530px; width: 433px;">
+      <div class="change-img">
+         <!-- <select name="" id="" ng-change="changeColor()" ng-model="preColorVal" ng-options="item.value as item.nameCn for item in podColors">
+              <option value="" ng-repeat="item in podColors"></option>
+        </select> -->
+        <select name="" id="" ng-change="changeColor()" ng-model="preColorVal">
+              <option value="{{item.value}}" ng-repeat="item in podColors">{{item.nameCn}}</option>
+        </select>
+        <select name="" id="" ng-change="changeColor()" ng-model="preColorFace" ng-show="showBackImg">
+              <option value="1">正面</option>
+              <option value="2">背面</option>
+        </select>
+        <canvas class="canvas-show" id="pre-color-canvas" width="400" height="400"></canvas>
+        <!-- <canvas class="canvas-quse" id="canvas-quse" width="250" height="250"></canvas> -->
+        <!-- <div id="basic-color-result" style="float: left; width: 200px; height: 200px; margin-top: 10px; border: 1px solid #ccc;"></div> -->
+        <!-- <div class="huanse"> -->
+        <!-- <p>基础色值：<input id="basic-color"></p> -->
+        <!-- </div> -->
+      </div>
+      <div class="tan-btns">
+        <!-- <a class="tan-btn0" ng-click="previewColorFlag=false;">{{'100051' | translate}}</a> -->
+        <a class="tan-btn1" ng-click="previewColorFlag=false;">{{'100050' | translate}}</a>
+      </div>
+  </div>
+</div>

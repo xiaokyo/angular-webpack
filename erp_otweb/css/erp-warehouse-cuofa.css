@@ -1,0 +1,29 @@
+select{
+	height: 34px;
+	border-radius: 4px;
+	border: 1px solid #e1e1e1;
+}
+.right-bar-wrap{
+	padding: 0 20px 0 230px;
+}
+.cuofa-search-item{
+	margin-right: 25px;
+}
+.cuofa-date{
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 50px;
+	color: #f9ae08;
+	border: 1px solid #f9ae08;
+	margin-right: 15px;
+	font-size: 12px;
+}
+.cuofa-date.active{
+	color: #fff;
+	background: #f9ae08;
+}
+.search-btn{
+	height: 34px;
+	margin-left: 20px;
+	width: 60px;
+}

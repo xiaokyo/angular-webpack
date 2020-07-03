@@ -1,0 +1,188 @@
+.asj-pod-merch {
+  border: 1px solid #E6E6E6;
+  width: 1000px;
+  padding: 15px;
+  padding-top: 0;
+}
+.asj-pod-merch .title {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #E6E6E6;
+}
+.asj-pod-merch .title h6 {
+  float: left;
+  color: #666666;
+  font-size: 16px;
+  line-height: 40px;
+}
+.asj-pod-merch .set-range {
+  float: right;
+}
+.asj-pod-merch .set-range .left {
+  color: #666;
+}
+.asj-pod-merch .set-range input {
+  height: 24px;
+  width: 100px;
+}
+.asj-pod-merch .set-range .tip {
+  font-size: 12px;
+  color: #999;
+}
+.asj-pod-merch .add-pod-colors {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.asj-pod-merch .add-pod-colors input {
+  height: 30px;
+  padding-left: 10px;
+}
+.asj-pod-merch .pod-colors table {
+  width: 620px;
+  margin-top: 10px;
+}
+.asj-pod-merch .pod-colors td {
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+}
+.asj-pod-merch .pod-zone .top-con {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #E6E6E6;
+}
+.asj-pod-merch .pod-zone .top-con ul {
+  float: left;
+}
+.asj-pod-merch .pod-zone .top-con ul li {
+  float: left;
+  margin-right: 15px;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  line-height: 50px;
+}
+.asj-pod-merch .pod-zone .top-con ul .current {
+  position: relative;
+}
+.asj-pod-merch .pod-zone .top-con ul .current::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background: #FF9900;
+  width: 100%;
+  border-radius: 2px;
+  left: 0;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn {
+  float: right;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-text {
+  float: left;
+  margin-right: 10px;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon {
+  float: left;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon b {
+  color: #8B572A;
+  font-weight: normal;
+  float: left;
+  margin-right: 5px;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon i {
+  float: left;
+  display: inline-block;
+  height: 4px;
+  width: 48px;
+  background: #FF9900;
+  margin-right: 5px;
+  margin-top: 23px;
+  position: relative;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon i::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -10px;
+  width: 24px;
+  height: 24px;
+  background: #FFB85F;
+  border-radius: 50%;
+  transition: all .3s;
+  cursor: pointer;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon .on::after {
+  right: 0;
+}
+.asj-pod-merch .pod-zone .top-con .switch-btn .switch-icon .off::after {
+  right: 24px;
+}
+.asj-pod-merch .pod-zone .bottom-con {
+  padding: 10px 0;
+}
+.asj-pod-merch .pod-zone .bottom-con .show-img {
+  float: left;
+  width: 402px;
+  height: 402px;
+  position: relative;
+  margin-right: 10px;
+}
+.asj-pod-merch .pod-zone .bottom-con .del-btn {
+  position: absolute;
+  width: 33px;
+  height: 33px;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+.asj-pod-merch .pod-zone .bottom-con .preview {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+.asj-pod-merch .pod-zone .bottom-con .add-img {
+  width: 104px;
+  height: 104px;
+  border: 1px dashed #dcdcdc;
+  background: #FAFAFA;
+  cursor: pointer;
+  position: relative;
+  float: left;
+  margin-right: 10px;
+}
+.asj-pod-merch .pod-zone .bottom-con .add-img span {
+  display: block;
+  width: 20px;
+  height: 20p;
+  margin: 24px auto 20px;
+}
+.asj-pod-merch .pod-zone .bottom-con .add-img a {
+  display: block;
+  text-align: center;
+}
+.asj-pod-merch .pod-zone .bottom-con .add-img form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 104px;
+  height: 104px;
+}
+.asj-pod-merch .pod-zone .bottom-con .add-img form input {
+  display: block;
+  width: 104px;
+  height: 104px;
+  opacity: 0;
+  cursor: pointer;
+}
+.asj-pod-merch .pod-zone .bottom-con .print-sele {
+  height: 40px;
+  line-height: 40px;
+}
+.asj-pod-merch .pod-zone .bottom-con .print-sele select {
+  height: 30px;
+}
+.asj-pod-merch .pod-puretext .max-num {
+  margin-top: 10px;
+}

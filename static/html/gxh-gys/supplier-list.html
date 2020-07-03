@@ -1,0 +1,168 @@
+<style type="text/css">
+	.mar-top{
+		margin-top: 6px;
+		display: inline-block;
+	}
+	.mar-bot{
+		margin-bottom: 6px;
+		display: inline-block;
+	}
+</style>
+<div class="gxh-gys-wrap pod-supplier-list-wrap">
+	<div class="gxh-gys-con">
+		<div class="gxh-gys-top">
+			<div class="gxh-sealabel">
+				<input placeholder="请输入供应商" class="w20h40inp" type="text" ng-model="search" ng-keydown="enterSearch($event)"></input><button class="w90h40btn" ng-click="searchFun()"></button>
+			</div>
+		</div>
+		<div class="gxh-gys-mid">
+			<div class="table-box">
+				<!-- <table class="table table-bordered"> -->
+				<table class="gxh-table">
+					<thead>
+						<tr>
+							<th>供应商</th>
+							<th>入驻时间</th>
+							<th>关联数量</th>
+							<th>采购审核</th>
+							<th>历史订单量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in list track by $index">
+							<td>{{item.gongSiMing}}</td>
+							<td>{{item.createDate | date:"yyyy-MM-dd"}}</td>
+							<td>{{item.count1}}</td>
+							<td>{{item.count2}}</td>
+							<td>{{item.count3}}</td>
+							<td class="ope-td">
+								<a href="javascript:void(0);" ng-click="showConlist(item)">关联管理</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="page-box" ng-show="list.length>0">
+          <div class="select-page-num">
+              <select class="form-control" ng-model="pageSize" ng-change="chanPageSize()">
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+              </select>
+              <span>每页</span>
+          </div>
+          <div class="total-num">
+              共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+          </div>
+          <div class="page-index">
+              <div id="pagination1" class="pagination2"></div>
+          </div>
+          <div class="to-go">
+              <span>跳转：</span>
+              <input type="text" class="form-control" placeholder="" ng-model="topagenum">
+              <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="chanPageNum()">go</a>
+          </div>
+      </div>
+		</div>
+	</div>
+</div>
+<!-- pod订单附件 -->
+<div class="erp-common-tan-v2-wrap" ng-show="showConlistFlag">
+	<div class="erp-common-tan-v2 pod-supplier-tan" style="width: 924px; height: 700px;">
+		<a class="tan-v2-close" href="javascript:void(0);" ng-click="showConlistFlag=false;tanList=[];tanListOri=[];"><img src="static/image/public-img/close-img.png"></a>
+		<div class="tan-v2-top">
+			<h6>供应关联列表</h6>
+		</div>
+		<div class="tan-v2-con">
+			<div class="table-box-tan">
+				<!-- <table class="table table-bordered"> -->
+				<table class="gxh-table">
+					<thead>
+						<tr>
+							<th>关联SKU</th>
+							<th class="th-detail">商品描述</th>
+							<th>关联时间</th>
+							<th>截止有效期</th>
+							<!-- <th>自动同步订单</th>
+							<th>优先级</th> -->
+							<th>采购价(元)</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in tanList track by $index">
+							<td>{{item.sku}}</td>
+							<td>
+								<div class="detail-item">
+									<span class="asj-listimg-span"><img ng-src="{{item.img}}" alt="" class="small-img" src=""><img src="{{item.img}}" alt="" class="hidden-bigimg"></span>
+									<!-- <img src="{{item.img}}" alt=""> -->
+									<span class="name">{{item.describe}}</span>
+								</div>
+							</td>
+							<td>{{item.createDate | date:"yyyy-MM-dd"}}</td>
+							<td>{{item.shiXiaoDate | date:"yyyy-MM-dd"}}</td>
+							<!-- <td>
+								<select ng-model="item.ZiDongPaiDan" ng-change="updateConPro(item,'ZiDongPaiDan',$index)">
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</td> -->
+							<!-- <td>
+								<select ng-model="item.youXianJi" ng-change="updateConPro(item,'youXianJi',$index)">
+									<option value="2">高</option>
+									<option value="1">中</option>
+									<option value="0">低</option>
+								</select>
+							</td> -->
+							<td>
+								<!-- <input type="" name="" ng-model="item.caiGouPrice" ng-change="updateConPro(item,'caiGouPrice',$index)"> -->
+								<input type="" name="" ng-model="item.caiGouPrice">
+							</td>
+							<td class="ope-td">
+								<a class="mar-bot" href="javascript:void(0);" ng-click="updateConPro(item,'cancelConnect',$index)">取消供应关联</a>
+								<hr />
+								<a class="mar-top" href="javascript:void(0);" ng-click="updateConPro(item,'caiGouPrice',$index)">保存</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="page-box" ng-show="tanList.length>0">
+          <!-- <div class="select-page-num">
+              <select class="form-control" ng-model="pageSize" ng-change="chanPageSize()">
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+              </select>
+              <span>每页</span>
+          </div> -->
+          <div class="total-num">
+              共&nbsp;&nbsp;{{ totalNumTan }}&nbsp;&nbsp;条
+          </div>
+          <div class="page-index">
+              <div id="pagination2" class="pagination2"></div>
+          </div>
+          <!-- <div class="to-go">
+              <span>跳转：</span>
+              <input type="text" class="form-control" placeholder="" ng-model="topagenumTan">
+              <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="chanPageNumTan()">go</a>
+          </div> -->
+      </div>
+		</div>
+		<!-- <div class="tan-v2-bot">
+			<a href="javascript:void(0);" class="btn1">Submit</a>
+		</div> -->
+	</div>
+</div>
+<!-- 是否取消关联的弹框 -->
+<!-- ng-show='guanLianFlag' -->
+<div class="erp-common-tan-v2-wrap" ng-show='guanLianFlag'>
+	<div class="erp-common-tan-v2 erp-common-tan-confirm" style="width: 400px;height: 160px;">
+		<p>是否确定取消关联?</p>
+		<div class="tan-v2-bot">
+			<a href="javascript:void(0)" class="qu-xiao-btn" ng-click="guanLianFlag=false">取消</a>
+			<a href="javascript:void(0)" class="que-ding-btn" ng-click="quXiaoGuanLian()">确定</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,365 @@
+<style>
+.soldOutNav{
+    position: fixed;
+    top: 0;
+    background: #fff;
+    height: 60px;
+    padding: 0  20px;
+    width: calc(100% - 270px);
+    z-index: 999;
+}
+.soldOutNav>a{
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    width: 60px;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+.soldOutNav>a:hover{
+    color: rgba(255,162,0,1);
+}
+.soldOutNav>a.act{
+    color: rgba(255,162,0,1);
+    border-bottom-color: rgba(255,162,0,1);
+}
+.searchTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchGoup input{
+    width: 200px;
+    height: 30px;
+    padding: 0 10px;
+}
+.searchGoup button{
+    height: 30px;
+    padding: 0 15px;
+    background: rgba(255,162,0,1);
+    color: #fff;
+    position: relative;
+    left: -5px;
+}
+.tableBottom{
+    margin-top: 15px;
+}
+.ea-list-table th>span{
+    font-size: 14px;
+}
+.zzc{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,0.4);
+    display: none;
+}
+.zzcWrap{
+    width: 800px;
+    height: 700px;
+    background: #fff;
+    border-radius: 5px;
+    margin: 100px auto;
+    padding: 20px;
+}
+.WrapBottom{
+    border-top: 1px solid #e4e4e4;
+    padding: 15px 0;
+    margin-top: 10px;
+}
+.WrapTop{
+    display: flex;
+
+}
+.WrapTop-con{
+    width: 50%;
+    padding-bottom: 20px;
+}
+.WrapTop-con:first-child{
+    border-right: 1px solid #e4e4e4;
+}
+.WrapSearchCon{
+    text-align: center;
+}
+.WrapSearchCon input{
+    width: 250px;
+    height: 30px;
+    padding: 0 10px;
+}
+.zzcWrap button{
+    padding: 0 15px;
+    height: 30px;
+    background: rgba(255,162,0,1);
+    color: #fff;
+}
+.WrapSearchThead{
+    margin-top: 10px;
+    display: flex;
+}
+.WrapSearchTh{
+    text-align: center;
+    background: #FCF4D9;
+    color: #8B572A;
+    padding: 10px;
+}
+.WrapSearchTr{
+    display: flex;
+    border-bottom: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+}
+.WrapSearchTd{
+    text-align: center;
+    border-right: 1px solid #e4e4e4;
+    padding: 10px;
+}
+.WrapSearchTd span{
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.WrapSearchTd a:hover{
+    color: rgba(255,162,0,1);
+}
+.ea-list-table p,ea-list-table th{
+    font-size: 14px !important;
+}
+.shangjiaBtn{
+    padding: 3px 10px;
+    font-size: 12px;
+    color: #fff;
+    background: rgba(255,162,0,1);
+    border-radius: 4px;
+}
+.WrapTop-con p{
+    text-align: center;
+}
+.WrapTop-con ul{
+    margin-top: 15px;
+    padding: 0 20px;
+}
+.WrapTop-con ul li{
+    font-size: 14px;
+}
+.WrapTop-con ul li:not(:last-child){
+    margin-bottom: 8px;
+}
+/*  static\image\public-img\close-img.png*/
+.WrapTop-con ul>li>span{
+    max-width: 300px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.WrapTop-con ul li b{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('static/image/public-img/close-img.png') no-repeat;
+    background-size: 12px;
+    position: relative;
+    /* top: 5px; */
+    left: 10px;
+    cursor: pointer;
+}
+.WrapBottom{
+    text-align: right;
+
+}
+.WrapBottom button{
+    border-radius: 4px;
+    margin-left: 15px;
+}
+/* static\image\public-img\multiple1.png */
+.checkIcon{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url('static/image/public-img/multiple1.png') no-repeat;
+    background-size: 12px;
+    cursor: pointer;
+}
+.checkIcon.checked{
+    background: url('static/image/public-img/multiple2.png') no-repeat;
+    background-size: 12px;
+}
+.reasonZZC{
+    display: none;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 999999;
+}
+.reasonWrap{
+    width: 300px;
+    height: 160px;
+    border-radius: 5px;
+    background: #fff;
+    margin: 250px auto;
+    padding: 20px;
+}
+.reasonGroup{
+    margin-top: 15px;
+    /* padding-top: 15px;
+    border-top: 1px solid #e1e1e1; */
+}
+.reasonBottom{
+    border-top: 1px solid #e1e1e1;
+    margin-top: 15px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+.reasonBottom button{
+    /* background:rgba(255,162,0,1); */
+    border-radius: 4px;
+    padding: 5px 15px;
+    font-size: 12px;
+}
+.reasonBottom button:first-child{
+    background:rgba(255,162,0,1);
+    border: 1px solid rgba(255,162,0,1);
+    color: #fff;
+    margin-right: 15px;
+}
+.reasonBottom button:last-child{
+    background: #fff;
+    color: #333;
+    border: 1px solid #666;
+}
+</style>
+
+<div class="merchandise-box" >
+    <div class="right-bar-wrap inquiry-and-drop">
+        <div class="soldOutNav">
+             <a class="" ng-click="gotoSoldOut()">商品</a>
+             <a class="act">变体</a>
+        </div>
+        <div class="right-bar" style="margin-top:70px;padding:20px;">
+            <div class="searchTop">
+                <div class="searchGoup">
+                    <input placeholder="请输入SKU" ng-model="searchInfo" type="text">
+                    <button ng-click="searchFun()">搜索</button>
+                </div>
+                <div class="searchGoup">
+                    <button style="border-radius: 3px;" ng-click="piliangshangjiaFun()">批量上架</button>
+                    <button style="border-radius: 3px;" ng-click="xiajiaSKU()">下架SKU</button>
+                </div>
+            </div>
+            <div class="tableBottom">
+                <table class="ea-list-table ea-erp-cs">
+                    <thead>
+                        <tr>
+                            <th><span style="display:flex;"><b ng-click="checkAll($event)" class="checkAllIcon checkIcon" style="position:relative;top:5px;"></b><span>序号</span></span></th>
+                            <th><span>下架时间</span></th>
+                            <th><span>图片</span></th>
+                            <th><span>商品名称</span></th>
+                            <th><span>SKU</span></th>
+                            <th><span>商品类目</span></th>
+                            <th><span>
+                                <p>商品</p>
+                                <p>单价($)</p>
+                                </span></th>
+                            <th><span>
+                                <p>对手</p>
+                                <p>价格($)</p>
+                                </span></th>
+                            <!-- <th><span>可见性</span></th> -->
+                            <th><span>下架人员</span></th>
+                            <th><span>下架原因</span></th>
+                            <th><span>操作</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sold in soldOutSkuList">
+                            <td><span>
+                                <b data-id="{{sold.vID}}" class="checkIcon" style="position:relative;top:2px;"></b>
+                                {{($index+1)+(pageNum-1)*pageSize}}</span></td>
+                            <td><span>
+                                <p>{{classCreateTime(sold.soldOutTime,1)}}</p>
+                                <p>{{classCreateTime(sold.soldOutTime,2)}}</p>
+                            </span></td>
+                            <td><span>
+                                <img width="50" height="50" src="{{sold.img}}" alt="">
+                            </span></td>
+                            <td style="width:250px;"><span>{{sold.NAME}}</span></td>
+                            <td><span>{{sold.SKU}}</span></td>
+                            <td><span>
+                                <p ng-repeat="cat in sold.CATEGORY">{{cat.name}}</p>
+                            </span></td>
+                            <td><span>{{sold.SELLPRICE}}</span></td>
+                            <td><span>{{sold.rivalPrice}}</span></td>
+                            <!-- <td><span>全部</span></td> -->
+                            <td><span>{{sold.soldOutName}}</span></td>
+                            <td><span>{{sold.soldOutCause}}</span></td>
+                            <td><span> <button class="shangjiaBtn" ng-click="shangjiaFun(sold)">上架</button></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 分页组件 -->
+                <page></page>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 下架商品 -->
+<div class="zzc" style="">
+    <div class="zzcWrap">
+        <div class="WrapTop">
+            <div class="WrapTop-con" style="padding-right:20px;">
+                <div class="WrapSearchCon">
+                    <input placeholder="请输入SKU" ng-model="SKUValue" type="text"/>
+                    <button style="position:relative;left:-5px;" ng-click="searchBySKU()">搜索</button>
+                </div>
+                <div class="WrapSearchThead">
+                    <div class="WrapSearchTh" style="width:75%">SKU</div>
+                    <div class="WrapSearchTh" style="width:25%">操作</div>
+                </div>
+                <div class="WrapSearchResult" style="height:510px;overflow-y: auto;">
+                    <div class="WrapSearchTr" ng-repeat="sku in skuList">
+                        <div class="WrapSearchTd" title="{{sku.SKU}}" data-id="{{sku.ID}}" style="width:75%"><span>{{sku.SKU}}</span></div>
+                        <div class="WrapSearchTd" style="width:25%"><a ng-click="addXiajiaItem(sku)">添加</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="WrapTop-con">
+                <p>下架列表（{{totalXiajia}}/20）</p>
+                <ul style="height:553px;overflow-y: auto;">
+                    <li ng-repeat="xiajia in xiajiaList"><span>{{xiajia.SKU}}</span><b ng-click="deleteXiajia($index)"></b></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="WrapBottom">
+            <button ng-click="sureXiajiaFun()">批量下架</button>
+            <button ng-click="cancelXiajiaFun()">取消</button>
+        </div>
+    </div>
+</div>
+<!-- 下架理由 -->
+<div class="reasonZZC">
+    <div class="reasonWrap">
+        <p>请选择下架理由：</p>
+        <div class="reasonGroup">
+            <label>下架理由：</label>
+            <select name="" id="xiajiaReason" style="width:120px;">
+                <option value="缺货">缺货</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="reasonBottom">
+            <button ng-click="sureXiajiaReasonFun()">确定</button>
+            <button ng-click="cancelReason()">取消</button>
+        </div>        
+    </div>
+</div>

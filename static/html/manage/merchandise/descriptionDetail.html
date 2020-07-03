@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+      .desDetail{
+        padding:41px 28px;
+        background-color: #fff;
+      }
+      .desDetail .info{
+        padding-bottom: 14px;
+        border-bottom: 1px solid #E4E4E4;
+      }
+      .desDetail .info div{
+        float: left;
+        color:#333;
+      }
+      .desDetail .info div img{
+        width:70px;
+        height:70px;
+        margin-right: 12px;
+        border-radius: 100%;
+        border:1px solid #DBDBDB;
+      }
+      .desDetail .info h5{
+        font-size: 16px;
+      }
+      .desDetail .info p{
+        font-size: 14px;
+        margin: 6px 0;
+      }
+      .desDetail .info p.createTime{
+        color:#999
+      }
+      .desDetail .record h4{ 
+        font-size: 16px;
+        color:#F9AE08;
+        margin:20px 0;
+      }
+      .desDetail .record table{
+        width:100%;
+        text-align: center;
+      }
+      .desDetail .record table tr{
+        border:1px solid #F3F3F3;
+      }
+      .desDetail .record table th{
+        height:44px;
+        background:rgba(252,244,217,1);
+        border-radius:4px 4px 0px 0px;
+        color:#8B572A;
+        font-size: 14px;
+        text-align: center;
+      }
+      .desDetail .record table td{
+        height:72px;
+        font-size: 12px;
+        color:#333;
+      }
+      .bot{
+        background: #fff;
+        margin-top: 10px;
+        line-height:58px;
+        font-size: 16px;
+        padding:0 28px;
+        color:#666;
+      }
+      .bot span{
+        color:#333;
+        margin-right: 150px;
+      }
+      .staring{
+          height: 17px;
+          display: inline-block;
+          margin:0;
+        }
+        .staring > label{
+          position: relative;
+          float: right;
+          width: 22px;
+          height: 22px;
+          color: transparent;
+          background-image: url("static/image/manage/starIcon.png");
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+        .staring > label.rated{
+          background-position: 0 -22px; 
+        }
+        .staring > label:before{
+          display: none;
+          position: absolute;
+          content: " ";
+          width: 22px;
+          height: 22px;
+          background-image: url("static/image/manage/starIcon.png");
+          background-repeat: no-repeat;
+          background-size: 100%;
+          bottom: 0;
+        }
+        .nodata{
+          text-align: center;
+          padding:30px 0;
+          font-size: 14px;
+        }
+        .basic-info{
+          background-color: #fff;
+          padding-bottom: 30px;
+        }
+        .basic-title{
+          line-height: 58px;
+          padding-bottom: 0;
+          margin-top:10px;
+        }
+        .backs{
+          text-align: center;
+          margin-top: 76px;
+        }
+        .backs a{
+          display:inline-block;
+          width: 116px;
+          line-height: 40px;
+          border-radius: 6px;
+          border:1px solid #F8A636;
+          color: #F8A636;
+        }
+        .backs a:hover{
+          color: #333;
+          background-color: #e6e6e6;
+          border-color: #adadad;
+        }
+    </style>
+</head>
+<body>
+  <div class="ea-content">
+    <div class="right-bar-wrap">
+      <div class="desDetail">
+        <div class="info clearfix">
+          <div>
+            <img src="{{dbLocproductComment.dspAccountImg}}" alt="无">
+          </div>
+          <div>
+            <h5>{{dbLocproductComment.dspAccountName}}</h5>
+            <p class="createTime">{{dbLocproductComment.createDate| date:'yyyy-MM-dd HH:mm:ss'}}</p>
+            <p class="staring">
+              <label for="rated5" ng-class="{'rated':5<=dbLocproductComment.score}"></label>
+              <label for="rated4" ng-class="{'rated':4<=dbLocproductComment.score}"></label>
+              <label for="rated3" ng-class="{'rated':3<=dbLocproductComment.score}"></label>
+              <label for="rated2" ng-class="{'rated':2<=dbLocproductComment.score}"></label>
+              <label for="rated1" ng-class="{'rated':1<=dbLocproductComment.score}"></label>
+            </p>
+            <p>{{dbLocproductComment.content}}</p>
+          </div>
+        </div>
+        <div class="record" ng-show="listCommentCheck.length>0">
+          <h4>审核记录</h4>
+          <table>
+            <tr>
+              <th>序号</th>
+              <th>审核状态</th>
+              <th>备注</th>
+              <th>审核人</th>
+              <th>审核时间</th>
+            </tr>
+            <tr ng-repeat="(index,item) in listCommentCheck">
+              <td>{{index+1}}</td>
+              <td>{{item.status==1?"不通过":"通过"}}</td>
+              <td>{{item.remark}}</td>
+              <td>{{item.checkName}}</td>
+              <td>{{item.checkDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            </tr>
+          </table>
+        </div>       
+      </div>
+      <div class="bot">
+        <p>
+          商品描述版本名称：<span>{{dbLocproductLanguage.template}}</span>
+          商品描述语言版本：<span>{{dbLocproductLanguage.lan}}</span>
+          商品描述评分：<span>{{dbLocproductComment.score}}</span>
+        </p>
+      </div>
+
+      <!-- 基本信息 -->
+      <div class="basic-info">
+        <div class="basic-title">基本信息</div>
+        <div class="inputs-basic">
+          <!-- 商品类型 -->
+          <div class="input-item clearfix merch-sku">
+            <label class="">商品类型</label>
+            <div class="right-con">
+              <span ng-if="dbLocproduct.producttype=='0'">代发商品</span>
+              <span ng-if="dbLocproduct.producttype=='1'">服务商品</span>
+              <span ng-if="dbLocproduct.producttype=='3'">包装商品</span>
+              <span ng-if="dbLocproduct.producttype=='4'">供应商商品</span>
+            </div>
+          </div>
+          <!-- 商品名称 -->
+          <div class="input-item clearfix">
+            <label>商品名称</label>
+            <div class="right-con">
+              {{ dbLocproduct.nameen }}
+            </div>
+          </div>
+          <!-- 商品sku -->
+          <div class="input-item clearfix merch-sku">
+            <label>SKU</label>
+            <div class="right-con">
+              {{ dbLocproduct.sku }}
+            </div>
+          </div>
+          <!-- 商品类目 -->
+          <div class="input-item clearfix merch-sku">
+            <label>商品类目</label>
+            <div class="right-con">
+              <span id="show-selected-category">{{ dbLocproduct.category }}</span>
+            </div>
+          </div>
+          <!-- 商品到货周期 2019-7-9 xioay-->
+          <div class="input-item clearfix merch-sku" ng-show="chartShow">
+            <label>商品到货周期</label>
+            <div style="height: 400px;" id="pie-chart"></div>
+          </div>
+          <!-- 描述 -->
+          <div class="input-item merchan-desc clearfix">
+            <label class="label-desc">描述</label>
+            <div class="right-con" style="padding: 50px 37px 0 12px;">
+              <div id="wang-editor"></div>
+            </div>
+          </div>
+          <div class="backs">
+            <a href="javascript:history.go(-1)">返回</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

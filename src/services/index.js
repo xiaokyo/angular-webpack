@@ -1,4 +1,6 @@
-export const setServices = app => {
+import erpService from './erp'
+
+export default app => {
   app.factory('MathService', function () {
     const factory = {}
     factory.multiply = function (a, b) {
@@ -13,4 +15,6 @@ export const setServices = app => {
       return MathService.multiply(a, a)
     }
   })
+
+  erpService(app)
 }

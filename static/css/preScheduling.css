@@ -1,0 +1,211 @@
+.pre-scheduling input[disabled], .pre-scheduling select[disabled] {
+	opacity: .6;
+	cursor: no-drop;
+}
+
+.pre-scheduling .tab-box {
+	margin: 10px 0;
+	height: 50px;
+	line-height: 46px;
+	background-color: #fff;
+	padding: 0 20px;
+}
+
+.pre-scheduling .tab-box a {
+	color: #666;
+	font-size: 16px;
+	margin: 0 10px;
+	display: inline-block;
+}
+
+.pre-scheduling .tab-box a:hover {
+	color: #F9AE08;
+}
+
+.pre-scheduling .tab-box .active {
+	color: #F9AE08;
+	border-bottom: 2px solid #F9AE08;
+}
+
+.pre-scheduling .filter-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.pre-scheduling .filter-box input,
+.pre-scheduling .filter-box select,
+.pre-scheduling .form-box input,
+.pre-scheduling .form-box select{
+	min-width: 170px;
+	height: 30px;
+	font-size: 12px;
+}
+
+.pre-scheduling .filter-box input,
+.pre-scheduling .filter-box select {
+	margin-right: 15px;
+	font-size: 12px;
+}
+
+.pre-scheduling .filter-box button {
+	padding: 0 8px;
+	line-height: 30px;
+	height: 30px;
+	font-size: 14px;
+	background-color: #F9AE08;
+	color: #fff;
+	border-radius: 4px;
+}
+
+.pre-scheduling .content-box {
+	background-color: #fff;
+	padding: 16px;
+	max-height: initial;
+}
+
+.pre-scheduling table {
+	width: 100%;
+	text-align: center;
+}
+
+.pre-scheduling table thead {
+	height: 44px;
+	background: rgba(252, 244, 217, 1);
+	border-radius: 4px 4px 0px 0px;
+	line-height: 44px;
+	
+}
+
+.pre-scheduling table thead th {
+	text-align: center;
+	font-size: 14px;
+	font-family: PingFangSC-Medium;
+	font-weight: 500;
+	color: rgba(139, 87, 42, 1);
+}
+
+.pre-scheduling table thead th .sort {
+	font-size: 20px;
+	cursor: pointer;
+	color: #999;
+}
+
+.pre-scheduling table thead th .active {
+	color: #F9AE08;
+}
+
+
+.pre-scheduling table tr {
+	border: 1px solid #F3F3F3;
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+	font-family: PingFangSC-Regular;
+	font-weight: 400;
+	color: rgba(51, 51, 51, 1);
+}
+
+.pre-scheduling table tr input {
+	min-width: initial;
+	width: 80px;
+	text-align: center;
+}
+
+.pre-scheduling table tr td {
+	border-right: 1px solid #F3F3F3;
+	font-size: 12px;
+}
+
+.pre-scheduling table i {
+	width: 16px;
+	height: 16px;
+	background-image: url("../../static/image/order-img/multiple1.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.pre-scheduling table .unchecked {
+	background-image: url("../../static/image/order-img/multiple1.png");
+}
+
+.pre-scheduling table .checked {
+	background-image: url("../../static/image/order-img/multiple2.png");
+}
+
+.add-detail-warp {
+	background-color: #fff;
+	padding: 16px;
+}
+
+.pre-scheduling .back-btn {
+	height: 30px;
+	padding: 0 8px;
+	border: 1px solid #F9AE08;
+	border-radius: 4px;
+	margin-bottom: 15px;
+}
+
+.pre-scheduling .form-box .remark {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.pre-scheduling .form-box label {
+	/*margin: 15px 0;*/
+	margin: 0 15px 15px 0;
+}
+
+.pre-scheduling .btns {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pre-scheduling .btns button {
+	margin-left: 15px;
+	padding: 0 8px;
+	height: 30px;
+	border-radius: 4px;
+}
+
+.pre-scheduling .btns button:nth-child(1) {
+	border: 1px solid #999988;
+}
+
+.pre-scheduling .btns button:nth-child(2) {
+	background-color: #F9AE08;
+	color: #fff;
+}
+
+.pre-scheduling .confirm-table{
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

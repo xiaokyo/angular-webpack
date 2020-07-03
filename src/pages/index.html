@@ -3,19 +3,147 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="义乌市促佳贸易有限公司" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
   <title>erp-cjdropshipping</title>
+  <link rel="shortcut icon" href="static/favicons.png" />
+
+  <script src="/static/js/public/jquery-3.0.0.min.js"></script>
+  <script src="/static/layer/layer.js"></script>
+  <script src="/static/jqPaginator-master/jqPaginator.js"></script>
+
 </head>
 
 <body>
-  <div ng-app="manage" ng-controller="manage.ctrl" ng-cloak>
-    
-    <ul>
-      <li><a ui-sref="home" ui-sref-active="active">HOME</a></li>
-      <li><a ui-sref="test" ui-sref-active="active">TEST</a></li>
-    </ul>
+  <div ng-app="manage" ng-controller="manage.ctrl">
 
-    <ui-view></ui-view>
+    <!-- 内容导航-->
+    <div class="cebian-menu" id="cebian-menu" ng-show="cebianList.length > 0">
+      <div class="cebian-nav">
+        <div ng-show="!isZhankai" id="zhankai">
+          <div class="zhankaiContent">
+            <a class="zhankaiyidong" href=""></a>
+            <img ng-click="shrinkFn('zhankai')" class="zhankaiimg" src="static/image/manage/zhankai.png" alt="" />
+            <a class="zhankaiyidong" href=""></a>
+          </div>
+
+        </div>
+
+        <a ng-show="isZhankai" id="yidong" href=""><img src="static/image/manage/move.png" alt="" /></a>
+        <div class="cebian-content" style="white-space: nowrap">
+          <span class="ord-stu-cs" ng-class="{'act': i.isActive}" ng-repeat="i in cebianList"
+            repeat-finish="renderFinish2()">
+            <a ng-click="clickCebianfn()" ui-sref='{{i.href}}'>{{i.name | translate}} {{iscunzai(i.count)}}</a>
+          </span>
+        </div>
+
+        <a ng-click="shrinkFn('shouqi')" id="shouqi" href="javascript:void(0)"><img src="static/image/manage/shouqi.png" alt="" /></a>
+      </div>
+    </div>
+    <div class="comheader-wrap" style="width: 250px;height: 100%;position: fixed;">
+      <div class="header-con">
+        <div class="header-logo-new d-flex-center">
+          <img src="static/image/public-img/erplogo.png">
+          <a ng-bind="admin" class="header-logo-user"></a>
+        </div>
+        <!-- 导航部分 -->
+        <div class="header-nav" ng-mouseleave="navMouseLeaveFn()">
+          <ul class="fnav">
+            <li ng-mouseenter="navMouseEnterFn(item)" class="fnav-li"
+              ng-class="{'active': item.isActive, 'act': item.isHover}" ng-repeat="item in firstNavList"
+              ng-hide="{{item.hidden}}" repeat-finish="renderFinish()">
+              <img ng-src="{{item.img}}" alt="" />
+              <a ng-click="clickMenu($event, item, 'first')" data-attr="1" ui-sref='{{setHref(item.href)}}'
+                translate="{{item.name}}"></a>
+              <div class="header-nav-icon header-nav-1">&nbsp;</div>
+              <div class="header-nav-icon header-nav-2">&nbsp;</div>
+              <div class="second-content" ng-class="{'show': item.isHover}">
+                <div ng-class="{'second-nav':true}">
+                  <div class="s-content" ng-class="{'s-content-en': change_lang === 'cn'}" ng-cloak
+                    ng-repeat="nav in item.children" ng-hide="{{nav.hidden}}">
+                    <h2 class="s-title" ng-class="{'act': nav.isActive}">
+                      <a ng-click="clickMenu($event, nav, 'second')" data-attr="2"
+                        ui-sref='{{setHref(nav.href)}}'>{{nav.name | translate}}
+                        {{iscunzai(nav.count)}}</a>
+                    </h2>
+                    <div class="t-content">
+                      <p ng-class="{'act':son.isActive}" ng-click="clickMenu($event, son, 'third')" render-finish ng-repeat="son in nav.children" ng-hide="{{son.hidden}}">
+                        <a data-attr="3" ui-sref="{{setHref(son.href)}}">{{son.name |translate}}{{iscunzai(son.count)}}</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="header-bottom d-flex-center">
+          <button class="language-change" ng-model="change_lang" ng-click="changeLanguage(change_lang)">
+            <span class="language-change-img"></span>
+            <span class="language-change-text" ng-cloak>{{iflang(change_lang)}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!--系统通知弹窗-->
+    <div class="guanlianshangpin-wrap xitong" ng-show="isShowNotice" ng-cloak>
+      <div class="guanlianshangpin c-ord-con" style="margin: auto;right: 0;top: 0;left: 0;bottom: 0;">
+        <h3 class="title">{{showData.title}}</h3>
+        <!-- 系统通知 -->
+        <div class="content-box" ng-if="showData.type === '1'">
+          <div ng-repeat="item in showData.data">
+            <p ng-show="item.stype == 'issue'" class="contxt">
+              你有未处理的工单
+              <a href="#/erpservice/gd" target="_blank">{{item.count}}条</a>。
+            </p>
+            <p ng-show="item.stype == 'dispute'" class="contxt">
+              你有未处理的纠纷<a href="#/erpservice/csdisputePendingm" target="_blank">{{item.count}}条</a>。
+            </p>
+            <p ng-show="item.stype == 'sourceproduct'" class="contxt">你有等待搜品<a href="#/sourcing"
+                target="_blank">{{item.count}}条</a>。</p>
+            <p ng-show="item.stype == 'locproduct'" class="contxt">你有等待审核商品<a href="#/merchandise/list/drop/1"
+                target="_blank">{{item.count}}条</a>。</p>
+            <p ng-show="item.stype == 'serveProduct'" class="contxt">你有待审核服务商品<a href="#/merchandise/pendfuwu"
+                target="_blank">{{item.count}}条</a>。</p>
+          </div>
+        </div>
+        <!-- DHL订单通知 -->
+        <div class="dhl-order content-box" ng-if="showData.type === '2'">
+          <div class="item" ng-repeat="item in showData.data">
+            <div>{{item.orderType === '1' ? '直发订单:' : '代发订单:' }}<span>{{item.orderId}}</span></div>
+            <div>下单时间:<span>{{item.orderDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+          </div>
+        </div>
+        <!-- 搜品通知 -->
+        <div class="content-box" style="height: 270px;" ng-if="showData.type === '3'">
+          <div ng-repeat="item in showData.data">
+            搜品编号<span style="color:green;">{{item.number}}</span>截止时间<span
+              style="color:red;">{{item.jieZhiShiJianStr}}</span>,请快速处理！
+          </div>
+        </div>
+        <!-- 内部通知 -->
+        <div style="color: #999988;" class="content-box notice" ng-if="showData.type === '4'">
+          {{showData.info}}
+        </div>
+        <a ng-if="showData.type === '3'" class="gosource" href="#/sourcing" target="_blank">去处理</a>
+        <button ng-disabled="idx === 0" style="position: absolute;left: 100px;bottom: 22px;"
+          ng-click="preBtn()">上一条</button>
+        <button class="closebtn" ng-click="closeNotice()">知道了</button>
+        <button ng-disabled="idx === noticeData.length-1" style="position: absolute;right: 100px;bottom: 22px;"
+          ng-click="nextBtn()">下一条</button>
+      </div>
+    </div>
+
+    <div class="manage-main">
+      <ui-view></ui-view>
+    </div>
+
   </div>
 </body>
 

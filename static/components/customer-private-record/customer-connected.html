@@ -1,0 +1,146 @@
+<div class="guanlianshangpin-wrap" ng-show="visible">
+  <div class="guanlianshangpin c-ord-con">
+    <button
+      style="
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 50px;
+        height: 20px;
+        background: #f99429;
+        color: #fffefe;
+        font-size: 12px;
+        border-radius: 4px;
+      "
+      ng-click="closeTan()"
+    >
+      {{'100066' | translate}}
+    </button>
+    <div class="top-info">
+      <span class="guest-num"
+        >{{'100815' | translate}}： {{currentData.num}}</span
+      >
+      <span class="guest-name"
+        >{{'100108' | translate}}：{{currentData.NAME}}</span
+      >
+      <span class="guest-saleman"
+        >{{'101318' | translate}}：{{currentData.relate_salesman ||
+        currentData.RELATE_SALESMAN}}</span
+      >
+    </div>
+    <span class="guanlianshangpinhead" ng-if="isconlist"
+      >{{'100903' | translate}}</span
+    >
+    <br />
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-class="{'active': currentMenu === 0}" ng-click="changeMenu(0)" class="active"><a href="javascript:void(0)">私有库存商品</a></li>
+      <li role="presentation" ng-class="{'active': currentMenu === 1}" ng-click="changeMenu(1)"><a href="javascript:void(0)">转供应商记录</a></li>
+    </ul>
+    <div
+      style="width: 1100px; height: 628px; overflow: auto;"
+      class="erp-load-box"
+    >
+      <table class="asj-pro-list">
+        <thead class="c-ord-thead">
+          <tr>
+            <th style="width: 40px;">
+              <!--<img src="static/image/order-img/multiple1.png">-->
+              <span>{{'100174' | translate}}</span>
+            </th>
+            <th style="width: 70px;">{{'100909' | translate}}</th>
+            <th style="width: 50px;">SKU</th>
+            <th style="width: 50px;">商品属性</th>
+            <th style="width: 50px;">数量</th>
+            <th ng-if="currentMenu === 1" style="width: 50px;">转移供应商</th>
+            <th ng-if="currentMenu === 1" style="width: 50px;">转移时间</th>
+            <th style="width: 80px;">{{'100043' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody class="c-ord-tbody" ng-repeat="(index1,item) in list">
+          <tr>
+            <td>
+              <p>{{index1+1}}</p>
+              <!-- td 右边的边框 -->
+              <span class="border-span"></span>
+            </td>
+            <td class="ordlist-imgtd">
+              <div>
+                <img
+                  class="ordlist-goods-img"
+                  ng-src="{{item.bigimg}}"
+                  alt="商品"
+                />
+              </div>
+              <!-- td 右边的边框 -->
+              <span class="border-span"></span>
+            </td>
+            <td>
+              {{item.sku}}
+            </td>
+            <td>{{item.property}}</td>
+            <td>{{item.nums}}</td>
+            <td ng-if="currentMenu === 1">{{item.transferCompanyName}}</td>
+            <td ng-if="currentMenu === 1">{{item.transferDate}}</td>
+            <td>
+              <div>
+                <a
+                  href="javascript:void(0);"
+                  class="show-variant-btn"
+                  title=""
+                  ng-show="!item.down"
+                  ng-click="showVariant(item, index1)"
+                  >Collapse<br /><img
+                    src="static/image/public-img/to-down.png"
+                    alt=""
+                /></a>
+
+                <a
+                  href="javascript:void(0);"
+                  class="show-variant-btn"
+                  title=""
+                  ng-show="item.down"
+                  ng-click="hideVariant(item, index1)"
+                  >Collapse<br /><img
+                    src="static/image/public-img/to-up.png"
+                    alt=""
+                /></a>
+              </div>
+            </td>
+          </tr>
+          <tr
+            style="background: #f5f5f5;"
+            ng-repeat="(index2,item2) in item.stanProducts"
+            ng-show="item.down"
+          >
+            <td></td>
+            <td class="ordlist-imgtd">
+              <div>
+                <img
+                  class="ordlist-goods-img"
+                  ng-src="{{item2.img}}"
+                  alt="商品"
+                />
+              </div>
+            </td>
+            <td>
+              SKU：{{item2.sku}}
+            </td>
+            <td>{{item.property}}</td>
+            <td>数量：{{item2.vTotal}}</td>
+            <td ng-if="currentMenu === 1">转移供应商：{{item.transferCompanyName}}</td>
+            <td ng-if="currentMenu === 1">转移时间：{{item2.createdate.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>
+              <div>
+                <span ng-repeat="item3 in item2.stores"
+                  >{{item3.storageDoId |
+                  storageTrans:storageObj}}:{{item3.variantNums}}&nbsp;&nbsp;</span
+                >
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <page></page>
+  </div>
+</div>

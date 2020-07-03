@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>视频订单</title>
+</head>
+<style>
+    .clearfix:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .guanlianshangpin-wrap .clos {
+        background-color: orange;
+        color: #fff;
+        padding: 4px 10px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    body .guanlianshangpin {
+        width: 700px;
+        height: 500px;
+    }
+
+    .guanlianshangpin ul {
+        padding: 40px 20px 10px 20px;
+        font-size: 14px;
+        line-height: 30px;
+        overflow-y: auto;
+        height: 475px;
+    }
+
+    .guanlianshangpin ul li span {
+        float: left;
+    }
+
+    .guanlianshangpin ul li span:nth-child(2) {
+        color: #999;
+        word-wrap: break-word;
+        width: 470px;
+    }
+
+    .table-con-box tr button {
+        /*background-color: orange;*/
+        font-size: 12px;
+        color: #fff;
+        padding: 3px 8px;
+        margin: 0;
+    }
+
+    .selectActive {
+        background: #e8f4ff;
+    }
+
+    .overTR:hover {
+        background: #e8f4ff;
+    }
+
+    .ea-list-table th {
+        font-size: 14px;
+        /*border-right: none;*/
+    }
+
+    .ea-list-table td {
+        font-size: 14px;
+        /*border-right: none;*/
+        max-width: 200px;
+    }
+
+    .ea-list-table td span {
+        cursor: pointer;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: initial;
+        text-align: center;
+        display: block;
+    }
+
+    .setprice label {
+        margin-right: 10px;
+    }
+
+    .setprice input {
+        height: 28px;
+        line-height: 28px;
+        padding: 0 8px;
+    }
+
+    .setprice button {
+        width: 60px;
+        height: 28px;
+        line-height: 28px;
+        border-radius: 3px;
+        color: #fff;
+        background: #08aceb;
+    }
+
+    .h6 {
+        height: 61px;
+    }
+
+    .table-con-box tr button {
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .tan-delete-ware {
+        border-radius: 4px;
+        min-height: 120px;
+        height: initial;
+    }
+
+    .asj-common-tan h3 {
+        font-size: 14px;
+        font-family: PingFangSC-Medium;
+        color: rgba(102, 102, 102, 1);
+        line-height: 20px;
+        margin: 20px 0;
+        text-align: left;
+    }
+
+    .asj-common-tan .tan-btns {
+        text-align: right;
+    }
+
+    .asj-common-tan .tan-btns .tan-btn1 {
+        width: 80px;
+        height: 30px;
+        background: rgba(249, 174, 8, 1);
+        border-radius: 2px;
+        color: #fff;
+        margin: initial;
+    }
+
+    .asj-common-tan .tan-btns .tan-btn0 {
+        width: 80px;
+        height: 30px;
+        border-radius: 2px;
+        border: 1px solid rgba(247, 157, 45, 1);
+        margin: 0 20px;
+        color: #F9AE08;
+        background-color: #fff;
+    }
+
+    .search-box {
+        width: initial;
+    }
+
+    .search-box select {
+        height: 30px;
+        padding: 0 10px;
+        border-radius: 3px;
+    }
+    .col{
+        border:2px solid green !important;
+    }
+</style>
+<body>
+<div class="ea-content">
+    <div class="right-bar-wrap ea-right-content">
+        <div class="asj-h10"></div>
+        <div class="right-bar">
+            <div class="ea-right-search">
+                <div class="input-group search-box">
+                    <div class="input-group search-box">
+                        <input ng-keyup="enterSearch($event)" type="text" class="form-control top-search-inp"
+                               placeholder="请按订单号查询" ng-model="title">
+                        <a role="button" class="btn btn-default top-search-btn" type="button"
+                           ng-click="usersearch()">搜索</a>
+                        <!--    <label style="margin-left: 15px;">
+                                <span class="ng-binding">状态：</span>
+                                <select class="select-search-stu" ng-model="sourcestatus"
+                                        ng-change="sourcechange(sourcestatus)">
+                                    <option value="">所有状态</option>
+                                    <option value="14">需审核</option>
+                                    <option value="15">已拒绝</option>
+                                    <option value="16">已报价</option>
+                                    <option value="17">拍摄中</option>
+                                    <option value="18">已完成</option>
+                                </select>
+                                <span class="ng-binding">视频来源：</span>
+                                <select class="select-search-stu" ng-model="types"
+                                        ng-change="sourcechange(types)">
+                                    <option value="">所有类型</option>
+                                    <option value="2">平台商品拍摄</option>
+                                    <option value="1">独有商品拍摄</option>
+                                    <option value="0">店铺商品拍摄</option>
+                                </select>
+                            </label>-->
+                    </div>
+                </div>
+            </div>
+            <div class="table-con-box">
+                <table class="ea-list-table ea-erp-cs">
+                    <thead>
+                    <tr>
+                        <th>日期/订单号</th>
+                        <th>视频商品</th>
+                        <th>客户ID</th>
+                        <th>视频价格</th>
+                        <th>实付价格</th>
+                        <!--<th>业务员</th>-->
+                        <!--<th>状态</th>-->
+                        <th>类型</th>
+                        <th>客户描述</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-click="TrClick($index)">
+                    <tr ng-repeat="item in proList" ng-class='{selectActive: $index == focus,"overTR":isoverTR}'
+                        repeat-finish="repeatFinish">
+                        <td>
+                            <span>{{item.createDate}}</span>
+                            <span>{{item.id}}</span>
+                        </td>
+                        <td style="text-align: left; width: 410px;">
+                            <table class="pro-info" width="100%">
+                                <tr>
+                                    <td class="li-img" style="border: none;text-align: left;width:20%;margin-right: 10px;">
+                                        <img width="240" height="136" ng-src="{{item.locProduct.img.split(',')[0] | IMG_SIZE: 240}}" alt=""
+                                             ng-show="!item.watermarkViewUrl">
+                                        <video id="my-video"
+                                               ng-show="item.watermarkViewUrl"
+                                               src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15306336/338209605760.mp4"
+                                               class="video-js zzz" controls preload="auto" width="240"
+                                               height="136" data-setup="{techOrder: ['flash','html5']}">
+                                            <source class="vvv"
+                                                    src="https://cc-west-usa.oss-us-west-1.aliyuncs.com/15306336/338209605760.mp4"
+                                                    data-index="{{$index}}"
+                                                    data-url="{{videosrc(item.watermarkViewUrl)}}"
+                                                    type="video/mp4">
+                                        </video>
+                                    </td>
+                                    <td class="li-pro-name" style="width: 10%;border: none;">
+                                        <div class="merch-name">{{item.locProduct.nameen}}</div>
+                                        <div class="merch-name"
+                                             style="color: #7b7b7b;font-size: 12px;line-height: 18px;margin-top: 3px;">
+                                            {{item.locProduct.sku}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="cus-lvtd">
+                            <span>{{item.downloadUserName}}</span>
+                            <b ng-if="item.userLevel==3" class="yzkehu-flag">优</b>
+                            <b ng-if="item.userLevel==2" class="ptkehu-flag">普</b>
+                            <b ng-if="item.userLevel==1" class="qzkehu-flag">潜</b>
+                            <img src="static/image/public-img/order.png">
+                            <b class="cus-dengji">LV{{item.cunLevel}}</b>
+                            <img src="static/image/public-img/money.png">
+                            <b class="cus-dengji">LV{{item.moneyLevel}}</b>
+                        </td>
+                        <td><span>{{item.businessVideoPrice}}</span></td>
+                        <td><span>{{item.videoPracticalPrice}}</span></td>
+                        <!--<td><span>{{item.number || '&#45;&#45;'}}</span></td>-->
+                        <td>
+                            <span ng-show="item.videoType == 1">Unlimited Using</span>
+                            <span ng-show="item.videoType == 2">Using in three websites</span>
+                        </td>
+                        <td><span ng-attr-title="{{item.description}}">{{item.description}}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- 分页 -->
+                <div class="no-data" ng-show="totalNum == 0" style="text-align: center;">没有数据</div>
+                <div class="page-box" ng-show="totalNum > 0">
+                    <div class="select-page-num">
+                        <select class="form-control" ng-model="pagesize" ng-change="pagechange(pagesize)"
+                                style="width: 65px;height: 31px;">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                        <span>每页</span>
+                    </div>
+                    <div class="total-num">
+                        共&nbsp;&nbsp;{{ totalNum }}&nbsp;&nbsp;条
+                    </div>
+                    <div class="page-index">
+                        <div class="pagegroup">
+                            <a href="#">&lt;&lt;</a>
+                            <a href="#">&lt;</a>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a class="current" href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">···</a>
+                            <a href="#">&gt;</a>
+                            <a href="#">&gt;&gt;</a>
+                        </div>
+                    </div>
+                    <div class="to-go">
+                        <span>跳转：</span>
+                        <input type="text" class="goyema form-control" placeholder="" ng-model="pagenum">
+                        <a class="btn btn-default" href="javascript: void(0);" role="button" ng-click="pagenumchange()">go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
