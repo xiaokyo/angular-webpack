@@ -16,6 +16,11 @@
   <script src="/static/layer/layer.js"></script>
   <script src="/static/jqPaginator-master/jqPaginator.js"></script>
 
+  <style>
+    [ng-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -37,11 +42,12 @@
         <div class="cebian-content" style="white-space: nowrap">
           <span class="ord-stu-cs" ng-class="{'act': i.isActive}" ng-repeat="i in cebianList"
             repeat-finish="renderFinish2()">
-            <a ng-click="clickCebianfn()" ui-sref='{{i.href}}'>{{i.name | translate}} {{iscunzai(i.count)}}</a>
+            <a ng-click="clickCebianfn()" href='{{setHref(i.href)}}'>{{i.name | translate}} {{iscunzai(i.count)}}</a>
           </span>
         </div>
 
-        <a ng-click="shrinkFn('shouqi')" id="shouqi" href="javascript:void(0)"><img src="static/image/manage/shouqi.png" alt="" /></a>
+        <a ng-click="shrinkFn('shouqi')" id="shouqi" href="javascript:void(0)"><img src="static/image/manage/shouqi.png"
+            alt="" /></a>
       </div>
     </div>
     <div class="comheader-wrap" style="width: 250px;height: 100%;position: fixed;">
@@ -57,7 +63,7 @@
               ng-class="{'active': item.isActive, 'act': item.isHover}" ng-repeat="item in firstNavList"
               ng-hide="{{item.hidden}}" repeat-finish="renderFinish()">
               <img ng-src="{{item.img}}" alt="" />
-              <a ng-click="clickMenu($event, item, 'first')" data-attr="1" ui-sref='{{setHref(item.href)}}'
+              <a ng-click="clickMenu($event, item, 'first')" data-attr="1" href='{{setHref(item.href)}}'
                 translate="{{item.name}}"></a>
               <div class="header-nav-icon header-nav-1">&nbsp;</div>
               <div class="header-nav-icon header-nav-2">&nbsp;</div>
@@ -66,13 +72,15 @@
                   <div class="s-content" ng-class="{'s-content-en': change_lang === 'cn'}" ng-cloak
                     ng-repeat="nav in item.children" ng-hide="{{nav.hidden}}">
                     <h2 class="s-title" ng-class="{'act': nav.isActive}">
-                      <a ng-click="clickMenu($event, nav, 'second')" data-attr="2"
-                        ui-sref='{{setHref(nav.href)}}'>{{nav.name | translate}}
+                      <a ng-click="clickMenu($event, nav, 'second')" data-attr="2" href='{{setHref(nav.href)}}'
+                        ng-cloak>{{nav.name | translate}}
                         {{iscunzai(nav.count)}}</a>
                     </h2>
                     <div class="t-content">
-                      <p ng-class="{'act':son.isActive}" ng-click="clickMenu($event, son, 'third')" render-finish ng-repeat="son in nav.children" ng-hide="{{son.hidden}}">
-                        <a data-attr="3" ui-sref="{{setHref(son.href)}}">{{son.name |translate}}{{iscunzai(son.count)}}</a>
+                      <p ng-class="{'act':son.isActive}" ng-click="clickMenu($event, son, 'third')" render-finish
+                        ng-repeat="son in nav.children" ng-hide="{{son.hidden}}">
+                        <a data-attr="3" href="{{setHref(son.href)}}"
+                          ng-cloak>{{son.name |translate}}{{iscunzai(son.count)}}</a>
                       </p>
                     </div>
                   </div>
@@ -94,41 +102,41 @@
     <!--系统通知弹窗-->
     <div class="guanlianshangpin-wrap xitong" ng-show="isShowNotice" ng-cloak>
       <div class="guanlianshangpin c-ord-con" style="margin: auto;right: 0;top: 0;left: 0;bottom: 0;">
-        <h3 class="title">{{showData.title}}</h3>
+        <h3 class="title" ng-cloak>{{showData.title}}</h3>
         <!-- 系统通知 -->
         <div class="content-box" ng-if="showData.type === '1'">
           <div ng-repeat="item in showData.data">
             <p ng-show="item.stype == 'issue'" class="contxt">
               你有未处理的工单
-              <a href="#/erpservice/gd" target="_blank">{{item.count}}条</a>。
+              <a href="#/erpservice/gd" target="_blank" ng-cloak>{{item.count}}条</a>。
             </p>
             <p ng-show="item.stype == 'dispute'" class="contxt">
-              你有未处理的纠纷<a href="#/erpservice/csdisputePendingm" target="_blank">{{item.count}}条</a>。
+              你有未处理的纠纷<a href="#/erpservice/csdisputePendingm" target="_blank" ng-cloak>{{item.count}}条</a>。
             </p>
-            <p ng-show="item.stype == 'sourceproduct'" class="contxt">你有等待搜品<a href="#/sourcing"
-                target="_blank">{{item.count}}条</a>。</p>
+            <p ng-show="item.stype == 'sourceproduct'" class="contxt">你有等待搜品<a href="#/sourcing" target="_blank"
+                ng-cloak>{{item.count}}条</a>。</p>
             <p ng-show="item.stype == 'locproduct'" class="contxt">你有等待审核商品<a href="#/merchandise/list/drop/1"
-                target="_blank">{{item.count}}条</a>。</p>
+                target="_blank" ng-cloak>{{item.count}}条</a>。</p>
             <p ng-show="item.stype == 'serveProduct'" class="contxt">你有待审核服务商品<a href="#/merchandise/pendfuwu"
-                target="_blank">{{item.count}}条</a>。</p>
+                target="_blank" ng-cloak>{{item.count}}条</a>。</p>
           </div>
         </div>
         <!-- DHL订单通知 -->
         <div class="dhl-order content-box" ng-if="showData.type === '2'">
           <div class="item" ng-repeat="item in showData.data">
-            <div>{{item.orderType === '1' ? '直发订单:' : '代发订单:' }}<span>{{item.orderId}}</span></div>
-            <div>下单时间:<span>{{item.orderDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+            <div ng-cloak>{{item.orderType === '1' ? '直发订单:' : '代发订单:' }}<span>{{item.orderId}}</span></div>
+            <div>下单时间:<span ng-cloak>{{item.orderDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
           </div>
         </div>
         <!-- 搜品通知 -->
         <div class="content-box" style="height: 270px;" ng-if="showData.type === '3'">
           <div ng-repeat="item in showData.data">
-            搜品编号<span style="color:green;">{{item.number}}</span>截止时间<span
-              style="color:red;">{{item.jieZhiShiJianStr}}</span>,请快速处理！
+            搜品编号<span style="color:green;" ng-cloak>{{item.number}}</span>截止时间<span style="color:red;"
+              ng-cloak>{{item.jieZhiShiJianStr}}</span>,请快速处理！
           </div>
         </div>
         <!-- 内部通知 -->
-        <div style="color: #999988;" class="content-box notice" ng-if="showData.type === '4'">
+        <div style="color: #999988;" class="content-box notice" ng-if="showData.type === '4'" ng-cloak>
           {{showData.info}}
         </div>
         <a ng-if="showData.type === '3'" class="gosource" href="#/sourcing" target="_blank">去处理</a>

@@ -512,13 +512,13 @@
 			data.orderobserver = $scope.orderobserver;
 			data.CJTracknumber = $scope.CJTracknumber;
 			if ($scope.ydh) {
-				if($scope.ydh.indexOf(',')==-1){
-					var midStr = $scope.ydh;
-					var subResStr = midStr.substring(midStr.length-22);
-					if(subResStr.substring(0,1)=='9'){
-						$scope.ydh = subResStr;
-					}
-				}
+				// if($scope.ydh.indexOf(',')==-1){
+				// 	var midStr = $scope.ydh;
+				// 	var subResStr = midStr.substring(midStr.length-22);
+				// 	if(subResStr.substring(0,1)=='9'){
+				// 		$scope.ydh = subResStr;
+				// 	}
+				// }
 				data.ydh = $scope.ydh;
 			} else {
 				data.ydh = 'all';

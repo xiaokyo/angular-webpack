@@ -796,7 +796,7 @@
                             <li class="li-remove"><a href="javascript: void(0);" ng-click="removeVaribleTr($event)">{{'100227' | translate}}</a></li>
                             <li
                             ng-cloak
-                            ng-show="(productType=='0' || productType=='1') && (userInfo.erploginName == 'admin' || userInfo.erploginName == '王慧云')"
+                            ng-show="(productType=='0' || productType=='1') && biantiXiajiaFlag"
                             class="li-xiaji"><a  href="javascript: void(0);" ng-click="xiajiaFun($event)">下架</a></li>
                             <li class="li-shangjia"><a href="javascript: void(0);" ng-click="shangjiaFun($event)">上架</a></li>
                           </ul>

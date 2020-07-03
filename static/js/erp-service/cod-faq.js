@@ -69,7 +69,7 @@
 				pageNum:$scope.pageNum,
 				pageSize:$scope.pageSize,
 				data:{
-					type:'2',
+					type:'',
 					title:$scope.searchInput
 				}
 			}

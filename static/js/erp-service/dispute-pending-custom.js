@@ -150,6 +150,7 @@
                 endDate:$scope.endTime,
                 store: $scope.storeNum,
                 operator: $scope.operatorName,
+                trackingNumber: $scope.trackNumVal,
             };
             erp.postFun('app/dispute/getDispute', JSON.stringify(getListData), con, errFun);
             function con(data) {

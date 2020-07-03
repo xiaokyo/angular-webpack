@@ -1,3 +1,6 @@
+// 可选参数
+const squash = { squash: true, value: null }
+
 export default [
   {
     name: 'home',
@@ -5,8 +8,11 @@ export default [
     url: '/mycj/ywyHome',
   },
   {
-    name: 'foo',
-    controller: 'foo.ctrl',
-    url: '/foo'
+    name: 'commonHome',
+    controller: 'commonHome.ctrl',
+    url: '/mycj/commonHome/:id?haha',
+    params: {
+      id: squash
+    }
   }
 ]

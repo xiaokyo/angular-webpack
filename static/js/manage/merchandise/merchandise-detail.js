@@ -173,6 +173,8 @@
 
         var userInfo = erp.getUserInfo();
         $scope.userInfo = erp.getUserInfo();
+        //变体下架 权限 admin，王慧云，甘秋华
+        $scope.biantiXiajiaFlag = ['admin', '王慧云', '甘秋华'].includes(userInfo.erploginName)
 
         $scope.setOneFlg = false; // 单个设置图片/重量/邮寄重量
 

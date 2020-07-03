@@ -218,19 +218,23 @@
 
     // 结算
     $scope.finalToCod = (id) => {
-      console.log(1111,id)
-      let rqData = {
-        id
-      };
-      erp.postFun("erp/codCustomerRemitRecord/financialMoney", rqData, function (data) {
-        if(data.data.statusCode == 200){
-          layer.msg('操作成功');
-        }else{
-          layer.msg(data.data.message);
-        }
-      }, function (err) { 
-        layer.msg('操作错误，请稍后再试')
-      }, { layer: true })
+      layer.confirm('确认后，则该对账单中的金额将会显示在客户cod可提现金额中，并且客户可进行提现操作', { title: '是否确认要对该对账单进行结算?' }, function (index) {
+        //do something
+        console.log(1111,id)
+        let rqData = {
+          id
+        };
+        erp.postFun("erp/codCustomerRemitRecord/financialMoney", rqData, function (data) {
+          if(data.data.statusCode == 200){
+            layer.msg('操作成功');
+          }else{
+            layer.msg(data.data.message);
+          }
+        }, function (err) { 
+          layer.msg('操作错误，请稍后再试')
+        }, { layer: true })
+        // layer.close(index);
+      });
     }
 
     // 查看详情
@@ -240,6 +244,19 @@
         return false;
       }
       window.location.href = `manage.html#/Reconciliation/BillCollectionList?batchNumber=${batchNumber}&statusPage=3`;
+    }
+
+    // 下载明细
+    $scope.handleDowloadDetail = item => {
+      console.log(item);
+      const load = layer.load(0)
+      erp.loadDown({
+        url: 'erp/reconciliation/exportCodChargesDetailVOList',
+        params: [item.batchNumber],
+        callback: function () {
+          layer.close(load)
+        },
+      })
     }
     
   }])

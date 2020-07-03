@@ -1,7 +1,7 @@
 import { Base64 as base64 } from 'js-base64'
 
 export default (app) => {
-  app.service('erp', function ($http, $q) {
+  app.service('erp', function ($http, $q, $state) {
     // 配置start
     /** 这句话千万不要动！！！，打包项目时自动切换环境 */
     //-----*>

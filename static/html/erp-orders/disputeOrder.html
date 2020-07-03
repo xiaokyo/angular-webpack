@@ -327,6 +327,9 @@
                       <th width="80">订单状态</th>
 
                       <th width="80">订单类型</th>
+                      <th width="80">创建时间</th>
+                      <th width="80">完成时间</th>
+                      <th width="80">处理时间</th>
                       
                     </tr>
                   </thead>
@@ -479,7 +482,9 @@
                         <p ng-if="orderType=='1'">直发订单</p>
                         <p ng-if="orderType=='2'">代发订单</p>
                       </td>
-
+                      <td>{{zddlist.disputeCreateDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td>{{zddlist.disputeFinallyDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td>{{zddlist.disputeOperatorDate.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
 
                     </tr>
                     <tr class="erpd-toggle-tr">

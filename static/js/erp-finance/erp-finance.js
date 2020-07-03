@@ -1410,35 +1410,6 @@
             })
 
         }
-        // //选中事件
-        // var zxsIndex = 0;
-        // $('.ea-list-table').on('click', '.checkbtn', function() {
-        //     if ($(this).attr('src') == 'static/image/order-img/multiple1.png') {
-        //         $(this).attr('src', 'static/image/order-img/multiple2.png');
-        //         zxsIndex++;
-        //         if (zxsIndex == $('.ea-list-table .checkbtn').length) {
-        //             $('.ea-list-table .all-checkbtn').attr('src', 'static/image/order-img/multiple2.png');
-        //         }
-        //     } else {
-        //         $(this).attr('src', 'static/image/order-img/multiple1.png');
-        //         zxsIndex--;
-        //         if (zxsIndex != $('.ea-list-table .checkbtn').length) {
-        //             $('.ea-list-table .all-checkbtn').attr('src', 'static/image/order-img/multiple1.png');
-        //         }
-        //     }
-        // })
-        // //全选
-        // $('.ea-list-table').on('click', '.all-checkbtn', function() {
-        //     if ($(this).attr('src') == 'static/image/order-img/multiple1.png') {
-        //         $(this).attr('src', 'static/image/order-img/multiple2.png');
-        //         zxsIndex = $('.ea-list-table .checkbtn').length;
-        //         $('.ea-list-table .checkbtn').attr('src', 'static/image/order-img/multiple2.png');
-        //     } else {
-        //         $(this).attr('src', 'static/image/order-img/multiple1.png');
-        //         zxsIndex = 0;
-        //         $('.ea-list-table .checkbtn').attr('src', 'static/image/order-img/multiple1.png');
-        //     }
-        // })
     }])
     app.filter('statusTrans', function() {
         return function(status, type) {
@@ -3067,19 +3038,23 @@
             params.userName = $scope.searchContent
             layer.load(2);
             erp.postFun("erp/wallet/getCustomerWatercourse", params, function (res) {
-                console.log(res)
+                console.log(res,'2222222')
+                if(res.data.statusCode=="506"){
+                  layer.msg('该用户已不存在erp账户')
+                  return
+                }
                 $scope.billList = res.data.result.list.map(item => {
 							item.paymenttype = paymentType[item.paymenttype] || ''
 							if (item.image) item.image = item.type === '2' || item.type === '6' ? item.image.split(',') : item.image.split(',')
 							return item
 						});
-                $scope.$broadcast('page-data', {
-                    pageSize: $scope.pageSize.toString(),
-                    pageNum: $scope.pageNum,
-                    totalCounts: res.data.result.total,
-                    pageList: ['10','20','50', '100', '200']
-                });
-                layer.closeAll('loading')
+              $scope.$broadcast('page-data', {
+                  pageSize: $scope.pageSize.toString(),
+                  pageNum: $scope.pageNum,
+                  totalCounts: res.data.result.total,
+                  pageList: ['10','20','50', '100', '200']
+              });
+              layer.closeAll('loading')
             }, function (err) { layer.closeAll('loading')})
         }
 

@@ -20,20 +20,21 @@ export default (app) => {
     /**
      * 路由配置
      */
-    routers.forEach(({ name, url, controller }) => {
+    routers.forEach(({ name, url, controller, params = {} }) => {
       $stateProvider
         .state(name, {
           url,
+          params,
           controller,
           templateUrl: `/src/pages/${name}/index.template.html`,
           lazyLoad: transition => {
             const $lazy = transition.injector().get('$ocLazyLoad');
-            return import(`@src/pages/${name}/index.module.js`).then(m => $lazy.load(m.default));
+            return import(`@cache/modules/index.${name}.js`).then(m => $lazy.load(m.default));
           },
         })
     })
 
     $locationProvider.hashPrefix(''); // 去掉路径中的! (/#!/ -> /#/)
-    $urlRouterProvider.otherwise('/ywyHome');
+    // $urlRouterProvider.otherwise('/mycj/ywyHome');
   })
 }

@@ -9,7 +9,7 @@ app.service('erp', ['$http','$q', function ($http,$q) {
   // 配置start
   /** 这句话千万不要动！！！，打包项目时自动切换环境 */
   //-----*>
-  var environment = '##development##';
+  var environment = '##production##';
   //<*-----
   // ##development## 开发
   // ##production## 线上
@@ -252,6 +252,14 @@ app.service('erp', ['$http','$q', function ($http,$q) {
   }
   this.postFun2 = function (url, data, successCallback, errorCallback) {
     $http.post(httpsJson._logistics + url, data).then(function (backdata) {
+      successCallback(backdata);
+    }, function (backdata) {
+      // console.log(backdata);
+      errorCallback(backdata);
+    });
+  }
+  this.getFun2 = function (url, successCallback, errorCallback) {
+    $http.get(httpsJson._logistics + url).then(function (backdata) {
       successCallback(backdata);
     }, function (backdata) {
       // console.log(backdata);

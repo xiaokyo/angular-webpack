@@ -3,7 +3,7 @@
     development: {
       "app": "http://erp.test.com/",
       "cj-erp": "http://erp.test.com/",
-      "erp": "http://erp1.test.com/",
+	    "erp": "http://erp1.test.com/",
       "storage": "http://storage.test.com/",
       "caigou": "http://caigou.test.com/",
       "tool": "http://tools.test.com/",
@@ -13,7 +13,7 @@
       "source": "http://sourcing.test.com/",
       "newlogistics": "http://logistics2.test.com/",
       "mail": "http://cjmail.test.com/",
-      "_logistics": "http://192.168.5.37:8011/",
+      "_logistics": "http://192.168.5.37:8010/",
       "_logistics_com": "http://192.168.5.37:8010/",
       "_zflogistics": "http://dsp-logist.test.com/",
       "supplier": "http://192.168.5.239:8077/",
@@ -85,7 +85,7 @@
     test: {
       "app": "http://erp.test.com/",
       "cj-erp": "http://erp.test.com/",
-      "erp": "http://erp1.test.com/",
+	    "erp": "http://erp1.test.com/",
       "storage": "http://storage.test.com/",
       "caigou": "http://caigou.test.com/",
       "tool": "http://tools.test.com/",
@@ -95,7 +95,7 @@
       "source": "http://sourcing.test.com/",
       "newlogistics": "http://logistics2.test.com/",
       "mail": "http://cjmail.test.com/",
-      "_logistics": "http://192.168.5.37:8011/",
+      "_logistics": "http://192.168.5.37:8010/",
       "_logistics_com": "http://192.168.5.37:8010/",
       "_zflogistics": "http://dsp-logist.test.com/",
       "supplier": "http://192.168.5.239:8077/",
@@ -206,7 +206,8 @@
       "otherData": "/",
       "payOrder": "/",
       "linShiGong":"/",
-      "cujiaOthers":"/"
+      "cujiaOthers":"/",
+      "oldLogistics":"/"
     }
   }
 })()

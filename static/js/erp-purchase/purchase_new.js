@@ -303,11 +303,10 @@
 		function getList() {
 			erp.load();
 			const url = $scope.isQueHuoFlag ? api.needGoodsList : api.goodsList;
-			const { pageNum, pageSize, storageId, searchValue: inputStr, buyerId, personalizedIdentity } = $scope;
-			// const oldparams = { pageNum, pageSize, storageId, inputStr };
-			const params = { data: { storageId, inputStr }, pageNum, pageSize } //{post data: {storageId: '', inputStr: '搜索内容' }, pageSize: '', pageNum: ''}
-			// if(buyerId) params.data.buyerId = buyerId
-			// if(personalizedIdentity) params.data.personalizedIdentity = 1
+			let { pageNum, pageSize, storageId, searchValue: inputStr } = $scope;
+			if(!pageNum || pageNum == 'undefined') $scope.pageNum = pageNum = 1
+			if(!pageSize || pageSize == 'undefined') $scope.pageSize = pageSize = 30
+			const params = { data: { storageId, inputStr }, pageNum, pageSize }
 			params.data.buyerId = $scope.buyerId
 			params.data.personalizedIdentity = $scope.personalizedIdentity
 			params.data.assignBuyerId = $scope.assignBuyerId

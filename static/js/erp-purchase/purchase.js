@@ -345,7 +345,10 @@
 		 */
 		function getPidByPurchaseLink(link, reverse = false){
 			if(!link) return ''
-			if(reverse) return $scope.cgList.find(_ => _.name.indexOf(link) != -1).name
+			if(reverse) {
+				const obj = $scope.cgList.find(_ => _.name.indexOf(link) != -1)
+				return (obj && obj.name) || `https://detail.1688.com/offer/${link}.html`
+			}
 			return link.split('offer/')[1].split('.html')[0]
 		}
 
@@ -896,7 +899,21 @@
 		function getOrdListFun() {
 			console.log('此处为复制黏贴多余代码该页面不使用  采购迁移时 新老接口 替换 为此 删除 此函数代码 作为标记')
 		}
-		
+		/**
+		 * quantity change 改外成quantity
+		 * @param {*} pItem 
+		 * @param {*} item 
+		 */
+		function quantityChange(pItem, item){
+			const list = pItem.recordList;
+			let count = 0
+			list.forEach(_ => {
+				count += +_.quantity
+			})
+			pItem.quantity = count
+		}
+		$scope.quantityChange = erp.deBounce(quantityChange, 500)
+
 		// 判断预采购师傅在处理中且在路上
 		$scope.isHandleAdvancePuchaseNum = function(item){
 			const { useStatus, trueQuantity } = item
@@ -905,6 +922,17 @@
 				res = "(" + trueQuantity + "在路上)"
 			}
 			return res
+		}
+
+		/**
+		 * 当为数字拼出一条链接
+		 * @param {string} url 链接或者数字
+		 */
+		$scope.get1688href = function(url){
+			console.log(url, /^[0-9]+$/.test(url))
+			if(!url) return ''
+			if(/^[0-9]+$/.test(url)) return `https://detail.1688.com/offer/${url}.html`
+			return url 
 		}
 
 		$scope.seachKey = 'stanSku';
@@ -2384,9 +2412,9 @@
 				layer.msg(data.data.message)
 				if (data.data.statusCode == 200) {
 					// 保存成功后将外层记录数量计算一遍
-					let quantityCount = 0
-					parentItem.recordList.forEach(_=>{ quantityCount += +_.ruKuNum })
-					parentItem.quantity = quantityCount
+					// let quantityCount = 0
+					// parentItem.recordList.forEach(_=>{ quantityCount += +_.ruKuNum })
+					// parentItem.quantity = quantityCount
 
 				}
 			}, function (data) {

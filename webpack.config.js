@@ -6,6 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+// customize plugins
+const AutoGen = require('./plugins/AutoGen')
+
 // 是否开发环境
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -32,7 +35,10 @@ const config = {
       // old source
       'static': resolve('static'),
       './static': resolve('static'),
-      'erp_otweb': resolve('erp_otweb')
+      'erp_otweb': resolve('erp_otweb'),
+
+      // cache
+      '@cache': resolve('src/.cache')
     }
   },
   module: {
@@ -49,13 +55,13 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
         // 提取 css 到外部文件件
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
         test: /\.html$/,
@@ -76,12 +82,13 @@ const config = {
   },
   stats: { // log 信息控制
     assets: false, // 能关闭 pulibc 搬运的 log
-    children: false, // 能关闭 mini-css-extract-plugin log
+    // children: false, // 能关闭 mini-css-extract-plugin log
   },
   plugins: [
+    new AutoGen(),// 自动生成所需index.js
     new HtmlWebpackPlugin({
       template: resolve('./src/pages/index.html'), // 入口模板
-      filename: 'manage.html'
+      filename: 'index.html'
     }),
     // 提取 css 到外部文件件
     new MiniCssExtractPlugin({

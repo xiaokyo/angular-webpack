@@ -3415,11 +3415,12 @@
 			addData.stans = csArr;
 			addData.yeWuYuan = $.trim($scope.addywyName);
 			console.log(JSON.stringify(addData))
+			const load = layer.load(0)
 			erp.postFun("caigou/procurement/tianJiaChuDanCaiGou", JSON.stringify(addData), bb, err);
 			// erp.postFun("pojo/procurement/addProcurementBillInForm",JSON.stringify(addData) , bb, err);
 
 			function bb(a) {
-				console.log(a)
+				layer.close(load)
 				if (a.data.statusCode == 200) {
 					layer.msg("添加成功")
 					$scope.sku = '';

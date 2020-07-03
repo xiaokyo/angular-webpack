@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var app = angular.module('erp-reconciliation');
   app.controller("BillCollectionListCtrl", [
     "$scope",
@@ -7,7 +7,7 @@
     "utils",
     "$location",
     "$filter",
-    function($scope, erp, $routeParams, utils, $location, $filter) {
+    function ($scope, erp, $routeParams, utils, $location, $filter) {
       console.log('BillCollectionListCtrl')
 
       //
@@ -49,7 +49,7 @@
       $('#date2').val(formatNowDate)
 
       // 分页触发
-      $scope.$on('pagedata-fa', function(d, data) {
+      $scope.$on('pagedata-fa', function (d, data) {
         $scope.pageNum = parseInt(data.pageNum);
         $scope.pageSize = parseInt(data.pageSize);
         getData();
@@ -58,7 +58,7 @@
       function getQueryVariable(variable) {
         console.log(location.href)
         var query = location.href.split("?")[1]
-        if(query){
+        if (query) {
           var vars = query.split("&");
           for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
@@ -78,12 +78,14 @@
         $scope.pageNum = 1
       }
       //查询
-      $scope.searchInput = function() {
+      $scope.searchInput = function () {
         const filters = {
           [$scope.selectVal]: $scope.searVal,
-          // startDeliveryTime: $('#date1').val(),
-          // endDeliveryTimeme: $('#date2').val(),
+          startDeliveryTime: $('#date1').val(),
+          endDeliveryTime: $('#date2').val(),
           status: $scope.status,
+          cjorderId: $scope.cjorderId,
+          logisticsWaybillNo: $scope.logisticsWaybillNo,
         }
         $scope.filters = filters
         $scope.pageNum = 1
@@ -107,7 +109,7 @@
         }
         Object.assign(data, info, filters);
 
-        erp.postFun(url, data, function(res) {
+        erp.postFun(url, data, function (res) {
           console.log(res)
           const data = res.data
           if (data.statusCode == '200') {
@@ -123,7 +125,7 @@
               pageList: $scope.pagenumarr
             });
           }
-        }, function(data) {
+        }, function (data) {
           console.log(data)
         }, {
           layer: true
@@ -132,10 +134,10 @@
       getData()
 
       // 保存
-      $scope.saveList = function() {
+      $scope.saveList = function () {
         erp.postFun('erp/reconciliation/queryMismatchCount', {
           batchNumber: $scope.batchNumber,
-        }, function(res) {
+        }, function (res) {
           console.log(res.data)
           if (res.data.statusCode == '200') {
             if (res.data.result > 0) {
@@ -151,7 +153,7 @@
       function sureConfirm() {
         erp.postFun('erp/reconciliation/saveRemitRecordDraft', {
           batchNumber: $scope.batchNumber,
-        }, function(res) {
+        }, function (res) {
           const data = res.data
           if (data.statusCode == '200') {
             layer.msg("保存成功！")
@@ -159,29 +161,29 @@
         })
       }
       // 导出
-      $scope.exportExcel = function() {
+      $scope.exportExcel = function () {
         const filters = $scope.filters
         let data = {}
         Object.assign(data, filters)
         console.log(data)
-        erp.postFun('erp/reconciliation/codExcelOutFinancial', data, function(res) {
+        erp.postFun('erp/reconciliation/codExcelOutFinancial', data, function (res) {
           const data = res.data
           if (data.statusCode == '200') {
             window.open(data.result);
           }
 
-        }, function(data) {
+        }, function (data) {
           console.log(data)
         }, {
           layer: true
         })
       }
       // 保存并生产结算单
-      $scope.generalList = function() {
+      $scope.generalList = function () {
         erp.postFun('erp/reconciliation/saveRemitRecordSettled', {
           batchNumber: $scope.batchNumber,
           remitName: $scope.ReconciliationName
-        }, function(res) {
+        }, function (res) {
           console.log(res)
           const data = res.data
           if (data.statusCode == '200') {
@@ -194,8 +196,8 @@
         })
       }
 
-      $scope.goback = function() {
-        window.history.back(-1); 
+      $scope.goback = function () {
+        window.history.back(-1);
       }
 
       function clear() {

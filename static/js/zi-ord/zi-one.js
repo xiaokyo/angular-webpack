@@ -1839,7 +1839,10 @@
 				layer.msg('该订单为测试账号订单')
 				return;
 			}
-
+			$scope.companyCode = "";
+			$scope.companyValue = "";
+			$scope.choseAcount = "";
+			$scope.acountList = "";
 			$scope.ddepackNum = 0;
 			$scope.bdepackNum = 0;
 			$scope.oneHcepackNum = 0;//含磁epack
@@ -1931,6 +1934,9 @@
 				cjpacketSeaLightIds = '',
 				cjpacketSeaHeavyIds = '',
 				cjpacketCazxIds = '',
+				cjpacketFrPhIds = '',
+				cjpacketFrThIds = '',
+				cjpacketAeIds = '',
 				euroOrdinarGbIds = '',
 				euroOrdinarDeIds = '',
 				euroOrdinarFrIds = '',
@@ -1958,6 +1964,8 @@
 			let isDianOrCommonFlag = isDianOrCommonFun(sxArr1)
 			let isHaveDianOrBatteryFlag = isHaveDianOrBatteryFun(sxArr1)
 			let isCommonAndElectronicFlag = isCommonAndElectronicFun(sxArr1)
+			let isAllPuhuoFlag = isAllPuhuoFun(sxArr1);
+			let isHanCiAndElectronicFlag = isHanCiAndElectronicFun(sxArr1);
 			// item.orderweight > 285 && 取消重量限制
 			if (item.countryCode == 'US') {
 				//之前普货的判断
@@ -2309,6 +2317,7 @@
 							}
 						}
 						let isHaveBatteryFlag = isHaveBatteryFun(sxArr1)
+						let cjpacketAeFlag = cjpacketAeFun(sxArr1);
 						if(item.countryCode == 'GB'&&item.orderweight < 2000){
 							$scope.haiJinCjpacketNum++;
 							if(isHaveBatteryFlag){//是不是电池 燕文484
@@ -2415,7 +2424,7 @@
 									// 	yTDdIds = item.id + ',';
 									// }
 								}
-								else if (item.countryCode == 'IT' || item.countryCode == 'SE' || item.countryCode == 'FR' || item.countryCode == 'BE' || item.countryCode == 'NL' || item.countryCode == 'AT') {
+								else if (item.countryCode == 'IT' || item.countryCode == 'SE' || item.countryCode == 'BE' || item.countryCode == 'NL' || item.countryCode == 'AT') {
 									$scope.sanTaiNum++;
 									$scope.showindex = 33;
 									if(noEntryFlag){
@@ -2466,6 +2475,39 @@
 									$scope.teDingGuoJiaCjpacketCount++;
 									$scope.showindex = 33;
 									$scope.sanTaiNum++;
+								} else if (item.countryCode == 'ZA' && item.orderweight < 2000) {
+									$scope.sanTaiNum++;
+									if(isAllPuhuoFlag){
+										$scope.showindex = 33;
+										yTBddIds = item.id;
+									}else if(isHanCiAndElectronicFlag){
+										$scope.showindex = 33;
+										yTDdIds = item.id;
+									}else{
+										$scope.qtwlordNum++;
+										$scope.showindex = 4;
+									}
+								} else if (item.countryCode == 'FR') {
+									$scope.sanTaiNum++;
+									if(isAllPuhuoFlag){
+										cjpacketFrPhIds = item.id;
+										$scope.showindex = 33;
+									}else if(isHaveDianOrBatteryFlag){
+										cjpacketFrThIds = item.id;
+										$scope.showindex = 33;
+									}else{
+										yTDdIds = item.id;
+										$scope.showindex = 4;
+									}
+								} else if (item.countryCode == 'AE' && item.orderweight < 3000) {
+									if(cjpacketAeFlag){
+										$scope.sanTaiNum++;
+										$scope.showindex = 33;
+										cjpacketAeIds = item.id;
+									}else{
+										$scope.qtwlordNum++;
+										$scope.showindex = 4;
+									}
 								} else {
 									$scope.qtwlordNum++;
 									$scope.showindex = 4;
@@ -2515,12 +2557,50 @@
 				}
 
 			}
+
+
+			$scope.getCompanyCode = function(){
+				$scope.companyCode=$scope.companyValue?$scope.companyValue.split("#")[0]:""
+				//console.log($scope.companyCode)
+				if($scope.companyCode){
+					erp.getFun2("oldLogistics/LcCompanyAccount/list?channelCode="+$scope.companyCode,function(data){						
+						const res = data.data
+						if(res.code==200){
+							if(Array.isArray(res.data)){
+								$scope.acountList=res.data
+							}
+						}
+					})
+				}
+			}
+			function checkAccout(){
+				// if($scope.acountList && !$scope.choseAcount){
+				// 	layer.msg('您还未选择账号，请您选择账号后重试');
+				// 	return false;
+				// }
+				if($scope.choseAcount){
+					const updata={
+						logisticsModeName:item.logisticName,
+						logisticsChannelName:$scope.companyCode,
+						companyAccountId:$scope.choseAcount,
+						orderIds:$scope.oneordId,
+					}
+					console.log(updata)
+					erp.postFun2('oldLogistics/LcCompanyOrderRecord/save', updata, function (data) {
+						console.log(data)
+					})
+				}
+				return true;
+			}
+
+
 			$scope.oneisydFlag = true;//单独操作生成运单号的弹框
 			$scope.cjCodFun = function (stu) {
-				if ($('.oneqd-sel44').val() == '请选择') {
+				if ($('.oneqd-sel44').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -2718,10 +2798,11 @@
 				})
 			}
 			$scope.cjpacketThaFun = function (stu) {
-				if ($('.oneqd-sel48').val() == '请选择') {
+				if ($('.oneqd-sel48').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -2744,10 +2825,11 @@
 				})
 			}
 			$scope.cjpacketSeaFun = function (stu) {
-				if ($('.oneqd-sel50').val() == '请选择') {
+				if ($('.oneqd-sel50').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -2821,10 +2903,11 @@
 				})
 			}
 			$scope.hkDhlFun = function (stu) {
-				if ($('.oneqd-sel34').val() == '请选择') {
+				if ($('.oneqd-sel34').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3072,7 +3155,18 @@
 					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketCazxIds, 'JNDZX', '义乌加拿大专线')) : stCsArr.push(stCsFun(cjpacketCazxIds, 'JNDZX', '深圳加拿大专线'))
 					cjpacketIds += cjpacketCazxIds;
 				}
-				
+				if (cjpacketFrPhIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketFrPhIds, 'PX', '义乌4PX联邮通Y优先普货')) : stCsArr.push(stCsFun(cjpacketFrPhIds, 'PX', '深圳4PX联邮通Y优先普货'))
+					cjpacketIds += cjpacketFrPhIds;
+				}
+				if (cjpacketFrThIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketFrThIds, 'PY', '义乌4PX联邮通优先带电')) : stCsArr.push(stCsFun(cjpacketFrThIds, 'PY', '深圳4PX联邮通优先带电'))
+					cjpacketIds += cjpacketFrThIds;
+				}
+				if (cjpacketAeIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketAeIds, 'BLKRCJNL836', '义乌阿联酋专线')) : stCsArr.push(stCsFun(cjpacketAeIds, 'BLKRCJNL836', '深圳阿联酋专线'))
+					cjpacketIds += cjpacketAeIds;
+				}
 				erp.load();
 				if ($scope.teDingGuoJiaCjpacketCount > 0) {
 					var updata = {};
@@ -3285,13 +3379,14 @@
 					layer.msg('订单数为零不能生成订单');
 					return;
 				}
-				if ($('.qd-onesel43').val() == '请选择') {
+				if ($('.qd-onesel43').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
-				}
+				}				
 				if ($('.scyd-btn43').hasClass('btn-active1')) {
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3347,10 +3442,11 @@
 				})
 			}
 			$scope.nfsfFun = function (stu) {//南风顺丰
-				if ($('.qd-onesel15').val() == '请选择') {
+				if ($('.qd-onesel15').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3373,10 +3469,11 @@
 				})
 			}
 			$scope.ttsfFun = function (stu) {//泰腾顺丰
-				if ($('.qd-onesel16').val() == '请选择') {
+				if ($('.qd-onesel16').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3399,10 +3496,11 @@
 				})
 			}
 			$scope.ddepackFun = function (stu) {//带电E邮宝
-				if ($('.oneqd-sel1').val() == '请选择') {
+				if ($('.oneqd-sel1').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+        		if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3425,10 +3523,11 @@
 				})
 			}
 			$scope.bddepackFun = function (stu) {//不带电E邮宝
-				if ($('.oneqd-sel2').val() == '请选择') {
+				if ($('.oneqd-sel2').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3450,7 +3549,6 @@
 					layer.closeAll("loading")
 				})
 			}
-
 			$scope.enterscmdFun23 = function (stu) {//带电dhl
 				erp.load();
 				var updata = {};
@@ -3540,10 +3638,11 @@
 				})
 			}
 			$scope.dhlOfficialFun = function (stu) {//官方dhl
-				if ($('.oneqd-sel20').val() == '请选择') {
+				if ($('.oneqd-sel20').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3589,10 +3688,11 @@
 				})
 			}
 			$scope.hcepackFun = function (stu) {//含磁E邮宝
-				if ($('.oneqd-sel13').val() == '请选择') {
+				if ($('.oneqd-sel13').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3615,10 +3715,11 @@
 				})
 			}
 			$scope.gzepackFun = function (stu) {//膏状E邮宝+
-				if ($('.oneqd-sel9').val() == '请选择') {
+				if ($('.oneqd-sel9').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -3763,10 +3864,11 @@
 				})
 			}
 			$scope.bdyzxbFun = function (stu) {//不带电邮政小包
-				if ($('.oneqd-sel6').val() == '请选择') {
+				if ($('.oneqd-sel6').val() == '') {
 					layer.msg('请选择物流渠道')
 					return;
 				}
+				if(!checkAccout()) return //检查是否有多账号
 				erp.load();
 				var updata = {};
 				updata.orderNum = $scope.oneordId;
@@ -4612,6 +4714,36 @@
 				}
 			}
 		}
+		function isHanCiAndElectronicFun(arr) {
+			for (var j = 0; j < arr.length; j++) {
+				if (arr[j] == 'HAVE_MAGNETISM'||arr[j] == 'BATTERY'||arr[j] == 'ELECTRONIC') {
+					return true;
+				}
+				if (j == arr.length - 1) {
+					return false;
+				}
+			}
+		}
+		function cjpacketAeFun(arr){
+			for (var j = 0; j < arr.length; j++) {
+				if (arr[j] != 'COMMON' && arr[j] != 'THIN' && arr[j] != 'FLAT' && arr[j] != 'OVERSIZE' && arr[j] != 'ELECTRONIC' && arr[j] != 'BATTERY' && arr[j] != 'HAVE_CREAM' && arr[j] != 'HAVE_LIQUID' && arr[j] != 'NO_ENTRY') {
+					return false;
+				}
+				if (j == arr.length - 1) {
+					return true;
+				}
+			}
+		}
+		function isAllPuhuoFun(arr) {
+			for (var j = 0; j < arr.length; j++) {
+				if (arr[j] != 'COMMON' && arr[j] != 'THIN' && arr[j] != 'FLAT' && arr[j] != 'OVERSIZE') {
+					return false;
+				}
+				if (j == arr.length - 1) {
+					return true;
+				}
+			}
+		}
 		function sxBooleanFun1(arr, COMMON, BATTERY, ELECTRONIC, OVERSIZE, on) {
 			// console.log(arr,COMMON,BATTERY,ELECTRONIC,OVERSIZE,on)
 			let shuXingFlag = false;
@@ -4806,9 +4938,13 @@
 				cjpacketThaIds = '',
 				cjpacketSeaIds = '',
 				cjpacketCazxIds = '',
+				cjpacketFrThIds = '',
+				cjpacketFrPhIds = '',
+				cjpacketAeIds = '',
 				euroOrdinarGbIds = '',
 				euroOrdinarDeIds = '',
 				euroOrdinarFrIds = '',
+				euroOrdinarFrDdIds = '',
 				euroOrdinarBeIds = '',
 				euroOrdinarItIds = '',
 				stGBIds = '';
@@ -4967,6 +5103,9 @@
 							let batteryOrElectoronicFlag = isBatteryOrELECTRONICFun(sxArr1)
 							let isHaveDianOrBatteryFlag = isHaveDianOrBatteryFun(sxArr1)
 							let isDianOrCommonFlag = isDianOrCommonFun(sxArr1);
+							let isAllPuhuoFlag = isAllPuhuoFun(sxArr1);
+							let isHanCiAndElectronicFlag = isHanCiAndElectronicFun(sxArr1);
+							let cjpacketAeFlag = cjpacketAeFun(sxArr1);
 							//ordWeight > 285 &&  取消重量限制
 							if (ordCountryCode == 'US' && ($scope.store == 0 || $scope.store == 1 || $scope.store == 5) && $scope.cjPacketVal == 'y') {
 								console.log(usZhwlIds)
@@ -5379,7 +5518,7 @@
 									// }
 								}
 								//NL 荷兰  SE 瑞典  AT 奥地利  BE 比利时
-								else if(ordCountryCode == 'IT' || ordCountryCode == 'SE' || ordCountryCode == 'FR' || ordCountryCode == 'BE' || ordCountryCode == 'NL' || ordCountryCode == 'AT'){
+								else if(ordCountryCode == 'IT' || ordCountryCode == 'SE' || ordCountryCode == 'BE' || ordCountryCode == 'NL' || ordCountryCode == 'AT'){
 									$scope.sanTaiNum++;
 									if(isNoEntryFlag){
 										yTGbDdIds += itemOrdId + ',';
@@ -5416,8 +5555,35 @@
 									teDingGuoJiaCjpacketIds += itemOrdId + ',';
 									$scope.teDingGuoJiaCjpacketCount++;
 									$scope.sanTaiNum++;
-								}
-								else {
+								} else if (ordCountryCode == 'ZA' && ordWeight < 2000) {
+									if(isAllPuhuoFlag){
+										$scope.sanTaiNum++;
+										yTBddIds += itemOrdId + ',';
+									}else if(isHanCiAndElectronicFlag){
+										yTDdIds += itemOrdId + ',';
+										$scope.sanTaiNum++;
+									}else{
+										$scope.qtwlordNum++;
+										qtwlIds += itemOrdId + ',';
+									}
+								} else if (ordCountryCode == 'FR') {
+									$scope.sanTaiNum++;
+									if(isAllPuhuoFlag){
+										cjpacketFrPhIds += itemOrdId + ',';
+									}else if(isHaveDianOrBatteryFlag){
+										cjpacketFrThIds += itemOrdId + ',';
+									}else{
+										yTDdIds += itemOrdId + ',';
+									}
+								} else if (ordCountryCode == 'AE' && ordWeight < 3000) {
+									if(cjpacketAeFlag){
+										$scope.sanTaiNum++;
+										cjpacketAeIds += itemOrdId + ',';
+									}else{
+										$scope.qtwlordNum++;
+										qtwlIds += itemOrdId + ',';
+									}
+								} else {
 									$scope.qtwlordNum++;
 									qtwlIds += itemOrdId + ',';
 								}
@@ -5529,7 +5695,52 @@
 					erp.closeLoad();
 				})
 
+			}		
+			
+			$scope.allCom = {}
+			$scope.bulkAcount = {}
+			$scope.bulkChoseAcount = {}
+
+			$scope.allChangeCom = function(idx){
+				const comCode=$scope.allCom[idx]?$scope.allCom[idx].split("#")[0]:"";
+				if(comCode){
+					erp.getFun2("oldLogistics/LcCompanyAccount/list?channelCode="+comCode,function(data){						
+						const res = data.data
+						if(res.code==200){
+							if(Array.isArray(res.data)){
+								$scope.bulkAcount[idx]=res.data
+							}
+						}
+					})
+				}
+				console.log(comCode)
+				console.log($scope.allCom)
+				console.log($scope.bulkChoseAcount)
 			}
+
+			function bulkCheckAccout(idx,orderIds,name){
+				console.log(name)
+				// if($scope.bulkAcount[idx] && !$scope.bulkChoseAcount[idx]){
+				// 	layer.msg('您还未选择账号，请您选择账号后重试');
+				// 	return false;
+				// }
+				if($scope.bulkChoseAcount[idx]){
+					const comCode=$scope.allCom[idx]?$scope.allCom[idx].split("#")[0]:"";
+					const updata={
+						logisticsModeName:name,
+						logisticsChannelName:comCode,
+						companyAccountId:$scope.bulkChoseAcount[idx],
+						orderIds,
+					}
+					console.log(updata)
+					erp.postFun2('oldLogistics/LcCompanyOrderRecord/save', updata, function (data) {
+						console.log(data)
+					})
+				}
+				return true;
+			}
+
+
 			$scope.enterscmdFun48 = function (stu) {//DHL eCommerce
 				if ($scope.cjpacketThaNum <= 0) {
 					layer.msg('订单数为零不能生成订单');
@@ -5538,10 +5749,11 @@
 				if ($('.scyd-btn48').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel48').val() == '请选择') {
+				if ($('.qd-sel48').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+        if(!bulkCheckAccout(48,cjpacketThaIds,'CJPacket-Tha')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -5566,10 +5778,11 @@
 				if ($('.scyd-btn50').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel50').val() == '请选择') {
+				if ($('.qd-sel50').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+        if(!bulkCheckAccout(50,cjpacketSeaIds,'CJPacket-Sea')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -5594,10 +5807,11 @@
 				if ($('.scyd-btn44').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel44').val() == '请选择') {
+				if ($('.qd-sel44').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+        if(!bulkCheckAccout(44,cjCodIds,'CJCOD')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -5622,10 +5836,11 @@
 				if ($('.scyd-btn43').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel43').val() == '请选择') {
+				if ($('.qd-sel43').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+        if(!bulkCheckAccout(43,postNlIds,'美国专线')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -5935,10 +6150,11 @@
 				if ($('.scyd-btn34').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel34').val() == '请选择') {
+				if ($('.qd-sel34').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+        if(!bulkCheckAccout(34,hkDhlIds,'DHL HongKong')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -6039,6 +6255,18 @@
 				if (cjpacketCazxIds != '') {
 					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketCazxIds, 'JNDZX', '义乌加拿大专线')) : stCsArr.push(stCsFun(cjpacketCazxIds, 'JNDZX', '深圳加拿大专线'))
 					cjpacketIds += cjpacketCazxIds;
+				}
+				if (cjpacketFrPhIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketFrPhIds, 'PX', '义乌4PX联邮通Y优先普货')) : stCsArr.push(stCsFun(cjpacketFrPhIds, 'PX', '深圳4PX联邮通Y优先普货'))
+					cjpacketIds += cjpacketFrPhIds;
+				}
+				if (cjpacketFrThIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketFrThIds, 'PY', '义乌4PX联邮通优先带电')) : stCsArr.push(stCsFun(cjpacketFrThIds, 'PY', '深圳4PX联邮通优先带电'))
+					cjpacketIds += cjpacketFrThIds;
+				}
+				if (cjpacketAeIds != '') {
+					whereTarget == 'YW' ? stCsArr.push(stCsFun(cjpacketAeIds, 'BLKRCJNL836', '义乌阿联酋专线')) : stCsArr.push(stCsFun(cjpacketAeIds, 'BLKRCJNL836', '深圳阿联酋专线'))
+					cjpacketIds += cjpacketAeIds;
 				}
 				erp.load();
 				$scope.succscydnumflag = true;
@@ -6767,13 +6995,14 @@
 					layer.msg('订单数为零不能生成订单');
 					return;
 				}
-				if ($('.qd-sel15').val() == '请选择') {
+				if ($('.qd-sel15').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn15').hasClass('btn-active1')) {
 					return;
 				}
+        if(!bulkCheckAccout(15,nfSfIds,'CJ Normal Express')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -6799,13 +7028,14 @@
 					layer.msg('订单数为零不能生成订单');
 					return;
 				}
-				if ($('.qd-sel16').val() == '请选择') {
+				if ($('.qd-sel16').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn16').hasClass('btn-active1')) {
 					return;
 				}
+        if(!bulkCheckAccout(16,ttSfIds,'CJ Normal Express')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				var updata = {};
@@ -6922,10 +7152,11 @@
 				if ($('.scyd-btn20').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel20').val() == '请选择') {
+				if ($('.qd-sel20').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!bulkCheckAccout(20,dhlOfficialIds,'DHL Official')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)
@@ -6947,19 +7178,22 @@
 					console.log(data)
 				})
 			}
+			
+			
 			$scope.enterscmdFun1 = function (stu) {//带电E邮宝生成运单号函数
 				console.log(stu)
 				if ($scope.ddepackNum <= 0) {
 					layer.msg('订单数为零不能生成订单');
 					return;
 				}
-				if ($('.qd-sel1').val() == '请选择') {
+				if ($('.qd-sel1').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn1').hasClass('btn-active1')) {
 					return;
 				}
+				if(!bulkCheckAccout(1,ddepackIds,'epacket')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)
@@ -6986,13 +7220,14 @@
 					layer.msg('订单数为零不能生成订单')
 					return;
 				}
-				if ($('.qd-sel2').val() == '请选择') {
+				if ($('.qd-sel2').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn2').hasClass('btn-active1')) {
 					return;
-				}
+				}        
+				if(!bulkCheckAccout(2,bdepackIds,'epacket')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)
@@ -7466,10 +7701,11 @@
 				if ($('.scyd-btn13').hasClass('btn-active1')) {
 					return;
 				}
-				if ($('.qd-sel13').val() == '请选择') {
+				if ($('.qd-sel13').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
+				if(!bulkCheckAccout(13,hcepackIds,'epacket')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)
@@ -7524,13 +7760,14 @@
 					layer.msg('订单数为零不能生成订单');
 					return;
 				}
-				if ($('.qd-sel9').val() == '请选择') {
+				if ($('.qd-sel9').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn9').hasClass('btn-active1')) {
 					return;
 				}
+        if(!bulkCheckAccout(9,gzepackIds,'epacket')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)
@@ -7595,13 +7832,14 @@
 					layer.msg('订单数为零不能生成订单')
 					return;
 				}
-				if ($('.qd-sel6').val() == '请选择') {
+				if ($('.qd-sel6').val() == '') {
 					layer.msg('请选择物流渠道');
 					return;
 				}
 				if ($('.scyd-btn6').hasClass('btn-active1')) {
 					return;
 				}
+        if(!bulkCheckAccout(6,bdyzxbIds,'China Post Registered Air Mail')) return
 				erp.load();
 				$scope.succscydnumflag = true;
 				// console.log(ddepackIds+'###'+bdepackIds+'==='+qtwlIds)

@@ -173,6 +173,7 @@
             getListData.orderNumber = $scope.searchval;
             getListData.store = $scope.storeNum;
             getListData.operator = $scope.operatorName;
+            getListData.trackingNumber = $scope.trackNumVal;
             erp.postFun('app/dispute/getDispute', JSON.stringify(getListData), con, errFun,{layer:true})
 
             function con(data) {
@@ -252,10 +253,8 @@
         });
         $scope.search = function () {
             console.log($scope.searchval);
-            if ($scope.searchval) {
-                $scope.pageNum = '1';
-                getList(erp, $scope);
-            }
+            $scope.pageNum = '1';
+            getList(erp, $scope);
         }
         var jflx = '';
         $('.search-select').change(function () {
@@ -1093,6 +1092,7 @@
             getListData.orderNumber = $scope.searchval;
             getListData.store = $scope.storeNum;
             getListData.operator = $scope.operatorName;
+            getListData.trackingNumber = $scope.trackNumVal;
             erp.postFun('app/dispute/getDispute', JSON.stringify(getListData), con, errFun,{layer:true})
 
             function con(data) {
@@ -1170,10 +1170,8 @@
         //$scope.searchval = '';
         $scope.search = function () {
             console.log($scope.searchval);
-            if ($scope.searchval) {
-                $scope.pageNum = '1';
-                getList(erp, $scope);
-            }
+            $scope.pageNum = '1';
+            getList(erp, $scope);
         }
         var jflx = '';
         $('.search-select').change(function () {
@@ -1481,6 +1479,7 @@
             getListData.orderNumber = $scope.searchval;
             getListData.store = $scope.storeNum;
             getListData.operator = $scope.operatorName;
+            getListData.trackingNumber = $scope.trackNumVal;
             erp.postFun('app/dispute/getDispute', JSON.stringify(getListData), con, errFun,{layer:true})
 
             function con(data) {

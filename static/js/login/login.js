@@ -130,7 +130,7 @@
                             location.href = $scope.target;
                             return;
                         }
-                        if (obj.job == '销售' || obj.job == '管理') {
+                        if (obj.job == '销售' || obj.job == '管理' || obj.job == '客服') {
                             console.log('销售 管理')
                             location.href = 'manage.html#/mycj/ywyHome';
                         } else {

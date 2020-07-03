@@ -1,4 +1,7 @@
 import echarts from 'echarts'
+// css
+import 'erp_otweb/css/erp-ywy-home.css'
+import 'erp_otweb/css/erp-wa-KeHu-style.css'
 
 export default ($scope, erp) => {
   console.log('业务员首页')

@@ -2286,7 +2286,7 @@
     }
     //处理不同职位显示的不同路由
     $scope.disposeMenuByJob = () => {
-      const loginJobList = ['销售', '管理', '人事']
+      const loginJobList = ['销售', '管理', '人事', '客服']
       $scope.firstNavList = $scope.firstNavList.map(item => {
         if (item.name === '100001') {
           item.href = loginJobList.includes(loginJob) ? '#/mycj/ywyHome' : '#/mycj/commonHome'

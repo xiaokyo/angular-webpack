@@ -5,6 +5,7 @@ import oclazyload from 'oclazyload'
 import translate from 'angular-translate'
 import angularTranslateFileLoader from 'angular-translate-loader-static-files';
 import { Base64 as bs } from 'js-base64'
+import routers from '../routers/routers'
 
 // style
 import './common.less'
@@ -226,7 +227,17 @@ export const start = () => {
      */
     $scope.setHref = function (href) {
       if (!href) return 'javascript:void(0)'
-      if (href.indexOf('#') != -1) return href.replace('#', '')
+
+      // manage url
+      let nav = href
+      if (nav.startsWith('#')) {
+        nav = nav.replace('#', '')
+        const route = routers.find(_ => _.url == nav)
+        
+        // old url
+        if (!route) return `/manage.html${href}`
+      }
+
       return href
     }
 
