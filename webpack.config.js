@@ -6,9 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-// customize plugins
-const AutoGen = require('./plugins/AutoGen')
-
 // 是否开发环境
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -85,7 +82,6 @@ const config = {
     // children: false, // 能关闭 mini-css-extract-plugin log
   },
   plugins: [
-    new AutoGen(),// 自动生成所需index.js
     new HtmlWebpackPlugin({
       template: resolve('./src/pages/index.html'), // 入口模板
       filename: 'index.html'

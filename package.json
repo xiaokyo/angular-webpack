@@ -41,7 +41,9 @@
     "write-file-webpack-plugin": "^4.5.1"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack"
+    "dev": "yarn moduleGen && cross-env NODE_ENV=development webpack-dev-server",
+    "build": "yarn moduleGen && cross-env NODE_ENV=production webpack",
+    "----": "----------------------自动模块生成",
+    "moduleGen": "node plugins/genModules.js"
   }
 }

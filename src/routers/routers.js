@@ -10,9 +10,6 @@ export default [
   {
     name: 'commonHome',
     controller: 'commonHome.ctrl',
-    url: '/mycj/commonHome/:id?haha',
-    params: {
-      id: squash
-    }
+    url: '/mycj/commonHome'
   }
 ]

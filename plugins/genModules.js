@@ -22,4 +22,4 @@ export default mod
   })
 }
 
-module.exports = { writeModules }
+writeModules()

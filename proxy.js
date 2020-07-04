@@ -42,6 +42,46 @@ const development = {
   "cujiaOthers": "http://192.168.5.197:8121/"
 }
 
+const production = {
+  "app": "https://app.cjdropshipping.com/",
+  "cj-erp": "https://erp.cjdropshipping.cn/",//https://erp.cjdropshipping.com
+  "erp": "https://erp1.cjdropshipping.com/",
+  "storage": "https://storage.cjdropshipping.com/",
+  "caigou": "https://erp.cjdropshipping.cn/",
+  "procurement": "https://erp.cjdropshipping.cn/",
+  "tool": 'https://tools.cjdropshipping.com/',
+  'order': "https://order.cjdropshipping.com/",
+  "cj": 'https://app1.cjdropshipping.com/',
+  "fulfillment": "https://fulfillment.cjdropshipping.com/",
+  "source": "https://sourcing.cjdropshipping.com/",
+  "newlogistics": "https://logistics2.cjdropshipping.com/",
+  "mail": "https://cjmail.cjdropshipping.com/",
+  "_logistics": "https://logistics.cjdropshipping.com/",
+  "_zflogistics": "https://miandan2.cjdropshipping.cn/",
+  "supplier": "https://suppliers.cjdropshipping.cn/erp/",
+  "log_recod": "http://jhmjjx.cn:4000/",
+  "robot": "https://chat.cjdropshipping.com/",
+  "message": "https://chat.cjdropshipping.com/",
+  "product": "https://product.cjdropshipping.com/",// 商品档案线上环境
+  "warehousereceipt": "https://erp.cjdropshipping.cn/",
+  "warehouse": "https://erp.cjdropshipping.cn/",
+  "warehouseBuildWeb": "https://erp.cjdropshipping.cn/",
+  "control": "https://authority.cjdropshipping.cn/", //权限系统
+  "processOrder": "https://erp.cjdropshipping.cn/",
+  "storehouseSimple": "https://erp.cjdropshipping.cn/",
+  "storehouseUsa": "https://erp.cjdropshipping.cn/",
+  "storehouse": "https://erp.cjdropshipping.cn/",
+  "orderSyn": "https://erp.cjdropshipping.cn/",
+  "unsold": "/",
+  "media": "https://app.cjdropshipping.com/",
+  "integral": "https://erp.cjdropshipping.cn/", // 绩效考核规则相关
+  "erpSupplierPlan": "https://suppliers.cjdropshipping.cn/erp/",
+  "erpSupplierSourceAllocateRecording": "https://suppliers.cjdropshipping.cn/erp/",
+  "erpSupplierSourceProduct": "https://suppliers.cjdropshipping.cn/erp/",
+  "supplierPlanInfo": "https://suppliers.cjdropshipping.cn/erp/",
+  "linShiGong": "https://erp.cjdropshipping.cn/"
+}
+
 /**
  * 设置代理格式
  * @param {*} obj 
